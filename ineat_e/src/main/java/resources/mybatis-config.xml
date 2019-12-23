@@ -26,8 +26,14 @@
 	</typeAliases>
 
 	<mappers>
-	<!-- 
-		<mapper resource="com/ineat/www/sql/" />   
-	 -->
+
+		<mapper resource="com/ineat/www/sql/MemberSQL.xml" />   
+		<mapper resource="com/ineat/www/sql/StoryBoardSQL.xml" />   
+		<mapper resource="com/ineat/www/sql/ReBoardSQL.xml" />   
+		<mapper resource="com/ineat/www/sql/ReviewSQL.xml" />   
+		<mapper resource="com/ineat/www/sql/FileSQL.xml" />   
+		<mapper resource="com/ineat/www/sql/TasteInfoSQL.xml" />   
+		<mapper resource="com/ineat/www/sql/MatdcupSQL.xml" />   
+
 	</mappers>
 </configuration>
