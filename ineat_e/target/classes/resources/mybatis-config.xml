@@ -13,8 +13,13 @@
 	
 	<typeAliases>
 		<!-- 
-		<typeAlias alias="" type="com.ineat.www.vo." /> 
-		<typeAlias alias="" type="com.ineat.www.vo." /> 
+		<typeAlias alias="mVO" type="com.ineat.www.vo.MemberVO" /> 
+		<typeAlias alias="sVO" type="com.ineat.www.vo.StoryBoardVO" /> 
+		<typeAlias alias="rbVO" type="com.ineat.www.vo.ReBoardVO" /> 
+		<typeAlias alias="rvVO" type="com.ineat.www.vo.ReviewVO" /> 
+		<typeAlias alias="fVO" type="com.ineat.www.vo.FileVO" /> 
+		<typeAlias alias="tVO" type="com.ineat.www.vo.TasteInfoVO" /> 
+		<typeAlias alias="mcVO" type="com.ineat.www.vo.MatdcupVO" /> 
 		 -->
 
 	</typeAliases>
