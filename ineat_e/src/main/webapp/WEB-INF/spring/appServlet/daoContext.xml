@@ -8,8 +8,14 @@
                   http://www.springframework.org/schema/context 
                   https://www.springframework.org/schema/context/spring-context.xsd">
    
-   <!-- 
-   <bean id="" class="com.ineat.www.util."/>
-   <bean id="" class="com.ineat.www.dao." />
-    -->
+   
+   <bean id="fileDown" class="com.ineat.www.util.DownloadUtil"/>
+   <bean id="mDAO" class="com.ineat.www.dao.MemberDAO" />
+   <bean id="sbDAO" class="com.ineat.www.dao.StoryBoardDAO" />
+   <bean id="rbDAO" class="com.ineat.www.dao.ReBoardDAO" />
+   <bean id="rvDAO" class="com.ineat.www.dao.ReviewDAO" />
+   <bean id="fDAO" class="com.ineat.www.dao.FileDAO" />
+   <bean id="tDAO" class="com.ineat.www.dao.TasteInfoDAO" />
+   <bean id="mcDAO" class="com.ineat.www.dao.MatdcupDAO" />
+   
 </beans>
