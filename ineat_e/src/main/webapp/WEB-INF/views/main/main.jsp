@@ -10,11 +10,51 @@
 <script type="text/javascript" src="/js/jquery-3.4.1.min.js" ></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/popper.min.js"></script>
+<script type="text/javascript" src="/js/fullpage.min.js"></script>
+<script type="text/javascript" src="/js/pscript.js"></script>
 <style>
 </style>
 <script type="text/javascript">
 </script>
 <style>
+<!--메인css-->
+ body {
+            background-color : #ff7702;
+        }
+
+        .bg {
+            background-color: rgba(255, 255, 255, 1);
+            border-color: rgba(214, 214, 214, 1);
+            ;
+        }
+
+        #page1 {
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.3);
+            display: inline-block;
+        }
+
+        #mainimg {
+            border: solid white 10px;
+
+        }
+/*섹션2*/
+.reviewTitle{
+			width: 80%;
+			height: 40px;
+			background-color: #ff7702;
+			border-top-right-radius: 40px;
+			padding-top:1px;
+		}
+.reviewBox{
+	width: 80%;
+	height: 130px;
+	margin-top: 10px;
+	border: 2px solid #ff7702;
+}
+
+
+<!--로그인 모달창 css-->
 .form-control:focus {
   border:solid orange 2px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 165, 0, 0.4)
@@ -37,9 +77,65 @@
 </style>
 </head>
 <body>
- <button type="button" class="btn btn-outline-warning "
- onclick="document.getElementById('login').style.display='block'">login</button>
- 
+ 	<!-- 메인 -->
+ 	
+    <!--네비게이션바-->
+    <nav class="navbar navbar-expand-lg navbar-light bg fixed-top">
+        <a class="navbar-brand" href="#"><img src="img/logo.png" style="margin-left: 30px; width: 100px;"></a>
+        <!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+            aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>-->
+
+        <div class="collapse navbar-collapse" id="navbar">
+            <form class="form-inline col-9">
+                <input class=" form-control col-10 mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-warning" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav float-left" style="width: 200px; margin-right: 20px;">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Story</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Matdcup</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">List</a>
+                </li>
+                <li class="nav-item">
+                    <img src="img/member.png" width="30x" style="margin-left: 15px;"
+                    onclick="document.getElementById('login').style.display='block'">
+                </li>
+            </ul>
+            <div>
+            </div>
+        </div>
+    </nav>
+    <!--네비게이션바-->
+
+    <!--메인-->
+    <div id="fullpage" class="wrapper">
+        <!-- 섹션1-->
+        <div class="section">
+            <div id="page1" style="margin-top: 10%;">
+                <img src="img/k_doen.jpg" width="28%" id="mainimg" style="margin-left: 15px;">
+                <img src="img/ineat.png" width="30%" style="margin-right:5%; margin-left: 5%;">
+                <img src="img/k_doen.jpg" width="28%" id="mainimg">
+            </div>
+        </div>
+        <!--임시섹션2-->
+        <div class="section">
+            <div class="content2">
+                <div class="reviewTitle">리뷰 랭킹?</div>
+                <div class="reviewBox"></div>
+                <div class="reviewBox"></div>
+                <div class="reviewBox"></div>
+                <div class="reviewBox"></div>
+            </div>
+        </div>
+    </div>
+        <div class="section"></div>
+        <div class="section"></div>
  
     <!-- 로그인 모달창 -->
     <div id="login" class="w3-modal">
