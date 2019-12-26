@@ -17,15 +17,9 @@
 <script type="text/javascript">
 </script>
 <style>
-<!--메인css-->
- body {
-            background-color : #ff7702;
-        }
-
         .bg {
             background-color: rgba(255, 255, 255, 1);
             border-color: rgba(214, 214, 214, 1);
-            ;
         }
 
         #page1 {
@@ -80,7 +74,7 @@
  	<!-- 메인 -->
  	
     <!--네비게이션바-->
-    <nav class="navbar navbar-expand-lg navbar-light bg fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
         <a class="navbar-brand" href="#"><img src="img/logo.png" style="margin-left: 30px; width: 100px;"></a>
         <!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
             aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,11 +110,11 @@
     <!--메인-->
     <div id="fullpage" class="wrapper">
         <!-- 섹션1-->
-        <div class="section">
-            <div id="page1" style="margin-top: 10%;">
-                <img src="img/k_doen.jpg" width="28%" id="mainimg" style="margin-left: 15px;">
+         <div class="section" style="background: url('img/main.jpg') no-repeat; background-size: cover;">
+            <div id="page1" style="margin-top: 10%;">                    
+                <img src="img/click.jpg" width="28%" id="mainimg" style="margin-left: 15px;">
                 <img src="img/ineat.png" width="30%" style="margin-right:5%; margin-left: 5%;">
-                <img src="img/k_doen.jpg" width="28%" id="mainimg">
+                <img src="img/matdcup.jpg" width="28%" id="mainimg">
             </div>
         </div>
         <!--임시섹션2-->
