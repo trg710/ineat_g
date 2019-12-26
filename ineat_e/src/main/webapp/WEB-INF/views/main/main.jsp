@@ -21,6 +21,11 @@
             background-color: rgba(255, 255, 255, 1);
             border-color: rgba(214, 214, 214, 1);
         }
+        
+        .form-control:focus {
+        border:solid orange 2px;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 165, 0, 0.4)
+        }
 
         #page1 {
             padding: 50px;
