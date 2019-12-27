@@ -7,6 +7,7 @@
 <title></title>
 <link rel="stylesheet" href="/css/w3.css" >
 <link rel="stylesheet" href="/css/bootstrap.css" >
+<link rel="stylesheet" href="/css/fullpage.min.css" >
 <script type="text/javascript" src="/js/jquery-3.4.1.min.js" ></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/popper.min.js"></script>
@@ -116,7 +117,7 @@
     <div id="fullpage" class="wrapper">
         <!-- 섹션1-->
          <div class="section" style="background: url('img/main.jpg') no-repeat; background-size: cover;">
-            <div id="page1" style="margin-top: 10%;">                    
+            <div id="page1" style="margin-top:5%;">                    
                 <img src="img/click.jpg" width="28%" id="mainimg" style="margin-left: 15px;">
                 <img src="img/ineat.png" width="30%" style="margin-right:5%; margin-left: 5%;">
                 <img src="img/matdcup.jpg" width="28%" id="mainimg">
