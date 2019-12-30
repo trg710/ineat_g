@@ -8,12 +8,12 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>맛집 리스트</title>
 
-<link rel="stylesheet" href="css/w3.css" >
-<link rel="stylesheet" href="css/bootstrap.css" >
+<link rel="stylesheet" href="/oxo/css/w3.css" >
+<link rel="stylesheet" href="/oxo/css/bootstrap.css" >
 
-<script type="text/javascript" src="js/jquery.min.js" ></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="/oxo/js/jquery.min.js" ></script>
+<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/oxo/js/popper.min.js"></script>
 
 <style>
     ul {
@@ -103,7 +103,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg fixed-top">
-        <a class="navbar-brand" href="#"><img src="img/logo.png" style="margin-left: 30px; width: 100px;"></a>
+        <a class="navbar-brand" href="#"><img src="/oxo/img/logo.png" style="margin-left: 30px; width: 100px;"></a>
         <div class="collapse navbar-collapse" id="navbar">
         
             <form class="form-inline col-9">
@@ -122,7 +122,7 @@
                     <a class="nav-link" href="#">List</a>
                 </li>
                 <li class="nav-item">
-                    <img src="img/member.png" width="30x" style="margin-left: 15px;"
+                    <img src="/oxo/img/member.png" width="30x" style="margin-left: 15px;"
                         onclick="document.getElementById('login').style.display='block'">
                 </li>
             </ul>
@@ -167,7 +167,7 @@
                         <div class="lr">좋아요순</div>
                     </div>
                 </div>
-
+				
                 <!-- 리스트 컬럼 -->
                 <div class="d-flex mainlist">
                 
