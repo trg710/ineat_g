@@ -82,20 +82,41 @@ $(function(){
 
         }
 /*섹션2*/
-.reviewTitle{
-			width: 80%;
-			height: 40px;
-			background-color: #ff7702;
-			border-top-right-radius: 40px;
-			padding-top:1px;
+		.content2{
+		margin-top:50px;
 		}
-.reviewBox{
-	width: 80%;
-	height: 130px;
-	margin-top: 10px;
-	border: 2px solid #ff7702;
-	
-}
+        .reviewTitle {
+            width: 70%;
+            height: 40px;
+            background-color: #ff7702;
+            border-top-right-radius: 40px;
+            margin: 20px auto;
+        }
+
+        .reviewBox {
+            width: 70%;
+            height: 10em;
+            border: 2px solid #ff7702;
+            background-color: white;
+            margin: 15px auto;
+            padding: 5px;
+        }
+
+        .review {
+            width: 80%;
+            height: 100%;
+            margin: 0 auto;
+            display: inline-block;
+            position: relative;
+        }
+        .rvtext{
+        height:112px; 
+        width: 150%; 
+        float: left;  
+        margin-left:22px; 
+        border: 2px solid #ff7702;
+        background-color:
+        }
 
 
 <!--로그인 모달창 css-->
@@ -172,7 +193,7 @@ $(function(){
             </div>
         </div>
                <!--임시섹션2-->
-        <div class="section mt-n1">
+        <div class="section mt-n1" style="background: url('img/main2.jpg') no-repeat; background-size: cover;">
             <div class="content2">
                 <div class="reviewTitle">
                     <h1 style="font-size: 38px; color: rgb(255, 255, 255);"><em>R e v i e w</em></h1>
@@ -183,19 +204,25 @@ $(function(){
                         <h6></h6>
                         <h4 class="badge badge-warning" style="font-size:13px; margin-left:5px;">닉네임닉네임</h4>
                     </div>
-                    <div class="review col-10 clearfix">
+                    <div class="review col-12 clearfix" style="margin-top:3px;">
+                    <div style="margin-right:20px;">
                         <img src="img/k_doen.jpg" width="112px;" height="112px"
                             style="float: left; border: solid white 1px;">
                         <img src="img/k_doen.jpg" width="112px;" height="112px"
                             style="float: left; border: solid white 1px;">
-                        <div class="col-6"
-                            style="height:112px; width: 150%; float: right;  margin-left:22px; border: 2px solid #ff7702;">
+                        <img src="img/k_doen.jpg" width="112px;" height="112px"
+                            style="float: left; border: solid white 1px;">
+                    </div>
+                        <div class="col-4 rvtext">
                             <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
                         </div>
-                    </div>
-                    <div class="jumsu col-2" style="float: right; margin-top: 10px;" width="50px" height="50px;">
-                        <h1 style="font-size: 80px; color: rgb(0, 148, 0);"><b><em>4.2</em></b></h1>
-                    </div>
+						<div class="jumsu" style="float: right;"
+							width="50px" height="50px;">
+							<h1 style="font-size: 80px; color: rgb(0, 148, 0);">
+								<b><em>4.2</em></b>
+							</h1>
+						</div>
+					</div>
                 </div>
                 <div class="reviewBox">
                 </div>
@@ -206,8 +233,9 @@ $(function(){
             </div>
         </div>
     </div>
-    <div class="section"></div>
-    <div class="section"></div>
+    
+    <!-- 섹션3 -->
+    <div class="section" style="background: url('img/main2.jpg') no-repeat; background-size: cover;"></div>
  
     <!-- 로그인 모달창 -->
     <div id="login" class="w3-modal">
