@@ -1,4 +1,4 @@
-package com.ineat.www;
+package com.ineat.oxo;
 
 import java.text.DateFormat;
 import java.util.Date;

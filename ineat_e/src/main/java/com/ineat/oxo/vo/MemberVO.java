@@ -1,4 +1,4 @@
-package com.ineat.www.vo;
+package com.ineat.oxo.vo;
 
 
 // mVO

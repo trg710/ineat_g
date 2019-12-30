@@ -1,4 +1,4 @@
-package com.ineat.www.services;
+package com.ineat.oxo.services;
 // 주석
 public class FileService {
 

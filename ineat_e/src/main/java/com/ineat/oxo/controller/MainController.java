@@ -1,4 +1,4 @@
-package com.ineat.www.controller;
+package com.ineat.oxo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

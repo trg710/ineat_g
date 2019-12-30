@@ -1,4 +1,4 @@
-package com.ineat.www.controller;
+package com.ineat.oxo.controller;
 
 public class Member {
 	public void test() {

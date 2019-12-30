@@ -1,4 +1,4 @@
-package com.ineat.www.util;
+package com.ineat.oxo.util;
 
 /**
  *    이 클래스는 페이지 이동 기능에 필요한 정보를 계산하기 위해서

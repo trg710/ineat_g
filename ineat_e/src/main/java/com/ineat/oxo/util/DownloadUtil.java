@@ -1,4 +1,4 @@
-package com.ineat.www.util;
+package com.ineat.oxo.util;
 
 
 //dUtil

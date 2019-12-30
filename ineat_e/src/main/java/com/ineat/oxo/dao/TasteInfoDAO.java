@@ -1,4 +1,4 @@
-package com.ineat.www.dao;
+package com.ineat.oxo.dao;
 
 
 //tDAO
