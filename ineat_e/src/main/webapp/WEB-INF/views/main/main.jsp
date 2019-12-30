@@ -5,19 +5,62 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<link rel="stylesheet" href="/css/fullpage.min.css" >
 <link rel="stylesheet" href="/css/w3.css" >
 <link rel="stylesheet" href="/css/bootstrap.css" >
-<link rel="stylesheet" href="/css/fullpage.min.css" >
 <script type="text/javascript" src="/js/jquery-3.4.1.min.js" ></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/popper.min.js"></script>
 <script type="text/javascript" src="/js/fullpage.min.js"></script>
 <script type="text/javascript" src="/js/pscript.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <style>
 </style>
 <script type="text/javascript">
+$(function(){
+	//네비바 로고 클릭 시 메인화면으로 이동
+	$('.navbar-brand').click(function(){
+		$(location).attr('href','main.eat');
+	});
+	//로그인처리
+	$('#login').css('display','none');
+	$('#loginbtn').click(function(){
+		$('#login').css('display','block');
+	});
+	$('#x').click(function(){
+		$('#login').css('display','none');
+	});
+	//회원가입처리
+	$('#joinbtn').click(function(){
+		$(location).attr('href','/join.eat');
+	});
+});
 </script>
 <style>
+
+        .clearfix::before,
+        .clearfix::after {
+            display: block;
+            content: '';
+            clear: both;
+        }
+
+        #navbar li ul {
+            background-color: white;
+            display: none;
+            /* 평상시에는 서브메뉴가 안보이게 하기 */
+            height: auto;
+            padding: 0px;
+            margin: 0px;
+            border: 0px;
+            position: absolute;
+            width: 200px;
+            z-index: 200;
+        }
+
+        #navbar li:hover ul {
+        display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
+        }
+
         .bg {
             background-color: rgba(255, 255, 255, 1);
             border-color: rgba(214, 214, 214, 1);
@@ -51,6 +94,7 @@
 	height: 130px;
 	margin-top: 10px;
 	border: 2px solid #ff7702;
+	
 }
 
 
@@ -87,7 +131,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>-->
 
-        <div class="collapse navbar-collapse" id="navbar">
+       <div class="collapse navbar-collapse" id="navbar">
             <form class="form-inline col-9">
                 <input class=" form-control col-10 mr-sm-2" type="text" placeholder="Search">
                 <button class="btn btn-warning" type="submit">Search</button>
@@ -103,45 +147,73 @@
                     <a class="nav-link" href="#">List</a>
                 </li>
                 <li class="nav-item">
-                    <img src="img/member.png" width="30x" style="margin-left: 15px;"
-                    onclick="document.getElementById('login').style.display='block'">
+                    <img src="img/member.png" width="30x" style="margin-left: 15px;">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" id="joinbtn"><a class="nav-link" href="#">회원가입</a></li>
+                        <li class="nav-item" id="loginbtn"><a class="nav-link" >로그인</a></li>
+                        <c:if test="${not empty SID}">
+                        <li class="nav-item"><a class="nav-link" href="#">회원정보보기</a></li>
+                        </c:if>
+                    </ul>
                 </li>
             </ul>
-            <div>
-            </div>
         </div>
     </nav>
     <!--네비게이션바-->
 
-    <!--메인-->
+   <!--메인-->
     <div id="fullpage" class="wrapper">
         <!-- 섹션1-->
-         <div class="section" style="background: url('img/main.jpg') no-repeat; background-size: cover;">
-            <div id="page1" style="margin-top:5%;">                    
+        <div class="section" style="background: url('img/main.jpg') no-repeat; background-size: cover;">
+            <div id="page1" style="margin-top: 5%;">
                 <img src="img/click.jpg" width="28%" id="mainimg" style="margin-left: 15px;">
                 <img src="img/ineat.png" width="30%" style="margin-right:5%; margin-left: 5%;">
                 <img src="img/matdcup.jpg" width="28%" id="mainimg">
             </div>
         </div>
-        <!--임시섹션2-->
-        <div class="section">
+               <!--임시섹션2-->
+        <div class="section mt-n1">
             <div class="content2">
-                <div class="reviewTitle">리뷰 랭킹?</div>
-                <div class="reviewBox"></div>
-                <div class="reviewBox"></div>
-                <div class="reviewBox"></div>
-                <div class="reviewBox"></div>
+                <div class="reviewTitle">
+                    <h1 style="font-size: 38px; color: rgb(255, 255, 255);"><em>R e v i e w</em></h1>
+                </div>
+                <div class="reviewBox col-12">
+                    <div class="membInfo col-2 center-block" style="float: left;">
+                        <img src="img/member.png" width="70px" height="70px" style="margin: 10px 0px 0px 14px;">
+                        <h6></h6>
+                        <h4 class="badge badge-warning" style="font-size:13px; margin-left:5px;">닉네임닉네임</h4>
+                    </div>
+                    <div class="review col-10 clearfix">
+                        <img src="img/k_doen.jpg" width="112px;" height="112px"
+                            style="float: left; border: solid white 1px;">
+                        <img src="img/k_doen.jpg" width="112px;" height="112px"
+                            style="float: left; border: solid white 1px;">
+                        <div class="col-6"
+                            style="height:112px; width: 150%; float: right;  margin-left:22px; border: 2px solid #ff7702;">
+                            <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                        </div>
+                    </div>
+                    <div class="jumsu col-2" style="float: right; margin-top: 10px;" width="50px" height="50px;">
+                        <h1 style="font-size: 80px; color: rgb(0, 148, 0);"><b><em>4.2</em></b></h1>
+                    </div>
+                </div>
+                <div class="reviewBox">
+                </div>
+                <div class="reviewBox">
+                </div>
+                <div class="reviewBox">
+                </div>
             </div>
         </div>
     </div>
-        <div class="section"></div>
-        <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
  
     <!-- 로그인 모달창 -->
     <div id="login" class="w3-modal">
     <div class="w3-modal-content" style="width:35%">
       <div class="w3-container w3-padding" >
-        <span onclick="document.getElementById('login').style.display='none'" id="x" style ="margin:10px 18px 0px 0px;"class="w3-button w3-display-topright">&times;</span>
+        <span id="x" style ="margin:10px 18px 0px 0px;"class="w3-button w3-display-topright">&times;</span>
         <!-- 로그인 모달 실제코드 -->
            
          <div style="border: solid orange 2px;">
@@ -161,13 +233,10 @@
                     <button type="submit" class="btn btn-warning btn-w">Login</button>
                 </div>
                 <div style="display: inline-block; margin:0px;" class="row col-md-12">
-                    <div class="size col-md-4 " style="float: left;">
-                            <p class="text-warning size"><b>회원가입</b></p>
-                    </div>
-                    <div class="size col-md-4" style="float: left;">
+                    <div class="size col-md-6" style="float: left;">
                         <p class="text-warning size"><b>아이디찾기</b></p>
                     </div>
-                    <div class="size col-md-4" style="float: right;">
+                    <div class="size col-md-6" style="float: right;">
                         <p class="text-warning size"><b>비밀번호찾기</b></p>
                     </div>
                 </div>
