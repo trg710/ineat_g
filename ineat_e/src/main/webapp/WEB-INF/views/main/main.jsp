@@ -30,6 +30,34 @@
 		$('#x').click(function() {
 			$('#login').css('display', 'none');
 		});
+		
+		$('#loginsub').click(function(){
+			$.ajax({
+				url : "/oxo/member/loginProc.eat",
+				type : "post",
+				dataType : "json",
+				data : {"id" : $('#id').val(),
+					"pw" : $('#password').val()},
+				success : function(cnt){
+					if(cnt==1){
+						location.reload();
+					}else{
+						alert('로그인에 실패하였습니다.');
+					}
+				},
+				error : function(){
+					alert('###에러');
+				}
+			});
+		});
+		
+		
+		
+		//로그아웃
+		$('#logout').click(function(){
+			$(location).attr('href', '/oxo/member/logout.eat');
+		});
+		
 		//회원가입처리
 		$('#joinbtn').click(function() {
 			$(location).attr('href', '/oxo/member/join.eat');
@@ -190,10 +218,13 @@
 				<li class="nav-item"><img src="img/member.png" width="30x"
 					style="margin-left: 15px;">
 					<ul class="navbar-nav">
+						<c:if test="${empty SID}">
+						<li class="nav-item" id="loginbtn"><a class="nav-link">로그인</a></li>
 						<li class="nav-item" id="joinbtn"><a class="nav-link"
 							href="#">회원가입</a></li>
-						<li class="nav-item" id="loginbtn"><a class="nav-link">로그인</a></li>
+						</c:if>
 						<c:if test="${not empty SID}">
+							<li class="nav-item"><a class="nav-link" href="#" id="logout">로그아웃</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">회원정보보기</a></li>
 						</c:if>
 					</ul></li>
@@ -299,16 +330,16 @@
 						<div
 							style="padding: 20px 20px 0px 20px; margin: 20px 20px 20px 20px;">
 							<div>
-								<input type="text" class="form-control inputheight " id="id"
+								<input type="text" class="form-control inputheight " id="id" name="id"
 									placeholder="I D"">
 							</div>
 							<div>
 								<input type="password" class="form-control inputheight "
-									style="margin-top: 10px;" id="password" placeholder="Password"">
+									style="margin-top: 10px;" id="password" name="pw" placeholder="Password">
 							</div>
 							<div>
 								<br>
-								<button type="submit" class="btn btn-warning btn-w">Login</button>
+								<button type="button" class="btn btn-warning btn-w" id="loginsub">Login</button>
 							</div>
 							<div style="display: inline-block; margin: 0px;"
 								class="row col-md-12">
