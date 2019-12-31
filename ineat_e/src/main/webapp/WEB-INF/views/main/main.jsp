@@ -71,7 +71,7 @@
 	clear: both;
 }
 #fp-nav ul li a span {
-    background-color: #00690f;
+    background-color: rgba(0, 105, 15, 0.7);
 }
 
 #navbar li ul {
@@ -146,12 +146,31 @@
 	width: 150%;
 	float: left;
 	margin-left: 22px;
-	border: 2px solid #ff7702;
-	background-color:
+}
+
+/*3섹션*/
+#page3 {
+	align-content: center;
+	padding: 20px 100px 20px 100px;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.5);
+	display: inline-block;
+	border-top: 10px solid #ff7702;
+	border-bottom: 10px solid #ff7702;
+}
+
+#img {
+	margin: 10px;
+}
+
+#img:hover {
+	border: solid white 10px;
+	box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
 }
 
 <!--
-로그인 모달창 css-->.form-control:focus {
+로그인 모달창 css-->
+.form-control:focus {
 	border: solid orange 2px;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px
 		rgba(255, 165, 0, 0.4)
@@ -172,24 +191,6 @@
 	color: #000 !important;
 	background-color: rgba(253, 153, 0, 0.6) !important;
 }
-
-/*3섹션*/
-#page3 {
-	align-content: center;
-	padding: 20px 100px 20px 100px;
-	width: 100%;
-	background-color: rgba(255, 255, 255, 0.3);
-	display: inline-block;
-}
-
-#img {
-	margin: 10px;
-}
-
-#img:hover {
-	border: solid white 10px;
-	box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
-}
 </style>
 </head>
 <body>
@@ -205,8 +206,8 @@
         </button>-->
 
 		<div class="collapse navbar-collapse" id="navbar">
-			<form class="form-inline col-9">
-				<input class=" form-control col-10 mr-sm-2" type="text"
+			<form class="form-inline col-10">
+				<input class=" form-control col-11 mr-sm-2" type="text"
 					placeholder="Search">
 				<button class="btn btn-warning" type="submit">Search</button>
 			</form>
