@@ -22,4 +22,15 @@ public class StoryBoard {
 		return mv;
 	}
 
+	@RequestMapping("storyBoardInfo.eat")
+	public ModelAndView storyBoardInfo(ModelAndView mv) {
+		
+		return mv;
+	}
+	
+	@RequestMapping("storyBoardWrite.eat")
+	public ModelAndView storyBoardWrite(ModelAndView mv) {
+		
+		return mv;
+	}
 }

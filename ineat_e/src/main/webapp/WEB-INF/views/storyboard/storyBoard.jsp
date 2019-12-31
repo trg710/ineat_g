@@ -16,7 +16,7 @@
         <div class="col-md-2"></div>
         <div class="col-md-8"><h3>inEat Story</h3></div>
     </div>
-     <div class="row mt-3 text-center">
+    <div class="row mt-3 text-center">
         <div class="col-md-2"></div>
         <div class="col-md-2 border-bottom">이미지</div>
         <div class="col-md-2 border-bottom">제목</div>
@@ -26,13 +26,13 @@
         <div class="col-md-1 border-bottom">조회수</div>
     </div>
     
-     <div class="row mt-1 text-center">
+    <div class="row mt-1 text-center">
         <div class="col-md-2"></div>
         <div class="col-md-2"><img src="/img/noimage.jpg" width="50%"></div>
         <div class="col-md-2 pt-4">여기 진짜 맛있어요!</div>
         <div class="col-md-1 pt-4">LeetsxPro</div>
         <div class="col-md-1 pt-4">2019-12-31</div>
-        <div class="col-md-1 pt-4">△ ▽</div>
+        <div class="col-md-1 pt-3"><img src="/img/like_16px.jpg">10<p><img src="/img/hate_16px.jpg">1</div>
         <div class="col-md-1 pt-4">1</div>
     </div>
     
