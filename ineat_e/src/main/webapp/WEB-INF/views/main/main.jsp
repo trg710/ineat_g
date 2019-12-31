@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="css/fullpage.min.css">
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/nav.css">
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="js/popper.min.js"></script>
 <script type="text/javascript" src="js/fullpage.min.js"></script>
@@ -65,37 +66,6 @@
 	display: block;
 	content: '';
 	clear: both;
-}
-#fp-nav ul li a span {
-    background-color: rgba(0, 105, 15, 0.7);
-}
-
-#navbar li ul {
-	background-color: white;
-	display: none;
-	/* 평상시에는 서브메뉴가 안보이게 하기 */
-	height: auto;
-	padding: 0px;
-	margin: 0px;
-	border: 0px;
-	position: absolute;
-	width: 200px;
-	z-index: 200;
-}
-
-#navbar li:hover ul {
-	display: block; /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
-}
-
-.bg {
-	background-color: rgba(255, 255, 255, 1);
-	border-color: rgba(214, 214, 214, 1);
-}
-
-.form-control:focus {
-	border: solid orange 2px;
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px
-		rgba(255, 165, 0, 0.4)
 }
 
 #page1 {
