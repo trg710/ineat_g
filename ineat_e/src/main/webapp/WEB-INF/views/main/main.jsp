@@ -324,7 +324,7 @@
 				<div style="border: solid orange 2px;">
 					<div>
 						<div style="text-align: center;">
-							<img src="/img/logo.png" width="50%"
+							<img src="/oxo/img/logo.png" width="50%"
 								style="align-content: center; padding-top: 20px;">
 						</div>
 						<div
