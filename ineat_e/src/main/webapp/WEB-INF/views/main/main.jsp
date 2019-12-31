@@ -18,10 +18,6 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		//네비바 로고 클릭 시 메인화면으로 이동
-		$('.navbar-brand').click(function() {
-			$(location).attr('href', '/oxo/main.eat');
-		});
 		//로그인처리
 		$('#login').css('display', 'none');
 		$('#loginbtn').click(function() {
@@ -200,6 +196,13 @@
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
 		<a class="navbar-brand" href="#"><img src="img/logo.png"
 			style="margin-left: 30px; width: 100px;"></a>
+			<script type="text/javascript">
+			$(function() {
+				//네비바 로고 클릭 시 메인화면으로 이동
+				$('.navbar-brand').click(function() {
+					$(location).attr('href', '/oxo/main.eat');
+				});
+			</script>
 		<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
             aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
