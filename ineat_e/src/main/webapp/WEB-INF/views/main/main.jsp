@@ -6,15 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" href="css/fullpage.min.css">
-<link rel="stylesheet" href="css/w3.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/nav.css">
-<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="js/popper.min.js"></script>
-<script type="text/javascript" src="js/fullpage.min.js"></script>
-<script type="text/javascript" src="js/pscript.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/oxo/css/fullpage.min.css">
+<link rel="stylesheet" href="/oxo/css/w3.css">
+<link rel="stylesheet" href="/oxo/css/bootstrap.css">
+<link rel="stylesheet" href="/oxo/css/nav.css">
+<script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/oxo/js/popper.min.js"></script>
+<script type="text/javascript" src="/oxo/js/fullpage.min.js"></script>
+<script type="text/javascript" src="/oxo/js/pscript.js"></script>
+<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
 <style>
 </style>
 <script type="text/javascript">
