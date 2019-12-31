@@ -23,7 +23,7 @@ public class MainList {
 	}
 	@RequestMapping("map.eat")
 	public ModelAndView MapTest(ModelAndView mv) {
-		mv.setViewName("ineatlist/detail/maptest");
+		mv.setViewName("ineatlist/detail/modal");
 		return mv;
 	}
 }
