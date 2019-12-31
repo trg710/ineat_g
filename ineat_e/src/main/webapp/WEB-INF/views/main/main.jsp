@@ -59,7 +59,16 @@
       $('#joinbtn').click(function() {
          $(location).attr('href', '/oxo/member/join.eat');
       });
+   
+    //추천페이지로 이동 ---태은추가
+   	  $('.goRecommend').click(function(){
+   		  $(location).attr('href','/oxo/recommend/recommend.eat');
+   	  });
+    
    });
+  		
+   	  
+  
 </script>
 <style>
 .clearfix::before, .clearfix::after {
@@ -213,7 +222,7 @@
       <div class="section"
          style="background: url('img/main.jpg') no-repeat; background-size: cover;">
          <div id="page1" style="margin-top: 5%;">
-            <img src="img/click.jpg" width="28%" id="mainimg"
+            <img src="img/click.jpg" width="28%" id="mainimg" class="goRecommend"
                style="margin-left: 15px;"> <img src="img/ineat.png"
                width="30%" style="margin-right: 5%; margin-left: 5%;"> <img
                src="img/matdcup.jpg" width="28%" id="mainimg">
