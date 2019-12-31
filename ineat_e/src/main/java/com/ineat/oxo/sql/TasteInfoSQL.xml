@@ -6,6 +6,8 @@
          
  <mapper namespace="tSQL">
  
- 
- 
+ 	<select id="">
+ 		
+ 	</select>
+ 	
  </mapper>

@@ -11,6 +11,8 @@ public class MainList {
 	
 	@RequestMapping("list.eat")
 	public ModelAndView List(ModelAndView mv) {
+		
+		
 		mv.setViewName("ineatlist/list");
 		return mv;
 	}
