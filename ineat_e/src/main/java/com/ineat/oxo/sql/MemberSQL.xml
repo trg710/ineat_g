@@ -16,5 +16,57 @@
  		AND m_pw = #{pw}
  </select>
  
+ <insert id="Join" parameterType="mVO">
+ 	<selectKey keyProperty="mno" resultType="int" order="BEFORE">
+ 		SELECT
+ 			NVL(MAX(m_no)+1, 10001)
+ 		FROM
+ 			ie_member
+ 	</selectKey>
+ 		INSERT INTO
+ 			ie_member
+ 		VALUES(
+ 			#{mno}, #{id}, #{pw}, #{name}, #{email}, #{nname}, #{tel}, sysdate, to_date(#{bday}, 'yy/MM/dd')
+ 		)
+ </insert>
  
+ <!-- 회원가입 아이디 체크 -->
+ <select id="idCk" resultType="int" parameterType="String">
+ 	SELECT
+ 		count(*) cnt
+ 	FROM
+ 		ie_member
+ 	WHERE
+ 		m_id=#{id}
+ </select>
+ 
+ <!-- 회원가입 닉네임 체크 -->
+ <select id="nnCk" resultType="int" parameterType="String">
+ 	SELECT
+ 		count(*) cnt
+ 	FROM
+ 		ie_member
+ 	WHERE
+ 		m_nname= #{nname}
+ </select>
+ 
+ <!-- 회원가입 전화번호 체크 -->
+ <select id="telCk" resultType="int" parameterType="String">
+ 	SELECT
+ 		count(*) cnt
+ 	FROM
+ 		ie_member
+ 	WHERE
+ 		m_tel = #{tel}
+ </select>
+ 
+ <!-- 이메일체크 -->
+  <select id="eCk" resultType="int" parameterType="String">
+ 	SELECT
+ 		count(*) cnt
+ 	FROM
+ 		ie_member
+ 	WHERE
+ 		m_email = #{email}
+ </select>
  </mapper>

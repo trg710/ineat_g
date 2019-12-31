@@ -15,4 +15,29 @@ public class MemberDAO {
 		int cnt = sqlSession.selectOne("mSQL.Login", mVO);
 		return cnt;
 	}
+	
+	//회원가입
+	public int joinProc(MemberVO mVO) {
+		return sqlSession.insert("mSQL.Join", mVO);
+	}
+	
+	//아이디체크
+	public int idCheck(String id) {
+		return sqlSession.selectOne("mSQL.idCk",id);
+	}
+	
+	//닉네임체크
+	public int nnCheck(String nname) {
+		return sqlSession.selectOne("mSQL.nnCk", nname);
+	}
+	
+	//전화번호체크
+	public int telCheck(String tel) {
+		return sqlSession.selectOne("mSQL.telCk", tel);
+	}
+	
+	//이메일체크
+	 public int eCheck(String email) {
+		 return sqlSession.selectOne("mSQL.eCk", email);
+	 }
 }

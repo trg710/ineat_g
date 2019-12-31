@@ -14,12 +14,21 @@ public class MemberVO {
 	private String email;
 	private String nname;
 	private String tel;
+	private String bday;
 	private Date wDate;
 	private String sDate;
 	private Time wTime;
 	private String sTime;
 	
 	
+	
+
+	public String getBday() {
+		return bday;
+	}
+	public void setBday(String bday) {
+		this.bday = bday;
+	}
 
 	public int getMno() {
 		return mno;
