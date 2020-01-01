@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>story board info</title>
-<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 <script type="text/javascript">
 </script>
 </head>
@@ -26,12 +26,12 @@
     </div>
     <div class="row mt-2">
     	<div class="col-md-2"></div>
-    	<div class="col-md-3"><img src="/img/noimage.jpg" width="auto"></div>
+    	<div class="col-md-3"><img src="/oxo/img/noimage.jpg" width="100%"></div>
     	<div class="col-md-5 pt-3">최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ</div>
     </div>
     <div class="row mt-2 text-center">
         <div class="col-md-2"></div>
-        <div class="col-md-1"><img src="/img/like_16px.jpg">10<img src="/img/hate_16px.jpg" class="ml-2">1</div>
+        <div class="col-md-1"><img src="/oxo/img/like_16px.jpg">10<img src="/oxo/img/hate_16px.jpg" class="ml-2">1</div>
         <div class="col-md-7"></div>
     </div>
     <div class="row mt-2">

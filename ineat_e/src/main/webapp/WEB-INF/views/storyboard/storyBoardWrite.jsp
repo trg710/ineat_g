@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>story board write</title>
-<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 <script type="text/javascript">
 </script>
 </head>
@@ -33,8 +33,8 @@
     <div class="row mt-2">
         <div class="col-md-2"></div>
         <div class="col-md-1 text-center">파일</div>
-        <div class="col-md-6">
-			<div class="input-group mb-3">
+        <div class="col-md-5">
+			<div class="input-group">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
 				</div>
@@ -44,7 +44,7 @@
 				</div>
 			</div>
         </div>
-        <div class="col-md-1"></div>
+        <div class="col-md-2"></div>
     </div>
     <div class="row mt-4">
         <div class="col-md-2"></div>

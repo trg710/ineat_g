@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>story board</title>
-<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 <script type="text/javascript">
 </script>
 </head>
@@ -28,11 +28,11 @@
     
     <div class="row mt-1 text-center">
         <div class="col-md-2"></div>
-        <div class="col-md-2"><img src="/img/noimage.jpg" width="50%"></div>
+        <div class="col-md-2"><img src="/oxo/img/noimage.jpg" width="50%"></div>
         <div class="col-md-2 pt-4">여기 진짜 맛있어요!</div>
         <div class="col-md-1 pt-4">LeetsxPro</div>
         <div class="col-md-1 pt-4">2019-12-31</div>
-        <div class="col-md-1 pt-3"><img src="/img/like_16px.jpg">10<p><img src="/img/hate_16px.jpg">1</div>
+        <div class="col-md-1 pt-3"><img src="/oxo/img/like_16px.jpg">10<p><img src="/oxo/img/hate_16px.jpg">1</div>
         <div class="col-md-1 pt-4">1</div>
     </div>
     
