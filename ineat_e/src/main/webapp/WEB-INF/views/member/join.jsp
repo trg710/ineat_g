@@ -14,6 +14,11 @@
 .btn-w{
     width: 100px;
 }
+.form-control:focus {
+   border: solid orange 2px;
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px
+      rgba(255, 165, 0, 0.4)
+}
 </style>
 <script type="text/javascript">
    $(function(){
@@ -85,10 +90,10 @@
       var pwck = $('#pwck').val();
       var msg = $('#pwmsg');
       if(pw==pwck){
-         msg.html('비밀번호가 일치합니다.').css('color','#fd8f00');
+         msg.html('비밀번호가 일치합니다.').css('color','gray');
       }
       if(pw!=pwck){
-         msg.html('비밀번호가 일치하지 않습니다.').css('color','gray');
+         msg.html('비밀번호가 일치하지 않습니다.').css('color','#fd8f00');
       }
       if(pw=="" || pwck==""){
          msg.html(" ");
@@ -117,13 +122,13 @@
             success : function(cnt){
                var ck = cnt;
                if(ck==1){
-                  //아이디가 있는 경우
+                  //전화번호가 있는 경우
                   $('#tel').val("");
                   $('#telmsg').attr('class','');
                   $('#telmsg').toggleClass('text-warning');
                   $('#telmsg').html("이미 가입된 전화번호입니다.");
                }else{
-                  //아이디가 없는 경우
+                  //전화번호가 없는 경우
                   $('#telmsg').attr('class','');
                   $('#telmsg').toggleClass('text-muted');
                   $('#telmsg').html("사용 가능한 전화번호입니다.");
@@ -172,7 +177,9 @@
             $('#emsg').toggleClass('text-warning');
             $('#emsg').html("이메일을 올바르게 입력하세요.");
          }
-         //캔슬 클릭
+         
+         
+         //캔슬 클릭시 메인화면으로 이동
          $('.cancel').click(function(){
             $(location).attr('href','/oxo/main.eat');
          });  

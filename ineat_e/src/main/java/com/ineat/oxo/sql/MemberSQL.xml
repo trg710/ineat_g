@@ -26,7 +26,7 @@
  		INSERT INTO
  			ie_member
  		VALUES(
- 			#{mno}, #{id}, #{pw}, #{name}, #{email}, #{nname}, #{tel}, sysdate, to_date(#{bday}, 'yy/MM/dd')
+ 			#{mno}, #{id}, #{pw}, #{name}, #{email}, #{nname}, #{tel}, sysdate, to_date(#{bday}, 'yyyy/MM/dd')
  		)
  </insert>
  
@@ -68,5 +68,15 @@
  		ie_member
  	WHERE
  		m_email = #{email}
+ </select>
+ 
+ <!-- 회원정보 가져오기 -->
+ <select id="memInfo" resultType="mVO" parameterType="mVO">
+ 	SELECT
+ 		m_name name, m_nname nname, m_id id, m_tel tel, m_email email, m_birthday bday, m_date wDate 
+ 	FROM
+ 		ie_member
+ 	WHERE
+ 		m_id=#{id}
  </select>
  </mapper>

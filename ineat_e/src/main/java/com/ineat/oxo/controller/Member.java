@@ -17,6 +17,8 @@ import com.ineat.oxo.vo.MemberVO;
 public class Member {
 	@Autowired
 	MemberDAO mDAO;
+	
+	/*회원 가입 및 로그인*/
 
 	//로그인
 	@RequestMapping("loginProc.eat")
@@ -91,5 +93,14 @@ public class Member {
 		return cnt;
 	}
 	
+	
+	/*회원 정보 관련*/
+	@RequestMapping("memInfo.eat")
+	public ModelAndView memInfo(MemberVO mVO,ModelAndView mv) {
+		MemberVO memVO = mDAO.memInfo(mVO);
+		mv.addObject("DATA",memVO);
+		mv.setViewName("member/memInfo");
+		return mv;
+	}
 }
 

@@ -59,7 +59,11 @@
       $('#joinbtn').click(function() {
          $(location).attr('href', '/oxo/member/join.eat');
       });
-   
+   	//회원정보보기로 이동
+   		var id = '${SID}';
+   		$('#memInfo').click(function(){
+   			$(location).attr('href','/oxo/member/memInfo.eat?id='+id);
+   		});
     //추천페이지로 이동 ---태은추가
    	  $('.goRecommend').click(function(){
    		  $(location).attr('href','/oxo/recommend/recommend.eat');
@@ -185,6 +189,7 @@
             $('.navbar-brand').click(function() {
                $(location).attr('href', '/oxo/main.eat');
             });
+         });
          </script>
       <!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
             aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -199,20 +204,19 @@
          </form>
          <ul class="navbar-nav float-left"
             style="width: 200px; margin-right: 20px;">
-            <li class="nav-item" id="story"><a class="nav-link">Story</a></li>
+            <li class="nav-item" id="story"><a class="nav-link" href="#">Story</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Matdcup</a></li>
             <li class="nav-item"><a class="nav-link" href="#">List</a></li>
             <li class="nav-item"><img src="img/member.png" width="30x"
                style="margin-left: 15px;">
                <ul class="navbar-nav">
                   <c:if test="${empty SID}">
-                  <li class="nav-item" id="loginbtn"><a class="nav-link">로그인</a></li>
-                  <li class="nav-item" id="joinbtn"><a class="nav-link"
-                     href="#">회원가입</a></li>
+                  <li class="nav-item" id="loginbtn"><a class="nav-link" href="#">로그인</a></li>
+                  <li class="nav-item" id="joinbtn"><a class="nav-link" href="#">회원가입</a></li>
                   </c:if>
                   <c:if test="${not empty SID}">
                      <li class="nav-item"><a class="nav-link" href="#" id="logout">로그아웃</a></li>
-                     <li class="nav-item"><a class="nav-link" href="#">회원정보보기</a></li>
+                     <li class="nav-item"><a class="nav-link" href="#" id="memInfo">회원정보보기</a></li>
                   </c:if>
                </ul></li>
          </ul>

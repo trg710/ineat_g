@@ -40,4 +40,8 @@ public class MemberDAO {
 	 public int eCheck(String email) {
 		 return sqlSession.selectOne("mSQL.eCk", email);
 	 }
+	 
+	 public MemberVO memInfo(MemberVO mVO) {
+		 return sqlSession.selectOne("mSQL.memInfo", mVO);
+	 }
 }
