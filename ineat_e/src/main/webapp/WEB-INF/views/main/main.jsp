@@ -64,6 +64,10 @@
    	  $('.goRecommend').click(function(){
    		  $(location).attr('href','/oxo/recommend/recommend.eat');
    	  });
+   	//스토리보드로 이동
+   	$('#story').click(function(){
+   		$(location).attr('href','/oxo/storyboard/storyBoard.eat');
+   	});
     
    });
   		
@@ -195,7 +199,7 @@
          </form>
          <ul class="navbar-nav float-left"
             style="width: 200px; margin-right: 20px;">
-            <li class="nav-item"><a class="nav-link" href="#">Story</a></li>
+            <li class="nav-item" id="story"><a class="nav-link">Story</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Matdcup</a></li>
             <li class="nav-item"><a class="nav-link" href="#">List</a></li>
             <li class="nav-item"><img src="img/member.png" width="30x"
