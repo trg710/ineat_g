@@ -15,11 +15,18 @@ $(function(){
 		location.href = "/oxo/storyboard/storyBoard.eat";
 	});
 	// 작성하기
-	/*
-	$('#toWrite').click(function(){
-		location.href = "/oxo/storyboard/storyBoardWriteProc.eat";
-	});
-	*/
+	function content(){
+		var title = $('#title').val();
+		var content = $('#content').val();
+		
+		if(!content && !title){
+			alert('내용을 작성해주세요.');
+			return;
+		}
+		$('#form1').submit();
+	}
+	$('#write').click(content);
+	
 });
 </script>
 </head>
@@ -33,39 +40,41 @@ $(function(){
 	        <div class="col-md-2"></div>
 	        <div class="col-md-8 border-bottom"></div>
 	    </div>
-	    <div class="row mt-2">
-	        <div class="col-md-2"></div>
-	        <div class="col-md-1 text-center">제목</div>
-	        <div class="col-md-6"><input type="text" style="width:100%" value=""></div>
-	    </div>
-	    <div class="row mt-2">
-	        <div class="col-md-2"></div>
-	        <div class="col-md-1 text-center">내용</div>
-	        <div class="col-md-6"><textarea cols="150" rows="10" style="width:100%"></textarea></div>
-	    </div>
-	    <div class="row mt-2">
-	        <div class="col-md-2"></div>
-	        <div class="col-md-1 text-center">파일</div>
-	        <div class="col-md-6">
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+	    <form id="form1" method="post" action="/oxo/storyboard/storyBoardWriteProc.eat">
+		    <div class="row mt-2">
+		        <div class="col-md-2"></div>
+		        <div class="col-md-1 text-center">제목</div>
+		        <div class="col-md-6"><input type="text" id="title" style="width:100%" value=""></div>
+		    </div>
+		    <div class="row mt-2">
+		        <div class="col-md-2"></div>
+		        <div class="col-md-1 text-center">내용</div>
+		        <div class="col-md-6"><textarea id="content" cols="150" rows="10" style="width:100%"></textarea></div>
+		    </div>
+		    <div class="row mt-2">
+		        <div class="col-md-2"></div>
+		        <div class="col-md-1 text-center">파일</div>
+		        <div class="col-md-6">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+						</div>
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+							<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+						</div>
 					</div>
-					<div class="custom-file">
-						<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-						<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-					</div>
-				</div>
-	        </div>
-	        <div class="col-md-1"></div>
-	    </div>
+		        </div>
+		        <div class="col-md-1"></div>
+		    </div>
+	    </form>
 	    <div class="row mt-4">
 	        <div class="col-md-2"></div>
 	        <div class="col-md-6"></div>
 	        <div class="col-md-2">
 	        	<div class="btn-group" role="group">
 	        		<button type="button" id="cancel" class="btn btn-light">취소</button>
-	        		<button type="button" id="toWrite" class="btn btn-light">작성하기</button>
+	        		<button type="button" id="write" class="btn btn-light">작성하기</button>
 	        	</div>
 	        </div>
 	    </div>

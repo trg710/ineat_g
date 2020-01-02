@@ -24,16 +24,16 @@ $(function(){
 	    </div>
 	    <div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
-	        <div class="col-md-2 border-bottom">여기 진짜 맛있어요!</div>
+	        <div class="col-md-2 border-bottom">${title }</div>
 	        <div class="col-md-3 border-bottom"></div>
-	        <div class="col-md-1 border-bottom">조회수 10</div>
-	        <div class="col-md-1 border-bottom">LeetsxPro</div>
-	        <div class="col-md-1 border-bottom">2019-12-31</div>
+	        <div class="col-md-1 border-bottom">조회수: ${views }</div>
+	        <div class="col-md-1 border-bottom">${mid }</div>
+	        <div class="col-md-1 border-bottom">${wdate }</div>
 	    </div>
 	    <div class="row mt-2">
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-3"><img src="/oxo/img/noimage.jpg" width="100%"></div>
-	    	<div class="col-md-5 pt-3">최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ최근에 먹었던 음식중에 제일 맛있었어요!!ㅋㅋㅋㅋ 위치가 가산디지털역 근처에 있어서 가까워서 전 자주 가요!ㅋㅋㅋ</div>
+	    	<div class="col-md-5 pt-3">${content }</div>
 	    </div>
 	    <div class="row mt-2 text-center">
 	        <div class="col-md-2"></div>
@@ -63,6 +63,10 @@ $(function(){
 	    	<div class="col-md-1"></div>
 	    	<div class="col-md-6 border"></div>
 	    	<div class="col-md-1"><button type="button" class="btn btn-light">등록</button></div>
+	    </div>
+	    <div class="row mt-4">
+	    	<div class="col-md-2"></div>
+	    	<div class="col-md-8"><button type="button" id="toEdit" class="btn btn-light">수정하기</button></div>
 	    </div>
 	    <div class="row mt-4 text-center">
 	    	<div class="col-md-2"></div>

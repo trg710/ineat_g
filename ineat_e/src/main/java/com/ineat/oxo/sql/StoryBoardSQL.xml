@@ -4,8 +4,33 @@
          PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
          
- <mapper namespace="sbSQL">
+<mapper namespace="sbSQL">
+
+	<!-- storyBaord 출력 -->
+	<select id="storyBoard" resultType="sbVO">
+		SELECT
+    		sb_no bno, m_id mid, sb_title title, sb_date wdate, sb_views views, nvl(sb_fno, 0) fno
+		FROM
+		    ie_story_board, ie_member
+		WHERE
+		    sb_mno = m_no
+		ORDER BY
+		    sb_date desc	
+	</select>
+	
+	<!--  storyBoardInfo 출력 -->
+	<select id="storyBoardInfo" resultType="sbVO">
+		SELECT
+		    m_id mid, sb_title title, sb_date wdate, sb_content content, sb_views views
+		FROM
+		    IE_STORY_BOARD, IE_MEMBER
+		WHERE
+		    sb_no = #{bno}
+		    and sb_mno = m_no
+	</select>
+
+
+
  
  
- 
- </mapper>
+</mapper>

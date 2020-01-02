@@ -10,14 +10,36 @@
 <link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 <script type="text/javascript">
 $(function(){
-	$('#write').click(function(){
+	// 작성페이지로
+	$('#toWrite').click(function(){
 		location.href = "/oxo/storyboard/storyBoardWrite.eat";
 	});
+	// 홈페이지로
+	$('#toHome').click(function(){
+		location.href = "/oxo/main.eat";
+	});
+	// 상세보기
+	$('.toInfo').click(function(){
+		var bno = $(this).attr('id');
+		
+		alert(bno);
+		$('#bno').val(bno);
+		$('#form1').submit();
+		
+	});
+	
 });
 
 </script>
 </head>
 <body>
+
+	<form method="post" action="/oxo/storyboard/storyBoardInfo.eat" id="form1">
+		bno:<input type="text" name="bno" id="bno">
+	</form>
+
+
+
 	<div class="container-fluid">
 		<div class="row mt-3 text-center">
 			<div class="col-md-2"></div>
@@ -33,54 +55,26 @@ $(function(){
 	        <div class="col-md-1 border-bottom">좋아요, 싫어요</div>
 	        <div class="col-md-1 border-bottom">조회수</div>
 	    </div>
+	    <c:forEach var="data" items="${LIST }">
+		    <div class="row mt-1 text-center">
+		        <div class="col-md-2"></div>
+		        <div class="col-md-2 border-bottom pb-1"><img src="/oxo/img/noimage.jpg" width="50%"></div>
+		        <div class="col-md-2 border-bottom pt-4 toInfo" id="${data.bno }">${data.title }[5]</div>
+		        <div class="col-md-1 border-bottom pt-4">${data.mid }</div>
+		        <div class="col-md-1 border-bottom pt-4">${data.wdate }</div>
+		        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">10<p><img src="/oxo/img/hate_16px.jpg">1</div>
+		        <div class="col-md-1 border-bottom pt-4">${data.views }</div>
+		        <div class="col-md-2"></div>
+		    </div>
+	    </c:forEach>
 	    
-	    <div class="row mt-1 text-center">
-	        <div class="col-md-2"></div>
-	        <div class="col-md-2 border-bottom"><img src="/oxo/img/noimage.jpg" width="50%"></div>
-	        <div class="col-md-2 border-bottom pt-4">여기 진짜 맛있어요![5]</div>
-	        <div class="col-md-1 border-bottom pt-4">LeetsxPro</div>
-	        <div class="col-md-1 border-bottom pt-4">2019-12-31</div>
-	        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">10<p><img src="/oxo/img/hate_16px.jpg">1</div>
-	        <div class="col-md-1 border-bottom pt-4">1</div>
-	        <div class="col-md-2"></div>
-	    </div>
-	    <div class="row mt-1 text-center">
-	        <div class="col-md-2"></div>
-	        <div class="col-md-2 border-bottom"><img src="/oxo/img/noimage.jpg" width="50%"></div>
-	        <div class="col-md-2 border-bottom pt-4">여기 진짜 맛있어요!</div>
-	        <div class="col-md-1 border-bottom pt-4">LeetsxPro</div>
-	        <div class="col-md-1 border-bottom pt-4">2019-12-31</div>
-	        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">10<p><img src="/oxo/img/hate_16px.jpg">1</div>
-	        <div class="col-md-1 border-bottom pt-4">1</div>
-	        <div class="col-md-2"></div>
-	    </div>
-	    <div class="row mt-1 text-center">
-	        <div class="col-md-2"></div>
-	        <div class="col-md-2 border-bottom"><img src="/oxo/img/noimage.jpg" width="50%"></div>
-	        <div class="col-md-2 border-bottom pt-4">여기 진짜 맛있어요![3]</div>
-	        <div class="col-md-1 border-bottom pt-4">LeetsxPro</div>
-	        <div class="col-md-1 border-bottom pt-4">2019-12-31</div>
-	        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">10<p><img src="/oxo/img/hate_16px.jpg">1</div>
-	        <div class="col-md-1 border-bottom pt-4">1</div>
-	        <div class="col-md-2"></div>
-	    </div>
-	    <div class="row mt-1 text-center">
-	        <div class="col-md-2"></div>
-	        <div class="col-md-2 border-bottom"><img src="/oxo/img/noimage.jpg" width="50%"></div>
-	        <div class="col-md-2 border-bottom pt-4">여기 진짜 맛있어요!</div>
-	        <div class="col-md-1 border-bottom pt-4">LeetsxPro</div>
-	        <div class="col-md-1 border-bottom pt-4">2019-12-31</div>
-	        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">10<p><img src="/oxo/img/hate_16px.jpg">1</div>
-	        <div class="col-md-1 border-bottom pt-4">1</div>
-	        <div class="col-md-2"></div>
-	    </div>
 	    <div class="row mt-4">
 	        <div class="col-md-2"></div>
 	        <div class="col-md-6"></div>
 	        <div class="col-md-2">
 	        	<div class="btn-group" role="group">
-	        		<button type="button" class="btn btn-light">홈으로</button>
-	        		<button type="button" id="write" class="btn btn-light">글쓰기</button>
+	        		<button type="button" id="toHome" class="btn btn-light">홈으로</button>
+	        		<button type="button" id="toWrite" class="btn btn-light">글쓰기</button>
 	        	</div>
 	        </div>
 	    </div>

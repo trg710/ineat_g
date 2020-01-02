@@ -14,7 +14,7 @@
 	<typeAliases>
 	
 		<typeAlias alias="mVO" type="com.ineat.oxo.vo.MemberVO" /> 
-		<typeAlias alias="sVO" type="com.ineat.oxo.vo.StoryBoardVO" /> 
+		<typeAlias alias="sbVO" type="com.ineat.oxo.vo.StoryBoardVO" /> 
 		<typeAlias alias="rbVO" type="com.ineat.oxo.vo.ReBoardVO" /> 
 		<typeAlias alias="rvVO" type="com.ineat.oxo.vo.ReviewVO" /> 
 		<typeAlias alias="fVO" type="com.ineat.oxo.vo.FileVO" /> 
