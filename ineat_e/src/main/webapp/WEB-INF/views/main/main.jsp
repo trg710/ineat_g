@@ -227,13 +227,11 @@
    <!--메인-->
    <div id="fullpage" class="wrapper">
       <!-- 섹션1-->
-      <div class="section"
-         style="background: url('img/main.jpg') no-repeat; background-size: cover;">
+      <div class="section" style="background: url('img/main.jpg') no-repeat; background-size: cover;">
          <div id="page1" style="margin-top: 5%;">
-            <img src="img/click.jpg" width="28%" id="mainimg" class="goRecommend"
-               style="margin-left: 15px;"> <img src="img/ineat.png"
-               width="30%" style="margin-right: 5%; margin-left: 5%;"> <img
-               src="img/matdcup.jpg" width="28%" id="mainimg">
+            <a href="#"><img src="img/click.jpg" width="28%" id="mainimg" class="goRecommend" style="margin-left: 15px;"></a>
+               <img src="img/ineat.png" width="30%" style="margin-right: 5%; margin-left: 5%;">
+               <a href="#"><img src="img/matdcup.jpg" width="28%" id="mainimg"></a>
          </div>
       </div>
       <!--임시섹션2-->
@@ -285,20 +283,14 @@
       align="center">
       <div id="page3" style="margin-top: 5%;">
          <div align="left">
-            <img src="img/한식1.jpg" onmouseover="this.src='img/한식2.jpg'"
-               onmouseout="this.src='img/한식1.jpg'" width="250px" id="img"> <img
-               src="img/중식1.jpg" onmouseover="this.src='img/중식2.jpg'"
-               onmouseout="this.src='img/중식1.jpg'" width="250px" id="img"> <img
-               src="img/양식1.jpg" onmouseover="this.src='img/양식2.jpg'"
-               onmouseout="this.src='img/양식1.jpg'" width="250px" id="img">
+            <a href="#"><img src="img/한식1.jpg" onmouseover="this.src='img/한식2.jpg'" onmouseout="this.src='img/한식1.jpg'" width="250px" id="img"></a>
+            <a href="#"><img src="img/중식1.jpg" onmouseover="this.src='img/중식2.jpg'" onmouseout="this.src='img/중식1.jpg'" width="250px" id="img"></a>
+            <a href="#"><img src="img/양식1.jpg" onmouseover="this.src='img/양식2.jpg'" onmouseout="this.src='img/양식1.jpg'" width="250px" id="img"></a>
          </div>
          <div style="margin-left: 30%;" align="right">
-            <img src="img/일식1.jpg" onmouseover="this.src='img/일식2.jpg'"
-               onmouseout="this.src='img/일식1.jpg'" width="250px" id="img"> <img
-               src="img/회식1.jpg" onmouseover="this.src='img/회식2.jpg'"
-               onmouseout="this.src='img/회식1.jpg'" width="250px" id="img"> <img
-               src="img/카페1.jpg" onmouseover="this.src='img/카페2.jpg'"
-               onmouseout="this.src='img/카페1.jpg'" width="250px" id="img">
+            <a href="#"><img src="img/일식1.jpg" onmouseover="this.src='img/일식2.jpg'" onmouseout="this.src='img/일식1.jpg'" width="250px" id="img"></a>
+			<a href="#"><img src="img/회식1.jpg" onmouseover="this.src='img/회식2.jpg'" onmouseout="this.src='img/회식1.jpg'" width="250px" id="img"> </a>
+			<a href="#"><img src="img/카페1.jpg" onmouseover="this.src='img/카페2.jpg'" onmouseout="this.src='img/카페1.jpg'" width="250px" id="img"></a>
          </div>
       </div>
    </div>
