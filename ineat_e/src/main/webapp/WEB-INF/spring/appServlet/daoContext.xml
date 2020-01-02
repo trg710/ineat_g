@@ -13,4 +13,6 @@
    <bean id="fDAO" class="com.ineat.oxo.dao.FileDAO" />
    <bean id="tDAO" class="com.ineat.oxo.dao.TasteInfoDAO" />
    <bean id="mcDAO" class="com.ineat.oxo.dao.MatdcupDAO" />
+   <bean id="rDAO" class="com.ineat.oxo.dao.RecommendDAO" />
+
 </beans>
