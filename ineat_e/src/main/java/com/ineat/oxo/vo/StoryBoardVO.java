@@ -10,6 +10,7 @@ public class StoryBoardVO {
 	private int bno;
 	private int mno;
 	private int fno;
+	private int writer;
 	private String mid;
 	private String title;
 	private String content;
@@ -19,6 +20,12 @@ public class StoryBoardVO {
 	private MultipartFile[] file;
 	
 	
+	public int getWriter() {
+		return writer;
+	}
+	public void setWriter(int writer) {
+		this.writer = writer;
+	}
 	public MultipartFile getsFile() {
 		return sFile;
 	}
@@ -85,6 +92,13 @@ public class StoryBoardVO {
 	public void setViews(int views) {
 		this.views = views;
 	}
-	
+	public String toString() {
+		return 
+				"bno : " + bno + 
+				" | mid : " + mid +
+				" | title : " + title +
+				" | content : " + content
+				; 
+	}
 	
 }

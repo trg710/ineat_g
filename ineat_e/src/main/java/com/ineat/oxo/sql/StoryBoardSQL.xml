@@ -29,8 +29,39 @@
 		    and sb_mno = m_no
 	</select>
 
-
-
- 
+	<!-- sb write 처리 -->
+	<insert id="storyBoardWriteProc" parameterType="sbVO">
+		<selectKey keyProperty="writer" resultType="int" order="BEFORE">
+			SELECT
+				M_NO
+			FROM
+				IE_MEMBER
+			WHERE
+				M_ID = #{mid}
+		</selectKey>
+		INSERT INTO
+			ie_story_board(sb_no, sb_mno, sb_title, sb_content, sb_date)
+		VALUES(
+			(SELECT NVL(MAX(sb_no) + 1, 100001) FROM ie_story_board), #{writer}, #{title}, #{content}, sysdate
+		)
+	</insert>
+ 	
+ 	<!--  sbFile write 처리 -->
+ 	<insert id="sbFileAddProc" parameterType="fVO">
+ 		<selectKey keyProperty="writer" resultType="int" order="BEFORE">
+			SELECT
+				M_NO
+			FROM
+				MEMBER
+			WHERE
+				M_ID = #{mid}
+		</selectKey>
+		INSERT INTO
+			ie_sb_fileup(sbf_no, sbf_mno, sbf_oriname, sbf_savename, sbf_len, sbf_dir)
+		VALUES(
+			(SELECT NVL(MAX(sbf_no) + 1, 1000001) FROM IE_SB_FILEUP),
+			#{writer}, #{oriName}, #{saveName}, #{len}, #{dir}
+		)
+ 	</insert>
  
 </mapper>

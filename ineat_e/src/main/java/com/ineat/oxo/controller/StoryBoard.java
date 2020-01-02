@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.ineat.oxo.dao.FileDAO;
 import com.ineat.oxo.dao.StoryBoardDAO;
+import com.ineat.oxo.services.FileService;
 import com.ineat.oxo.vo.StoryBoardVO;
 
 /**
@@ -25,6 +28,12 @@ import com.ineat.oxo.vo.StoryBoardVO;
 public class StoryBoard {
 	@Autowired
 	StoryBoardDAO sbDAO;
+	
+	@Autowired
+	FileDAO fDAO;
+	
+	@Autowired
+	FileService fileSrvc;
 	
 	// sb 출력
 	@RequestMapping("storyBoard.eat")
@@ -69,9 +78,24 @@ public class StoryBoard {
 	
 	// sbwrite 처리
 	@RequestMapping("storyBoardWriteProc.eat")
-	public ModelAndView storyBoardWriteProc(ModelAndView mv) {
+	public ModelAndView storyBoardWriteProc(ModelAndView mv, RedirectView rv, HttpSession session, StoryBoardVO sbVO) {
+		System.out.println("##sbVO.toString()\n " + sbVO.toString());
 		
+		int cnt = sbDAO.storyBoardWriteProc(sbVO);
 		
+		// 업로드 할 파일 유무 확인
+		if(cnt == 1 && sbVO.getsFile().getOriginalFilename() != "") {
+			session.setAttribute("mid", sbVO.getMid());
+			fileSrvc.setDAO(fDAO);
+			fileSrvc.sbFileAddProc(session, sbVO);
+			rv.setUrl("/oxo/storyboard/storyBoard.eat");
+		}else if(cnt == 1) {
+			rv.setUrl("/oxo/storyboard/storyBoard.eat");
+		}else {
+			rv.setUrl("/oxo/storyboard/storyBoardWrite.eat");
+		}
+		
+		mv.setView(rv);
 		return mv;
 	}
 	

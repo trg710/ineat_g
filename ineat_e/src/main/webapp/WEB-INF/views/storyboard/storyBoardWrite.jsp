@@ -19,10 +19,6 @@ $(function(){
 		var title = $('#title').val();
 		var content = $('#content').val();
 		
-		if(!content && !title){
-			alert('내용을 작성해주세요.');
-			return;
-		}
 		$('#form1').submit();
 	}
 	$('#write').click(content);
@@ -45,14 +41,14 @@ $(function(){
 	    </div>
 	    <form id="form1" method="post" action="/oxo/storyboard/storyBoardWriteProc.eat" enctype="multipart/form-data">
 		    <div class="row mt-2">
-		        <div class="col-md-2">sid<input type="text" id="mid" value="${SID }"></div>
+		        <div class="col-md-2">sid<input type="text" name="mid" value="${SID }"></div>
 		        <div class="col-md-1 text-center">제목</div>
-		        <div class="col-md-6"><input type="text" id="title" style="width:100%" value=""></div>
+		        <div class="col-md-6"><input type="text" name="title" style="width:100%" value=""></div>
 		    </div>
 		    <div class="row mt-2">
 		        <div class="col-md-2"></div>
 		        <div class="col-md-1 text-center">내용</div>
-		        <div class="col-md-6"><textarea id="content" cols="150" rows="10" style="width:100%"></textarea></div>
+		        <div class="col-md-6"><textarea name="content" cols="150" rows="10" style="width:100%"></textarea></div>
 		    </div>
 		    <div class="row mt-2">
 		        <div class="col-md-2"></div>
@@ -63,7 +59,7 @@ $(function(){
 							<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
 						</div>
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+							<input type="file" name="sFile" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 							<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
 						</div>
 					</div>
