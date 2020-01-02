@@ -97,7 +97,8 @@ public class StoryBoardVO {
 				"bno : " + bno + 
 				" | mid : " + mid +
 				" | title : " + title +
-				" | content : " + content
+				" | content : " + content +
+				" | writer : " + writer
 				; 
 	}
 	

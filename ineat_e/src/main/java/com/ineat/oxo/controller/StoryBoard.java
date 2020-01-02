@@ -88,6 +88,7 @@ public class StoryBoard {
 			session.setAttribute("mid", sbVO.getMid());
 			fileSrvc.setDAO(fDAO);
 			fileSrvc.sbFileAddProc(session, sbVO);
+			System.out.println("##sbVO.toString()\n " + sbVO.toString());
 			rv.setUrl("/oxo/storyboard/storyBoard.eat");
 		}else if(cnt == 1) {
 			rv.setUrl("/oxo/storyboard/storyBoard.eat");

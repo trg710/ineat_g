@@ -7,6 +7,7 @@ public class FileVO {
 	private int fno;
 	private int bno;
 	private int mno;
+	private int writer;
 	private String mid;
 	private String oriName;
 	private String saveName;
@@ -15,6 +16,13 @@ public class FileVO {
 	private Date fDate;
 	private String sDate;
 	
+	
+	public int getWriter() {
+		return writer;
+	}
+	public void setWriter(int writer) {
+		this.writer = writer;
+	}
 	public int getFno() {
 		return fno;
 	}
