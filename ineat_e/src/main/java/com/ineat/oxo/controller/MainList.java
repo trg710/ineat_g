@@ -3,6 +3,7 @@ package com.ineat.oxo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ineat.oxo.dao.TasteInfoDAO;
@@ -30,6 +31,17 @@ public class MainList {
 		
 		return mv;
 	}
+	
+	
+	@RequestMapping("morelist.eat")
+	@ResponseBody
+	public List<TasteInfoVO> morelist(TasteInfoVO tVO) {
+		
+		List<TasteInfoVO> list = tDAO.moreList(tVO);
+		
+		return list;
+	}
+	
 	
 	@RequestMapping("info.eat")
 	public ModelAndView detailinfo(ModelAndView mv) {

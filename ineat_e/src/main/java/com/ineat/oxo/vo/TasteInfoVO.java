@@ -15,6 +15,15 @@ public class TasteInfoVO {
 	private String ml_count;
 	private String ml_isshow;
 	
+	private String ml_type;
+	
+	
+	public String getMl_type() {
+		return ml_type;
+	}
+	public void setMl_type(String ml_type) {
+		this.ml_type = ml_type;
+	}
 	public int getMl_no() {
 		return ml_no;
 	}

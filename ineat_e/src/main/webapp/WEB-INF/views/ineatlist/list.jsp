@@ -91,12 +91,86 @@
 
 
 <script type="text/javascript">
+$(function(){
+	var isEnd= false;
+	var no = 1000001;
 	
+	var listno = 5
+	
+	var total = $("#listbox").children('div').length;
+	if(total < 5 ){
+		$('#more').css('display','none');	
+	}
+	
+	var listplus = $("#more").click(function(){
+		
+		if(isEnd == true){
+			return;
+		}
+		no += 5;
+		$.ajax({
+			url:"/oxo/ineatlist/morelist.eat",
+			type: "post",
+			dataType:"json",
+			data:{
+				ml_no : no
+				
+			},
+			success: function(data){
+				var length = data.length;
+				
+				console.log('데이터길이 ' + data.length);
+				
+				if(length < 5){
+					isEnd=true;
+				}
+				
+				for(var i = 0; i< length; i ++){
+					var resultlist = '';
+					listno += 1;
+					
+					console.log(listno);
+					
+					resultlist +='<div class="d-flex mainlist" data-id="'+data[i].ml_no+'">';
+					resultlist +='<h2 style="display: inline-block; margin-right:10px;">'+listno+'.</h2>';
+					resultlist +='<div class="imgbox">';
+					resultlist +='<img src="/oxo/mainlist/'+data[i].ml_title+'1.jpg">';
+					resultlist +='</div>';
+					resultlist +='<div class="text_box">';
+					resultlist +='<div> 버튼이미지 </div>';
+					resultlist +='<ul>';
+					resultlist +='<li>';
+					resultlist +='<h2 class="d-inline-block">'+data[i].ml_title+'</h2>';
+					resultlist +='<h2 class="d-inline-block"> <span>4.5</span>';
+					resultlist +='</h2>';
+					resultlist +='</li>';
+					resultlist +='<li>';
+					resultlist +=''+data[i].ml_newaddr+'';
+					resultlist +='</li>';
+					resultlist +='<li>';
+					resultlist +='실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.'; 
+					resultlist +='</li>';
+					resultlist +='<li>';
+					resultlist +='이것이야말로 힘차게 싹이 아니다.';
+					resultlist +='</li>';
+					resultlist +='</ul>';
+					resultlist +='<div> 자세히 보기 > </div>';
+					resultlist +='</div>';
+					resultlist +='</div>';
+	                $('#listbox').append(resultlist);
+	               
+				}
+				$('#total').html(listno);
+			}
+		});
+		
+		
+	});
+});
 </script>
 <script>
 	$("#lr").click(function() {
 		var str = (this).val();
-
 	});
 </script>
 </head>
@@ -133,7 +207,7 @@
 
     <div class="container" style="margin-top: 100px;">
         <div class="row">
-            <div style="width: 900px; margin: 0 auto;">
+            <div style="width: 900px; margin: 0 auto; "class="pb-5">
 
                 <!-- 태그 버튼들 정렬내용. -->
                 <div class="btn-group-toggle d-flex justify-content-between col-12" data-toggle="buttons">
@@ -159,7 +233,7 @@
 
                 <div class="listtop">
                     <div>
-                        <em>${TOTAL }</em>개<span id="common">(${type }순)</span>
+                        <em id="total">${TOTAL }</em>개<span id="common">(${type }순)</span>
                     </div>
                     <div class="list_row d-flex">
                         <div class="lr">조회순</div>
@@ -169,72 +243,51 @@
                 </div>
 				
                 <!-- 리스트 컬럼 -->
-                <c:forEach var="data" items="${LIST }" varStatus="sts">
-                <div class="d-flex mainlist">
-                
-                    <!-- 넘버 -->
-                    <h2 style="display: inline-block; margin-right:10px;">${sts.count}.</h2>
-
-                    <!-- 이미지박스 -->
-                    <div class="imgbox">
-                        <!-- <img src="http://starpizza.co.kr/data/goodsImages/GOODS1_1525318753.jpg"> -->
-                        <img src="/oxo/mainlist/${data.ml_title }1.jpg">
-                    </div>
-					
-                    <!-- 텍스트박스 -->
-                    <div class="text_box">
-                        <div> 버튼이미지 </div>
-                        <ul>
-                            <li>
-                                <h2 class="d-inline-block"> ${data.ml_title }</h2>
-                                <h2 class="d-inline-block"> <span>4.5</span>
-                                </h2>
-                            </li>
-                            <li>
-                                ${data.ml_newaddr }
-                            </li>
-                            <li>
-                                <b>유저 id</b> 인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의 이것이다. 어디 이것이야말로 힘차게 싹이 아니다.
-                                실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.
-                            </li>
-                            <li>
-                                <b>유저 id</b> 인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의 이것이다. 어디 이것이야말로 힘차게 싹이 아니다.
-                                실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의 이것이다. 어디
-                                이것이야말로 힘차게 싹이 아니다.
-                            </li>
-                        </ul>
-                        <div> 자세히 보기 > </div>
-                    </div>
-                </div>
-                </c:forEach>
-	
+                <div id = "listbox">
+	                <c:forEach var="data" items="${LIST }" varStatus="sts">
+		                <div class="d-flex mainlist" data-id="${data.ml_no }">
+		                	
+		                    <!-- 넘버 -->
+		                    <h2 style="display: inline-block; margin-right:10px;">${sts.count}.</h2>
+		
+		                    <!-- 이미지박스 -->
+		                    <div class="imgbox">
+		                        <!-- <img src="http://starpizza.co.kr/data/goodsImages/GOODS1_1525318753.jpg"> -->
+		                        <img src="/oxo/mainlist/${data.ml_title }1.jpg">
+		                    </div>
+							
+		                    <!-- 텍스트박스 -->
+		                    <div class="text_box">
+		                        <div> 버튼이미지 </div>
+		                        <ul>
+		                            <li>
+		                                <h2 class="d-inline-block"> ${data.ml_title }</h2>
+		                                <h2 class="d-inline-block"> <span>4.5</span>
+		                                </h2>
+		                            </li>
+		                            <li>
+		                                ${data.ml_newaddr }
+		                            </li>
+		                            <li>
+		                                <b>유저 id</b> 인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의 이것이다. 어디 이것이야말로 힘차게 싹이 아니다.
+		                                실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.
+		                            </li>
+		                            <li>
+		                                <b>유저 id</b> 인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의 이것이다. 어디 이것이야말로 힘차게 싹이 아니다.
+		                                실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의 이것이다. 어디
+		                                이것이야말로 힘차게 싹이 아니다.
+		                            </li>
+		                        </ul>
+		                        <div> 자세히 보기 > </div>
+		                    </div>
+		                </div>
+	                </c:forEach>
+				</div>
 
 
                 <!-- 페이징처리  -->
-                <div class="text-center d-flex page_box">
-                    <ul class="pagination" style="margin: 0 auto;">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">&laquo;</a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">4</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">5</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">&raquo;</a>
-                        </li>
-                    </ul>
+                <div class="text-center page_box" id="more">
+                    <button class="btn btn-warning" >더보기</button>
                 </div>
 
             </div>

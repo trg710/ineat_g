@@ -14,6 +14,15 @@ public class TasteInfoDAO {
 	
 	public List<TasteInfoVO> selectList() {
 		List<TasteInfoVO> list = sqlSession.selectList("tSQL.selectlist");
+		
+		
+		return list;
+	}
+	
+	public List<TasteInfoVO> moreList(TasteInfoVO tVO){
+		
+		List<TasteInfoVO> list = sqlSession.selectList("tSQL.morelist",tVO);
+		
 		return list;
 	}
 }
