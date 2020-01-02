@@ -2,6 +2,8 @@ package com.ineat.oxo.vo;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 // sbVO
 public class StoryBoardVO {
 	private int cnt;
@@ -11,9 +13,24 @@ public class StoryBoardVO {
 	private String mid;
 	private String title;
 	private String content;
-	private Date wdate;
+	private Date sbDate;
 	private int views;
+	private MultipartFile sFile;
+	private MultipartFile[] file;
 	
+	
+	public MultipartFile getsFile() {
+		return sFile;
+	}
+	public void setsFile(MultipartFile sFile) {
+		this.sFile = sFile;
+	}
+	public MultipartFile[] getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile[] file) {
+		this.file = file;
+	}
 	public int getCnt() {
 		return cnt;
 	}
@@ -56,11 +73,11 @@ public class StoryBoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getWdate() {
-		return wdate;
+	public Date getSbDate() {
+		return sbDate;
 	}
-	public void setWdate(Date wdate) {
-		this.wdate = wdate;
+	public void setSbDate(Date sbDate) {
+		this.sbDate = sbDate;
 	}
 	public int getViews() {
 		return views;

@@ -31,6 +31,9 @@ $(function(){
 </script>
 </head>
 <body>
+
+
+
 	<div class="container-fluid">
 		<div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
@@ -40,9 +43,9 @@ $(function(){
 	        <div class="col-md-2"></div>
 	        <div class="col-md-8 border-bottom"></div>
 	    </div>
-	    <form id="form1" method="post" action="/oxo/storyboard/storyBoardWriteProc.eat">
+	    <form id="form1" method="post" action="/oxo/storyboard/storyBoardWriteProc.eat" enctype="multipart/form-data">
 		    <div class="row mt-2">
-		        <div class="col-md-2"></div>
+		        <div class="col-md-2">sid<input type="text" id="mid" value="${SID }"></div>
 		        <div class="col-md-1 text-center">제목</div>
 		        <div class="col-md-6"><input type="text" id="title" style="width:100%" value=""></div>
 		    </div>

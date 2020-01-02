@@ -9,7 +9,7 @@
 	<!-- storyBaord 출력 -->
 	<select id="storyBoard" resultType="sbVO">
 		SELECT
-    		sb_no bno, m_id mid, sb_title title, sb_date wdate, sb_views views, nvl(sb_fno, 0) fno
+    		sb_no bno, m_id mid, sb_title title, sb_date sbDate, sb_views views, nvl(sb_fno, 0) fno
 		FROM
 		    ie_story_board, ie_member
 		WHERE
@@ -21,7 +21,7 @@
 	<!--  storyBoardInfo 출력 -->
 	<select id="storyBoardInfo" resultType="sbVO">
 		SELECT
-		    m_id mid, sb_title title, sb_date wdate, sb_content content, sb_views views
+		    m_id mid, sb_title title, sb_date sbDate, sb_content content, sb_views views
 		FROM
 		    IE_STORY_BOARD, IE_MEMBER
 		WHERE

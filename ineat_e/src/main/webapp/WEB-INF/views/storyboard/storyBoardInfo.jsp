@@ -17,6 +17,9 @@ $(function(){
 </script>
 </head>
 <body>
+
+sid:<input type="text" value="${SID }">
+
 	<div class="container-fluid">
 		<div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
@@ -28,7 +31,7 @@ $(function(){
 	        <div class="col-md-3 border-bottom"></div>
 	        <div class="col-md-1 border-bottom">조회수: ${views }</div>
 	        <div class="col-md-1 border-bottom">${mid }</div>
-	        <div class="col-md-1 border-bottom">${wdate }</div>
+	        <div class="col-md-1 border-bottom">${sbDate }</div>
 	    </div>
 	    <div class="row mt-2">
 	    	<div class="col-md-2"></div>
@@ -64,10 +67,12 @@ $(function(){
 	    	<div class="col-md-6 border"></div>
 	    	<div class="col-md-1"><button type="button" class="btn btn-light">등록</button></div>
 	    </div>
-	    <div class="row mt-4">
-	    	<div class="col-md-2"></div>
-	    	<div class="col-md-8"><button type="button" id="toEdit" class="btn btn-light">수정하기</button></div>
-	    </div>
+	    <c:if test="${SID == mid }">
+		    <div class="row mt-4">
+		    	<div class="col-md-2"></div>
+		    	<div class="col-md-8"><button type="button" id="toEdit" class="btn btn-light">수정하기</button></div>
+		    </div>
+	    </c:if>
 	    <div class="row mt-4 text-center">
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-8"><button type="button" id="toList" class="btn btn-light">목록으로</button></div>

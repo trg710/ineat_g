@@ -37,6 +37,7 @@ $(function(){
 	<form method="post" action="/oxo/storyboard/storyBoardInfo.eat" id="form1">
 		bno:<input type="text" name="bno" id="bno">
 	</form>
+	sid:<input type="text" value="${SID }">
 
 
 
@@ -61,7 +62,7 @@ $(function(){
 		        <div class="col-md-2 border-bottom pb-1"><img src="/oxo/img/noimage.jpg" width="50%"></div>
 		        <div class="col-md-2 border-bottom pt-4 toInfo" id="${data.bno }">${data.title }[5]</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.mid }</div>
-		        <div class="col-md-1 border-bottom pt-4">${data.wdate }</div>
+		        <div class="col-md-1 border-bottom pt-4">${data.sbDate }</div>
 		        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">10<p><img src="/oxo/img/hate_16px.jpg">1</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.views }</div>
 		        <div class="col-md-2"></div>

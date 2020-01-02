@@ -34,7 +34,7 @@ public class StoryBoard {
 		
 		String sid = (String) session.getAttribute("SID");
 		session.setAttribute("SID", sid);
-		System.out.println("%storyBoard.eat: " + sid);
+		System.out.println("*storyBoard.eat sid: " + sid);
 		return mv;
 	}
 
@@ -43,10 +43,14 @@ public class StoryBoard {
 	public ModelAndView storyBoardInfo(ModelAndView mv, HttpSession session, StoryBoardVO sbVO, int bno) {
 		sbVO = sbDAO.storyBoardInfo(bno);
 		
+		String sid = (String) session.getAttribute("SID");
+		session.setAttribute("SID", sid);
+		System.out.println("*storyBoardInfo.eat sid: " + sid);
+		
 		mv.addObject("mid", sbVO.getMid());
 		mv.addObject("title", sbVO.getTitle());
 		mv.addObject("content", sbVO.getContent());
-		mv.addObject("wdate", sbVO.getWdate());
+		mv.addObject("sbDate", sbVO.getSbDate());
 		mv.addObject("views", sbVO.getViews());
 		
 		return mv;
@@ -54,7 +58,19 @@ public class StoryBoard {
 	
 	// sbwrite 출력
 	@RequestMapping("storyBoardWrite.eat")
-	public ModelAndView storyBoardWrite(ModelAndView mv) {
+	public ModelAndView storyBoardWrite(ModelAndView mv, HttpSession session) {
+		
+		String sid = (String) session.getAttribute("SID");
+		session.setAttribute("SID", sid);
+		System.out.println("*storyBoardWrite.eat sid: " + sid);
+		
+		return mv;
+	}
+	
+	// sbwrite 처리
+	@RequestMapping("storyBoardWriteProc.eat")
+	public ModelAndView storyBoardWriteProc(ModelAndView mv) {
+		
 		
 		return mv;
 	}
