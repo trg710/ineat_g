@@ -13,12 +13,29 @@ $(function(){
 	$('#toList').click(function(){
 		location.href = "/oxo/storyboard/storyBoard.eat";
 	});
+	
+	$('.like').click(function(){
+		
+		$('#likeForm').submit();
+	});
+	
+	
 });
 </script>
 </head>
 <body>
 
-sid:<input type="text" value="${SID }">
+
+
+
+	<form method="post" action="/oxo/storyboard/sbLike.eat" id="likeForm">
+		sid:<input type="text" name="mid" id="mid" value="${SID }" />
+		sbno:<input type="number" name="bno" id="bno" value="${SBNO }" />
+		isshow:<input type="text" name="isshow" id="isshow" value="Y" />
+	</form>
+
+
+
 
 	<div class="container-fluid">
 		<div class="row mt-3 text-center">
@@ -35,12 +52,30 @@ sid:<input type="text" value="${SID }">
 	    </div>
 	    <div class="row mt-2">
 	    	<div class="col-md-2"></div>
-	    	<div class="col-md-3"><img src="/oxo/img/noimage.jpg" width="100%"></div>
+	    	<div class="col-md-3">
+	    		<c:if test="${saveName == null }">
+	    			<img src="/oxo/img/noimage.jpg" width="100%">
+	    		</c:if>
+	    		<c:if test="${saveName != null}">
+	    			<img src="/oxo/upload/${saveName }" width="100%">
+	    		</c:if>
+	    	</div>
 	    	<div class="col-md-5 pt-3">${content }</div>
 	    </div>
 	    <div class="row mt-2 text-center">
 	        <div class="col-md-2"></div>
-	        <div class="col-md-1"><img src="/oxo/img/like_16px.jpg">10<img src="/oxo/img/hate_16px.jpg" class="ml-2">1</div>
+	        <div class="col-md-1">
+	        	<div class="btn-group" role="group">
+		        	<button id="${SBNO }" type="button" class="like btn btn-light">
+		        		<img src="/oxo/img/like_16px.jpg">${llike }
+		        	</button>
+		        	<button id="${SBNO }" type="button" class="hate btn btn-light">
+		        		<img src="/oxo/img/hate_16px.jpg" class="ml-2">${hhate }
+		        	</button>
+	        	</div>
+	        </div>
+	        
+	        
 	        <div class="col-md-7"></div>
 	    </div>
 	    <div class="row mt-2">

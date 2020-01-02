@@ -29,4 +29,29 @@ public class StoryBoardDAO {
 		
 		return cnt;
 	}
+	
+	// sb like 처리
+	public int sbLike(StoryBoardVO sbVO) {
+		return sqlSession.selectOne("sbSQL.sbLike", sbVO);
+	}
+	
+	public int sbLikeU(StoryBoardVO sbVO) {
+		return sqlSession.update("sbSQL.sbLikeU", sbVO);
+	}
+	
+	public int sbLikeHC(StoryBoardVO sbVO) {
+		return sqlSession.selectOne("sbSQL.sbLikeHC", sbVO);
+	}
+	
+	public int sbLikeZC(StoryBoardVO sbVO) {
+		return sqlSession.selectOne("sbSQL.sbLikeZC", sbVO);
+	}
+	
+	public int sbLikeU2(StoryBoardVO sbVO) {
+		return sqlSession.update("sbSQL.sbLikeU2", sbVO);
+	}
+	
+	public int sbLike2(StoryBoardVO sbVO) {
+		return sqlSession.update("sbSQL.sbLike2", sbVO);
+	}
 }

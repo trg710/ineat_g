@@ -9,7 +9,21 @@
 	<!-- storyBaord 출력 -->
 	<select id="storyBoard" resultType="sbVO">
 		SELECT
-    		sb_no bno, m_id mid, sb_title title, sb_date sbDate, sb_views views, nvl(sb_fno, 0) fno
+    		sb_no bno, m_id mid, sb_title title, sb_date sbDate, sb_views views, nvl(sb_fno, 0) fno,
+    		
+    		(SELECT COUNT(*)
+		    FROM IE_SB_LIKEHATE
+		    WHERE
+		    sb_no = sblh_bno
+		    and SBLH_ISSHOW = 'Y'
+		    ) LLIKE,
+		    (SELECT COUNT(*) 
+		    FROM IE_SB_LIKEHATE
+		    WHERE
+		    sb_no = sblh_bno
+		    and SBLH_ISSHOW = 'N'
+		    ) HHATE
+    		
 		FROM
 		    ie_story_board, ie_member
 		WHERE
@@ -21,7 +35,30 @@
 	<!--  storyBoardInfo 출력 -->
 	<select id="storyBoardInfo" resultType="sbVO">
 		SELECT
-		    m_id mid, sb_title title, sb_date sbDate, sb_content content, sb_views views
+		    m_id mid,
+		    	(SELECT 
+				    NVL(sbf_savename, '')
+				FROM 
+				    ie_story_board,ie_member,ie_sb_fileup 
+				WHERE 
+				    sb_no = #{bno} 
+				    and sb_mno = m_no 
+				    and sb_mno = sbf_mno) saveName,
+		    sb_title title, sb_date sbDate, sb_content content, sb_views views,
+		    
+		    (SELECT COUNT(*)
+		    FROM IE_SB_LIKEHATE
+		    WHERE
+		    sb_no = sblh_bno
+		    and SBLH_ISSHOW = 'Y'
+		    ) LLIKE,
+		    (SELECT COUNT(*) 
+		    FROM IE_SB_LIKEHATE
+		    WHERE
+		    sb_no = sblh_bno
+		    and SBLH_ISSHOW = 'N'
+		    ) HHATE
+		    
 		FROM
 		    IE_STORY_BOARD, IE_MEMBER
 		WHERE
@@ -52,7 +89,7 @@
 			SELECT
 				M_NO
 			FROM
-				MEMBER
+				IE_MEMBER
 			WHERE
 				M_ID = #{mid}
 		</selectKey>
@@ -63,5 +100,86 @@
 			#{writer}, #{oriName}, #{saveName}, #{len}, #{dir}
 		)
  	</insert>
+ 	
+ 	<select id="sbLike" resultType="int" parameterType="sbVO">
+ 		SELECT
+    		count(*) cnt
+		FROM
+    		IE_SB_LIKEHATE, IE_MEMBER
+		WHERE
+		    m_no = sblh_mno
+		    and m_id= #{mid}
+		    and sblh_bno= #{bno}
+		    and sblh_isshow= #{isshow}
+ 	</select>
  
+ 	<update id="sbLikeU" parameterType="sbVO">
+ 		UPDATE 
+		    IE_SB_LIKEHATE
+		SET 
+		    sblh_isshow='Z'
+		WHERE 
+		    sblh_bno= #{bno}
+		    AND sblh_mno = (SELECT
+				                 M_NO
+				                   FROM
+				                 IE_MEMBER
+				                WHERE
+				                   M_ID = #{mid})
+ 	</update>
+ 	
+ 	<select id="sbLikeHC" resultType="int" parameterType="sbVO">
+ 		SELECT
+    		count(*) cnt2
+		FROM
+    		ie_sb_likehate, ie_member
+		WHERE
+		    m_no = sblh_mno
+		    and m_id= #{mid}
+		    and sblh_bno= #{bno}
+		    and sblh_isshow = 'N'
+ 	</select>
+ 	
+ 	<select id="sbLikeZC" resultType="int" parameterType="sbVO">
+ 		SELECT
+    		count(*) cnt3
+		FROM
+    		ie_sb_likehate,ie_member
+		WHERE
+		    m_no = sblh_mno
+		    and m_id= #{mid}
+		    and sblh_bno= #{bno}
+		    and sblh_isshow = 'Z'
+ 	</select>
+ 	
+ 	<update id="sbLikeU2" parameterType="sbVO">
+ 		UPDATE 
+		    ie_sb_likehate
+		SET 
+		    sblh_isshow='Y'
+		WHERE 
+		    sblh_bno= #{bno}
+		    AND sblh_mno = (SELECT
+				                 M_NO
+				                   FROM
+				                 IE_MEMBER
+				                WHERE
+				                   M_ID = #{mid})
+ 	</update>
+ 	
+ 	<insert id="sbLike2" parameterType="sbVO">
+ 		<selectKey keyProperty="writer" resultType="int" order="BEFORE">
+ 			SELECT
+				M_NO
+			FROM
+				IE_MEMBER
+			WHERE
+				M_ID = #{mid}
+ 		</selectKey>
+ 		INSERT INTO
+			ie_sb_likehate
+		VALUES(
+			#{writer}, #{bno}, #{isshow}
+		)
+ 	</insert>
 </mapper>

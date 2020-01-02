@@ -18,8 +18,37 @@ public class StoryBoardVO {
 	private int views;
 	private MultipartFile sFile;
 	private MultipartFile[] file;
+	private String saveName;
+	private String isshow;
+	private int llike;
+	private int hhate;
 	
 	
+	
+	public int getLlike() {
+		return llike;
+	}
+	public void setLlike(int llike) {
+		this.llike = llike;
+	}
+	public int getHhate() {
+		return hhate;
+	}
+	public void setHhate(int hhate) {
+		this.hhate = hhate;
+	}
+	public String getIsshow() {
+		return isshow;
+	}
+	public void setIsshow(String isshow) {
+		this.isshow = isshow;
+	}
+	public String getSaveName() {
+		return saveName;
+	}
+	public void setSaveName(String saveName) {
+		this.saveName = saveName;
+	}
 	public int getWriter() {
 		return writer;
 	}

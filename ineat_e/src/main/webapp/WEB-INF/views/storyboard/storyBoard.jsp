@@ -63,7 +63,7 @@ $(function(){
 		        <div class="col-md-2 border-bottom pt-4 toInfo" id="${data.bno }">${data.title }[5]</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.mid }</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.sbDate }</div>
-		        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">10<p><img src="/oxo/img/hate_16px.jpg">1</div>
+		        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">${data.llike }<p><img src="/oxo/img/hate_16px.jpg">${data.hhate }</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.views }</div>
 		        <div class="col-md-2"></div>
 		    </div>

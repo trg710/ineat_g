@@ -150,12 +150,16 @@ public class FileService {
 		fVO.setMid(sbVO.getMid());
 		fVO.setOriName(sbVO.getsFile().getOriginalFilename());
 		fVO.setSaveName(savename);
-		System.out.println("fileBoardPicAddProc() bno: "+ fVO.getBno());
-		System.out.println("fileBoardPicAddProc() savename: " + savename);
-		
 		fVO.setDir("\\upload");
-		
 		fVO.setLen(sbVO.getsFile().getSize());
+		
+		
+		System.out.println("sbFileAddProc() bno: "+ fVO.getBno());
+		System.out.println("sbFileAddProc() mid: "+ fVO.getMid());
+		System.out.println("sbFileAddProc() oriName: "+ fVO.getOriName());
+		System.out.println("sbFileAddProc() savename: " + savename);
+		System.out.println("sbFileAddProc() dir: "+ fVO.getDir());
+		System.out.println("sbFileAddProc() len: " + fVO.getLen());
 		
 		cnt = ((FileDAO)dao).sbFileAddProc(fVO);
 		

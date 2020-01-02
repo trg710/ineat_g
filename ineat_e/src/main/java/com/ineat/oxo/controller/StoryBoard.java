@@ -51,6 +51,7 @@ public class StoryBoard {
 	@RequestMapping("storyBoardInfo.eat")
 	public ModelAndView storyBoardInfo(ModelAndView mv, HttpSession session, StoryBoardVO sbVO, int bno) {
 		sbVO = sbDAO.storyBoardInfo(bno);
+		session.setAttribute("SBNO", bno);
 		
 		String sid = (String) session.getAttribute("SID");
 		session.setAttribute("SID", sid);
@@ -61,6 +62,10 @@ public class StoryBoard {
 		mv.addObject("content", sbVO.getContent());
 		mv.addObject("sbDate", sbVO.getSbDate());
 		mv.addObject("views", sbVO.getViews());
+		mv.addObject("saveName", sbVO.getSaveName());
+		mv.addObject("llike", sbVO.getLlike());
+		mv.addObject("hhate", sbVO.getHhate());
+		
 		
 		return mv;
 	}
@@ -100,4 +105,43 @@ public class StoryBoard {
 		return mv;
 	}
 	
+	// 좋아요 처리
+	@RequestMapping("sbLike.eat")
+	public ModelAndView sbLike(ModelAndView mv, HttpSession session, StoryBoardVO sbVO) {
+		System.out.println(sbVO.getBno());
+		
+		// 데이터가 있는지 먼저 확인
+		int cnt = sbDAO.sbLike(sbVO);
+		
+		if(cnt == 1) {
+			System.out.println("이미 좋아요를 눌렀습니다.");
+			sbDAO.sbLikeU(sbVO);
+			
+			
+		}else {
+			int cnt2 = sbDAO.sbLikeHC(sbVO);
+			
+			if(cnt2 == 1) {
+				System.out.println("이미 싫어요를 눌렀습니다.");
+				
+			
+			}else {
+				int cnt3 = sbDAO.sbLikeZC(sbVO);
+				
+				if(cnt3 == 1) {
+					System.out.println("이미 Z값이 있습니다.");
+					sbDAO.sbLikeU2(sbVO);
+					
+				}else {
+					System.out.println("좋아요를 눌러도 좋습니다.");
+					sbDAO.sbLike2(sbVO);
+					
+				}
+				
+			}
+		}
+		
+		mv.setViewName("storyboard/storyBoardInfo");
+		return mv;
+	}
 }
