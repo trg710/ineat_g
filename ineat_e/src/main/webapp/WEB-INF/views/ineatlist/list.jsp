@@ -59,9 +59,9 @@
     }
 
     .mainlist {
-        padding-top: 30px;
+        padding-top: 60px;
         padding-bottom: 30px;
-        width: 760px;
+        width: 900px;
         margin: 0 auto;
         border-bottom: 1px solid #dbdbdb;
         position: relative;
@@ -70,7 +70,7 @@
     .listtop {
         padding-top: 30px;
         padding-bottom: 5px;
-        width: 760px;
+        width: 900px;
         margin: 0 auto;
         border-bottom: 1px solid #dbdbdb;
         position: relative;
@@ -159,7 +159,7 @@
 
                 <div class="listtop">
                     <div>
-                        <em>n</em>개<span id="common">(ㅇㅇ순)</span>
+                        <em>${TOTAL }</em>개<span id="common">(${type }순)</span>
                     </div>
                     <div class="list_row d-flex">
                         <div class="lr">조회순</div>
@@ -169,14 +169,16 @@
                 </div>
 				
                 <!-- 리스트 컬럼 -->
+                <c:forEach var="data" items="${LIST }" varStatus="sts">
                 <div class="d-flex mainlist">
                 
                     <!-- 넘버 -->
-                    <h2 style="display: inline-block; margin-right:10px;">1.</h2>
+                    <h2 style="display: inline-block; margin-right:10px;">${sts.count}.</h2>
 
                     <!-- 이미지박스 -->
                     <div class="imgbox">
-                        <img src="http://starpizza.co.kr/data/goodsImages/GOODS1_1525318753.jpg">
+                        <!-- <img src="http://starpizza.co.kr/data/goodsImages/GOODS1_1525318753.jpg"> -->
+                        <img src="/oxo/mainlist/${data.ml_title }1.jpg">
                     </div>
 					
                     <!-- 텍스트박스 -->
@@ -184,12 +186,12 @@
                         <div> 버튼이미지 </div>
                         <ul>
                             <li>
-                                <h2 class="d-inline-block"> 식당이름</h2>
+                                <h2 class="d-inline-block"> ${data.ml_title }</h2>
                                 <h2 class="d-inline-block"> <span>4.5</span>
                                 </h2>
                             </li>
                             <li>
-                                서울 특별시 가산동 470-8
+                                ${data.ml_newaddr }
                             </li>
                             <li>
                                 <b>유저 id</b> 인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의 이것이다. 어디 이것이야말로 힘차게 싹이 아니다.
@@ -204,7 +206,8 @@
                         <div> 자세히 보기 > </div>
                     </div>
                 </div>
-
+                </c:forEach>
+	
 
 
                 <!-- 페이징처리  -->

@@ -6,8 +6,11 @@
          
  <mapper namespace="tSQL">
  
- 	<select id="">
- 		
+ 
+ 	<select id="selectlist" resultType="tVO">
+ 		SELECT ml_no, ml_title, ml_newaddr, ml_count
+		FROM ie_mainlist
+		ORDER BY ml_count desc, ml_no desc
  	</select>
  	
  </mapper>

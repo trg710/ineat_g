@@ -14,6 +14,7 @@ public class TasteInfoVO {
 	private String ml_tag;
 	private String ml_count;
 	private String ml_isshow;
+	
 	public int getMl_no() {
 		return ml_no;
 	}

@@ -1,19 +1,33 @@
 package com.ineat.oxo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ineat.oxo.dao.TasteInfoDAO;
+import com.ineat.oxo.vo.TasteInfoVO;
+
+import java.util.*;
   
 @Controller
 @RequestMapping("/ineatlist/")
 public class MainList {
+	@Autowired
+	TasteInfoDAO tDAO;
 	
 	@RequestMapping("list.eat")
 	public ModelAndView List(ModelAndView mv) {
+		List<TasteInfoVO> list = tDAO.selectList();
 		
+		int total = list.size();
 		
+		mv.addObject("LIST",list);
+		
+		mv.addObject("TOTAL", total);
+		mv.addObject("type","조회");
 		mv.setViewName("ineatlist/list");
+		
 		return mv;
 	}
 	
