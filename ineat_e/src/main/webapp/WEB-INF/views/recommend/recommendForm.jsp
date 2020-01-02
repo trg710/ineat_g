@@ -92,8 +92,8 @@
                 <img src="/oxo/img/recommend_sam.jpg" class="img-thumbnail card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">삼계탕</h5>
-                    <p class="card-text">현재 기온은 <span id="ctemp"></span> 도 이고 습도는 <span id="humidity"></span>정도로 선선한 날씨네요.
-                    추천메뉴는 삼계탕입니다.</p>
+                    <p class="card-text">현재 기온은 <span id="ctemp"></span>도로 <span id="dayCondition"></span> 입니다.
+                    추천메뉴는 <span class="recommendMenu"></span>입니다.</p>
                 </div>
                 </div>
             </div>
@@ -117,7 +117,15 @@
         $.getJSON('http://api.openweathermap.org/data/2.5/weather?id=1835848&APPID=44b647d32d3a2207ba2169b2aa1a7f92&units=metric', function(data) {
             var $nowTemp = data.main.temp;
             var $humidity = data.main.humidity;
-            
+            var $dayCondition;
+            if($nowTemp>20){
+            	$dayCondition='더운날';
+            }else if($nowTemp>5){
+            	$dayCondition='선선한날'
+            }else{
+            	$dayCondition='추운날';
+            }
+            $('#dayCondition').append($dayCondition);
             $('#ctemp').append($nowTemp);
             $('#humidity').append($humidity);
         });

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE mapper
+         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rSQL">
+	<select id="showList" resultType="tVO">
+		SELECT
+			ml_title
+		FROM
+			IE_MAINLIST
+		WHERE
+			ml_no BETWEEN  1000001 AND 1000006
+	</select>
+</mapper>
