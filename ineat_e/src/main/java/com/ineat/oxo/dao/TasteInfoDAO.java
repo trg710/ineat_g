@@ -25,4 +25,10 @@ public class TasteInfoDAO {
 		
 		return list;
 	}
+	
+	public List<TasteInfoVO> tagList(TasteInfoVO tVO){
+		List<TasteInfoVO> list = sqlSession.selectList("tSQL.taglist",tVO);
+		
+		return list;
+	}
 }

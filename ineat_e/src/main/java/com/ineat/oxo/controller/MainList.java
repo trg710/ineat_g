@@ -35,9 +35,17 @@ public class MainList {
 	
 	@RequestMapping("morelist.eat")
 	@ResponseBody
-	public List<TasteInfoVO> morelist(TasteInfoVO tVO) {
+	public ArrayList<TasteInfoVO> morelist(TasteInfoVO tVO) {
+		ArrayList<TasteInfoVO> list = new ArrayList<TasteInfoVO>();
+		String type = tVO.getMl_type();
+		String tag = tVO.getMl_tag();
 		
-		List<TasteInfoVO> list = tDAO.moreList(tVO);
+		if(tag == "") {
+			list = (ArrayList<TasteInfoVO>)tDAO.moreList(tVO);
+		}else {
+			System.out.println(tag);
+			list = (ArrayList<TasteInfoVO>)tDAO.tagList(tVO);
+		}
 		
 		return list;
 	}

@@ -21,4 +21,11 @@
 		WHERE ml_no between ${ml_no} AND ${ml_no}+4
 		ORDER BY ml_count desc, ml_no desc
  	</select>
+ 	
+ 	<select id="taglist" resultType="tVO" parameterType="tVO">
+ 		SELECT ml_no, ml_title, ml_newaddr, ml_count
+		FROM ie_mainlist
+		WHERE ml_no between ${ml_no} AND ${ml_no}+4 AND ml_tag like '%${ml_tag}%'
+		ORDER BY ml_count desc, ml_no desc
+ 	</select>
  </mapper>
