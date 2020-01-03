@@ -22,7 +22,6 @@ $(function(){
 	$('.toInfo').click(function(){
 		var bno = $(this).attr('id');
 		
-		alert(bno);
 		$('#bno').val(bno);
 		$('#form1').submit();
 		
@@ -59,7 +58,14 @@ $(function(){
 	    <c:forEach var="data" items="${LIST }">
 		    <div class="row mt-1 text-center">
 		        <div class="col-md-2"></div>
-		        <div class="col-md-2 border-bottom pb-1"><img src="/oxo/img/noimage.jpg" width="50%"></div>
+		        <div class="col-md-2 border-bottom pb-1">
+			        <c:if test="${data.saveName == null }">
+		    			<img src="/oxo/img/noimage.jpg" width="50%">
+		    		</c:if>
+		    		<c:if test="${data.saveName != null}">
+		    			<img src="/oxo/upload/${data.saveName }" width="50%">
+		    		</c:if>
+		        </div>
 		        <div class="col-md-2 border-bottom pt-4 toInfo" id="${data.bno }">${data.title }[5]</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.mid }</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.sbDate }</div>

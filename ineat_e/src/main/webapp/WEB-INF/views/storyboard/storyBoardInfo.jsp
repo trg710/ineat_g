@@ -19,7 +19,88 @@ $(function(){
 		$('#likeForm').submit();
 	});
 	
+	$('.hate').click(function(){
+		
+		$('#hateForm').submit();
+	});
 	
+	$('#delete').click(function(){
+
+		$('#deleteForm').submit();
+	});
+	
+	// 게시물 상세 보기
+	$('#toEdit').click(function(){
+		var aid = '${SID}';
+		
+		$.ajax({
+			url		: "/oxo/storyboard/sbViewDetail.eat",
+			type	: "post",
+			dataType: "json",
+			data	: {
+				id : aid
+			},
+			success : function(data){
+				$('#bno').html(data.bno);
+				$('#mid').html(data.mid);
+				$('#title').html(data.title);
+				$('#content').html(data.content);
+				
+				$('#bno2').html(data.bno);
+				$('#mid2').html(data.mid);
+				$('#title2').val(data.title);
+				$('#content2').val(data.content);
+			},
+			error : function(){
+				alert('회원 정보 요청에 실패했습니다.');
+			}
+		});
+	});
+	
+	// 게시물 수정 처리
+	
+	$('#edit').click(function(){
+		// 할 일
+		// 데이터 읽어오고
+		var title1 = $('#title').text();
+		var title2 = $('#title2').val();
+		var content1 = $('#content').text();
+		var content2 = $('#content2').val();
+		var bno = $('#bno').text();
+		
+		
+		if(title1 == title2 && content1 == content2){
+			alert("수정 내용이 없습니다.")
+			return;
+		}
+		
+		$.ajax({
+			url		: "/oxo/storyboard/sbInfoEdit.eat",
+			type	: "post",
+			dataType: "json",
+			data	: {
+				title : title2,
+				content : content2,
+				bno  : bno
+			
+			},
+			
+			success : function(data){
+				
+				if(data.cnt == 1){
+					
+					location.href="/oxo/storyboard/storyBoard.eat";
+					alert('정보가 수정 되었습니다.');
+				}else{
+					alert('정보 수정을 실패했습니다.');
+				}
+			},
+			error : function(){
+				alert('서버 오류');
+				
+			}
+		});		
+	}); 
 });
 </script>
 </head>
@@ -29,9 +110,20 @@ $(function(){
 
 
 	<form method="post" action="/oxo/storyboard/sbLike.eat" id="likeForm">
-		sid:<input type="text" name="mid" id="mid" value="${SID }" />
-		sbno:<input type="number" name="bno" id="bno" value="${SBNO }" />
-		isshow:<input type="text" name="isshow" id="isshow" value="Y" />
+		sid:<input type="text" name="mid" value="${SID }" />
+		sbno:<input type="number" name="bno" value="${SBNO }" />
+		isshow:<input type="text" name="isshow" value="Y" />
+	</form>
+	
+	<form method="post" action="/oxo/storyboard/sbHate.eat" id="hateForm">
+		sid:<input type="text" name="mid" value="${SID }" />
+		sbno:<input type="number" name="bno" value="${SBNO }" />
+		isshow:<input type="text" name="isshow" value="N" />
+	</form>
+	
+	<form method="post" action="/oxo/storyboard/sbDelete.eat" id="deleteForm">
+		sid:<input type="text" name="mid" value="${SID }" />
+		sbno:<input type="text" name="bno" value="${SBNO }" />
 	</form>
 
 
@@ -105,9 +197,74 @@ $(function(){
 	    <c:if test="${SID == mid }">
 		    <div class="row mt-4">
 		    	<div class="col-md-2"></div>
-		    	<div class="col-md-8"><button type="button" id="toEdit" class="btn btn-light">수정하기</button></div>
+		    	<div class="col-md-8">
+		    		<div class="btn-group" role="group">
+		    			<button type="button" id="toEdit" class="btn btn-light" data-toggle="modal" data-target="#myModal1">수정하기</button>
+		    			<button type="button" id="delete" class="btn btn-light">삭제하기</button>
+		    		</div>
+		    	</div>
 		    </div>
 	    </c:if>
+	    
+	    
+	    <!-- 게시물 상세 보기 -->
+	    
+	    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title text-center" id="exampleModalLabel">inEat Story</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <div class="container-fluid">
+				    <div class="row">
+				        <div class="col-md-2"></div>
+				        <div class="col-md-2">글번호</div>
+				        <div class="col-md-5"><span id="bno" style="display:none"></span><span id="bno2"></span></div>
+				    </div>
+				    <div class="row">
+				        <div class="col-md-2"></div>
+				        <div class="col-md-2">아이디</div>
+				        <div class="col-md-5"><span id="mid" style="display:none"></span><span id="mid2"></span></div>
+				    </div>
+				    <div class="row">
+				        <div class="col-md-2"></div>
+				        <div class="col-md-2">제목</div>
+				        <div class="col-md-5"><span id="title" style="display:none"></span><input type="text" id="title2" name="title2"></div>
+				    </div>
+				    <div class="row">
+				        <div class="col-md-2"></div>
+				        <div class="col-md-2">내용</div>
+				        <div class="col-md-5"><span id="content" style="display:none"></span><textarea id="content2" name="content2" cols="150" rows="10" style="width:100%"></textarea></div>
+				    </div>
+				</div>
+		        
+		        
+		        
+		        
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		        <button type="button" id="edit" class="btn btn-primary">수정하기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 	    <div class="row mt-4 text-center">
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-8"><button type="button" id="toList" class="btn btn-light">목록으로</button></div>

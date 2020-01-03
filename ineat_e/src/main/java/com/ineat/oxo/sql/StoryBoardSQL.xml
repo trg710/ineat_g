@@ -101,6 +101,8 @@
 		)
  	</insert>
  	
+ 	
+ 	<!-- 좋아요 처리 -->
  	<select id="sbLike" resultType="int" parameterType="sbVO">
  		SELECT
     		count(*) cnt
@@ -182,4 +184,133 @@
 			#{writer}, #{bno}, #{isshow}
 		)
  	</insert>
+ 	
+ 	<!-- 싫어요 처리 -->
+ 	<select id="sbHate" resultType="int" parameterType="sbVO">
+ 		SELECT
+    		count(*) cnt
+		FROM
+    		IE_SB_LIKEHATE, IE_MEMBER
+		WHERE
+		    m_no = sblh_mno
+		    and m_id= #{mid}
+		    and sblh_bno= #{bno}
+		    and sblh_isshow= #{isshow}
+ 	</select>
+ 
+ 	<update id="sbHateU" parameterType="sbVO">
+ 		UPDATE 
+		    IE_SB_LIKEHATE
+		SET 
+		    sblh_isshow='Z'
+		WHERE 
+		    sblh_bno= #{bno}
+		    AND sblh_mno = (SELECT
+				                 M_NO
+				                   FROM
+				                 IE_MEMBER
+				                WHERE
+				                   M_ID = #{mid})
+ 	</update>
+ 	
+ 	<select id="sbHateLC" resultType="int" parameterType="sbVO">
+ 		SELECT
+    		count(*) cnt2
+		FROM
+    		ie_sb_likehate, ie_member
+		WHERE
+		    m_no = sblh_mno
+		    and m_id= #{mid}
+		    and sblh_bno= #{bno}
+		    and sblh_isshow = 'Y'
+ 	</select>
+ 	
+ 	<select id="sbHateZC" resultType="int" parameterType="sbVO">
+ 		SELECT
+    		count(*) cnt3
+		FROM
+    		ie_sb_likehate,ie_member
+		WHERE
+		    m_no = sblh_mno
+		    and m_id= #{mid}
+		    and sblh_bno= #{bno}
+		    and sblh_isshow = 'Z'
+ 	</select>
+ 	
+ 	<update id="sbHateU2" parameterType="sbVO">
+ 		UPDATE 
+		    ie_sb_likehate
+		SET 
+		    sblh_isshow='N'
+		WHERE 
+		    sblh_bno= #{bno}
+		    AND sblh_mno = (SELECT
+				                 M_NO
+				                   FROM
+				                 IE_MEMBER
+				                WHERE
+				                   M_ID = #{mid})
+ 	</update>
+ 	
+ 	<insert id="sbHate2" parameterType="sbVO">
+ 		<selectKey keyProperty="writer" resultType="int" order="BEFORE">
+ 			SELECT
+				M_NO
+			FROM
+				IE_MEMBER
+			WHERE
+				M_ID = #{mid}
+ 		</selectKey>
+ 		INSERT INTO
+			ie_sb_likehate
+		VALUES(
+			#{writer}, #{bno}, #{isshow}
+		)
+ 	</insert>
+ 	
+ 	<!-- 게시물 삭제 처리 -->
+ 	<delete id="sblhDelete" parameterType="sbVO">
+ 		DELETE FROM IE_SB_LIKEHATE
+		WHERE
+		    sblh_bno = #{bno}
+ 	</delete>
+ 	
+ 	<delete id="sbDelete" parameterType="sbVO">
+ 		DELETE FROM IE_STORY_BOARD
+		WHERE
+		    sb_no = #{bno}
+		    AND sb_mno = (SELECT
+		                        M_NO
+		                    FROM
+		                        IE_MEMBER
+		                    WHERE
+		                        M_ID = #{mid})
+ 	</delete>
+ 	
+ 	<!-- 게시물 상세보기 -->
+ 	<select id="sbViewDetail" resultType="sbVO" parameterType="string">
+		SELECT
+			sb_no bno, m_id mid, sb_title title, sb_content content
+		FROM
+			ie_member, ie_story_board
+		WHERE
+			m_no = sb_mno
+			AND m_id = #{id}
+	</select>
+	
+	<!-- 게시물 수정 처리 -->
+	<update id="sbInfoEdit" parameterType="sbVO">
+		UPDATE
+			IE_STORY_BOARD
+		<set>
+			<if test="title != null">sb_title = #{title},</if>
+			<if test="content != null">sb_content = #{content},</if>
+		</set>
+		<if test="bno != 0">
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				<if test="bno != 0">AND sb_no = #{bno}</if>
+			</trim>
+		</if>
+	</update>
+	
 </mapper>

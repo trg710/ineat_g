@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -108,23 +109,18 @@ public class StoryBoard {
 	// 좋아요 처리
 	@RequestMapping("sbLike.eat")
 	public ModelAndView sbLike(ModelAndView mv, HttpSession session, StoryBoardVO sbVO) {
-		System.out.println(sbVO.getBno());
-		
 		// 데이터가 있는지 먼저 확인
 		int cnt = sbDAO.sbLike(sbVO);
 		
 		if(cnt == 1) {
 			System.out.println("이미 좋아요를 눌렀습니다.");
 			sbDAO.sbLikeU(sbVO);
-			
-			
 		}else {
 			int cnt2 = sbDAO.sbLikeHC(sbVO);
 			
 			if(cnt2 == 1) {
 				System.out.println("이미 싫어요를 눌렀습니다.");
-				
-			
+					
 			}else {
 				int cnt3 = sbDAO.sbLikeZC(sbVO);
 				
@@ -134,14 +130,115 @@ public class StoryBoard {
 					
 				}else {
 					System.out.println("좋아요를 눌러도 좋습니다.");
-					sbDAO.sbLike2(sbVO);
-					
+					sbDAO.sbLike2(sbVO);	
 				}
-				
 			}
 		}
+		
+		int bno = (int) session.getAttribute("SBNO");
+		sbVO = sbDAO.storyBoardInfo(bno);
+		session.setAttribute("SBNO", bno);
+		
+		String sid = (String) session.getAttribute("SID");
+		session.setAttribute("SID", sid);
+		System.out.println("*storyBoardInfo.eat sid: " + sid);
+		
+		mv.addObject("mid", sbVO.getMid());
+		mv.addObject("title", sbVO.getTitle());
+		mv.addObject("content", sbVO.getContent());
+		mv.addObject("sbDate", sbVO.getSbDate());
+		mv.addObject("views", sbVO.getViews());
+		mv.addObject("saveName", sbVO.getSaveName());
+		mv.addObject("llike", sbVO.getLlike());
+		mv.addObject("hhate", sbVO.getHhate());
 		
 		mv.setViewName("storyboard/storyBoardInfo");
 		return mv;
 	}
+	
+	// 싫어요 처리
+	@RequestMapping("sbHate.eat")
+	public ModelAndView sbHate(ModelAndView mv, HttpSession session, StoryBoardVO sbVO) {
+		// 데이터가 있는지 먼저 확인
+		int cnt = sbDAO.sbHate(sbVO);
+		
+		if(cnt == 1) {
+			System.out.println("이미 싫어요를 눌렀습니다.");
+			sbDAO.sbHateU(sbVO);
+		}else {
+			int cnt2 = sbDAO.sbHateLC(sbVO);
+			
+			if(cnt2 == 1) {
+				System.out.println("이미 좋아요를 눌렀습니다.");
+					
+			}else {
+				int cnt3 = sbDAO.sbHateZC(sbVO);
+				
+				if(cnt3 == 1) {
+					System.out.println("이미 Z값이 있습니다.");
+					sbDAO.sbHateU2(sbVO);
+					
+				}else {
+					System.out.println("싫어요를 눌러도 좋습니다.");
+					sbDAO.sbHate2(sbVO);	
+				}
+			}
+		}
+		
+		int bno = (int) session.getAttribute("SBNO");
+		sbVO = sbDAO.storyBoardInfo(bno);
+		session.setAttribute("SBNO", bno);
+		
+		String sid = (String) session.getAttribute("SID");
+		session.setAttribute("SID", sid);
+		System.out.println("*storyBoardInfo.eat sid: " + sid);
+		
+		mv.addObject("mid", sbVO.getMid());
+		mv.addObject("title", sbVO.getTitle());
+		mv.addObject("content", sbVO.getContent());
+		mv.addObject("sbDate", sbVO.getSbDate());
+		mv.addObject("views", sbVO.getViews());
+		mv.addObject("saveName", sbVO.getSaveName());
+		mv.addObject("llike", sbVO.getLlike());
+		mv.addObject("hhate", sbVO.getHhate());
+		
+		mv.setViewName("storyboard/storyBoardInfo");
+		return mv;
+	}
+	
+	// 게시물 삭제 처리
+	@RequestMapping("sbDelete.eat")
+	public ModelAndView sbDelete(ModelAndView mv, RedirectView rv, HttpSession session, StoryBoardVO sbVO) {
+		sbDAO.sblhDelete(sbVO);
+		sbDAO.sbDelete(sbVO);
+		rv.setUrl("/oxo/storyboard/storyBoard.eat");
+		
+		mv.setView(rv);
+		return mv;
+	}
+	
+	// 게시물 상세 보기
+	@RequestMapping("sbViewDetail.eat")
+	public @ResponseBody StoryBoardVO sbViewDetail(String id) {
+		StoryBoardVO sbVO = sbDAO.sbViewDetail(id);
+
+		System.out.println("###sbViewDetail.eat: " + sbVO.getBno());
+		System.out.println("###sbViewDetail.eat: " + sbVO.getMid());
+		System.out.println("###sbViewDetail.eat: " + sbVO.getTitle());
+		System.out.println("###sbViewDetail.eat: " + sbVO.getContent());
+		return sbVO;
+	}
+	
+	// 게시물 수정 처리
+	@RequestMapping("sbInfoEdit.eat")
+	public @ResponseBody StoryBoardVO sbInfoEdit(StoryBoardVO sbVO) {
+		sbVO.setCnt(sbDAO.sbInfoEdit(sbVO));
+
+		System.out.println("###sbInfoEdit.eat" + sbVO.getBno());
+		System.out.println("###sbInfoEdit.eat" + sbVO.getTitle());
+		System.out.println("###sbInfoEdit.eat" + sbVO.getContent());
+
+		return sbVO;
+	}
+
 }
