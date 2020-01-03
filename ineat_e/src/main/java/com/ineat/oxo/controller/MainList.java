@@ -1,6 +1,7 @@
 package com.ineat.oxo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,6 +11,8 @@ import com.ineat.oxo.dao.TasteInfoDAO;
 import com.ineat.oxo.vo.TasteInfoVO;
 
 import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
   
 @Controller
 @RequestMapping("/ineatlist/")
@@ -49,9 +52,10 @@ public class MainList {
 	
 	
 	@RequestMapping("info.eat")
-	public ModelAndView detailinfo(ModelAndView mv) {
-		mv.setViewName("ineatlist/detail/detailinfo");
+	public ModelAndView detailinfo(ModelAndView mv, int ml_no) {
+		System.out.println(ml_no);
 		
+		mv.setViewName("ineatlist/detail/detailinfo");
 		return mv;
 	}
 	@RequestMapping("map.eat")
@@ -59,4 +63,5 @@ public class MainList {
 		mv.setViewName("ineatlist/detail/modal");
 		return mv;
 	}
+	
 }
