@@ -26,6 +26,8 @@ public class Recommend {
 	@RequestMapping("recommend.eat")
 	public ModelAndView recommendForm(ModelAndView mv) {
 		List list = rDAO.storeList();
+		List listMenu = rDAO.menuList();
+		
 		mv.addObject("LIST", list);
 
 		mv.setViewName("recommend/recommendForm");

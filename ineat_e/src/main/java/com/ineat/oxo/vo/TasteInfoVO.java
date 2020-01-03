@@ -14,10 +14,17 @@ public class TasteInfoVO {
 	private String ml_tag;
 	private String ml_count;
 	private String ml_isshow;
-	
 	private String ml_type;
+	private int rno;
 	
 	
+	
+	public int getRno() {
+		return rno;
+	}
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
 	public String getMl_type() {
 		return ml_type;
 	}

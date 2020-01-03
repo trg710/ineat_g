@@ -12,4 +12,8 @@
 		WHERE
 			ml_no BETWEEN  1000001 AND 1000006
 	</select>
+	<select id="menuList" resultType="tVO">
+		SELECT
+			
+	</select>
 </mapper>

@@ -13,4 +13,8 @@ public class RecommendDAO {
 			
 		return sqlSession.selectList("rSQL.showList");
 	}
+	
+	public List menuList() {
+		return sqlSession.selectList("rSQL.showMenu");
+	}
 }
