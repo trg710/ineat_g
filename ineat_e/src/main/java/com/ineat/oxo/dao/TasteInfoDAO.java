@@ -14,21 +14,20 @@ public class TasteInfoDAO {
 	
 	public List<TasteInfoVO> selectList() {
 		List<TasteInfoVO> list = sqlSession.selectList("tSQL.selectlist");
-		
-		
 		return list;
 	}
 	
 	public List<TasteInfoVO> moreList(TasteInfoVO tVO){
-		
 		List<TasteInfoVO> list = sqlSession.selectList("tSQL.morelist",tVO);
-		
 		return list;
 	}
 	
 	public List<TasteInfoVO> tagList(TasteInfoVO tVO){
 		List<TasteInfoVO> list = sqlSession.selectList("tSQL.taglist",tVO);
-		
 		return list;
+	}
+	
+	public void countup(int ml_no) {
+		sqlSession.update("tSQL.upcount", ml_no);
 	}
 }

@@ -54,10 +54,11 @@ public class MainList {
 	@RequestMapping("info.eat")
 	public ModelAndView detailinfo(ModelAndView mv, int ml_no) {
 		System.out.println(ml_no);
-		
+		tDAO.countup(ml_no);
 		mv.setViewName("ineatlist/detail/detailinfo");
 		return mv;
 	}
+	
 	@RequestMapping("map.eat")
 	public ModelAndView MapTest(ModelAndView mv) {
 		mv.setViewName("ineatlist/detail/modal");

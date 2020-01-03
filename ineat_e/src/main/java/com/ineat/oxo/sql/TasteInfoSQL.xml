@@ -22,7 +22,7 @@
 		(SELECT ml_no, ml_title, ml_newaddr, ml_count ,ROWNUM rno
 		FROM ie_mainlist
         order by ml_count desc)
-		WHERE rno between ${rno} AND ${rno}+4
+		WHERE rno between #{rno} AND #{rno}+4
         order by rno
  	</select>
  	
@@ -33,10 +33,18 @@
 			FROM(
 				SELECT ml_no, ml_title, ml_newaddr, ml_count, ml_tag
 				FROM ie_mainlist
-				WHERE ml_tag like '%${ml_tag}%'
+				WHERE ml_tag like '%'||#{ml_tag}||'%'
 				order by ml_count desc
 				)
 			)
-		WHERE rno BETWEEN ${rno} and ${rno}+4
+		WHERE rno BETWEEN #{rno} and #{rno}+4
  	</select>
+ 	
+ 	<update id="upcount" parameterType="int">
+ 		UPDATE ie_mainlist
+ 		SET
+ 			ml_count = ml_count+1
+ 		WHERE ml_no = #{ml_no}
+ 	</update>
+ 	
  </mapper>
