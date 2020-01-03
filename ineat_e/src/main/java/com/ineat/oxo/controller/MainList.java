@@ -39,14 +39,11 @@ public class MainList {
 		ArrayList<TasteInfoVO> list = new ArrayList<TasteInfoVO>();
 		String type = tVO.getMl_type();
 		String tag = tVO.getMl_tag();
-		
-		if(tag == "") {
+		if(tag.length() == 0) {
 			list = (ArrayList<TasteInfoVO>)tDAO.moreList(tVO);
 		}else {
-			System.out.println(tag);
 			list = (ArrayList<TasteInfoVO>)tDAO.tagList(tVO);
 		}
-		
 		return list;
 	}
 	

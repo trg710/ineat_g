@@ -8,24 +8,35 @@
  
  
  	<select id="selectlist" resultType="tVO">
-		SELECT ml_no, ml_title, ml_newaddr, ml_count
-		FROM ie_mainlist
-		WHERE ml_no between 1000001 AND 1000005
-		ORDER BY ml_count desc, ml_no desc
+		SELECT  *
+		FROM
+		(SELECT ml_no, ml_title, ml_newaddr, ml_count ,ROWNUM rno
+		FROM ie_mainlist)
+        WHERE rno BETWEEN 1 and 5
+        order by rno
  	</select>
  	
  	<select id="morelist" resultType="tVO" parameterType="tVO">
- 	
- 		SELECT ml_no, ml_title, ml_newaddr, ml_count
+		SELECT  *
+		FROM
+		(SELECT ml_no, ml_title, ml_newaddr, ml_count ,ROWNUM rno
 		FROM ie_mainlist
-		WHERE ml_no between ${ml_no} AND ${ml_no}+4
-		ORDER BY ml_count desc, ml_no desc
+        order by ml_count desc)
+		WHERE rno between ${rno} AND ${rno}+4
+        order by rno
  	</select>
  	
  	<select id="taglist" resultType="tVO" parameterType="tVO">
- 		SELECT ml_no, ml_title, ml_newaddr, ml_count
-		FROM ie_mainlist
-		WHERE ml_no between ${ml_no} AND ${ml_no}+4 AND ml_tag like '%${ml_tag}%'
-		ORDER BY ml_count desc, ml_no desc
+		SELECT *
+	    FROM(
+			SELECT ROWNUM rno, ml_no, ml_title, ml_newaddr, ml_count, ml_tag
+			FROM(
+				SELECT ml_no, ml_title, ml_newaddr, ml_count, ml_tag
+				FROM ie_mainlist
+				WHERE ml_tag like '%${ml_tag}%'
+				order by ml_count desc
+				)
+			)
+		WHERE rno BETWEEN ${rno} and ${rno}+4
  	</select>
  </mapper>
