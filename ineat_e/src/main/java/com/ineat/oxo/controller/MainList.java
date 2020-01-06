@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.ineat.oxo.dao.TasteInfoDAO;
 import com.ineat.oxo.vo.TasteInfoVO;
@@ -53,9 +54,10 @@ public class MainList {
 	
 	
 	@RequestMapping("info.eat")
-	public ModelAndView detailinfo(ModelAndView mv, int ml_no) {
+	public ModelAndView detailinfo(ModelAndView mv, int ml_no, RedirectView rv) {
 		System.out.println(ml_no);
-		tDAO.countup(ml_no);
+		TasteInfoVO tVO = tDAO.tasteInfo(ml_no);
+		mv.addObject("TVO", tVO);
 		mv.setViewName("ineatlist/detail/detailinfo");
 		return mv;
 	}

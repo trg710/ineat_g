@@ -16,54 +16,44 @@
         .m0 {
             margin: 0;
         }
-
         .bg {
             background-color: rgba(255, 255, 255, 1);
             border-color: rgba(214, 214, 214, 1);
             ;
         }
-
         .listtop {
-
             padding-bottom: 5px;
             margin: 0 auto;
             border-bottom: 1px solid #dbdbdb;
             position: relative;
         }
-
         .listcommon {
             position: absolute;
             right: 0;
         }
-
         .listcommon div {
             margin: auto 5px;
         }
-
         .bbg {
             border-bottom: solid 1px #dbdbdb;
             width: 950px;
             margin: 0 auto;
             padding: 10px 0;
         }
-
         .info {
             border-collapse: separate;
             border-spacing: 0 10px;
             margin: 25px 0;
         }
-
         .info td {
             padding-left: 50px;
         }
-
         .imgbox {
             width: 60px;
             height: 60px;
             border-radius: 50%;
             overflow: hidden;
         }
-
         .pic_1 {
             display: inline-block;
             position: relative;
@@ -72,17 +62,14 @@
             overflow: hidden;
             margin: 1px;
         }
-
         .pic {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .blurEffect {
             filter: brightness(30%);
         }
-
         .overindex {
             margin: 0;
             text-align: center;
@@ -108,7 +95,6 @@
                     gal.children('b').addClass('overindex');
                 }
             });
-
         });
     </script>
     
@@ -116,6 +102,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=de1101f28afb5244853fcd07238b684b&libraries=services"></script>
 
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg fixed-top">
         <a class="navbar-brand" href="#"><img src="/oxo/img/logo.png" style="margin-left: 30px; width: 100px;"></a>
@@ -159,15 +146,14 @@
 
                 <!-- 해더 -->
                 <div class="header d-flex position-relative">
-                    <h2>음식점 이름</h2><span>
-                        <h2>4.7</h2>
-                    </span>
+                    <h2>${TVO.ml_title}</h2>
+                    <span><h2>4.7</h2></span>
                     <div class="position-absolute" style="right: 0;">이미지</div>
                 </div>
 
                 <!-- 탑 -->
                 <div class="listtop d-flex">
-                    <div>ㅇ조회수 : <span>000</span> </div>
+                    <div>ㅇ조회수 : <span>${TVO.ml_count }</span> </div>
                     <div class="ml-3">ㅇ추천수 : <span>000</span> </div>
                     <div class="ml-3">ㅇ리뷰수 : <span>000</span> </div>
                     <div class="listcommon">
@@ -180,23 +166,23 @@
                     <tbody>
                         <tr>
                             <th>주소</th>
-                            <td>ㅇㅇㅇㅇ</td>
+                            <td>${TVO.ml_newaddr }</td>
                         </tr>
                         <tr>
                             <th>대표메뉴</th>
-                            <td>ㅇㅇㅇㅇ</td>
+                            <td>${TVO.ml_menu }</td>
                         </tr>
                         <tr>
                             <th>가격대</th>
-                            <td>ㅇㅇㅇㅇ</td>
+                            <td>${TVO.ml_price }</td>
                         </tr>
                         <tr>
                             <th>연락처</th>
-                            <td>ㅇㅇㅇㅇ</td>
+                            <td>${TVO.ml_tel }</td>
                         </tr>
                         <tr>
                             <th>영업시간</th>
-                            <td>ㅇㅇㅇㅇ</td>
+                            <td>${TVO.ml_time }</td>
                         </tr>
                     </tbody>
                 </table>
@@ -414,7 +400,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch('서울특별시 금천구 가산동 가산디지털1로 186', function(result, status) {
+geocoder.addressSearch('${TVO.ml_newaddr }', function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -429,7 +415,7 @@ geocoder.addressSearch('서울특별시 금천구 가산동 가산디지털1로 
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">${TVO.ml_title }</div>'
         });
         infowindow.open(map, marker);
 

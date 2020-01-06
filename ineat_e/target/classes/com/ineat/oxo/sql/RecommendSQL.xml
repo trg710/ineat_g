@@ -6,14 +6,53 @@
 <mapper namespace="rSQL">
 	<select id="showList" resultType="tVO">
 		SELECT
-			ml_title
+		ml_title
 		FROM
-			IE_MAINLIST
+		IE_MAINLIST
 		WHERE
-			ml_no BETWEEN  1000001 AND 1000006
+		ml_no BETWEEN 1000001 AND 1000006
 	</select>
 	<select id="menuList" resultType="tVO">
+	<![CDATA[
 		SELECT
-			
+ 			ROWNUM rno, ml_menu
+		FROM
+			(SELECT
+    			ml_menu
+			FROM
+    			ie_mainlist
+			WHERE
+    			ml_tag LIKE '%중식%'
+			OR
+    			ml_menu LIKE '%중식%'
+			OR
+       			ml_tag LIKE '%한식%'
+			OR
+    			ml_menu LIKE '%한식%'
+			ORDER BY DBMS_RANDOM.VALUE
+			)
+		WHERE
+    		ROWNUM  < 7
+   ]]>
+	</select>
+	
+	  
+	<select id="weatherChoo" resultType="tVO" parameterType="string">
+		SELECT
+    		ROWNUM rno , ml_menu, ml_title, ml_tag, mf_filename
+		FROM
+		(
+		SELECT
+    	*
+		FROM
+    		ie_mainlist l, ie_main_fileup f
+		WHERE
+    		f.mf_mlno = l.ml_no
+    	ORDER BY DBMS_RANDOM.VALUE
+		)
+		WHERE
+    		ml_tag LIKE '%' || #{dayCondition} || '%'
+    	AND
+    		ROWNUM = 1
 	</select>
 </mapper>

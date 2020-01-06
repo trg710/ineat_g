@@ -307,7 +307,7 @@ ul {
 
 							<!-- 이미지박스 -->
 							<div class="imgbox detail" data-id="${data.ml_no }">
-								<img src="/oxo/mainlist/${data.ml_title }1.jpg">
+								<img src="/oxo/mainlist/${data.ml_title}1.jpg">
 							</div>
 							<!-- 텍스트박스 -->
 							<div class="text_box">

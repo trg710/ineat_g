@@ -27,7 +27,10 @@ public class TasteInfoDAO {
 		return list;
 	}
 	
-	public void countup(int ml_no) {
+	public TasteInfoVO tasteInfo(int ml_no) {
 		sqlSession.update("tSQL.upcount", ml_no);
+		TasteInfoVO tVO = sqlSession.selectOne("tSQL.tasteInfo", ml_no);
+		
+		return tVO;
 	}
 }

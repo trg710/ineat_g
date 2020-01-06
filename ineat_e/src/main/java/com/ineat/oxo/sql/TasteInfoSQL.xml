@@ -47,4 +47,10 @@
  		WHERE ml_no = #{ml_no}
  	</update>
  	
+ 	<select id="tasteInfo" resultType="tVO" parameterType="int">
+ 		SELECT ml_no, ml_time,  ml_title, ml_tel, ml_price, ml_newaddr, ml_oldaddr, ml_menu, ml_count
+ 		FROM ie_mainlist
+ 		WHERE ml_no = #{ml_no}
+ 	</select>
+ 	
  </mapper>
