@@ -17,7 +17,7 @@ import com.ineat.oxo.vo.MemberVO;
 public class Member {
 	@Autowired
 	MemberDAO mDAO;
-	
+
 	/*회원 가입 및 로그인*/
 
 	//로그인
@@ -99,7 +99,6 @@ public class Member {
 	@RequestMapping("memInfo.eat")
 	public ModelAndView memInfo(MemberVO mVO,ModelAndView mv) {
 		MemberVO memVO = mDAO.memInfo(mVO);
-		System.out.println("******* : " + memVO);
 		mv.addObject("DATA", memVO);
 		mv.setViewName("member/memInfo");
 		return mv;
@@ -108,16 +107,42 @@ public class Member {
 	@RequestMapping("editProc.eat")
 	public ModelAndView editProc(ModelAndView mv, MemberVO mVO, RedirectView rv) {
 		int result = mDAO.infoEdit(mVO);
-		System.out.println("## membEdit : " + mVO);
+//		System.out.println("## membEdit : " + mVO);
 		
+		if(result == 1) {
+			rv.setUrl("/oxo/member/memInfo.eat");
+//			System.out.println("*********** : " + mVO.getId());
+		}else {
+			rv.setUrl("/oxo/member/memInfo.eat");
+		}
+/*		
 		if(result == 1) {
 			rv.setUrl("/oxo/member/memInfo.eat?id="+mVO.getId());
 			System.out.println("*********** : " + mVO.getId());
 		}else {
 			rv.setUrl("/oxo/member/memInfo.eat?id="+mVO.getId());
 		}
+*/
+		mv.addObject("id", mVO.getId());
 		mv.setView(rv);
 		return mv;
 	}
+
+	//아이디찾기
+	@RequestMapping("idFind.eat")
+	public ModelAndView idFind(ModelAndView mv) {
+		mv.setViewName("/member/idFind");
+		return mv;
+	}
+	
+	@RequestMapping("idFindProc.eat")
+	@ResponseBody
+	public MemberVO idFindProc(MemberVO mVO) {
+		MemberVO memVO = mDAO.idFind(mVO);
+		
+
+		return memVO;
+	}
+	
 }
 

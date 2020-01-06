@@ -77,14 +77,14 @@
  	FROM
  		ie_member
  	WHERE
- 		m_id=#{id}
+ 		m_id = #{id}
  </select>
  
  <!-- 회원정보 수정 -->
  <update id="editInfo" parameterType="mVO">
       UPDATE
          ie_member
-      <trim prefix="set" suffixOverrides=",">
+      <trim prefix="SET" suffixOverrides=",">
          <if test="nname != null">m_nname = #{nname},</if>
          <if test="pw != null">m_pw = #{pw},</if>
          <if test="tel != null">m_tel = #{tel},</if>
@@ -93,4 +93,16 @@
 		WHERE
 			m_id = #{id}
 </update>
+
+<!-- 아이디찾기 -->
+<select id="idFind" resultType="mVO" parameterType="mVO">
+	SELECT
+		m_id id
+	FROM
+		ie_member
+	WHERE
+		m_name = #{name}
+		AND m_email = #{email}
+</select>
+
  </mapper>

@@ -46,7 +46,11 @@ public class MemberDAO {
 	 }
 	 //회원정보수정
 	 public int infoEdit(MemberVO mVO) {
-		 System.out.println(mVO.getId());
 		 return sqlSession.update("mSQL.editInfo", mVO);
+	 }
+	 
+	 //아이디찾기
+	 public MemberVO idFind(MemberVO mVO) {
+		 return sqlSession.selectOne("mSQL.idFind", mVO);
 	 }
 }
