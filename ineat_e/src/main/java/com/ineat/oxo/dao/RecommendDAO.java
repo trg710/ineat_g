@@ -15,6 +15,10 @@ public class RecommendDAO {
 	}
 	
 	public List menuList() {
-		return sqlSession.selectList("rSQL.showMenu");
+		return sqlSession.selectList("rSQL.menuList");
 	}
+	public List weatherChoo(String dayCondition) {
+		System.out.println(dayCondition);
+		return sqlSession.selectList("rSQL.weatherChoo", dayCondition);
+	}	
 }
