@@ -50,16 +50,21 @@ public class Review {
 		int len = sfile.length;
 		
 		if(len > 0) {
+			
+			//fdao 넘기기.
 			fileSrvc.setDAO(fDAO);
 			
-			
+			//파일 업로드 처리.
+			String[] savename = fileSrvc.uploadProc(session, sfile);
 			rvDAO.f_addreview(rvVO);
+			
+			fDAO.rvFileaddProc(rvVO, savename);
+			
 		}else {
+			
 //			fno가 null값.
 			rvDAO.addreview(rvVO);
 		}
-		
-		
 		
 		return mv;
 	}
