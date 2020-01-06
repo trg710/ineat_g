@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ineat.oxo.dao.RecommendDAO;
+import com.ineat.oxo.vo.TasteInfoVO;
 
 /**
  * 
@@ -29,8 +32,20 @@ public class Recommend {
 		List listMenu = rDAO.menuList();
 		
 		mv.addObject("LIST", list);
+		mv.addObject("LISTMENU", listMenu);
+		
+		
 
 		mv.setViewName("recommend/recommendForm");
 		return mv;
+	}
+	
+	@RequestMapping("weather.eat")
+	@ResponseBody
+	public TasteInfoVO result(@RequestParam String dayCondition) {
+		TasteInfoVO weatherlist = rDAO.weatherChoo(dayCondition);
+		//api에서 데이터 제대로 들어오나 테스트
+		//System.out.println(dayCondition);
+		return weatherlist;
 	}
 }

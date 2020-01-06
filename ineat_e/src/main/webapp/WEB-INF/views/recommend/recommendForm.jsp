@@ -92,8 +92,8 @@ body {
 					<div class="card-body">
 						<h5 class="card-title">삼계탕</h5>
 						<p class="card-text">
-							현재 기온은 <span id="ctemp"></span>도로 <span id="dayCondition"></span>
-							입니다. 추천메뉴는 <span class="recommendMenu"></span>입니다.
+							현재 기온은 <h3><span id="ctemp"></span>도</h3>로 <h3><span id="dayCondition"></span></h3>
+							입니다.<span class="recommendTitle"></span>가게의  <h3><span class="recommendMenu"></span></h3>는 어떠실까요??
 						</p>
 					</div>
 				</div>
@@ -120,41 +120,39 @@ body {
 	<script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		$.getJSON(
-				'http://api.openweathermap.org/data/2.5/weather?id=1835848&APPID=44b647d32d3a2207ba2169b2aa1a7f92&units=metric',
-				function(data) {
-				var nowTemp = data.main.temp;
-				var humidity = data.main.humidity;
-				var dayCondition;
-				if (nowTemp > 20) {
-				dayCondition = '더운날';
-				} else if (nowTemp > 5) {
-				dayCondition = '선선한날';
-				} else {
-				dayCondition = '추운날';
-				}
-				
-				$.ajax({
-					url : "weather.eat",
-					type : "post",
-					dataType : "json",
-					data:{
-						"dayCondition" : dayCondition
-					},
-					success : function(adata){
-						var result = adata;
-						alert(result[0].ml_title);
-					},
-					error: function(){
-						alert('통신에러');
-					}
-				});
-				
-				
-				$('#dayCondition').append($dayCondition);
-				$('#ctemp').append($nowTemp);
-				$('#humidity').append($humidity);
-				});
+		$
+				.getJSON(
+						'http://api.openweathermap.org/data/2.5/weather?id=1835848&APPID=44b647d32d3a2207ba2169b2aa1a7f92&units=metric',
+						function(data) {
+							var nowTemp = data.main.temp;
+							var humidity = data.main.humidity;
+							var dayCondition;
+							if (nowTemp > 20) {
+								dayCondition = '더운날';
+							} else if (nowTemp > 5) {
+								dayCondition = '선선한날';
+							} else {
+								dayCondition = '추운날';
+							}
+							$('#dayCondition').append(dayCondition);
+							$('#ctemp').append(nowTemp);
+							$.ajax({
+								url : "weather.eat",
+								type : "post",
+								dataType : "json",
+								data : {
+									"dayCondition" : dayCondition
+								},
+								success : function(adata) {
+									//alert(adata.mf_filename);
+									$('.recommendTitle').append(adata.ml_title);
+									$('.recommendMenu').append(adata.ml_menu);
+								},
+								error : function() {
+									alert('통신에러');
+								}
+							});
+						});
 	</script>
 </body>
 

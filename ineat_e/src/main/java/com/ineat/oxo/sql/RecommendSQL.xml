@@ -39,18 +39,20 @@
 	  
 	<select id="weatherChoo" resultType="tVO" parameterType="string">
 		SELECT
-    		ROWNUM rno , ml_menu, ml_title,ml_tag
+    		ROWNUM rno , ml_menu, ml_title, ml_tag, mf_filename
 		FROM
-    	(
-        SELECT
-    			ml_menu, ml_title,ml_tag
-        FROM
-    			ie_mainlist
-        WHERE
-    			ml_tag LIKE '%' || #{dayCondition} || '%'
-        ORDER BY DBMS_RANDOM.VALUE
-    	)
-    	WHERE
+		(
+		SELECT
+    	*
+		FROM
+    		ie_mainlist l, ie_main_fileup f
+		WHERE
+    		f.mf_mlno = l.ml_no
+    	ORDER BY DBMS_RANDOM.VALUE
+		)
+		WHERE
+    		ml_tag LIKE '%' || #{dayCondition} || '%'
+    	AND
     		ROWNUM = 1
 	</select>
 </mapper>

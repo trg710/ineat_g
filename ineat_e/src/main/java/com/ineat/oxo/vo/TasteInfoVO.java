@@ -16,9 +16,14 @@ public class TasteInfoVO {
 	private String ml_isshow;
 	private String ml_type;
 	private int rno;
+	private String mf_filename;
 	
-	
-	
+	public String getMf_filename() {
+		return mf_filename;
+	}
+	public void setMf_filename(String mf_filename) {
+		this.mf_filename = mf_filename;
+	}
 	public int getRno() {
 		return rno;
 	}
