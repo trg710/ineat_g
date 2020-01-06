@@ -46,8 +46,7 @@ $(function() {
 
       <div class="collapse navbar-collapse" id="navbar">
          <form class="form-inline col-10">
-            <input class=" form-control col-11 mr-sm-2" type="text"
-               placeholder="Search">
+            <input class=" form-control col-11 mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-warning" type="submit">Search</button>
          </form>
          <ul class="navbar-nav float-left"
