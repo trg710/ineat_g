@@ -232,7 +232,6 @@
                         <div class="pic_1">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
                                 class="pic">
-
                         </div>
                         <div class="pic_1">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"

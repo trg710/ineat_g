@@ -1,11 +1,19 @@
 package com.ineat.oxo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.ineat.oxo.dao.FileDAO;
 import com.ineat.oxo.dao.ReviewDAO;
+import com.ineat.oxo.services.FileService;
+import com.ineat.oxo.vo.FileVO;
+import com.ineat.oxo.vo.ReviewVO;
 
 /**
  * 이 클래스는 리뷰관련 컨트롤러 입니다.
@@ -23,12 +31,36 @@ import com.ineat.oxo.dao.ReviewDAO;
 @RequestMapping("/ineatlist/review")
 public class Review {
 	@Autowired
-	ReviewDAO rvVO;
+	ReviewDAO rvDAO;
+	@Autowired
+	FileService fileSrvc;
+	@Autowired
+	FileDAO fDAO;
 	
-	@RequestMapping("addreview.eat")
-	public ModelAndView addreview(ModelAndView mv) {
-		
+	@RequestMapping("reviewform.eat")
+	public ModelAndView reviewform(ModelAndView mv) {
 		mv.setViewName("ineatlist/review/addreview");
+		return mv;
+	}
+	
+	@RequestMapping("addreview")
+	public ModelAndView addreview(ModelAndView mv, RedirectView rv, HttpSession session, ReviewVO rvVO) {
+		MultipartFile[] sfile =rvVO.getsFile();
+		
+		int len = sfile.length;
+		
+		if(len > 0) {
+			fileSrvc.setDAO(fDAO);
+			
+			
+			rvDAO.f_addreview(rvVO);
+		}else {
+//			fno가 null값.
+			rvDAO.addreview(rvVO);
+		}
+		
+		
+		
 		return mv;
 	}
 }

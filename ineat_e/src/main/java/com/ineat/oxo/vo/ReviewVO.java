@@ -3,6 +3,8 @@ package com.ineat.oxo.vo;
 import java.sql.Date;
 import java.sql.Time;
 
+import org.springframework.web.multipart.MultipartFile;
+
 //rvVO
 public class ReviewVO {
 	private int rv_no;
@@ -13,8 +15,23 @@ public class ReviewVO {
 	private int rv_score;
 	private Date rv_date;
 	private Time rv_time;
+	private String m_id;
+	
+	private MultipartFile[] sfile;
 	
 	
+	public MultipartFile[] getsFile() {
+		return sfile;
+	}
+	public void setsFile(MultipartFile[] sfile) {
+		this.sfile = sfile;
+	}
+	public String getM_id() {
+		return m_id;
+	}
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
 	public int getRv_no() {
 		return rv_no;
 	}

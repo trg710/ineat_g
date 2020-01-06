@@ -12,45 +12,56 @@
     <script src="/oxo/js/jquery.min.js"></script>
     <script src="/oxo/js/bootstrap.min.js"></script>
     <style>
-        .bg {
-            background-color: rgba(255, 255, 255, 1);
-            border-color: rgba(214, 214, 214, 1);
-        }
-
-        .reviewarea {
-            width: 100%;
-            height: 150px;
-            resize: none;
-            font-size: 16px;
-            border-color: rgba(214, 214, 214, 1);
-            border-radius: 3px;
-            overflow-y: hidden;
-        }
-
-        .pointStarRating {
-            width: 156px;
-            height: 24px;
-            overflow: hidden;
+		.bg {
+		    background-color: rgba(255, 255, 255, 1);
+		    border-color: rgba(214, 214, 214, 1);
+		}
+		
+		.reviewarea {
+		    width: 100%;
+		    height: 150px;
+		    resize: none;
+		    font-size: 16px;
+		    border-color: rgba(214, 214, 214, 1);
+		    border-radius: 3px;
+		    overflow-y: hidden;
+		}
+		
+		.pointStarRating {
+		    width: 156px;
+		    height: 24px;
+		    overflow: hidden;
+		    display: inline-block;
+		    vertical-align: top;
+		    margin: 1px 0 0 0;
+		    padding-left: 1px;
+		    background: url(/oxo/img/sp_ico3.png) no-repeat;
+		    background-position: 0 -1060px;
+		}
+		
+		.pointStarlist {
+		    height: 24px;
+		    width: 12px;
+		    overflow: hidden;
+		    border: 0;
+		    cursor: pointer;
+		    background: url(/oxo/img/sp_ico3.png) no-repeat;
+		    background-position: 0 -9999px;
+		}
+		.pic_1 {
             display: inline-block;
-            vertical-align: top;
-            margin: 1px 0 0 0;
-            padding-left: 1px;
-            background: url(/oxo/img/sp_ico3.png) no-repeat;
-            background-position: 0 -1060px;
-        }
-
-        .pointStarlist {
-            height: 24px;
-            width: 12px;
+            position: relative;
+            width: 100px;
+            height: 100px;
             overflow: hidden;
-            border: 0;
-            cursor: pointer;
-            background: url(/oxo/img/sp_ico3.png) no-repeat;
-            background-position: 0 -9999px;
+            margin: 1px;
         }
-
-        /* mouseenter
-        mouseleave */
+        .pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
@@ -116,6 +127,41 @@
             		console.log('비어있음');
             	}
             });
+            
+            var f_no;
+            var f_id;
+            var f_this;
+            var count = 0;
+            $(document).on('click', '.pic_1', function(e) {
+    			e.stopImmediatePropagation();
+    			f_this = $(this).find('img');
+            	f_no = $(this).index()+1;
+            	f_id = "#f"+f_no;
+            	$(f_id).click();
+            });
+            
+            $(document).on('change', f_id, function(e) {
+            	e.stopImmediatePropagation();
+            	var tmp = URL.createObjectURL(e.target.files[0]);
+            	f_this.attr('src', tmp);
+            	
+            	var f_value = $(this).val();
+            	
+            	if( count < f_no && count <= 10){
+            		count += 1;
+	            	var resultlist ='';
+	            	resultlist +='<div class="pic_1 ml-2">';
+	            	resultlist +='<img src="/oxo/img/moreimg.png" class="pic">';
+	            	resultlist +='</div>';
+	            	$('#gall').append(resultlist);
+	            	
+	            	f_id = 'f'+(f_no+1);
+	            	var inputfile = '<input type="file" class="form-control-file" name="sfile" id="'+f_id+'">';
+	            	$('#file_box').append(inputfile);
+            	}
+            	            	
+            });
+            
         });
     </script>
 </head>
@@ -177,22 +223,28 @@
                         <div class="starscore mr-2"><h3><b id="sc">0</b></h3></div>
                     </div>
                     <div>
-                        <form class="wrap" enctype="multipart/form-data">
-                            <input type="hidden" name="id" value="">
+                    
+                        <form class="wrap" enctype="multipart/form-data" method="post" action="/oxo/ineatlist/review/addreview.eat">
                             <input type="hidden" id="score" name="rv_score" value="">
-                            <input type="hidden" name="sFile" id="file">
-                            <textarea class="p-3 mt-3 mb-3 reviewarea" placeholder="리뷰 내용을 작성해 주세요"maxlength="4000"></textarea>
-                            
-                            <div id="file_box">
-	                           	<input type="file" class="form-control-file" name="sfile" id="f1" aria-describedby="fileHelp">
-	                            <input type="file" class="form-control-file" name="sfile" id="f2" aria-describedby="fileHelp">
-	                            <button type="button" class="btn btn-secondary btn-lg" id="ck"> 확인버튼 </button>
+                            <input type="hidden" id="score" name="rv_mlno" value="${MLNO}">
+                            <div id="file_box" style="display: none;">
+	                           	<input type="file" class="form-control-file" name="sfile" id="f1">
                             </div>
+                            
+                            <textarea name="rv_body" class="p-3 mt-3 mb-3 reviewarea" placeholder="리뷰 내용을 작성해 주세요" maxlength="1000"></textarea>
+                            
+                            <div class="gallery" id="gall">
+                        		<div class="pic_1 ml-2">
+                            		<img src="/oxo/img/moreimg.png" class="pic">
+                                </div>
+                        	</div>
+                        	
                             <div class="text-right">
                                 <button type="button" class="btn btn-secondary btn-lg"> 취소 </button>
                                 <button type="submit" class="btn btn-warning btn-lg ml-3"> 글 작성 완료</button>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>
