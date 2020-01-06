@@ -22,6 +22,10 @@
 </style>
 <script type="text/javascript">
    $(function(){
+	//메인으로 이동
+	$('.cancel').click(function(){
+		$(location).attr('href','/oxo/main.eat');
+	});
       //아이디체크
       $('#idck').click(function(){
          var sid = $('#id').val();
