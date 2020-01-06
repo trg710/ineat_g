@@ -44,4 +44,9 @@ public class MemberDAO {
 	 public MemberVO memInfo(MemberVO mVO) {
 		 return sqlSession.selectOne("mSQL.memInfo", mVO);
 	 }
+	 //회원정보수정
+	 public int infoEdit(MemberVO mVO) {
+		 System.out.println(mVO.getId());
+		 return sqlSession.update("mSQL.editInfo", mVO);
+	 }
 }

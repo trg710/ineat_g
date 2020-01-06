@@ -73,10 +73,24 @@
  <!-- 회원정보 가져오기 -->
  <select id="memInfo" resultType="mVO" parameterType="mVO">
  	SELECT
- 		m_name name, m_nname nname, m_id id, m_tel tel, m_email email, m_birthday bday, m_date wDate 
+ 		m_name name, m_nname nname, m_id id, m_pw pw, m_tel tel, m_email email, m_birthday bday, m_date wDate 
  	FROM
  		ie_member
  	WHERE
  		m_id=#{id}
  </select>
+ 
+ <!-- 회원정보 수정 -->
+ <update id="editInfo" parameterType="mVO">
+      UPDATE
+         ie_member
+      <trim prefix="set" suffixOverrides=",">
+         <if test="nname != null">m_nname = #{nname},</if>
+         <if test="pw != null">m_pw = #{pw},</if>
+         <if test="tel != null">m_tel = #{tel},</if>
+         <if test="email != null">m_email = #{email},</if>
+      </trim>
+		WHERE
+			m_id = #{id}
+</update>
  </mapper>

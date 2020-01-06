@@ -38,6 +38,11 @@
     border:solid orange 2px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 165, 0, 0.4)
 }
+#ennmsg{
+	position:absolute;
+	margin-top:10px;
+	margin-left:205px;
+}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -54,6 +59,36 @@ $(function(){
 	$('.ecancel').click(function(){
 		$('#editInfo').css('display','none');
 	});
+	
+    //닉네임체크
+    $('#ennck').click(function(){
+       var snn = $('#enname').val();
+       
+       $.ajax({
+          url : "/oxo/member/nnCheck.eat",
+          type : "post",
+          dataType : "json",
+          data : {"nname" : snn},
+          success : function(cnt){
+             var ck = cnt;
+             if(ck==1){
+                //아이디가 있는 경우
+                $('#enname').val("");
+                $('#ennmsg').attr('class','');
+                $('#ennmsg').toggleClass('text-warning');
+                $('#ennmsg').html("이미 사용된 닉네임입니다.");
+             }else{
+                //아이디가 없는 경우
+                $('#ennmsg').attr('class','');
+                $('#ennmsg').toggleClass('text-muted');
+                $('#ennmsg').html("사용 가능한 닉네임입니다.");
+             }
+          },
+          error : function(){
+             alert('##에러');
+          }
+       });
+    });
 	
     //비밀번호 체크
     $('#epwck').keyup(function(){
@@ -81,11 +116,10 @@ $(function(){
     
     });
 
+
 });
 </script>
 </head>
-<body>
-
 <body>
     <div class="container">
         <div class="row text-center">
@@ -159,7 +193,7 @@ $(function(){
     </div>
     
     <!-- 회원정보수정 모달창 -->
-
+<form method="post" action="/oxo/member/editProc.eat">
   <div id="editInfo" class="w3-modal">
       <div class="w3-modal-content" style="width:40%;">
          <div class="w3-container">
@@ -177,33 +211,38 @@ $(function(){
 
                     <div class="name">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>Name</em></h3>
-                        <h6 class="text-muted right text-right" id="ename">${DATA.name }</h6>
+                        <h6 class="text-muted right text-right" id="ename" >${DATA.name }</h6>
                     </div>
                     <br> 
 
                     <div class="nname">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>Nick Name</em></h3>
-                        <input type="password" class="form-control inputheight" id="enname">
-                        <button type="button" style ="float: right; margin-top:-5px;" class="btn btn-outline-warning btn-sm bt">Check</button>
+                        <input type="text" class="form-control inputheight" id="enname" name="nname" value="${DATA.nname }">
+                        <button type="button" style ="float: right; margin-top:-5px;" class="btn btn-outline-warning btn-sm bt" id="ennck">Check</button>
                     </div>
-                    <br><br>
+     
+                    <div>
+                        <p><span class="float-right" style="font-size: 12px;" id="ennmsg"></span></p>
+                    </div>
+                    <br>
 
 
                     <div class="id">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>ID</em></h3>
                         <h6 class="text-muted right text-right" id="eid">${DATA.id }</h6>
+                        <input type="hidden" name="id" value="${DATA.id }">
                     </div>
                     <br> 
 
                     <div class="pw">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>Password</em></h3>
-                        <input type="password" class="form-control inputheight " id="epw">
+                        <input type="password" class="form-control inputheight " id="epw" name="pw" value="${DATA.pw }">
                     </div>
                     <br><br>
 
                     <div class="pwck">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>Password</em></h3>
-                        <input type="password" class="form-control inputheight " id="epwck">
+                        <input type="password" class="form-control inputheight " id="epwck" value="${DATA.pw }">
                     </div>
                     <br>
                     <div>
@@ -213,14 +252,14 @@ $(function(){
                     
                     <div class="tel">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>Tel</em></h3>
-                        <input type="text" class="form-control inputheight " id="etel">
+                        <input type="text" class="form-control inputheight " id="etel" name="tel" value="${DATA.tel }">
                     </div>
                     <br><br>
 
                     
                     <div class="email">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>Email</em></h3>
-                        <input type="text" class="form-control inputheight " id="eemail">
+                        <input type="text" class="form-control inputheight " id="eemail" name="email" value="${DATA.email }">
                     </div>
                     <br> <br>
 
@@ -250,5 +289,6 @@ $(function(){
   
       </div>
   </div>
+</form>
 </body>
 </html>

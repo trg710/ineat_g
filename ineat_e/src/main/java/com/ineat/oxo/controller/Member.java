@@ -95,11 +95,28 @@ public class Member {
 	
 	
 	/*회원 정보 관련*/
+	//정보보기
 	@RequestMapping("memInfo.eat")
 	public ModelAndView memInfo(MemberVO mVO,ModelAndView mv) {
 		MemberVO memVO = mDAO.memInfo(mVO);
-		mv.addObject("DATA",memVO);
+		System.out.println("******* : " + memVO);
+		mv.addObject("DATA", memVO);
 		mv.setViewName("member/memInfo");
+		return mv;
+	}
+	//회원정보수정
+	@RequestMapping("editProc.eat")
+	public ModelAndView editProc(ModelAndView mv, MemberVO mVO, RedirectView rv) {
+		int result = mDAO.infoEdit(mVO);
+		System.out.println("## membEdit : " + mVO);
+		
+		if(result == 1) {
+			rv.setUrl("/oxo/member/memInfo.eat?id="+mVO.getId());
+			System.out.println("*********** : " + mVO.getId());
+		}else {
+			rv.setUrl("/oxo/member/memInfo.eat?id="+mVO.getId());
+		}
+		mv.setView(rv);
 		return mv;
 	}
 }

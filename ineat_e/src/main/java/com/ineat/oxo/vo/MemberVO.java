@@ -107,5 +107,8 @@ public class MemberVO {
 		this.sTime = sTime;
 	}
 	
+	public String toString() {
+		return nname + " | " + name + " | " + id + " | " + pw + " | " + tel + " | " + email + " | " + bday + " | " + wDate;
+	}
 	
 }
