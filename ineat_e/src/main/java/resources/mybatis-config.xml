@@ -35,5 +35,6 @@
 		<mapper resource="com/ineat/oxo/sql/TasteInfoSQL.xml" />   
 		<mapper resource="com/ineat/oxo/sql/MatdcupSQL.xml" />   
 		<mapper resource="com/ineat/oxo/sql/SearchSQL.xml"/> 
+		<mapper resource="com/ineat/oxo/sql/RecommendSQL.xml" />
 	</mappers>
 </configuration>
