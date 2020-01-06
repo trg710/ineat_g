@@ -19,6 +19,10 @@ $(function(){
 		var title = $('#title').val();
 		var content = $('#content').val();
 		
+		if(!title && !content){
+			alert('내용을 작성해 주세요.');
+			return;
+		}
 		$('#form1').submit();
 	}
 	$('#write').click(content);
@@ -43,12 +47,12 @@ $(function(){
 		    <div class="row mt-2">
 		        <div class="col-md-2">sid<input type="text" name="mid" value="${SID }"></div>
 		        <div class="col-md-1 text-center">제목</div>
-		        <div class="col-md-6"><input type="text" name="title" style="width:100%" value=""></div>
+		        <div class="col-md-6"><input type="text" id="title" name="title" style="width:100%" value=""></div>
 		    </div>
 		    <div class="row mt-2">
 		        <div class="col-md-2"></div>
 		        <div class="col-md-1 text-center">내용</div>
-		        <div class="col-md-6"><textarea name="content" cols="150" rows="10" style="width:100%"></textarea></div>
+		        <div class="col-md-6"><textarea id="content" name="content" cols="150" rows="10" style="width:100%"></textarea></div>
 		    </div>
 		    <div class="row mt-2">
 		        <div class="col-md-2"></div>

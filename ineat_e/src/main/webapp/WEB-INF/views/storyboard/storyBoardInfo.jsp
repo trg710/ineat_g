@@ -101,6 +101,20 @@ $(function(){
 			}
 		});		
 	}); 
+	
+	// 댓글 등록
+	function content(){
+		var content = $('#ccontent').val();
+			
+		if(!content){
+			alert('내용을 입력해주세요.');
+			return;
+		};
+		$('#form1').submit();
+	}
+	$('#register').click(content);
+	
+	
 });
 </script>
 </head>
@@ -136,11 +150,11 @@ $(function(){
 	    </div>
 	    <div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
-	        <div class="col-md-2 border-bottom">${title }</div>
-	        <div class="col-md-3 border-bottom"></div>
-	        <div class="col-md-1 border-bottom">조회수: ${views }</div>
-	        <div class="col-md-1 border-bottom">${mid }</div>
-	        <div class="col-md-1 border-bottom">${sbDate }</div>
+	        <div class="col-md-3 border-bottom">제목:${title }</div>
+	        <div class="col-md-1 border-bottom"></div>
+	        <div class="col-md-1 border-bottom">조회수:${views }</div>
+	        <div class="col-md-1 border-bottom">작성자:${mid }</div>
+	        <div class="col-md-2 border-bottom">작성일:${sbDate }</div>
 	    </div>
 	    <div class="row mt-2">
 	    	<div class="col-md-2"></div>
@@ -171,10 +185,12 @@ $(function(){
 	        <div class="col-md-7"></div>
 	    </div>
 	    <div class="row mt-2">
-	    	<div class="col-md-2"></div>
-	    	<div class="col-md-1"></div>
-	    	<div class="col-md-6 border-bottom">맛집만다니는사람<br><span class="ml-3">여기 진짜 맛잇긴해요 ㅋㅋㅋ</span></div>
-	    	<div class="col-md-1"></div>
+	    	<c:forEach var="data" items="${LIST }">
+		    	<div class="col-md-2"></div>
+		    	<div class="col-md-1"></div>
+		    	<div class="col-md-6 border-bottom">${data.mno }<br><span class="ml-3">${data.ccontent }</span></div>
+		    	<div class="col-md-1"></div>
+		    </c:forEach>
 	    </div>
 	    <div class="row mt-2">
 	    	<div class="col-md-2"></div>
@@ -188,11 +204,17 @@ $(function(){
 	    	<div class="col-md-6 border-bottom"><p class="ml-3">└ 라면좋아<br><span class="ml-4">저두 가봐야겠어요 ㅋㅋㅋㅋㅋ</span></p></div>
 	    	<div class="col-md-1"></div>
 	    </div>
-	    <div class="row mt-2 text-center">
+	    <div class="row mt-2">
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-1"></div>
-	    	<div class="col-md-6 border"></div>
-	    	<div class="col-md-1"><button type="button" class="btn btn-light">등록</button></div>
+	    	<div class="col-md-6">
+	    		<form id="form1" method="post" action="/oxo/storyboard/sbComment.eat" >
+	    			<input type="text" id="ccontent" name="ccontent" style="width:100%">
+	    			<input type="text" id="cbno" name="cbno" value="${SBNO }">
+	    			<input type="text" id="cmid" name="cmid" value="${SID }">
+	    		</form>
+    		</div>
+	    	<div class="col-md-1"><button type="button" id="register" class="btn btn-light">등록</button></div>
 	    </div>
 	    <c:if test="${SID == mid }">
 		    <div class="row mt-4">
@@ -241,10 +263,6 @@ $(function(){
 				        <div class="col-md-5"><span id="content" style="display:none"></span><textarea id="content2" name="content2" cols="150" rows="10" style="width:100%"></textarea></div>
 				    </div>
 				</div>
-		        
-		        
-		        
-		        
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
@@ -253,17 +271,6 @@ $(function(){
 		    </div>
 		  </div>
 		</div>
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
 	    
 	    <div class="row mt-4 text-center">
 	    	<div class="col-md-2"></div>

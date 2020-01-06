@@ -20,18 +20,10 @@ $(function(){
 	});
 	// 상세보기
 	$('.toInfo').click(function(){
-		/* var listbno = '#' + $(this).attr('id');
-		var listmid = '#mid'+ listbno.substring(1);
-		var textbno = listbno.substring(1);
-		var textmid = $(listmid).text(); */
 		
-		//보내줄 데이터 확인
-		/*
-		alert(textbno);
-		alert(textmid);
-		*/
 		var listbno = $(this).attr('id');
 		
+		alert(listbno);
 		$('#bno').val(listbno);
 		
 		/* $('#bno').val(textbno);

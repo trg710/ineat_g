@@ -22,9 +22,43 @@ public class StoryBoardVO {
 	private String isshow;
 	private int llike;
 	private int hhate;
+	private int cbno;
+	private String cmid;
+	private String ccontent;
+	private int cno;
+	private Date cDate;
 	
 	
-	
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
+	public Date getcDate() {
+		return cDate;
+	}
+	public void setcDate(Date cDate) {
+		this.cDate = cDate;
+	}
+	public String getCcontent() {
+		return ccontent;
+	}
+	public void setCcontent(String ccontent) {
+		this.ccontent = ccontent;
+	}
+	public int getCbno() {
+		return cbno;
+	}
+	public void setCbno(int cbno) {
+		this.cbno = cbno;
+	}
+	public String getCmid() {
+		return cmid;
+	}
+	public void setCmid(String cmid) {
+		this.cmid = cmid;
+	}
 	public int getLlike() {
 		return llike;
 	}

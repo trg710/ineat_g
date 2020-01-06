@@ -328,4 +328,33 @@
 		WHERE 
 		    SB_NO = #{bno}
 	</update>
+	
+	<!-- 댓글 함수 처리 -->
+	<insert id="sbComment" parameterType="sbVO">
+		<selectKey keyProperty="writer" resultType="int" order="BEFORE">
+			SELECT
+				M_NO
+			FROM
+				IE_MEMBER
+			WHERE
+				M_ID = #{cmid}
+		</selectKey>
+			INSERT INTO
+				IE_SB_COMMENTS
+			VALUES(
+				(SELECT NVL(MAX(SBCMT_NO) + 1, 1000001) FROM IE_SB_COMMENTS),
+				#{cbno}, #{writer}, #{ccontent}, SYSDATE
+			)
+	</insert>
+	
+	<select id="sbCommentList" resultType="sbVO">
+		SELECT
+		    SBCMT_NO cno, SBCMT_BNO bno, SBCMT_MNO mno, SBCMT_CONTENT ccontent, SBCMT_DATE cDate
+		FROM
+		    IE_SB_COMMENTS
+		WHERE
+		    SBCMT_BNO = #{bno}
+		ORDER BY
+		    SBCMT_DATE DESC
+	</select>
 </mapper>

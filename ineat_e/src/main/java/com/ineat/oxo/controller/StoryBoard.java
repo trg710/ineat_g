@@ -72,6 +72,11 @@ public class StoryBoard {
 		mv.addObject("llike", sbVO.getLlike());
 		mv.addObject("hhate", sbVO.getHhate());
 		
+		List<StoryBoardVO> list = sbDAO.sbCommentList(bno);
+		mv.addObject("LIST", list);
+		
+		
+		
 		
 		return mv;
 	}
@@ -246,4 +251,34 @@ public class StoryBoard {
 		return sbVO;
 	}
 
+	// 댓글 함수 처리
+	@RequestMapping("sbComment.eat")
+	public ModelAndView sbComment(ModelAndView mv, HttpSession session, StoryBoardVO sbVO) {
+		sbDAO.sbComment(sbVO);
+		System.out.println(sbVO.getCbno());
+		System.out.println(sbVO.getCmid());
+		System.out.println(sbVO.getCcontent());
+		
+		
+		int bno = (int) session.getAttribute("SBNO");
+		sbVO = sbDAO.storyBoardInfo(bno);
+		session.setAttribute("SBNO", bno);
+		
+		String sid = (String) session.getAttribute("SID");
+		session.setAttribute("SID", sid);
+		System.out.println("*storyBoardInfo.eat sid: " + sid);
+		
+		mv.addObject("mid", sbVO.getMid());
+		mv.addObject("title", sbVO.getTitle());
+		mv.addObject("content", sbVO.getContent());
+		mv.addObject("sbDate", sbVO.getSbDate());
+		mv.addObject("views", sbVO.getViews());
+		mv.addObject("saveName", sbVO.getSaveName());
+		mv.addObject("llike", sbVO.getLlike());
+		mv.addObject("hhate", sbVO.getHhate());
+		
+		mv.setViewName("storyboard/storyBoardInfo");
+		return mv;
+
+	}
 }

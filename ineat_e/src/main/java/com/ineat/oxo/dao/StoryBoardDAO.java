@@ -106,5 +106,14 @@ public class StoryBoardDAO {
 		return sqlSession.update("sbSQL.viewsCnt", bno);
 	}
 
+	public int sbComment(StoryBoardVO sbVO) {
+		return sqlSession.insert("sbSQL.sbComment", sbVO);		
+	}
+
+	// 댓글 가져오는 함수
+	public List<StoryBoardVO> sbCommentList(int bno){
+		return sqlSession.selectList("sbSQL.sbCommentList");
+	}
+
 
 }
