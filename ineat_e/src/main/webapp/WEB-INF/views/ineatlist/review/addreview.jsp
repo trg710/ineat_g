@@ -65,7 +65,7 @@
     </style>
     <script type="text/javascript">
         $(function () {
-
+			
             $('.pointStarRating>div:odd').css('width', '19px');
 
             $('.reviewarea').each(function () {
@@ -140,13 +140,14 @@
             	$(f_id).click();
             });
             
-            $(document).on('change', f_id, function(e) {
+            $(document).on('change', '.files' , function(e) {
             	e.stopImmediatePropagation();
+            	console.log($(this).val());
+            	
             	var tmp = URL.createObjectURL(e.target.files[0]);
             	f_this.attr('src', tmp);
             	
             	var f_value = $(this).val();
-            	
             	if( count < f_no && count <= 10){
             		count += 1;
 	            	var resultlist ='';
@@ -156,13 +157,17 @@
 	            	$('#gall').append(resultlist);
 	            	
 	            	f_id = 'f'+(f_no+1);
-	            	var inputfile = '<input type="file" class="form-control-file" name="sfile" id="'+f_id+'">';
+	            	var inputfile = '<input type="file" class="form-control-file files" name="sfile" id="'+f_id+'">';
 	            	$('#file_box').append(inputfile);
             	}
             	            	
             });
             
         });
+        function reviewsubmit(){
+        	$('.files:last').remove();
+        	$('#reviewfrm').submit();
+        }
     </script>
 </head>
 
@@ -224,15 +229,13 @@
                     </div>
                     <div>
                     
-                        <form class="wrap" enctype="multipart/form-data" method="post" action="/oxo/ineatlist/review/addreview.eat">
-                            <input type="hidden" id="score" name="rv_score" value="">
-                            <input type="hidden" id="score" name="rv_mlno" value="${MLNO}">
+                        <form class="wrap" enctype="multipart/form-data" method="post" action="/oxo/ineatlist/review/addreview.eat" id="reviewfrm">
+                            <input type="hidden" id="score" name="s_score" value="">
+                            <input type="hidden" id="mlno" name="rv_mlno" value="${MLNO}">
                             <div id="file_box" style="display: none;">
-	                           	<input type="file" class="form-control-file" name="sfile" id="f1">
+	                           	<input type="file" class="form-control-file files" name="sfile" id="f1">
                             </div>
-                            
                             <textarea name="rv_body" class="p-3 mt-3 mb-3 reviewarea" placeholder="리뷰 내용을 작성해 주세요" maxlength="1000"></textarea>
-                            
                             <div class="gallery" id="gall">
                         		<div class="pic_1 ml-2">
                             		<img src="/oxo/img/moreimg.png" class="pic">
@@ -241,7 +244,7 @@
                         	
                             <div class="text-right">
                                 <button type="button" class="btn btn-secondary btn-lg"> 취소 </button>
-                                <button type="submit" class="btn btn-warning btn-lg ml-3"> 글 작성 완료</button>
+                                <button type="button" class="btn btn-warning btn-lg ml-3" onclick="reviewsubmit()"> 글 작성 완료</button>
                             </div>
                         </form>
                         

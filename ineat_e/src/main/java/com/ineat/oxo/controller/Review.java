@@ -38,34 +38,29 @@ public class Review {
 	FileDAO fDAO;
 	
 	@RequestMapping("reviewform.eat")
-	public ModelAndView reviewform(ModelAndView mv) {
+	public ModelAndView reviewform(ModelAndView mv, int ml_no) {
+		mv.addObject("MLNO", ml_no);
 		mv.setViewName("ineatlist/review/addreview");
 		return mv;
 	}
 	
-	@RequestMapping("addreview")
+	@RequestMapping("addreview.eat")
 	public ModelAndView addreview(ModelAndView mv, RedirectView rv, HttpSession session, ReviewVO rvVO) {
-		MultipartFile[] sfile =rvVO.getsFile();
-		
-		int len = sfile.length;
-		
-		if(len > 0) {
-			
-			//fdao 넘기기.
-			fileSrvc.setDAO(fDAO);
-			
-			//파일 업로드 처리.
+		MultipartFile[] sfile =rvVO.getSfile();
+		rvVO.setM_id((String)session.getAttribute("SID"));
+		Double score = Double.parseDouble(rvVO.getS_score());
+		rvVO.setRv_score(score);
+		rvDAO.addreview(rvVO);
+
+		System.out.println(sfile);
+		if(sfile != null) {
 			String[] savename = fileSrvc.uploadProc(session, sfile);
-			rvDAO.f_addreview(rvVO);
-			
 			fDAO.rvFileaddProc(rvVO, savename);
-			
-		}else {
-			
-//			fno가 null값.
-			rvDAO.addreview(rvVO);
 		}
+		rvVO.getRv_mlno();
 		
+		rv.setUrl("/oxo/ineatlist/info.eat?ml_no="+rvVO.getRv_mlno());
+		mv.setView(rv);
 		return mv;
 	}
 }

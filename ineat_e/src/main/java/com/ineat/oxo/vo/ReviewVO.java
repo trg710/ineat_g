@@ -12,18 +12,24 @@ public class ReviewVO {
 	private int rv_mno;
 	private String rv_body;
 	private int rv_fno;
-	private int rv_score;
+	private String s_score;
+	private Double rv_score;
 	private Date rv_date;
 	private Time rv_time;
 	private String m_id;
 	
 	private MultipartFile[] sfile;
 	
-	
-	public MultipartFile[] getsFile() {
+	public String getS_score() {
+		return s_score;
+	}
+	public void setS_score(String s_score) {
+		this.s_score = s_score;
+	}
+	public MultipartFile[] getSfile() {
 		return sfile;
 	}
-	public void setsFile(MultipartFile[] sfile) {
+	public void setSfile(MultipartFile[] sfile) {
 		this.sfile = sfile;
 	}
 	public String getM_id() {
@@ -62,10 +68,10 @@ public class ReviewVO {
 	public void setRv_fno(int rv_fno) {
 		this.rv_fno = rv_fno;
 	}
-	public int getRv_score() {
+	public Double getRv_score() {
 		return rv_score;
 	}
-	public void setRv_score(int rv_score) {
+	public void setRv_score(Double rv_score) {
 		this.rv_score = rv_score;
 	}
 	public Date getRv_date() {

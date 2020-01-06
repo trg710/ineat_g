@@ -130,6 +130,7 @@ public class FileService {
 		String[] saveName = new String[multi.length];
 		
 		for(int i = 0; i < multi.length; i++) {
+			System.out.println("오리지널 파일 네임  : "+multi[i].getOriginalFilename());
 			saveName[i] = singleUpProc(session, multi[i]);
 		}
 		

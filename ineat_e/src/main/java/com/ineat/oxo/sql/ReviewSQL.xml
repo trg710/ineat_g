@@ -5,7 +5,20 @@
          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
          
  <mapper namespace="rvSQL">
- 
- 
- 
+ 	<insert id="addreview" parameterType="rvVO">
+ 	<selectKey keyProperty="rv_mno" resultType="int" order="BEFORE">
+	SELECT
+		M_NO
+	FROM
+		IE_MEMBER
+	WHERE
+		M_ID = #{m_id}
+ 	</selectKey>
+ 	INSERT INTO
+		ie_review(rv_no, rv_mlno, rv_mno, rv_body, rv_date, rv_score)
+	VALUES(
+    	(SELECT NVL(MAX(rv_no)+1, 100001) from ie_review), #{rv_mlno}, #{rv_mno}, #{rv_body}, sysdate, #{rv_score}
+	)
+ 	</insert>
+ 	
  </mapper>

@@ -162,7 +162,7 @@
                 </div>
 
                 <!-- 센터 -->
-                <table class="info">
+                <table class="info mb-0">
                     <tbody>
                         <tr>
                             <th>주소</th>
@@ -186,6 +186,11 @@
                         </tr>
                     </tbody>
                 </table>
+                <form action="/oxo/ineatlist/review/reviewform.eat" method="post" class="float-right">
+                	<input type="hidden" name="ml_no" id="mlno" value="${TVO.ml_no }">
+                <button class="btn btn-danger" id="addreview">리뷰작성</button>
+                </form>
+                
             </div>
             <div style="background-color: aqua;" class="col-4" id="map">
                 지도영역

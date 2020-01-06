@@ -14,7 +14,4 @@ public class ReviewDAO {
 		sqlSession.insert("rvSQL.addreview", rvVO);
 	}
 	
-	public void f_addreview(ReviewVO rvVO) {
-		sqlSession.insert("rvSQL.f_addreview", rvVO);
-	}
 }

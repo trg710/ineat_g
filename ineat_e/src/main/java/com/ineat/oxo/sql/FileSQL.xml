@@ -6,6 +6,15 @@
          
  <mapper namespace="fSQL">
  
+	 <insert id="rvFileaddProc" parameterType="fVO">
+		INSERT INTO
+		ie_re_fileup(
+		    rf_no, rf_oriname, rf_savename, rf_dir, rf_len, rf_rvno
+		)
+		VALUES(
+		    (select NVL(MAX(rf_no)+1, 100000001) from ie_re_fileup), #{oriName}, #{saveName}, #{dir}, #{len}, (SELECT max(rv_no) from ie_review)
+		)
+	 </insert>
  
  
  </mapper>

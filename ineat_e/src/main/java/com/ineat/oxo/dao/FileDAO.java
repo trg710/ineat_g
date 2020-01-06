@@ -20,19 +20,17 @@ public class FileDAO {
 	
 	public int rvFileaddProc(ReviewVO rvVO, String[] savename) {
 		FileVO fVO = new FileVO();
-		
-		MultipartFile[] sfile = rvVO.getsFile();
+		int cnt=0;
+		MultipartFile[] sfile = rvVO.getSfile();
 		
 		for(int i = 0; i < sfile.length; i++) {
 			fVO.setSaveName(savename[i]);
 			fVO.setOriName(sfile[i].getOriginalFilename());
-			fVO.setDir("/oxo/upload/");
+			fVO.setDir("/upload/");
 			fVO.setLen(sfile[i].getSize());
-			
+			cnt += sqlSession.insert("fSQL.rvFileaddProc", fVO);
 		}
 		
-		rvVO.getsFile();
-		
-		return sqlSession.insert("fSQL.rvFileaddProc", fVO);
+		return cnt;
 	}
 }
