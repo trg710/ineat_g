@@ -20,19 +20,20 @@
 		<typeAlias alias="fVO" type="com.ineat.oxo.vo.FileVO" /> 
 		<typeAlias alias="tVO" type="com.ineat.oxo.vo.TasteInfoVO" /> 
 		<typeAlias alias="mcVO" type="com.ineat.oxo.vo.MatdcupVO" /> 
-		<typeAlias alias="pUtil" type="com.ineat.oxo.util.PageUtil" />
-
+		<typeAlias alias="pUtil" type="com.ineat.oxo.util.PageUtil" /> 
+		<typeAlias alias="schVO" type="com.ineat.oxo.vo.SearchVO" />
 
 	</typeAliases>
 
 	<mappers>
+
 		<mapper resource="com/ineat/oxo/sql/MemberSQL.xml" />   
 		<mapper resource="com/ineat/oxo/sql/StoryBoardSQL.xml" />   
 		<mapper resource="com/ineat/oxo/sql/ReBoardSQL.xml" />   
 		<mapper resource="com/ineat/oxo/sql/ReviewSQL.xml" />   
 		<mapper resource="com/ineat/oxo/sql/FileSQL.xml" />   
 		<mapper resource="com/ineat/oxo/sql/TasteInfoSQL.xml" />   
-		<mapper resource="com/ineat/oxo/sql/MatdcupSQL.xml" /> 
-		<mapper resource="com/ineat/oxo/sql/RecommendSQL.xml" /> 
+		<mapper resource="com/ineat/oxo/sql/MatdcupSQL.xml" />   
+		<mapper resource="com/ineat/oxo/sql/SearchSQL.xml"/> 
 	</mappers>
 </configuration>
