@@ -69,9 +69,30 @@
    		  $(location).attr('href','/oxo/recommend/recommend.eat');
    	  });
  
+   	//3섹션 
+   	$('#hansik').click(function(){
+   		$(location).attr('href','/oxo/ineatlist/mainList.eat?rno=1&ml_tag=한식');
+   	});
+   	$('#joongsik').click(function(){
+   		$(location).attr('href','/oxo/ineatlist/mainList.eat?rno=1&ml_tag=중식');
+   	});
+   	$('#yangsik').click(function(){
+   		$(location).attr('href','/oxo/ineatlist/mainList.eat?rno=1&ml_tag=양식');
+   	});
+   	$('#ilsik').click(function(){
+   		$(location).attr('href','/oxo/ineatlist/mainList.eat?rno=1&ml_tag=일식');
+   	});
+   	$('#hsik').click(function(){
+   		$(location).attr('href','/oxo/ineatlist/mainList.eat?rno=1&ml_tag=회식');
+   	});
+   	$('#cafe').click(function(){
+   		$(location).attr('href','/oxo/ineatlist/mainList.eat?rno=1&ml_tag=카페');
+   	}); 	 	
+   	
+   	
    });
   		
-   	  
+   	
   
 </script>
 <style>
@@ -138,11 +159,11 @@
    border-bottom: 10px solid #ff7702;
 }
 
-#img {
+.img {
    margin: 10px;
 }
 
-#img:hover {
+.img:hover {
    border: solid white 10px;
    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
 }
@@ -200,8 +221,21 @@
          <ul class="navbar-nav float-left"
             style="width: 200px; margin-right: 20px;">
             <li class="nav-item" id="story"><a class="nav-link" href="#">Story</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Matdcup</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">List</a></li>
+            <li class="nav-item" id="cup"><a class="nav-link" href="#">Matdcup</a></li>
+            <li class="nav-item" id="list"><a class="nav-link" href="#">List</a></li>
+             <script type="text/javascript">
+             $(function(){
+            	//스토리 이동
+            	$('#story').click(function(){
+            		$(location).attr('href','/oxo/storyboard/storyBoard.eat');
+            	});
+            	//맛드컵 이동
+            	//리스트 이동
+            	$('#list').click(function(){
+            		$(location).attr('href','/oxo/ineatlist/list.eat');
+            	});
+             });
+             </script>
             <li class="nav-item"><img src="img/member.png" width="30x"
                style="margin-left: 15px;">
                <ul class="navbar-nav">
@@ -240,26 +274,20 @@
             </div>
             <div class="reviewBox col-12">
                <div class="membInfo col-2 center-block" style="float: left;">
-                  <img src="img/member.png" width="70px" height="70px"
-                     style="margin: 10px 0px 0px 14px;">
+                  <img src="img/member.png" width="70px" height="70px"  style="margin: 10px 0px 0px 14px;">
                   <h6></h6>
-                  <h4 class="badge badge-warning"
-                     style="font-size: 13px; margin-left: 5px;">닉네임닉네임</h4>
+                  <h4 class="badge badge-warning" style="font-size: 13px; margin-left: 5px;">닉네임닉네임</h4>
                </div>
                <div class="review col-12 clearfix" style="margin-top: 3px;">
                   <div style="margin-right: 20px;">
-                     <img src="img/k_doen.jpg" width="112px;" height="112px"
-                        style="float: left; border: solid white 1px;"> <img
-                        src="img/k_doen.jpg" width="112px;" height="112px"
-                        style="float: left; border: solid white 1px;"> <img
-                        src="img/k_doen.jpg" width="112px;" height="112px"
-                        style="float: left; border: solid white 1px;">
+                     <img src="img/k_doen.jpg" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
+                     <img src="img/k_doen.jpg" width="112px;" height="112px" style="float: left; border: solid white 1px;">
+                     <img src="img/k_doen.jpg" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
                   </div>
                   <div class="col-4 rvtext">
                      <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
                   </div>
-                  <div class="jumsu" style="float: right;" width="50px"
-                     height="50px;">
+                  <div class="jumsu" style="float: right;" width="50px" height="50px;">
                      <h1 style="font-size: 80px; color: rgb(0, 148, 0);">
                         <b><em>4.2</em></b>
                      </h1>
@@ -278,14 +306,14 @@
       align="center">
       <div id="page3" style="margin-top: 5%;">
          <div align="left">
-            <a href="#"><img src="img/한식1.jpg" onmouseover="this.src='img/한식2.jpg'" onmouseout="this.src='img/한식1.jpg'" width="250px" id="img"></a>
-            <a href="#"><img src="img/중식1.jpg" onmouseover="this.src='img/중식2.jpg'" onmouseout="this.src='img/중식1.jpg'" width="250px" id="img"></a>
-            <a href="#"><img src="img/양식1.jpg" onmouseover="this.src='img/양식2.jpg'" onmouseout="this.src='img/양식1.jpg'" width="250px" id="img"></a>
+            <a href="#"><img src="img/한식1.jpg" onmouseover="this.src='img/한식2.jpg'" onmouseout="this.src='img/한식1.jpg'" width="250px" id="hansik" class="img"></a>
+            <a href="#"><img src="img/중식1.jpg" onmouseover="this.src='img/중식2.jpg'" onmouseout="this.src='img/중식1.jpg'" width="250px" id="joongsik" class="img"></a>
+            <a href="#"><img src="img/양식1.jpg" onmouseover="this.src='img/양식2.jpg'" onmouseout="this.src='img/양식1.jpg'" width="250px" id="yangsik" class="img"></a>
          </div>
          <div style="margin-left: 30%;" align="right">
-            <a href="#"><img src="img/일식1.jpg" onmouseover="this.src='img/일식2.jpg'" onmouseout="this.src='img/일식1.jpg'" width="250px" id="img"></a>
-			<a href="#"><img src="img/회식1.jpg" onmouseover="this.src='img/회식2.jpg'" onmouseout="this.src='img/회식1.jpg'" width="250px" id="img"> </a>
-			<a href="#"><img src="img/카페1.jpg" onmouseover="this.src='img/카페2.jpg'" onmouseout="this.src='img/카페1.jpg'" width="250px" id="img"></a>
+            <a href="#"><img src="img/일식1.jpg" onmouseover="this.src='img/일식2.jpg'" onmouseout="this.src='img/일식1.jpg'" width="250px" id="ilsik" class="img"></a>
+			<a href="#"><img src="img/회식1.jpg" onmouseover="this.src='img/회식2.jpg'" onmouseout="this.src='img/회식1.jpg'" width="250px" id="hsik" class="img"> </a>
+			<a href="#"><img src="img/카페1.jpg" onmouseover="this.src='img/카페2.jpg'" onmouseout="this.src='img/카페1.jpg'" width="250px" id="cafe" class="img"></a>
          </div>
       </div>
    </div>

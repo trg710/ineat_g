@@ -3,6 +3,7 @@ package com.ineat.oxo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,6 +63,22 @@ public class MainList {
 	@RequestMapping("map.eat")
 	public ModelAndView MapTest(ModelAndView mv) {
 		mv.setViewName("ineatlist/detail/modal");
+		return mv;
+	}
+	
+	@RequestMapping("mainList.eat")
+	public ModelAndView mainList(ModelAndView mv, TasteInfoVO tVO) {
+		System.out.println(tVO.getMl_tag());
+		ArrayList<TasteInfoVO> list = new ArrayList<TasteInfoVO>();
+		String type = tVO.getMl_type();
+		String tag = tVO.getMl_tag();
+		if(tag.length() == 0) {
+			list = (ArrayList<TasteInfoVO>)tDAO.moreList(tVO);
+		}else {
+			list = (ArrayList<TasteInfoVO>)tDAO.tagList(tVO);
+		}
+		mv.addObject("LIST",list);
+		mv.setViewName("ineatlist/list");
 		return mv;
 	}
 	
