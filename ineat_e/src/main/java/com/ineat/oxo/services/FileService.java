@@ -146,7 +146,6 @@ public class FileService {
 		
 		FileVO fVO = new FileVO();
 		
-		fVO.setBno(sbVO.getBno());
 		fVO.setMid(sbVO.getMid());
 		fVO.setOriName(sbVO.getsFile().getOriginalFilename());
 		fVO.setSaveName(savename);

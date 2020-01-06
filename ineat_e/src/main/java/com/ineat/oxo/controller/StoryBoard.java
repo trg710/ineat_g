@@ -51,12 +51,17 @@ public class StoryBoard {
 	// sbinfo 출력
 	@RequestMapping("storyBoardInfo.eat")
 	public ModelAndView storyBoardInfo(ModelAndView mv, HttpSession session, StoryBoardVO sbVO, int bno) {
+		
+		// 조회수 함수 처리
+		sbDAO.viewsCnt(bno);
+		
 		sbVO = sbDAO.storyBoardInfo(bno);
 		session.setAttribute("SBNO", bno);
 		
 		String sid = (String) session.getAttribute("SID");
 		session.setAttribute("SID", sid);
 		System.out.println("*storyBoardInfo.eat sid: " + sid);
+
 		
 		mv.addObject("mid", sbVO.getMid());
 		mv.addObject("title", sbVO.getTitle());
@@ -85,7 +90,6 @@ public class StoryBoard {
 	// sbwrite 처리
 	@RequestMapping("storyBoardWriteProc.eat")
 	public ModelAndView storyBoardWriteProc(ModelAndView mv, RedirectView rv, HttpSession session, StoryBoardVO sbVO) {
-		System.out.println("##sbVO.toString()\n " + sbVO.toString());
 		
 		int cnt = sbDAO.storyBoardWriteProc(sbVO);
 		
@@ -210,6 +214,7 @@ public class StoryBoard {
 	@RequestMapping("sbDelete.eat")
 	public ModelAndView sbDelete(ModelAndView mv, RedirectView rv, HttpSession session, StoryBoardVO sbVO) {
 		sbDAO.sblhDelete(sbVO);
+		sbDAO.sbfileDelete(sbVO);
 		sbDAO.sbDelete(sbVO);
 		rv.setUrl("/oxo/storyboard/storyBoard.eat");
 		

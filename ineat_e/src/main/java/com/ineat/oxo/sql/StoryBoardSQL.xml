@@ -9,7 +9,7 @@
 	<!-- storyBaord 출력 -->
 	<select id="storyBoard" resultType="sbVO">
 		SELECT
-    		sb_no bno, m_id mid, sb_title title, sb_date sbDate, sb_views views, nvl(sb_fno, 0) fno,
+    		sb_no bno, m_id mid, sb_title title, sb_date sbDate, sb_views views,
     		
     		(SELECT COUNT(*)
 		    FROM IE_SB_LIKEHATE
@@ -22,8 +22,9 @@
 		    WHERE
 		    sb_no = sblh_bno
 		    and SBLH_ISSHOW = 'N'
-		    ) HHATE
-    		
+		    ) HHATE,
+            (SELECT NVL(sbf_savename, '') 
+            FROM IE_SB_FILEUP WHERE SB_NO = SBF_BNO) saveName
 		FROM
 		    ie_story_board, ie_member
 		WHERE
@@ -42,6 +43,7 @@
 				    ie_story_board,ie_member,ie_sb_fileup 
 				WHERE 
 				    sb_no = #{bno} 
+				    and sbf_bno = sb_no
 				    and sb_mno = m_no 
 				    and sb_mno = sbf_mno) saveName,
 		    sb_title title, sb_date sbDate, sb_content content, sb_views views,
@@ -94,13 +96,12 @@
 				M_ID = #{mid}
 		</selectKey>
 		INSERT INTO
-			ie_sb_fileup(sbf_no, sbf_mno, sbf_oriname, sbf_savename, sbf_len, sbf_dir)
+			ie_sb_fileup(sbf_bno, sbf_mno, sbf_oriname, sbf_savename, sbf_len, sbf_dir)
 		VALUES(
-			(SELECT NVL(MAX(sbf_no) + 1, 1000001) FROM IE_SB_FILEUP),
+			(SELECT MAX(sb_no) from ie_story_board),
 			#{writer}, #{oriName}, #{saveName}, #{len}, #{dir}
 		)
  	</insert>
- 	
  	
  	<!-- 좋아요 처리 -->
  	<select id="sbLike" resultType="int" parameterType="sbVO">
@@ -269,6 +270,11 @@
  	</insert>
  	
  	<!-- 게시물 삭제 처리 -->
+ 	<delete id="sbfileDelete" parameterType="sbVO">
+ 		DELETE FROM IE_SB_FILEUP
+		WHERE SBF_BNO = #{bno}
+ 	</delete>
+ 	
  	<delete id="sblhDelete" parameterType="sbVO">
  		DELETE FROM IE_SB_LIKEHATE
 		WHERE
@@ -313,4 +319,13 @@
 		</if>
 	</update>
 	
+	<!-- 조회수 함수 처리 -->
+	<update id="viewsCnt" parameterType="int">
+		UPDATE 
+		   IE_STORY_BOARD
+		SET 
+		    SB_VIEWS = SB_VIEWS + 1
+		WHERE 
+		    SB_NO = #{bno}
+	</update>
 </mapper>

@@ -20,9 +20,23 @@ $(function(){
 	});
 	// 상세보기
 	$('.toInfo').click(function(){
-		var bno = $(this).attr('id');
+		/* var listbno = '#' + $(this).attr('id');
+		var listmid = '#mid'+ listbno.substring(1);
+		var textbno = listbno.substring(1);
+		var textmid = $(listmid).text(); */
 		
-		$('#bno').val(bno);
+		//보내줄 데이터 확인
+		/*
+		alert(textbno);
+		alert(textmid);
+		*/
+		var listbno = $(this).attr('id');
+		
+		$('#bno').val(listbno);
+		
+		/* $('#bno').val(textbno);
+		$('#mid').val(textmid); */
+		
 		$('#form1').submit();
 		
 	});
@@ -35,9 +49,10 @@ $(function(){
 
 	<form method="post" action="/oxo/storyboard/storyBoardInfo.eat" id="form1">
 		bno:<input type="text" name="bno" id="bno">
+		mid:<input type="text" name="mid" id="mid">
 	</form>
-	sid:<input type="text" value="${SID }">
-
+	
+sid:<input type="text" value="${SID }">
 
 
 	<div class="container-fluid">
@@ -66,8 +81,8 @@ $(function(){
 		    			<img src="/oxo/upload/${data.saveName }" width="50%">
 		    		</c:if>
 		        </div>
-		        <div class="col-md-2 border-bottom pt-4 toInfo" id="${data.bno }">${data.title }[5]</div>
-		        <div class="col-md-1 border-bottom pt-4">${data.mid }</div>
+		        <div class="col-md-2 border-bottom pt-4 toInfo" id="${data.bno}" >${data.title }[5]</div>
+		        <div class="col-md-1 border-bottom pt-4">${data.mid}</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.sbDate }</div>
 		        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">${data.llike }<p><img src="/oxo/img/hate_16px.jpg">${data.hhate }</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.views }</div>

@@ -81,6 +81,7 @@ public class StoryBoardDAO {
 		return sqlSession.update("sbSQL.sbHate2", sbVO);
 	}
 	
+	// 삭제 처리
 	public int sblhDelete(StoryBoardVO sbVO) {
 		return sqlSession.delete("sbSQL.sblhDelete", sbVO);
 	}
@@ -89,6 +90,10 @@ public class StoryBoardDAO {
 		return sqlSession.delete("sbSQL.sbDelete", sbVO);
 	}
 
+	public int sbfileDelete(StoryBoardVO sbVO) {
+		return sqlSession.delete("sbSQL.sbfileDelete", sbVO);
+	}
+	// 게시물 상세보기
 	public StoryBoardVO sbViewDetail(String id) {
 		return sqlSession.selectOne("sbSQL.sbViewDetail", id);
 	}
@@ -96,5 +101,10 @@ public class StoryBoardDAO {
 	public int sbInfoEdit(StoryBoardVO sbVO) {
 		return sqlSession.update("sbSQL.sbInfoEdit", sbVO);
 	}
+
+	public int viewsCnt(int bno) {
+		return sqlSession.update("sbSQL.viewsCnt", bno);
+	}
+
 
 }
