@@ -15,55 +15,12 @@
 <script type="text/javascript" src="/oxo/js/fullpage.min.js"></script>
 <script type="text/javascript" src="/oxo/js/pscript.js"></script>
 <script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/oxo/js/nav.js"></script>
 <style>
 </style>
 <script type="text/javascript">
    $(function() {
-      //로그인처리
-      $('#login').css('display', 'none');
-      $('#loginbtn').click(function() {
-         $('#login').css('display', 'block');
-      });
-      $('#x').click(function() {
-         $('#login').css('display', 'none');
-      });
-      
-      $('#loginsub').click(function(){
-         $.ajax({
-            url : "/oxo/member/loginProc.eat",
-            type : "post",
-            dataType : "json",
-            data : {"id" : $('#id').val(),
-               "pw" : $('#password').val()},
-            success : function(cnt){
-               if(cnt==1){
-                  location.reload();
-               }else{
-                  alert('로그인에 실패하였습니다.');
-               }
-            },
-            error : function(){
-               alert('###에러');
-            }
-         });
-      });
-      
-      
-      
-      //로그아웃
-      $('#logout').click(function(){
-         $(location).attr('href', '/oxo/member/logout.eat');
-      });
-      
-      //회원가입처리
-      $('#joinbtn').click(function() {
-         $(location).attr('href', '/oxo/member/join.eat');
-      });
-   	//회원정보보기로 이동
-   		var id = '${SID}';
-   		$('#memInfo').click(function(){
-   			$(location).attr('href','/oxo/member/memInfo.eat?id='+id);
-   		});
+    
     //추천페이지로 이동 ---태은추가
    	  $('.goRecommend').click(function(){
    		  $(location).attr('href','/oxo/recommend/recommend.eat');
@@ -199,23 +156,15 @@
    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
       <a class="navbar-brand" href="#"><img src="img/logo.png"
          style="margin-left: 30px; width: 100px;"></a>
-         <script type="text/javascript">
-         $(function() {
-            //네비바 로고 클릭 시 메인화면으로 이동
-            $('.navbar-brand').click(function() {
-               $(location).attr('href', '/oxo/main.eat');
-            });
-         });
-         </script>
+ 
       <!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
             aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>-->
 
       <div class="collapse navbar-collapse" id="navbar">
-         <form class="form-inline col-10">
-            <input class=" form-control col-11 mr-sm-2" type="text"
-               placeholder="Search">
+         <form class="form-inline col-10" action="/oxo/searchProc.eat" method="POST">
+            <input class=" form-control col-11 mr-sm-2" type="text" placeholder="Search" name="contents">
             <button class="btn btn-warning" type="submit">Search</button>
          </form>
          <ul class="navbar-nav float-left"
@@ -223,19 +172,6 @@
             <li class="nav-item" id="story"><a class="nav-link" href="#">Story</a></li>
             <li class="nav-item" id="cup"><a class="nav-link" href="#">Matdcup</a></li>
             <li class="nav-item" id="list"><a class="nav-link" href="#">List</a></li>
-             <script type="text/javascript">
-             $(function(){
-            	//스토리 이동
-            	$('#story').click(function(){
-            		$(location).attr('href','/oxo/storyboard/storyBoard.eat');
-            	});
-            	//맛드컵 이동
-            	//리스트 이동
-            	$('#list').click(function(){
-            		$(location).attr('href','/oxo/ineatlist/list.eat');
-            	});
-             });
-             </script>
             <li class="nav-item"><img src="img/member.png" width="30x"
                style="margin-left: 15px;">
                <ul class="navbar-nav">
