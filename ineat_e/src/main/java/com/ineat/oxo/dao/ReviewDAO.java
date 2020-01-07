@@ -20,7 +20,7 @@ public class ReviewDAO {
 	public int getReviewCnt(int ml_no) {
 		return sqlSession.selectOne("rvSQL.reviewcnt", ml_no);
 	}
-	
+	 
 // 리뷰 정보 리스트를 가져오는 함수	
 	public List<ReviewVO> getReviewInfo(ReviewVO rvVO){
 		return sqlSession.selectList("rvSQL.reviewinfo", rvVO);
