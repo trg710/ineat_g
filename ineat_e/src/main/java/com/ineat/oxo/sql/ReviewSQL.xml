@@ -65,4 +65,15 @@
 	    rv_mlno = #{ml_no}
  	</select>
  	
+ 	<!-- 메인에 노출될 리뷰 -->
+ 	<select id="mainReview" resultType="rvVO">
+ 	SELECT
+ 		  rv_no, rv_body, rv_date, rv_score ,
+	    (SELECT M_ID FROM IE_MEMBER WHERE m_no = rv_mno) m_id
+ 	FROM
+ 		ie_review
+ 	ORDER BY  rv_date DESC
+ 	
+ 	
+ 	</select>
  </mapper>
