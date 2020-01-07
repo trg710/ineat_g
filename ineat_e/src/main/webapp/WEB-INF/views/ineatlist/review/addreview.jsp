@@ -134,6 +134,7 @@
             var count = 0;
             $(document).on('click', '.pic_1', function(e) {
     			e.stopImmediatePropagation();
+    			
     			f_this = $(this).find('img');
             	f_no = $(this).index()+1;
             	f_id = "#f"+f_no;

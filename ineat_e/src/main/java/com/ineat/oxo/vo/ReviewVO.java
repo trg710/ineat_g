@@ -17,9 +17,25 @@ public class ReviewVO {
 	private Date rv_date;
 	private Time rv_time;
 	private String m_id;
+	private String[] rf_savename;
 	
 	private MultipartFile[] sfile;
 	
+	private int cnt;
+	
+	
+	public String[] getRf_savename() {
+		return rf_savename;
+	}
+	public void setRf_savename(String[] rf_savename) {
+		this.rf_savename = rf_savename;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	public String getS_score() {
 		return s_score;
 	}

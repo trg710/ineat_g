@@ -21,4 +21,21 @@
 	)
  	</insert>
  	
+ 	<select id="reviewcnt" parameterType="int" resultType="int">
+ 	select
+		COUNT(*) cnt
+	from
+		ie_review
+	where
+		rv_mlno = #{ml_no};
+ 	</select>
+ 	
+ 	<select id="reviewinfo" parameterType="int" resultType="rvVO">
+ 	SELECT
+	    rv_no, rv_mno, rv_body, rv_date, rv_score , (SELECT COUNT(*) FROM ie_re_fileup WHERE rf_rvno = rv_no) cnt
+	FROM
+	    ie_review
+	WHERE
+	    rv_mlno = #{ml_no};
+ 	</select>
  </mapper>

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.ineat.oxo.dao.ReviewDAO;
 import com.ineat.oxo.dao.TasteInfoDAO;
+import com.ineat.oxo.vo.ReviewVO;
 import com.ineat.oxo.vo.TasteInfoVO;
 
 import java.util.*;
@@ -21,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 public class MainList {
 	@Autowired
 	TasteInfoDAO tDAO;
+	@Autowired
+	ReviewDAO rvDAO;
 	
 	@RequestMapping("list.eat")
 	public ModelAndView List(ModelAndView mv) {
@@ -55,8 +59,10 @@ public class MainList {
 	
 	@RequestMapping("info.eat")
 	public ModelAndView detailinfo(ModelAndView mv, int ml_no, RedirectView rv) {
-		System.out.println(ml_no);
 		TasteInfoVO tVO = tDAO.tasteInfo(ml_no);
+		
+//		ReviewVO rvVO = rvDAO.
+		
 		mv.addObject("TVO", tVO);
 		mv.setViewName("ineatlist/detail/detailinfo");
 		return mv;
