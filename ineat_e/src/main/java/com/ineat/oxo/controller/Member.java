@@ -1,10 +1,14 @@
 package com.ineat.oxo.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -17,6 +21,8 @@ import com.ineat.oxo.vo.MemberVO;
 public class Member {
 	@Autowired
 	MemberDAO mDAO;
+	@Autowired
+	MemberVO mVO;
 
 	/*회원 가입 및 로그인*/
 
@@ -144,5 +150,41 @@ public class Member {
 		return memVO;
 	}
 	
+	//비밀번호찾기
+	@RequestMapping("passFind.eat")
+	public ModelAndView passFind(ModelAndView mv) {
+		mv.setViewName("/member/passFind");
+		return mv;
+	}
+	
+	@RequestMapping("passFindProc.eat")
+	public ModelAndView passFindProc (MemberVO mVO, ModelAndView mv, RedirectView rv) {
+		System.out.println("들어오냐?");
+		System.out.println(mVO.getId());
+		
+		String id= mVO.getId();
+		String name= mVO.getName();
+		String email = mVO.getEmail();
+		String pw = mDAO.passFind(mVO).getPw();
+		System.out.println("###"+ id + name + email + pw);
+		
+		if(pw!=null){
+			mVO.setContent("inEAT에서 보내는 메일입니다.\r\n"
+							+id+"님의 비밀번호는 "+pw+" 입니다.\r\n"
+							+"개인정보 보호를 위해 비밀번호 확인 후 변경해주세요.");
+            mVO.setReceiver(email);
+            mVO.setSubject(id+"님 비밀번호 찾기 메일입니다.");
+            mDAO.sendEmail(mVO);
+            rv.setUrl("/oxo/main.eat");
+        }else {
+        	 rv.setUrl("/oxo/member/passFind.eat");
+        }
+//		mv.addObject("DATA",pw);
+//		mv.addObject("EMAIL",email);
+		mv.setView(rv);
+		return mv;
+
+	}
+
 }
 

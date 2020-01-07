@@ -1,7 +1,13 @@
 package com.ineat.oxo.dao;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import com.ineat.oxo.vo.MemberVO;
 
@@ -53,4 +59,32 @@ public class MemberDAO {
 	 public MemberVO idFind(MemberVO mVO) {
 		 return sqlSession.selectOne("mSQL.idFind", mVO);
 	 }
+	 
+	 //비번찾기
+	 
+	 public MemberVO passFind(MemberVO mVO) {
+		 return sqlSession.selectOne("mSQL.passFind",mVO);
+	 }
+	  @Autowired
+      protected JavaMailSender  mailSender;
+	  
+	  public void sendEmail(MemberVO mVO) {
+		  MimeMessage msg = mailSender.createMimeMessage();
+		  try {
+			  msg.setSubject(mVO.getSubject());
+			  msg.setText(mVO.getContent());
+			  msg.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(mVO.getReceiver()));
+		  }catch (MessagingException e) {
+			System.out.println("MessaginException");
+			e.printStackTrace();
+		}
+		  try {
+			mailSender.send(msg);
+		} catch (MailException e) {
+		System.out.println("MailException 발생");
+		}
+	  }
+
+
+
 }

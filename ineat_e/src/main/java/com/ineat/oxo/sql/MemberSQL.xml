@@ -105,4 +105,15 @@
 		AND m_email = #{email}
 </select>
 
+<!-- 비밀번호찾기 -->
+<select id="passFind" resultType="mVO" parameterType="mVO">
+	SELECT
+		m_pw pw
+	FROM
+		ie_member
+	WHERE
+		m_id = #{id}
+		AND m_name = #{name}
+		AND m_email = #{email}
+</select>
  </mapper>
