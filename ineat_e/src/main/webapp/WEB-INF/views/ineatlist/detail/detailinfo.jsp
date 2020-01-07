@@ -80,6 +80,12 @@
             color: white;
             font-size: 24px;
         }
+        .galls{
+        overflow-x: auto;
+	    width: 90%;
+	    white-space: nowrap;
+	    margin: 0 auto;
+        }
     </style>
 
     <script>
@@ -202,9 +208,13 @@
 
         <!-- 갤러리영역 -->
         <div class="row m0 bbg">
-            <div class="col-12 text-center">
-                갤러리 영역
-            </div>
+            <div class="text-center galls">
+				<c:forEach var="data3" items="${IMGS}">
+					<div class="pic_1">
+						<img src="/oxo/upload/${data3}" class="pic">
+					</div>
+				</c:forEach>
+			</div>
         </div>
         <!-- 갤러리영역 종료 -->
 

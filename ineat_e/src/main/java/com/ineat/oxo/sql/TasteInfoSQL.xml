@@ -53,13 +53,13 @@
  		WHERE ml_no = #{ml_no}
  	</select>
  	
- 	<select id="reviewimgs">
+ 	<select id="reviewimgs" parameterType="int" resultType="String">
  	SELECT
 	    rf_savename
 	FROM
 	    ie_review , ie_re_fileup
 	WHERE
-	    rv_mlno = 1000085 AND
+	    rv_mlno = #{ml_no} AND
 	    rv_no = rf_rvno(+) AND
 	    rv_no = rf_rvno
  	</select>
