@@ -101,6 +101,16 @@
                     gal.children('b').addClass('overindex');
                 }
             });
+            
+            $(document).on('mouseenter', '.reviews', function(e) {
+    			e.stopImmediatePropagation();
+    			$(this).css('background', '#8080801a');
+    		});
+
+    		$(document).on('mouseleave', '.reviews', function(e) {
+    			e.stopImmediatePropagation();
+    			$(this).css('background', '0');
+    		});
         });
     </script>
     
@@ -222,7 +232,7 @@
 
         <!-- 리뷰영역 -->
         <c:forEach var="data" items="${RV_LIST}">
-        <div class="row m0 bbg">
+        <div class="row m0 bbg reviews">
             <!-- 아바타 이미지 /아이디 -->
             <div class="col-10 d-flex mb-3">
                 <div class="text-center mt-3">
@@ -249,11 +259,15 @@
                 </div>
                 
             </div>
-
+			
             <!-- 등록점수 -->
             <div class="col-2 text-center mt-3">
                 <h1 class="text-success"><b>${data.rv_score}</b></h1>
                 <div>별모양 이미지</div>
+            </div>
+            <div class="col-12">
+            	<button type="button" class="btn btn-info btn-sm float-right">수정</button>
+            	<button type="button" class="btn btn-danger btn-sm float-right">삭제</button>
             </div>
         </div>
         <!-- 리뷰영역 종료 -->
