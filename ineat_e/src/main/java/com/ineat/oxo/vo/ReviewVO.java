@@ -2,6 +2,7 @@ package com.ineat.oxo.vo;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,17 +18,18 @@ public class ReviewVO {
 	private Date rv_date;
 	private Time rv_time;
 	private String m_id;
-	private String[] rf_savename;
+	private List<String> rf_savename;
 	
 	private MultipartFile[] sfile;
 	
 	private int cnt;
 	
 	
-	public String[] getRf_savename() {
+	
+	public List<String> getRf_savename() {
 		return rf_savename;
 	}
-	public void setRf_savename(String[] rf_savename) {
+	public void setRf_savename(List<String> rf_savename) {
 		this.rf_savename = rf_savename;
 	}
 	public int getCnt() {

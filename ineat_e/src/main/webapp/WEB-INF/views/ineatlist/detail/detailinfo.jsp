@@ -146,8 +146,8 @@
 
                 <!-- 해더 -->
                 <div class="header d-flex position-relative">
-                    <h2>${TVO.ml_title}</h2>
-                    <span><h2>4.7</h2></span>
+                    <h2><b>${TVO.ml_title}</b></h2>
+                    <span class="ml-3 text-success"><h2><b>${AVG}</b></h2></span>
                     <div class="position-absolute" style="right: 0;">이미지</div>
                 </div>
 
@@ -155,7 +155,7 @@
                 <div class="listtop d-flex">
                     <div>ㅇ조회수 : <span>${TVO.ml_count }</span> </div>
                     <div class="ml-3">ㅇ추천수 : <span>000</span> </div>
-                    <div class="ml-3">ㅇ리뷰수 : <span>000</span> </div>
+                    <div class="ml-3">ㅇ리뷰수 : <span>${CNT} </span> </div>
                     <div class="listcommon">
                         <div>2019-12-27</div>
                     </div>
@@ -211,6 +211,7 @@
 
 
         <!-- 리뷰영역 -->
+        <c:forEach var="data" items="${RV_LIST}">
         <div class="row m0 bbg">
             <!-- 아바타 이미지 /아이디 -->
             <div class="col-10 d-flex mb-3">
@@ -219,173 +220,34 @@
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQujpgIXc66CXx_lyy0TjzC2S26aKxpel6Yl_-qBrg3e06yfhKDyQ&s"
                             alt="avt" class="pic">
                     </div>
-                    <span>닉네임</span>
+                    <span>${data.m_id }</span>
                 </div>
-
+				
                 <!-- 리뷰내용 -->
                 <div class="ml-4">
-                    <p> 2019-12-27</p>
-                    <p>
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역
-                    </p>
-
+                    <p> ${data.rv_date }</p>
+                    <p>${data.rv_body }</p>
                     <div class="gallery">
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
+                    
+                    	<c:forEach var="data2" items="${data.rf_savename }">
+	                        <div class="pic_1">
+	                            <img src="/oxo/upload/${data2}" class="pic">
+	                        </div>
+                        </c:forEach>
+                        
                     </div>
                 </div>
+                
             </div>
 
             <!-- 등록점수 -->
             <div class="col-2 text-center mt-3">
-                <h1><b>4.7</b></h1>
+                <h1 class="text-success"><b>${data.rv_score}</b></h1>
                 <div>별모양 이미지</div>
             </div>
         </div>
         <!-- 리뷰영역 종료 -->
-		<!-- 리뷰영역 -->
-        <div class="row m0 bbg">
-            <!-- 아바타 이미지 /아이디 -->
-            <div class="col-10 d-flex mb-3">
-                <div class="text-center mt-3">
-                    <div class="imgbox">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQujpgIXc66CXx_lyy0TjzC2S26aKxpel6Yl_-qBrg3e06yfhKDyQ&s"
-                            alt="avt" class="pic">
-                    </div>
-                    <span>닉네임</span>
-                </div>
-
-                <!-- 리뷰내용 -->
-                <div class="ml-4">
-                    <p> 2019-12-27</p>
-                    <p>
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용 영역
-                    </p>
-
-                    <div class="gallery">
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 등록점수 -->
-            <div class="col-2 text-center mt-3">
-                <h1><b>4.7</b></h1>
-                <div>별모양 이미지</div>
-            </div>
-            
-        </div>
-        <!-- 리뷰영역 종료 -->
-        
-        <!-- 리뷰영역 -->
-        <div class="row m0 bbg">
-            <!-- 아바타 이미지 /아이디 -->
-            <div class="col-10 d-flex mb-3">
-                <div class="text-center mt-3">
-                    <div class="imgbox">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQujpgIXc66CXx_lyy0TjzC2S26aKxpel6Yl_-qBrg3e06yfhKDyQ&s"
-                            alt="avt" class="pic">
-                    </div>
-                    <span>닉네임</span>
-                </div>
-
-                <!-- 리뷰내용 -->
-                <div class="ml-4">
-                    <p> 2019-12-27</p>
-                    <p>
-                        리뷰 상세내용 영역 리뷰 상세내용 영역 리뷰 상세내용
-                    </p>
-
-                    <div class="gallery">
-                        <div class="pic_1">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQKuUOfGf8PwlNkBzfiOQdiM4r40X85-C4nB-OZTAAMKcYHFvRJA&s"
-                                class="pic">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 등록점수 -->
-            <div class="col-2 text-center mt-3">
-                <h1><b>4.7</b></h1>
-                <div>별모양 이미지</div>
-            </div>
-        </div>
-        <!-- 리뷰영역 종료 -->
+        </c:forEach>
     </div>
     
     

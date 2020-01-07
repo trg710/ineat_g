@@ -33,7 +33,6 @@ public class MainList {
 		int total = list.size();
 		
 		mv.addObject("LIST",list);
-		
 		mv.addObject("TOTAL", total);
 		mv.addObject("type","조회");
 		mv.setViewName("ineatlist/list");
@@ -61,8 +60,17 @@ public class MainList {
 	public ModelAndView detailinfo(ModelAndView mv, int ml_no, RedirectView rv) {
 		TasteInfoVO tVO = tDAO.tasteInfo(ml_no);
 		
-//		ReviewVO rvVO = rvDAO.
+		List<ReviewVO> list = rvDAO.getReviewInfo(ml_no);
+		int cnt = rvDAO.getReviewCnt(ml_no);
+		double avg = 0;
+		avg = rvDAO.getReviewAvg(ml_no);
+		List<String> rvimgs = tDAO.reviewImgs(ml_no);
+		System.out.println(list.size());
 		
+		mv.addObject("IMGS",rvimgs);
+		mv.addObject("AVG", avg);
+		mv.addObject("CNT",cnt);
+		mv.addObject("RV_LIST",list);
 		mv.addObject("TVO", tVO);
 		mv.setViewName("ineatlist/detail/detailinfo");
 		return mv;

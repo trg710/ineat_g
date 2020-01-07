@@ -33,4 +33,8 @@ public class TasteInfoDAO {
 		
 		return tVO;
 	}
+	
+	public List<String> reviewImgs(int ml_no){
+		return sqlSession.selectList("tSQL.reviewimgs", ml_no);
+	}
 }

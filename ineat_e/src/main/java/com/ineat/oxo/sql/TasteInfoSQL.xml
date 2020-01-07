@@ -53,4 +53,14 @@
  		WHERE ml_no = #{ml_no}
  	</select>
  	
+ 	<select id="reviewimgs">
+ 	SELECT
+	    rf_savename
+	FROM
+	    ie_review , ie_re_fileup
+	WHERE
+	    rv_mlno = 1000085 AND
+	    rv_no = rf_rvno(+) AND
+	    rv_no = rf_rvno
+ 	</select>
  </mapper>
