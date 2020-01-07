@@ -79,6 +79,7 @@
             var c_star;
             var c_index;
             var c_score;
+            
             $('.pointStarlist').click(function () {
                 c_star = $(this);
                 c_index = c_star.index();
@@ -103,6 +104,7 @@
                 star.prevAll('.even').css('background-position', '-13px -1031px');
                 star.nextAll().css('background-position', '0 -9999px');
             });
+            
             $('.pointStarRating').mouseleave(function () {
                 if (bool == true) {
                 	$('#sc').text(0);
