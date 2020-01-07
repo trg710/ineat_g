@@ -26,6 +26,7 @@ public class Recommend {
 	@Autowired
 	RecommendDAO rDAO;
 
+	//뷰보기
 	@RequestMapping("recommend.eat")
 	public ModelAndView recommendForm(ModelAndView mv) {
 		List list = rDAO.storeList();
@@ -40,6 +41,7 @@ public class Recommend {
 		return mv;
 	}
 	
+	//api기온받아와서 데이터베이스로 전달
 	@RequestMapping("weather.eat")
 	@ResponseBody
 	public TasteInfoVO result(@RequestParam String dayCondition) {

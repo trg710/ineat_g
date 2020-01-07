@@ -11,14 +11,19 @@ public class RecommendDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
+	//맛집 가게명
 	public List storeList() {
 			
 		return sqlSession.selectList("rSQL.showList");
 	}
 	
+	
+	//메뉴가져오기
 	public List menuList() {
 		return sqlSession.selectList("rSQL.menuList");
 	}
+	
+	//날씨로 추천하는 메뉴
 	public TasteInfoVO weatherChoo(String dayCondition) {
 		//System.out.println(dayCondition);
 		return sqlSession.selectOne("rSQL.weatherChoo", dayCondition);
