@@ -268,31 +268,32 @@
                   <em>R e v i e w</em>
                </h1>
             </div>
+            
+            <c:forEach var="data" items="${REVIEW}">
             <div class="reviewBox col-12">
                <div class="membInfo col-2 center-block" style="float: left;">
                   <img src="img/member.png" width="70px" height="70px"  style="margin: 10px 0px 0px 14px;">
                   <h6></h6>
-                  <h4 class="badge badge-warning" style="font-size: 13px; margin-left: 5px;">닉네임닉네임</h4>
+                  <h4 class="badge badge-warning" style="font-size: 13px; margin-left: 5px;">${data.m_id }</h4>
                </div>
                <div class="review col-12 clearfix" style="margin-top: 3px;">
                   <div style="margin-right: 20px;">
-                     <img src="img/k_doen.jpg" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
-                     <img src="img/k_doen.jpg" width="112px;" height="112px" style="float: left; border: solid white 1px;">
-                     <img src="img/k_doen.jpg" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
+                     <img src="mainlist/텐마루1.jpg" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
+                     <img src="mainlist/텐마루1.jpg" width="112px;" height="112px" style="float: left; border: solid white 1px;">
+                     <img src="mainlist/텐마루1.jpg" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
                   </div>
                   <div class="col-4 rvtext">
-                     <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                     <p>${data.rv_body }</p>
                   </div>
                   <div class="jumsu" style="float: right;" width="50px" height="50px;">
                      <h1 style="font-size: 80px; color: rgb(0, 148, 0);">
-                        <b><em>4.2</em></b>
+                        <b><em>${data.rv_score }</em></b>
                      </h1>
                   </div>
                </div>
             </div>
-            <div class="reviewBox"></div>
-            <div class="reviewBox"></div>
-            <div class="reviewBox"></div>
+            </c:forEach>
+            
          </div>
       </div>
       

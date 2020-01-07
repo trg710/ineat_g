@@ -48,4 +48,9 @@ public class ReviewDAO {
 //		리스트를 반환
 		return list;
 	}
+	
+	//메인에 노출될 리뷰
+	public List<ReviewVO> mainReview(){
+		return sqlSession.selectList("rvSQL.mainReview");
+	}
 }
