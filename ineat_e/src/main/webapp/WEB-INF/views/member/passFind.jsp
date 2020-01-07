@@ -74,10 +74,10 @@ $(function(){
                     <input type="text" class="form-control inputheight " id="email" name="email" placeholder="E-mail">
 <!--                     <input type="hidden" class="form-control inputheight " id="pw" name="pw" value=${EMAIL.email }>
                     <input type="hidden" class="form-control inputheight " id="pw" name="pw" value=${DATA.pw }>
-                     -->
                     <br>
                     
                     <b><p class="text-center text-warning" id="passok"><b>　</b></p></b>
+                     -->
                 </div>
                 
                 <div>
