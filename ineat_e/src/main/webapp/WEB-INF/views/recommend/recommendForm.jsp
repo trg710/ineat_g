@@ -8,9 +8,10 @@
 <title>Bootstrap Example</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/oxo/css/fullpage.min.css">
 <link rel="stylesheet" href="/oxo/css/w3.css">
 <link rel="stylesheet" href="/oxo/css/bootstrap.css">
-<link rel="stylesheet" href="/oxo/css/fullpage.min.css">
+<link rel="stylesheet" href="/oxo/css/nav.css">
 <style>
 .bg {
 	background-color: rgba(255, 255, 255, 1);
@@ -23,20 +24,16 @@
 		rgba(255, 165, 0, 0.4)
 }
 
-.content {
+/* .content {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-}
+} */
 
 body {
 	background: url('/oxo/img/main.jpg') no-repeat;
 	background-size: cover;
-}
-
-.conImg {
-	margin: 50px;
 }
 
 .conImg img {
@@ -51,9 +48,11 @@ body {
 .white {
 	background: rgba(255, 255, 255, 0.7);
 }
-
-.yellow {
-	background: rgba(255, 255, 0, 0.4);
+.imgClass{
+	height:350px;
+}
+.apiFont{
+	font-size:30px;
 }
 </style>
 <script type="text/javascript" src="/oxo/js/nav.js"></script>
@@ -62,7 +61,7 @@ body {
 <body>
 
 <!--네비게이션바-->
-   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
+   <nav class="navbar navbar-expand-lg navbar-light bg">
       <a class="navbar-brand" href="#"><img src="/oxo/img/logo.png"
          style="margin-left: 30px; width: 100px;"></a>
  
@@ -97,50 +96,60 @@ body {
       </div>
    </nav>
    <!--네비게이션바-->
-	<div class="container-xl">
-		<div class="row content" style="padding: 50px;">
-			<div class="col-4 white">
+	<div class="container-fhd">
+		<div class="row" style="padding: 50px;">
+			<div class="col-sm-4 white">
 				<h1>날씨</h1>
-				<div class="card">
+				<div class="card border-danger">
 					<img id="thumNail"
-						class="img-thumbnail card-img-top">
+						class="imgClass img-thumbnail card-img-top img-responsive">
 					<div class="card-body">
 						<p class="card-text">
-							현재 기온은 <h3><span id="ctemp"></span>도</h3>로 <h3><span id="dayCondition"></span></h3>
-							입니다.<span class="recommendTitle"></span>가게의  <h3><span class="recommendMenu"></span></h3>는 어떠실까요??
+							현재 기온은 <span class="apiFont" id="ctemp"></span>도로 <span class="apiFont" id="dayCondition"></span>
+							입니다.<br>
+							<span class="recommendTitle apiFont"></span>가게의  
+							<span class="recommendMenu apiFont"></span>는 어떠실까요??
 						</p>
 					</div>
 					<div class="card-title">
-						<button type="button" class="btn btn-warning recommendTitle"><p>검색하기</p></button>
+						<button type="button" class="btn btn-warning float-right" id="recommendID"><span class="recommendTitle"></span>&nbsp검색하기</button>
 					</div>
 
 				</div>
 			</div>
-			<div class="col-4 white">
+			<div class="col-sm-4 white">
+			
+			<!-- 검색으로 보내기 -->
 			<form class="form-inline col-9" action="/oxo/searchProc.eat" method="POST" id="frm">
                 <input type="hidden" id="contents" name="contents">
            </form>
+    
 				<h1>많이 검색한 메뉴</h1>
 				<ul class="list-group">
 					<c:forEach var="listMenu" items="${LISTMENU}">
-						<li class="list-group-item listMenu" id="list_ml_menu">${listMenu.ml_menu}</li>
+						<li class="list-group-item listMenu" id="list_ml_menu"><h3>${listMenu.ml_menu}</h3></li>
 					</c:forEach>
 				</ul>
 			</div>
-			<div class="col-4 white">
+			
+			<!-- 스토리로 보내기 -->
+			<div class="col-sm-4 white">
 				<h1>많이 검색한 맛집</h1>
 				<ul class="list-group">
 					<c:forEach var="list" items="${LIST}">
-						<li class="list-group-item listTitle">${list.ml_title}</li>
+						<li class="list-group-item listTitle" id="${list.ml_no}"><h3>${list.ml_title}</h3></li>
 					</c:forEach>
 				</ul>
 			</div>
 		</div>
 	</div>
 
-	<script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="/oxo/js/nav.js"></script>
-	<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/oxo/js/popper.min.js"></script>
+<script type="text/javascript" src="/oxo/js/fullpage.min.js"></script>
+<script type="text/javascript" src="/oxo/js/pscript.js"></script>
+<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/oxo/js/nav.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$.getJSON(
@@ -171,25 +180,41 @@ body {
 									$('.recommendTitle').append(adata.ml_title);
 									$('.recommendMenu').append(adata.ml_menu);
 									$('#thumNail').attr("src",thum);
+									$('#recommendID > span').attr("id",adata.ml_no);
+			
 								},
 								error : function() {
 									alert('통신에러');
 								}
 							});
 						});
+		//추천메뉴 검색하기
 		$('.listMenu').click(function(){
 			var searchTitle = $(this).text();
-			alert(searchTitle);						
+			//alert(searchTitle);						
 			$('#contents').val(searchTitle);
 			$('#frm').submit();
 		});
 		
+		//추천맛집 검색하기
 		$('.listTitle').click(function(){
-			var searchTitle = $(this).text();
-			alert(searchTitle);
-			$('#contents').val(searchTitle);
-			$('#frm').submit();
+			var no = $(this).attr('id');
+			$(location).attr('href','/oxo/ineatlist/info.eat?ml_no=' + no);
 		});
+		
+		//날씨추천메뉴 검색하기
+		$('#recommendID').click(function(){
+			var no = $('#recommendID > span').attr('id');
+			$(location).attr('href','/oxo/ineatlist/info.eat?ml_no=' + no);
+		});
+		
+		//마우스 아이콘, text스타일  변경
+		$('.list-group-item > h3').hover(function(){
+			$(this).css({"cursor":"pointer","text-decoration":"underline"});
+		},function(){
+			$(this).css('text-decoration','none');
+		});
+		
 	});
 	</script>
 </body>
