@@ -32,9 +32,11 @@
 }
 </style>
 <script type="text/javascript">
-/*
 $(function(){
-	
+	$('#home').click(function(){
+		$(location).attr('href','/oxo/main.eat');		
+	});
+/*
 	$('#sm').click(function(){
 		var email = $('#email').val();
 		var pw = $('#pw').val();
@@ -51,8 +53,8 @@ $(function(){
 		}
 	});
 	
-});
 */
+});
 </script>
 </head>
 <body>
