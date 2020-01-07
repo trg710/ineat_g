@@ -15,13 +15,19 @@ $(function(){
 	});
 	
 	$('.like').click(function(){
-		
-		$('#likeForm').submit();
+		if('${SID}' == ""){
+			alert('로그인 후 이용해 주세요.');
+		}else{
+			$('#likeForm').submit();	
+		};
 	});
 	
 	$('.hate').click(function(){
-		
-		$('#hateForm').submit();
+		if('${SID}' == ""){
+			alert('로그인 후 이용해 주세요.');
+		}else{
+			$('#hateForm').submit();
+		};
 	});
 	
 	$('#delete').click(function(){
@@ -106,7 +112,10 @@ $(function(){
 	function content(){
 		var content = $('#ccontent').val();
 			
-		if(!content){
+		if('${SID}' == ""){
+			alert('로그인 후 이용해주세요.');
+			return;
+		}else if(!content){
 			alert('내용을 입력해주세요.');
 			return;
 		};

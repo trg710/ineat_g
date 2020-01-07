@@ -42,7 +42,7 @@
 		    WHERE
 			    sb_mno = m_no
 			ORDER BY
-			    sb_date DESC
+			    sb_no DESC
 		    )
 		WHERE
 		    rno BETWEEN #{startCont} AND #{endCont}

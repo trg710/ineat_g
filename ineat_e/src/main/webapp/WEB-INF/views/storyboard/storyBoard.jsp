@@ -7,12 +7,19 @@
 <title>story board</title>
 <script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/oxo/css/nav.css">
+<link rel="stylesheet" href="/oxo/css/w3.css">
 <link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 <script type="text/javascript">
 $(function(){
 	// 작성페이지로
 	$('#toWrite').click(function(){
-		location.href = "/oxo/storyboard/storyBoardWrite.eat";
+		if('${SID}' == ""){
+			alert("로그인 후 이용해 주세요.");
+		}else{
+			location.href = "/oxo/storyboard/storyBoardWrite.eat";
+		};
 	});
 	// 홈페이지로
 	$('#toHome').click(function(){
@@ -35,7 +42,7 @@ $(function(){
 	if('${PAGE.startPage}' == 1){
 		$('#preBtn').toggleClass('pBtn');	
 	}
-	if('${PAGE.endPage == PAGE.totalPage}'){
+	if('${PAGE.endPage}' == '${PAGE.totalPage}'){
 		$('#nextBtn').toggleClass('pBtn');
 	}
 	
@@ -58,11 +65,72 @@ $(function(){
 	});
 	
 	
+	
+	// 네비바
+	 $(function() {
+	      //로그인처리
+	      $('#login').css('display', 'none');
+	      $('#loginbtn').click(function() {
+	         $('#login').css('display', 'block');
+	      });
+	      $('#x').click(function() {
+	         $('#login').css('display', 'none');
+	      });
+	      
+	      $('#loginsub').click(function(){
+	         $.ajax({
+	            url : "/oxo/member/loginProc.eat",
+	            type : "post",
+	            dataType : "json",
+	            data : {"id" : $('#id').val(),
+	               "pw" : $('#password').val()},
+	            success : function(cnt){
+	               if(cnt==1){
+	                  location.reload();
+	               }else{
+	                  alert('로그인에 실패하였습니다.');
+	               }
+	            },
+	            error : function(){
+	               alert('###에러');
+	            }
+	         });
+	      });
+	      
+	      
+	      //로그아웃
+	      $('#logout').click(function(){
+	         $(location).attr('href', '/oxo/member/logout.eat');
+	      });
+	      
+	      //회원가입처리
+	      $('#joinbtn').click(function() {
+	         $(location).attr('href', '/oxo/member/join.eat');
+	      });
+	   	//회원정보보기로 이동
+	   		var id = '${SID}'
+	   		$('#memInfo').click(function(){
+	   			$(location).attr('href','/oxo/member/memInfo.eat?id='+id);
+	   		});
+	 });
+	
 });
 
 </script>
 </head>
 <body>
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<form method="post" action="/oxo/storyboard/storyBoardInfo.eat" id="form1">
 		bno:<input type="text" name="bno" id="bno">
@@ -75,6 +143,91 @@ sid:<input type="text" value="${SID }">
 	</form>
 
 	<div class="container-fluid">
+	
+	<!--네비게이션바-->
+   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
+      <a class="navbar-brand" href="#"><img src="/oxo/img/logo.png"
+         style="margin-left: 30px; width: 100px;"></a>
+		<script type="text/javascript">
+		 $(function() {
+		      //네비바 로고 클릭 시 메인화면으로 이동
+		      $('.navbar-brand').click(function() {
+		         $(location).attr('href', '/oxo/main.eat');
+		      });
+		   });
+		  
+		</script>
+
+      <div class="collapse navbar-collapse" id="navbar">
+         <form class="form-inline col-10" action="/oxo/searchProc.eat" method="POST">
+            <input class=" form-control col-11 mr-sm-2" type="text" placeholder="Search" name="contents">
+            <button class="btn btn-warning" type="submit">Search</button>
+         </form>
+         <ul class="navbar-nav float-left"
+            style="width: 200px; margin-right: 20px;">
+            <li class="nav-item" id="story"><a class="nav-link" href="#">Story</a></li>
+            <li class="nav-item" id="cup"><a class="nav-link" href="#">Matdcup</a></li>
+            <li class="nav-item" id="list"><a class="nav-link" href="#">List</a></li>
+			<script type="text/javascript">
+			  $(function(){
+			  	//스토리 이동
+			  	$('#story').click(function(){
+			  		$(location).attr('href','/oxo/storyboard/storyBoard.eat');
+			  	});
+			  	//맛드컵 이동
+			  	//리스트 이동
+			  	$('#list').click(function(){
+			  		$(location).attr('href','/oxo/ineatlist/list.eat');
+			  	});
+			   });
+			</script>
+              <li class="nav-item"><img src="/oxo/img/member.png" width="30x"
+               style="margin-left: 15px;">
+               <ul class="navbar-nav">
+                  <c:if test="${empty SID}">
+                  <li class="nav-item" id="loginbtn"><a class="nav-link" href="#">로그인</a></li>
+                  <li class="nav-item" id="joinbtn"><a class="nav-link" href="#">회원가입</a></li>
+                  </c:if>
+                  <c:if test="${not empty SID}">
+                     <li class="nav-item"><a class="nav-link" href="#" id="logout">로그아웃</a></li>
+                     <li class="nav-item"><a class="nav-link" href="#" id="memInfo">회원정보보기</a></li>
+                  </c:if>
+               </ul></li>
+         </ul>
+      </div>
+   </nav>
+   <!--네비게이션바-->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		<div class="row mt-3 text-center">
 			<div class="col-md-2"></div>
 	        <div class="col-md-8"><h3>inEat Story</h3></div>
