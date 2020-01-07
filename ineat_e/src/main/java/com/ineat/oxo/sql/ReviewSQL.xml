@@ -72,8 +72,6 @@
 	    (SELECT M_ID FROM IE_MEMBER WHERE m_no = rv_mno) m_id
  	FROM
  		ie_review
- 	ORDER BY  rv_date DESC
- 	
- 	
+ 	ORDER BY  rv_date DESC 	
  	</select>
  </mapper>

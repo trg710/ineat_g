@@ -11,38 +11,27 @@
 		FROM
 		IE_MAINLIST
 		WHERE
-		ml_no BETWEEN 1000001 AND 1000006
+		ml_no BETWEEN 1000001 AND 1000010
 	</select>
 	
 	<!-- 메뉴리스트 가져오기 -->
 	<select id="menuList" resultType="tVO">
 	<![CDATA[
 		SELECT
- 			ROWNUM rno, ml_menu
+    		*
 		FROM
-			(SELECT
-    			ml_menu
-			FROM
-    			ie_mainlist
-			WHERE
-    			ml_tag LIKE '%중식%'
-			OR
-    			ml_menu LIKE '%중식%'
-			OR
-       			ml_tag LIKE '%한식%'
-			OR
-    			ml_menu LIKE '%한식%'
-			ORDER BY DBMS_RANDOM.VALUE
+			(
+				SELECT DISTINCT ROWNUM rno, ml_menu, ml_title, ml_tel FROM ie_mainlist
 			)
-		WHERE
-    		ROWNUM  < 7
+		WHERE rno <11
+		ORDER BY rno
    ]]>
 	</select>
 	
 	  <!--날씨관련메뉴 가져오기-->
 	<select id="weatherChoo" resultType="tVO" parameterType="string">
 		SELECT
-    		ROWNUM rno , ml_menu, ml_title, ml_tag, mf_filename
+    		ROWNUM rno , ml_menu, ml_title, ml_tag, mf_filename, ml_no
 		FROM
 		(
 		SELECT

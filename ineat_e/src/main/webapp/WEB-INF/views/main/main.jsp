@@ -269,12 +269,13 @@
                </h1>
             </div>
             
-            <c:forEach var="data" items="${REVIEW}">
+            
+            <c:forEach var="data" items="${REVIEW}"  begin="0" end="3"> 
             <div class="reviewBox col-12">
-               <div class="membInfo col-2 center-block" style="float: left;">
-                  <img src="img/member.png" width="70px" height="70px"  style="margin: 10px 0px 0px 14px;">
+               <div class="membInfo col-2 center-block mt-2" style="float: left; display: grid;">
+                  <img src="img/member.png" width="70px" height="70px"  style="margin: 0 auto;">
                   <h6></h6>
-                  <h4 class="badge badge-warning" style="font-size: 13px; margin-left: 5px;">${data.m_id }</h4>
+                  <h4 class="badge badge-warning" style="font-size: 13px;">${data.m_id }</h4>
                </div>
                <div class="review col-12 clearfix" style="margin-top: 3px;">
                   <div style="margin-right: 20px;">
@@ -293,6 +294,7 @@
                </div>
             </div>
             </c:forEach>
+            
             
          </div>
       </div>
