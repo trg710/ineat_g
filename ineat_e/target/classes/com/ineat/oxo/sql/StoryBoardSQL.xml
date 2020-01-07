@@ -5,33 +5,47 @@
          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
          
 <mapper namespace="sbSQL">
+	<!-- pagetotalcount 구하기 -->
+	<select id="getTotalCnt" resultType="int">
+		SELECT
+		    COUNT(*)
+		FROM
+			IE_STORY_BOARD
+	</select>
+
 
 	<!-- storyBaord 출력 -->
-	<select id="storyBoard" resultType="sbVO">
+	<select id="storyBoard" resultType="sbVO" parameterType="pUtil">
 		SELECT
-    		sb_no bno, m_id mid, sb_title title, sb_date sbDate, sb_views views,
-    		
-    		(SELECT COUNT(*)
-		    FROM IE_SB_LIKEHATE
-		    WHERE
-		    sb_no = sblh_bno
-		    and SBLH_ISSHOW = 'Y'
-		    ) LLIKE,
-		    (SELECT COUNT(*) 
-		    FROM IE_SB_LIKEHATE
-		    WHERE
-		    sb_no = sblh_bno
-		    and SBLH_ISSHOW = 'N'
-		    ) HHATE,
-            (SELECT NVL(sbf_savename, '') 
-            FROM IE_SB_FILEUP WHERE SB_NO = SBF_BNO) saveName,
-            (SELECT COUNT(*) FROM IE_SB_COMMENTS WHERE SB_NO = SBCMT_BNO) cmtCnt
+		     *
 		FROM
-		    ie_story_board, ie_member
+		    (
+		    SELECT
+		        ROWNUM rno, sb_no bno, m_id mid, sb_title title, sb_date sbDate, sb_views views,
+		    	(SELECT COUNT(*)
+			    FROM IE_SB_LIKEHATE
+			    WHERE
+			    sb_no = sblh_bno
+			    and SBLH_ISSHOW = 'Y'
+			    ) LLIKE,
+			    (SELECT COUNT(*) 
+			    FROM IE_SB_LIKEHATE
+			    WHERE
+			    sb_no = sblh_bno
+			    and SBLH_ISSHOW = 'N'
+			    ) HHATE,
+		        (SELECT NVL(sbf_savename, '') 
+		        FROM IE_SB_FILEUP WHERE SB_NO = SBF_BNO) saveName,
+		        (SELECT COUNT(*) FROM IE_SB_COMMENTS WHERE SB_NO = SBCMT_BNO) cmtCnt
+		    FROM
+		        IE_STORY_BOARD, IE_MEMBER
+		    WHERE
+			    sb_mno = m_no
+			ORDER BY
+			    sb_date DESC
+		    )
 		WHERE
-		    sb_mno = m_no
-		ORDER BY
-		    sb_date desc	
+		    rno BETWEEN #{startCont} AND #{endCont}
 	</select>
 	
 	<!--  storyBoardInfo 출력 -->

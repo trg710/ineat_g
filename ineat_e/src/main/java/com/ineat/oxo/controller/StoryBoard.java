@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.ineat.oxo.dao.FileDAO;
 import com.ineat.oxo.dao.StoryBoardDAO;
 import com.ineat.oxo.services.FileService;
+import com.ineat.oxo.util.PageUtil;
 import com.ineat.oxo.vo.StoryBoardVO;
 
 /**
@@ -38,10 +39,23 @@ public class StoryBoard {
 	
 	// sb 출력
 	@RequestMapping("storyBoard.eat")
-	public ModelAndView storyBoard(ModelAndView mv, HttpSession session) {
-		List<StoryBoardVO> list = sbDAO.storyBoard();
-		mv.addObject("LIST", list);
+	public ModelAndView storyBoard(ModelAndView mv, HttpSession session, PageUtil pUtil) {
+		int nowPage = 1;
 		
+		// 게시물 전체 개수
+		int totalCount = sbDAO.getTotalCnt();
+		
+		if(pUtil.getNowPage() == 0) {
+			nowPage = 1;
+		} else {
+			nowPage = pUtil.getNowPage();
+		}
+		
+		pUtil.setVar(nowPage, totalCount, 5, 10);
+		
+		List<StoryBoardVO> list = sbDAO.storyBoard(pUtil);
+		mv.addObject("LIST", list);
+		mv.addObject("PAGE", pUtil);
 		String sid = (String) session.getAttribute("SID");
 		session.setAttribute("SID", sid);
 		System.out.println("*storyBoard.eat sid: " + sid);

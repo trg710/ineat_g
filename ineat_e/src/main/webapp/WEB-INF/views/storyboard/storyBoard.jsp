@@ -23,15 +23,40 @@ $(function(){
 		
 		var listbno = $(this).attr('id');
 		
-		alert(listbno);
 		$('#bno').val(listbno);
 		
 		/* $('#bno').val(textbno);
 		$('#mid').val(textmid); */
 		
 		$('#form1').submit();
-		
 	});
+	
+	// 페이지 버튼 처리
+	if('${PAGE.startPage}' == 1){
+		$('#preBtn').toggleClass('pBtn');	
+	}
+	if('${PAGE.endPage == PAGE.totalPage}'){
+		$('#nextBtn').toggleClass('pBtn');
+	}
+	
+	$('.pBtn').click(function(){
+		var sPage = $(this).html();
+		var ptxt = $('#preBtn').html();
+		var ntxt = $('#nextBtn').html();
+		if(sPage == '${PAGE.nowPage}') return;
+		
+		if(sPage == ptxt){
+			sPage = '${PAGE.startPage - 1}';
+			$('#nowPage').val(sPage);
+		} else if(sPage == ntxt){
+			sPage = '${PAGE.endPage + 1}';
+			$('#nowPage').val(sPage);
+		} else {
+			$('#nowPage').val(sPage);
+		}
+		$('#form2').submit();
+	});
+	
 	
 });
 
@@ -45,6 +70,9 @@ $(function(){
 	
 sid:<input type="text" value="${SID }">
 
+	<form method="post" action="/oxo/storyboard/storyBoard.eat" id="form2">
+		nowpage:<input type="text" name="nowPage" id="nowPage">
+	</form>
 
 	<div class="container-fluid">
 		<div class="row mt-3 text-center">
@@ -88,7 +116,18 @@ sid:<input type="text" value="${SID }">
 		        <div class="col-md-2"></div>
 		    </div>
 	    </c:forEach>
-	    
+		  <ul class="pagination justify-content-center">
+		    <li class="page-item">
+		      <a class="page-link pBtn" href="#" tabindex="-1" aria-disabled="true" id="preBtn">Prev</a>
+		    </li>
+		    <c:forEach var="page" begin="${PAGE.startPage }" end="${PAGE.endPage }">
+		    <li class="page-item"><a class="page-link pBtn" href="#">${page }</a></li>
+		    </c:forEach>
+		    <li class="page-item">
+		      <a class="page-link pBtn" href="#" id="nextBtn">Next</a>
+		    </li>
+		  </ul>
+		
 	    <div class="row mt-4">
 	        <div class="col-md-2"></div>
 	        <div class="col-md-6"></div>

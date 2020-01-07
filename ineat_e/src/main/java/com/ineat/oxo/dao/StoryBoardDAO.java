@@ -15,8 +15,8 @@ public class StoryBoardDAO {
 	SqlSessionTemplate sqlSession;
 	
 	// sb 출력
-	public List<StoryBoardVO> storyBoard(){
-		return sqlSession.selectList("sbSQL.storyBoard");
+	public List<StoryBoardVO> storyBoard(PageUtil pUtil){
+		return sqlSession.selectList("sbSQL.storyBoard", pUtil);
 	}
 	
 	// sb 상세보기
@@ -116,4 +116,7 @@ public class StoryBoardDAO {
 		return sqlSession.selectList("sbSQL.sbCommentList", bno);
 	}
 	
+	public int getTotalCnt() {
+		return sqlSession.selectOne("sbSQL.getTotalCnt");
+	}
 }
