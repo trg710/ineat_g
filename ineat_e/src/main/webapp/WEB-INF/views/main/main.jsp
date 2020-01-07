@@ -357,10 +357,18 @@
                         });
                         </script>
                         <div class="size col-md-6" style="float: right;">
-                           <p class="text-warning size">
+                           <p class="text-warning size passFind">
                               <b>비밀번호찾기</b>
                            </p>
                         </div>
+                        <script>
+                        $(function(){
+                		//비밀번호 찾기 버튼 클릭시 비밀번호 찾는 창으로 이동
+                		$('.passFind').click(function(){
+                			$(location).attr('href','/oxo/member/passFind.eat');
+                		});
+                        });
+                        </script>
                      </div>
                      <p></p>
                      <p class="text-muted text-center pt-1">Copyright © INEAT Corp. All Rights Reserved.</p>
