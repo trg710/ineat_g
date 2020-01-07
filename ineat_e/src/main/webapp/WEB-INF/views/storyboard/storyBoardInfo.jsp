@@ -116,7 +116,7 @@ $(function(){
 			alert('로그인 후 이용해주세요.');
 			return;
 		}else if(!content){
-			alert('내용을 입력해주세요.');
+			alert('내용을 입력해주세요.  ');
 			return;
 		};
 		$('#form1').submit();
