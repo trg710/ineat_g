@@ -27,8 +27,16 @@ public class StoryBoardVO {
 	private String ccontent;
 	private int cno;
 	private Date cDate;
+	private int cmtCnt;
 	
 	
+	
+	public int getCmtCnt() {
+		return cmtCnt;
+	}
+	public void setCmtCnt(int cmtCnt) {
+		this.cmtCnt = cmtCnt;
+	}
 	public int getCno() {
 		return cno;
 	}

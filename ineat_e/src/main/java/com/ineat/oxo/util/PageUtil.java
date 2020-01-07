@@ -4,7 +4,7 @@ package com.ineat.oxo.util;
  *    이 클래스는 페이지 이동 기능에 필요한 정보를 계산하기 위해서
  *    만들어진 유틸리티적인 클래스이다.
  * 
- * @author   전은석
+ * @author   김민재
  * @since   2019.12.03
  * @version   v.1.0
  * @see

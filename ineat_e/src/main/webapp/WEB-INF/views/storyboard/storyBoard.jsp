@@ -41,7 +41,6 @@ $(function(){
 
 	<form method="post" action="/oxo/storyboard/storyBoardInfo.eat" id="form1">
 		bno:<input type="text" name="bno" id="bno">
-		mid:<input type="text" name="mid" id="mid">
 	</form>
 	
 sid:<input type="text" value="${SID }">
@@ -73,7 +72,15 @@ sid:<input type="text" value="${SID }">
 		    			<img src="/oxo/upload/${data.saveName }" width="50%">
 		    		</c:if>
 		        </div>
-		        <div class="col-md-2 border-bottom pt-4 toInfo" id="${data.bno}" >${data.title }[5]</div>
+		        <div class="col-md-2 border-bottom pt-4 toInfo" id="${data.bno}" >
+		        	<c:if test="${data.title.length() ge 15 }">
+	        			${data.title.substring(0, 15) }...
+	        		</c:if>
+	        		<c:if test="${data.title.length() lt 15 }">
+	        			${data.title}
+	        		</c:if>
+	        		[${data.cmtCnt }]
+	        	</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.mid}</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.sbDate }</div>
 		        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">${data.llike }<p><img src="/oxo/img/hate_16px.jpg">${data.hhate }</div>

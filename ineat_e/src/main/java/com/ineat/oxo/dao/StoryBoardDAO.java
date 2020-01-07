@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ineat.oxo.util.PageUtil;
 import com.ineat.oxo.vo.StoryBoardVO;
 
 //sbDAO
@@ -107,13 +108,12 @@ public class StoryBoardDAO {
 	}
 
 	public int sbComment(StoryBoardVO sbVO) {
-		return sqlSession.insert("sbSQL.sbComment", sbVO);		
+		return sqlSession.insert("sbSQL.sbComment", sbVO);
 	}
 
 	// 댓글 가져오는 함수
 	public List<StoryBoardVO> sbCommentList(int bno){
-		return sqlSession.selectList("sbSQL.sbCommentList");
+		return sqlSession.selectList("sbSQL.sbCommentList", bno);
 	}
-
-
+	
 }

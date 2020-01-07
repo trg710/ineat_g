@@ -125,19 +125,19 @@ $(function(){
 
 	<form method="post" action="/oxo/storyboard/sbLike.eat" id="likeForm">
 		sid:<input type="text" name="mid" value="${SID }" />
-		sbno:<input type="number" name="bno" value="${SBNO }" />
+		sbno:<input type="number" name="bno" value="${DATA.bno  }" />
 		isshow:<input type="text" name="isshow" value="Y" />
 	</form>
 	
 	<form method="post" action="/oxo/storyboard/sbHate.eat" id="hateForm">
 		sid:<input type="text" name="mid" value="${SID }" />
-		sbno:<input type="number" name="bno" value="${SBNO }" />
+		sbno:<input type="number" name="bno" value="${DATA.bno }" />
 		isshow:<input type="text" name="isshow" value="N" />
 	</form>
 	
 	<form method="post" action="/oxo/storyboard/sbDelete.eat" id="deleteForm">
 		sid:<input type="text" name="mid" value="${SID }" />
-		sbno:<input type="text" name="bno" value="${SBNO }" />
+		sbno:<input type="text" name="bno" value="${DATA.bno }" />
 	</form>
 
 
@@ -150,33 +150,33 @@ $(function(){
 	    </div>
 	    <div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
-	        <div class="col-md-3 border-bottom">제목:${title }</div>
+	        <div class="col-md-3 border-bottom">제목:${DATA.title }</div>
 	        <div class="col-md-1 border-bottom"></div>
-	        <div class="col-md-1 border-bottom">조회수:${views }</div>
-	        <div class="col-md-1 border-bottom">작성자:${mid }</div>
-	        <div class="col-md-2 border-bottom">작성일:${sbDate }</div>
+	        <div class="col-md-1 border-bottom">조회수:${DATA.views }</div>
+	        <div class="col-md-1 border-bottom">작성자:${DATA.mid }</div>
+	        <div class="col-md-2 border-bottom">작성일:${DATA.sbDate }</div>
 	    </div>
 	    <div class="row mt-2">
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-3">
-	    		<c:if test="${saveName == null }">
+	    		<c:if test="${DATA.saveName == null }">
 	    			<img src="/oxo/img/noimage.jpg" width="100%">
 	    		</c:if>
-	    		<c:if test="${saveName != null}">
-	    			<img src="/oxo/upload/${saveName }" width="100%">
+	    		<c:if test="${DATA.saveName != null}">
+	    			<img src="/oxo/upload/${DATA.saveName }" width="100%">
 	    		</c:if>
 	    	</div>
-	    	<div class="col-md-5 pt-3">${content }</div>
+	    	<div class="col-md-5 pt-3">${DATA.content }</div>
 	    </div>
 	    <div class="row mt-2 text-center">
 	        <div class="col-md-2"></div>
 	        <div class="col-md-1">
 	        	<div class="btn-group" role="group">
-		        	<button id="${SBNO }" type="button" class="like btn btn-light">
-		        		<img src="/oxo/img/like_16px.jpg">${llike }
+		        	<button id="${DATA.bno }" type="button" class="like btn btn-light">
+		        		<img src="/oxo/img/like_16px.jpg">${DATA.llike }
 		        	</button>
-		        	<button id="${SBNO }" type="button" class="hate btn btn-light">
-		        		<img src="/oxo/img/hate_16px.jpg" class="ml-2">${hhate }
+		        	<button id="${DATA.bno }" type="button" class="hate btn btn-light">
+		        		<img src="/oxo/img/hate_16px.jpg" class="ml-2">${DATA.hhate }
 		        	</button>
 	        	</div>
 	        </div>
@@ -184,34 +184,26 @@ $(function(){
 	        
 	        <div class="col-md-7"></div>
 	    </div>
+	    <!-- 댓글 보기 처리 -->
 	    <div class="row mt-2">
 	    	<c:forEach var="data" items="${LIST }">
 		    	<div class="col-md-2"></div>
 		    	<div class="col-md-1"></div>
-		    	<div class="col-md-6 border-bottom">${data.mno }<br><span class="ml-3">${data.ccontent }</span></div>
+		    	<div class="col-md-5 border-bottom">${data.mid }<br><span class="ml-3">${data.ccontent }</span></div>
+		    	<div class="col-md-1 border-bottom">${data.cDate }</div>
 		    	<div class="col-md-1"></div>
+		    	<div class="col-md-2"></div>
 		    </c:forEach>
 	    </div>
-	    <div class="row mt-2">
-	    	<div class="col-md-2"></div>
-	    	<div class="col-md-1"></div>
-	    	<div class="col-md-6 border-bottom">flex해봐유<br><span class="ml-3">저두 한번 가봐야 겠네요 ㅋㅋㅋ</span></div>
-	    	<div class="col-md-1"></div>
-	    </div>
-	    <div class="row mt-2">
-	    	<div class="col-md-2"></div>
-	    	<div class="col-md-1"></div>
-	    	<div class="col-md-6 border-bottom"><p class="ml-3">└ 라면좋아<br><span class="ml-4">저두 가봐야겠어요 ㅋㅋㅋㅋㅋ</span></p></div>
-	    	<div class="col-md-1"></div>
-	    </div>
+	    
 	    <div class="row mt-2">
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-1"></div>
 	    	<div class="col-md-6">
 	    		<form id="form1" method="post" action="/oxo/storyboard/sbComment.eat" >
-	    			<input type="text" id="ccontent" name="ccontent" style="width:100%">
-	    			<input type="text" id="cbno" name="cbno" value="${SBNO }">
-	    			<input type="text" id="cmid" name="cmid" value="${SID }">
+	    			<input type="text" id="ccontent" name="content" style="width:100%">
+	    			<input type="text" name="bno" value="${DATA.bno }">
+	    			<input type="text" name="mid" value="${SID}">
 	    		</form>
     		</div>
 	    	<div class="col-md-1"><button type="button" id="register" class="btn btn-light">등록</button></div>
@@ -255,7 +247,7 @@ $(function(){
 				    <div class="row">
 				        <div class="col-md-2"></div>
 				        <div class="col-md-2">제목</div>
-				        <div class="col-md-5"><span id="title" style="display:none"></span><input type="text" id="title2" name="title2"></div>
+				        <div class="col-md-5"><span id="title" style="display:none"></span><input type="text" id="title2" name="title2" style="width:100%"></div>
 				    </div>
 				    <div class="row">
 				        <div class="col-md-2"></div>

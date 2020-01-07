@@ -48,36 +48,23 @@ public class StoryBoard {
 		return mv;
 	}
 
-	// sbinfo 출력
+	// sbInfo 출력
 	@RequestMapping("storyBoardInfo.eat")
-	public ModelAndView storyBoardInfo(ModelAndView mv, HttpSession session, StoryBoardVO sbVO, int bno) {
+	public ModelAndView storyBoardInfo(ModelAndView mv, HttpSession session, StoryBoardVO sbVO) {
 		
 		// 조회수 함수 처리
-		sbDAO.viewsCnt(bno);
+		sbDAO.viewsCnt(sbVO.getBno());
 		
-		sbVO = sbDAO.storyBoardInfo(bno);
-		session.setAttribute("SBNO", bno);
-		
-		String sid = (String) session.getAttribute("SID");
-		session.setAttribute("SID", sid);
-		System.out.println("*storyBoardInfo.eat sid: " + sid);
-
-		
-		mv.addObject("mid", sbVO.getMid());
-		mv.addObject("title", sbVO.getTitle());
-		mv.addObject("content", sbVO.getContent());
-		mv.addObject("sbDate", sbVO.getSbDate());
-		mv.addObject("views", sbVO.getViews());
-		mv.addObject("saveName", sbVO.getSaveName());
-		mv.addObject("llike", sbVO.getLlike());
-		mv.addObject("hhate", sbVO.getHhate());
-		
-		List<StoryBoardVO> list = sbDAO.sbCommentList(bno);
+		// 댓글 보기 함수 처리
+		List<StoryBoardVO> list = sbDAO.sbCommentList(sbVO.getBno());
 		mv.addObject("LIST", list);
 		
+		// 내용 불러오기
+		sbVO = sbDAO.storyBoardInfo(sbVO.getBno());
+
+		mv.addObject("DATA", sbVO);
 		
-		
-		
+		mv.setViewName("storyboard/storyBoardInfo");
 		return mv;
 	}
 	
@@ -144,25 +131,10 @@ public class StoryBoard {
 			}
 		}
 		
-		int bno = (int) session.getAttribute("SBNO");
-		sbVO = sbDAO.storyBoardInfo(bno);
-		session.setAttribute("SBNO", bno);
-		
-		String sid = (String) session.getAttribute("SID");
-		session.setAttribute("SID", sid);
-		System.out.println("*storyBoardInfo.eat sid: " + sid);
-		
-		mv.addObject("mid", sbVO.getMid());
-		mv.addObject("title", sbVO.getTitle());
-		mv.addObject("content", sbVO.getContent());
-		mv.addObject("sbDate", sbVO.getSbDate());
-		mv.addObject("views", sbVO.getViews());
-		mv.addObject("saveName", sbVO.getSaveName());
-		mv.addObject("llike", sbVO.getLlike());
-		mv.addObject("hhate", sbVO.getHhate());
-		
-		mv.setViewName("storyboard/storyBoardInfo");
+		mv.addObject("DATA", sbVO);
+		mv.setViewName("storyboard/sbInfoR");
 		return mv;
+		
 	}
 	
 	// 싫어요 처리
@@ -194,24 +166,8 @@ public class StoryBoard {
 			}
 		}
 		
-		int bno = (int) session.getAttribute("SBNO");
-		sbVO = sbDAO.storyBoardInfo(bno);
-		session.setAttribute("SBNO", bno);
-		
-		String sid = (String) session.getAttribute("SID");
-		session.setAttribute("SID", sid);
-		System.out.println("*storyBoardInfo.eat sid: " + sid);
-		
-		mv.addObject("mid", sbVO.getMid());
-		mv.addObject("title", sbVO.getTitle());
-		mv.addObject("content", sbVO.getContent());
-		mv.addObject("sbDate", sbVO.getSbDate());
-		mv.addObject("views", sbVO.getViews());
-		mv.addObject("saveName", sbVO.getSaveName());
-		mv.addObject("llike", sbVO.getLlike());
-		mv.addObject("hhate", sbVO.getHhate());
-		
-		mv.setViewName("storyboard/storyBoardInfo");
+		mv.addObject("DATA", sbVO);
+		mv.setViewName("storyboard/sbInfoR");
 		return mv;
 	}
 	
@@ -255,29 +211,9 @@ public class StoryBoard {
 	@RequestMapping("sbComment.eat")
 	public ModelAndView sbComment(ModelAndView mv, HttpSession session, StoryBoardVO sbVO) {
 		sbDAO.sbComment(sbVO);
-		System.out.println(sbVO.getCbno());
-		System.out.println(sbVO.getCmid());
-		System.out.println(sbVO.getCcontent());
 		
-		
-		int bno = (int) session.getAttribute("SBNO");
-		sbVO = sbDAO.storyBoardInfo(bno);
-		session.setAttribute("SBNO", bno);
-		
-		String sid = (String) session.getAttribute("SID");
-		session.setAttribute("SID", sid);
-		System.out.println("*storyBoardInfo.eat sid: " + sid);
-		
-		mv.addObject("mid", sbVO.getMid());
-		mv.addObject("title", sbVO.getTitle());
-		mv.addObject("content", sbVO.getContent());
-		mv.addObject("sbDate", sbVO.getSbDate());
-		mv.addObject("views", sbVO.getViews());
-		mv.addObject("saveName", sbVO.getSaveName());
-		mv.addObject("llike", sbVO.getLlike());
-		mv.addObject("hhate", sbVO.getHhate());
-		
-		mv.setViewName("storyboard/storyBoardInfo");
+		mv.addObject("DATA", sbVO);
+		mv.setViewName("storyboard/sbInfoR");
 		return mv;
 
 	}
