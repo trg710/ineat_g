@@ -278,7 +278,7 @@ $(function(){
 		    	<div class="col-md-5 border-bottom">${data.mid }<br><span class="ml-3">${data.ccontent }</span></div>
 		    	<div class="col-md-1 border-bottom">${data.cDate }</div>
 		    	<div class="col-md-2">
-		    		<c:if test="${SID == DATA.mid }">
+		    		<c:if test="${SID == data.mid }">
 			    		<div class="btn-group" role="group">
 			    			<button type="button" id="${data.cno }" class="btn btn-light toCmtEdit" data-toggle="modal" data-target="#myModal2">수정</button>
 			    			<button type="button" id="${data.cno }" class="btn btn-light cmtDelete">삭제</button>
