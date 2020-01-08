@@ -8,6 +8,12 @@
 <script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap&subset=korean" rel="stylesheet">
+<style>
+	.kor{
+		font-family: "Noto Serif KR", sans-serif;
+	}
+</style>
 <script type="text/javascript">
 $(function(){
 	$('#toList').click(function(){
@@ -126,7 +132,6 @@ $(function(){
 	// 댓글 수정 처리
 	$('.toCmtEdit').click(function(){
 		var cno = $(this).attr('id');
-		alert(cno);
 		
 		$.ajax({
 			url		: "/oxo/storyboard/sbCmtView.eat",
@@ -143,6 +148,7 @@ $(function(){
 				$('#cno2').html(data.cno);
 				$('#cmid2').html(data.mid);
 				$('#ccontent2').val(data.ccontent);
+				
 			},
 			error : function(){
 				alert('회원 정보 요청에 실패했습니다.');
@@ -177,8 +183,8 @@ $(function(){
 			success : function(data){
 				
 				if(data.cnt == 1){
-					location.href="/oxo/storyboard/storyBoard.eat";
 					alert('정보가 수정 되었습니다.');
+					$('#bnoInfo').submit();
 				}else{
 					alert('정보 수정을 실패했습니다.');
 				}
@@ -203,7 +209,7 @@ $(function(){
 </script>
 </head>
 <body>
-
+<div style="display:none">
 	<form method="post" action="/oxo/storyboard/sbLike.eat" id="likeForm">
 		sid:<input type="text" name="mid" value="${SID }" />
 		sbno:<input type="number" name="bno" value="${DATA.bno  }" />
@@ -225,26 +231,28 @@ $(function(){
 		cno:<input type="text" id="ccno" name="cno"/>
 		sbno:<input type="number" name="bno" value="${DATA.bno }" />
 	</form>
-
-
-
-
+	
+	<form method="post" action="/oxo/storyboard/storyBoardInfo.eat" id="bnoInfo">
+		sbno:<input type="number" name="bno" value="${DATA.bno }" />
+	</form>
+</div>
+				
 	<div class="container-fluid">
 		<div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
-	        <div class="col-md-8"><h3>inEat Story</h3></div>
+	        <div class="col-md-8 text-primary font-italic"><h1>My story in inEat Story</h1></div>
 	    </div>
 	    <div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
-	        <div class="col-md-3 border-bottom">제목:${DATA.title }</div>
+	        <div class="col-md-3 border-bottom kor" style="font-size: 17px">${DATA.title }</div>
 	        <div class="col-md-1 border-bottom"></div>
-	        <div class="col-md-1 border-bottom">조회수:${DATA.views }</div>
-	        <div class="col-md-1 border-bottom">작성자:${DATA.mid }</div>
-	        <div class="col-md-2 border-bottom">작성일:${DATA.sbDate }</div>
+	        <div class="col-md-1 border-bottom kor">조회수:${DATA.views }</div>
+	        <div class="col-md-1 border-bottom kor">작성자:${DATA.mid }</div>
+	        <div class="col-md-2 border-bottom kor">작성일:${DATA.sbDate }</div>
 	    </div>
 	    <div class="row mt-2">
 	    	<div class="col-md-2"></div>
-	    	<div class="col-md-3">
+	    	<div class="col-md-3 pb-2 border-bottom">
 	    		<c:if test="${DATA.saveName == null }">
 	    			<img src="/oxo/img/noimage.jpg" width="100%">
 	    		</c:if>
@@ -252,7 +260,7 @@ $(function(){
 	    			<img src="/oxo/upload/${DATA.saveName }" width="100%">
 	    		</c:if>
 	    	</div>
-	    	<div class="col-md-5 pt-3">${DATA.content }</div>
+	    	<div class="col-md-5 border-bottom pt-3 kor" style="font-size: 17px">${DATA.content }</div>
 	    </div>
 	    <div class="row mt-2 text-center">
 	        <div class="col-md-2"></div>
@@ -266,17 +274,16 @@ $(function(){
 		        	</button>
 	        	</div>
 	        </div>
-	        
-	        
 	        <div class="col-md-7"></div>
 	    </div>
+	    
 	    <!-- 댓글 보기 처리 -->
 	    <div class="row mt-2">
 	    	<c:forEach var="data" items="${LIST }">
 		    	<div class="col-md-2"></div>
-		    	<div class="col-md-1">${data.cno }</div>
-		    	<div class="col-md-5 border-bottom">${data.mid }<br><span class="ml-3">${data.ccontent }</span></div>
-		    	<div class="col-md-1 border-bottom">${data.cDate }</div>
+		    	<div class="col-md-1"></div>
+		    	<div class="col-md-5 border-bottom kor">${data.mid }<br><span class="ml-3 kor">${data.ccontent }</span></div>
+		    	<div class="col-md-1 border-bottom kor">${data.cDate }</div>
 		    	<div class="col-md-2">
 		    		<c:if test="${SID == data.mid }">
 			    		<div class="btn-group" role="group">
@@ -294,11 +301,11 @@ $(function(){
 	    	<div class="col-md-1"></div>
 	    	<div class="col-md-6">
 	    		<form id="form1" method="post" action="/oxo/storyboard/sbComment.eat" >
-	    			<input type="text" id="ccontent" name="content" style="width:100%">
-	    			<input type="text" name="bno" value="${DATA.bno }">
-	    			<input type="text" name="mid" value="${SID}">
-	    		</form>
-    		</div>
+				    <input type="text" id="ccontent" name="content" style="width:100%">
+				    <input type="hidden" name="bno" value="${DATA.bno }">
+				    <input type="hidden" name="mid" value="${SID}">
+				</form>
+	    	</div>
 	    	<div class="col-md-1"><button type="button" id="register" class="btn btn-light">등록</button></div>
 	    </div>
 	    <c:if test="${SID == DATA.mid }">
@@ -326,8 +333,8 @@ $(function(){
 		        </button>
 		      </div>
 		      <div class="modal-body">
-		        <div class="container-fluid">
-				    <div class="row">
+		        <div class="container-fluid kor">
+				    <div class="row" style="display:none">
 				        <div class="col-md-2"></div>
 				        <div class="col-md-2">글번호</div>
 				        <div class="col-md-5"><span id="bno" style="display:none"></span><span id="bno2"></span></div>
@@ -369,21 +376,21 @@ $(function(){
 		        </button>
 		      </div>
 		      <div class="modal-body">
-		        <div class="container-fluid">
-				    <div class="row">
+		        <div class="container-fluid kor">
+				    <div class="row" style="display:none">
 				        <div class="col-md-2"></div>
 				        <div class="col-md-2">댓글번호</div>
-				        <div class="col-md-5"><span id="cno"></span><span id="cno2"></span></div>
+				        <div class="col-md-5"><span id="cno" style="display:none"></span><span id="cno2"></span></div>
 				    </div>
 				    <div class="row">
 				        <div class="col-md-2"></div>
 				        <div class="col-md-2">아이디</div>
-				        <div class="col-md-5"><span id="cmid"></span><span id="cmid2"></span></div>
+				        <div class="col-md-5"><span id="cmid" style="display:none"></span><span id="cmid2"></span></div>
 				    </div>
 				    <div class="row">
 				        <div class="col-md-2"></div>
 				        <div class="col-md-2">내용</div>
-				        <div class="col-md-5"><span id="ccontent"></span><textarea id="ccontent2" name="ccontent2" cols="150" rows="10" style="width:100%"></textarea></div>
+				        <div class="col-md-5"><span id="ccontent" style="display:none"></span><textarea id="ccontent2" name="ccontent2" cols="150" rows="10" style="width:100%"></textarea></div>
 				    </div>
 				</div>
 		      </div>
