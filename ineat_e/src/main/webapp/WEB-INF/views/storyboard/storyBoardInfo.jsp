@@ -99,10 +99,9 @@ $(function(){
 			
 			success : function(data){
 				
-				if(data.cnt == 1){
-					
-					location.href="/oxo/storyboard/storyBoard.eat";
+				if(data.cnt == 1){					
 					alert('정보가 수정 되었습니다.');
+					$('#bnoInfo').submit();
 				}else{
 					alert('정보 수정을 실패했습니다.');
 				}
@@ -254,7 +253,7 @@ $(function(){
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-3 pb-2 border-bottom">
 	    		<c:if test="${DATA.saveName == null }">
-	    			<img src="/oxo/img/noimage.jpg" width="100%">
+	    			<img src="/oxo/img/ineat_noimage.jpg" width="100%" class="border">
 	    		</c:if>
 	    		<c:if test="${DATA.saveName != null}">
 	    			<img src="/oxo/upload/${DATA.saveName }" width="100%">
@@ -300,8 +299,8 @@ $(function(){
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-1"></div>
 	    	<div class="col-md-6">
-	    		<form id="form1" method="post" action="/oxo/storyboard/sbComment.eat" >
-				    <input type="text" id="ccontent" name="content" style="width:100%">
+	    		<form id="form1" method="post" action="/oxo/storyboard/sbComment.eat" class="kor">
+				    <input type="text" id="ccontent" name="content" style="width:100%" maxlength="300">
 				    <input type="hidden" name="bno" value="${DATA.bno }">
 				    <input type="hidden" name="mid" value="${SID}">
 				</form>

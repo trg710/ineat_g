@@ -210,13 +210,13 @@ $(function(){
 		        <div class="col-md-2"></div>
 		        <div class="col-md-2 border-bottom pb-1">
 			        <c:if test="${data.saveName == null }">
-		    			<img src="/oxo/img/noimage.jpg" width="50%">
+		    			<img src="/oxo/img/ineat_noimage.jpg" width="50%" class="border">
 		    		</c:if>
 		    		<c:if test="${data.saveName != null}">
 		    			<img src="/oxo/upload/${data.saveName }" width="50%">
 		    		</c:if>
 		        </div>
-		        <div class="col-md-2 border-bottom pt-4 toInfo kor" id="${data.bno}" >
+		        <div class="col-md-2 border-bottom toInfo kor" id="${data.bno}" style="padding-top:33px">
 		        	<c:if test="${data.title.length() ge 14 }">
 	        			${data.title.substring(0, 14) }...
 	        		</c:if>
@@ -227,10 +227,10 @@ $(function(){
 		        		[${data.cmtCnt }]
 	        		</c:if>
 	        	</div>
-		        <div class="col-md-1 border-bottom pt-4 kor">${data.mid}</div>
-		        <div class="col-md-1 border-bottom pt-4 kor">${data.sbDate }</div>
-		        <div class="col-md-1 border-bottom pt-3"><img src="/oxo/img/like_16px.jpg">${data.llike }<p><img src="/oxo/img/hate_16px.jpg">${data.hhate }</div>
-		        <div class="col-md-1 border-bottom pt-4 kor">${data.views }</div>
+		        <div class="col-md-1 border-bottom kor" style="padding-top:33px">${data.mid}</div>
+		        <div class="col-md-1 border-bottom kor" style="padding-top:33px">${data.sbDate }</div>
+		        <div class="col-md-1 border-bottom" style="padding-top:23px"><img src="/oxo/img/like_16px.jpg">${data.llike }<p><img src="/oxo/img/hate_16px.jpg">${data.hhate }</div>
+		        <div class="col-md-1 border-bottom kor" style="padding-top:33px">${data.views }</div>
 		        <div class="col-md-2"></div>
 		    </div>
 	    </c:forEach>
