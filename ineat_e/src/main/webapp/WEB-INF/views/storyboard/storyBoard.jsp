@@ -213,7 +213,7 @@ $(function(){
 		    			<img src="/oxo/img/ineat_noimage.jpg" width="50%" class="border">
 		    		</c:if>
 		    		<c:if test="${data.saveName != null}">
-		    			<img src="/oxo/upload/${data.saveName }" width="50%">
+		    			<img src="/oxo/upload/${data.saveName }" width="50%"  >
 		    		</c:if>
 		        </div>
 		        <div class="col-md-2 border-bottom toInfo kor" id="${data.bno}" style="padding-top:33px">
