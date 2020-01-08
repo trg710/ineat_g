@@ -76,9 +76,9 @@
             });
 
             var bool = true;
-            var c_star = '#'+c_star;
             var c_index;
-            var c_score = '${rvVO.score}';
+            var c_star = '#'+'${RVO.rv_score}';
+            var c_score = '${RVO.rv_score}';
             
             $('.pointStarlist').click(function () {
                 c_star = $(this);
@@ -218,15 +218,15 @@
                     <div class="d-flex">
 	                    <div class="pointStarRating d-flex">
 	                        <div class="pointStarlist odd" id="0.5"></div>
-	                        <div class="pointStarlist even" id="1"></div>
+	                        <div class="pointStarlist even" id="1.0"></div>
 	                        <div class="pointStarlist odd" id="1.5"></div>
-	                        <div class="pointStarlist even" id="2"></div>
+	                        <div class="pointStarlist even" id="2.0"></div>
 	                        <div class="pointStarlist odd" id="2.5"></div>
-	                        <div class="pointStarlist even" id="3"></div>
+	                        <div class="pointStarlist even" id="3.0"></div>
 	                        <div class="pointStarlist odd" id="3.5"></div>
-	                        <div class="pointStarlist even" id="4"></div>
+	                        <div class="pointStarlist even" id="4.0"></div>
 	                        <div class="pointStarlist odd" id="4.5"></div>
-	                        <div class="pointStarlist even" id="5"></div>
+	                        <div class="pointStarlist even" id="5.0"></div>
 	                    </div>
                         <div class="starscore mr-2"><h3><b id="sc">0</b></h3></div>
                     </div>

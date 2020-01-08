@@ -74,7 +74,9 @@ public class Review {
 	@RequestMapping("fixreview.eat")
 	public ModelAndView fixreviewform(ModelAndView mv, int rv_no) {
 		ReviewVO rvVO = rvDAO.getRievewInfoOne(rv_no);
-		mv.addObject(rvVO);
+		System.out.println(rvVO.getRv_score());
+		
+		mv.addObject("RVO",rvVO);
 		mv.setViewName("ineatlist/review/fixreview");
 		return mv;
 	}

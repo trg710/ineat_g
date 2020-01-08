@@ -88,6 +88,9 @@
  	</select>
  	
  	<delete id="delreview" parameterType="int">
- 	DELETE FROM ie_review WHERE rv_no=${rv_no};
+ 	DELETE FROM
+ 		ie_review 
+ 	WHERE
+ 		rv_no=#{rv_no}
  	</delete>
  </mapper>
