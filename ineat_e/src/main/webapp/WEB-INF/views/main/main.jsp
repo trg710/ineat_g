@@ -70,8 +70,8 @@
    	  });
  	//2섹션 이미지
  	$('.rvimg').each(function () {
-                if ($('div', this).length > 4) {
-                    var gal = $(this).children().eq(3);
+                if ($('div', this).length > 3) {
+                    var gal = $(this).children().eq(2);
                     var count = gal.nextAll().length;
                     gal.nextAll().css("display", "none");
                     gal.children('img').addClass('blurEffect');
@@ -147,7 +147,20 @@
    margin: 15px auto;
    padding: 5px;
 }
-
+.pic{
+ border: solid white 1px;
+ width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.pic_1 {
+    display: inline-block;
+    position: relative;
+    width: 108px;
+    height: 108px;
+    overflow: hidden;
+    margin: 1px;
+}
 .overindex {
     margin: 0;
     text-align: center;
@@ -157,6 +170,9 @@
     transform: translate(-50%, -50%);
     color: white;
     font-size: 24px;
+}
+.blurEffect {
+    filter: brightness(70%);
 }
 /*3섹션*/
 #page3 {
@@ -290,7 +306,9 @@
                <div class="review col-10 clearfix d-flex" style="margin-top: 3px;">
                   <div class="col-6 rvimg">  
 	                   <c:forEach var="data2" items="${data.rf_savename}">
-                     <div><img src="upload/${data2}" width="112px;" height="112px"  style="float: left; border: solid white 1px;"></div>
+                     <div class="pic_1">
+                     	<img src="upload/${data2}" class="pic" >
+                     </div>
                   </c:forEach>
                   </div>
                   <div class="col-4">
