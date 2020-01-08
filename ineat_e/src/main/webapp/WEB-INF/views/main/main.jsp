@@ -68,7 +68,22 @@
    	  $('.goRecommend').click(function(){
    		  $(location).attr('href','/oxo/recommend/recommend.eat');
    	  });
- 
+ 	//2섹션 이미지
+ 	$('.rvimg').each(function () {
+                if ($('div', this).length > 4) {
+                    var gal = $(this).children().eq(3);
+                    var count = gal.nextAll().length;
+                    gal.nextAll().css("display", "none");
+                    gal.children('img').addClass('blurEffect');
+                    gal.append( '<b></b>' );
+                    gal.children('b').text("+"+count);
+                    gal.children('b').addClass('overindex');
+                }
+            });
+ 	
+ 	
+ 	
+ 	
    	//3섹션 
    	$('#hansik').click(function(){
    		$(location).attr('href','/oxo/ineatlist/mainList.eat?rno=1&ml_tag=한식');
@@ -117,7 +132,7 @@
 }
 
 .reviewTitle {
-   width: 70%;
+   min-width: 930px;
    height: 40px;
    background-color: #ff7702;
    border-top-right-radius: 40px;
@@ -125,7 +140,7 @@
 }
 
 .reviewBox {
-   width: 70%;
+   min-width: 930px;
    height: 10em;
    border: 2px solid #ff7702;
    background-color: white;
@@ -133,21 +148,16 @@
    padding: 5px;
 }
 
-.review {
-   width: 80%;
-   height: 100%;
-   margin: 0 auto;
-   display: inline-block;
-   position: relative;
+.overindex {
+    margin: 0;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
 }
-
-.rvtext {
-   height: 112px;
-   width: 150%;
-   float: left;
-   margin-left: 22px;
-}
-
 /*3섹션*/
 #page3 {
    align-content: center;
@@ -277,16 +287,16 @@
                   <h6></h6>
                   <h4 class="badge badge-warning" style="font-size: 13px;">${data.m_id }</h4>
                </div>
-               <div class="review col-10 clearfix" style="margin-top: 3px;">
-                  <div style="margin-right: 20px;">
+               <div class="review col-10 clearfix d-flex" style="margin-top: 3px;">
+                  <div class="col-6 rvimg">
 	                   <c:forEach var="data2" items="${data.rf_savename}">
-                     <img src="upload/"${data2}" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
+                     <div><img src="upload/${data2}" width="112px;" height="112px"  style="float: left; border: solid white 1px;"></div>
                   </c:forEach>
                   </div>
-                  <div class="col-4 rvtext">
+                  <div class="col-4">
                      <p>${data.rv_body }</p>
                   </div>
-                  <div class="jumsu" style="float: right;" width="50px" height="50px;">
+                  <div class="jumsu co-2" style="float: right;" width="50px" height="50px;">
                      <h1 style="font-size: 80px; color: rgb(0, 148, 0);">
                         <b><em>${data.rv_score }</em></b>
                      </h1>
