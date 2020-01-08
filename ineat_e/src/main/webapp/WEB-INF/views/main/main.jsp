@@ -104,7 +104,7 @@
 
 #page1 {
    padding: 50px;
-   background-color: rgba(255, 255, 255, 0.3);
+   background-color: rgba(255, 255, 255, 0.4);
    display: inline-block;
 }
 
@@ -279,9 +279,9 @@
                </div>
                <div class="review col-10 clearfix" style="margin-top: 3px;">
                   <div style="margin-right: 20px;">
-                     <img src="mainlist/텐마루1.jpg" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
-                     <img src="mainlist/텐마루1.jpg" width="112px;" height="112px" style="float: left; border: solid white 1px;">
-                     <img src="mainlist/텐마루1.jpg" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
+	                   <c:forEach var="data2" items="${data.rf_savename}">
+                     <img src="upload/"${data2}" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
+                  </c:forEach>
                   </div>
                   <div class="col-4 rvtext">
                      <p>${data.rv_body }</p>

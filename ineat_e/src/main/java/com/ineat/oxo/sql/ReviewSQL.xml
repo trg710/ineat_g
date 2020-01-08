@@ -69,6 +69,7 @@
  	<select id="mainReview" resultType="rvVO">
  	SELECT
  		  rv_no, rv_body, rv_date, rv_score ,
+ 		(SELECT COUNT(*) FROM ie_re_fileup WHERE rf_rvno = rv_no) cnt,
 	    (SELECT M_ID FROM IE_MEMBER WHERE m_no = rv_mno) m_id
  	FROM
  		ie_review
