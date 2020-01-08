@@ -111,6 +111,12 @@
   
 </script>
 <style>
+.short_txt02{
+    overflow:hidden;
+    display:-webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient:vertical;
+}
 .clearfix::before, .clearfix::after {
    display: block;
    content: '';
@@ -318,7 +324,7 @@ object-fit: cover;
                   </c:forEach>
                   </div>
                   <div class="col-4 rvtext">
-                     <p>${data.rv_body }</p>
+                     <p class="short_txt02">${data.rv_body }</p>
                   </div>
                   <div class="jumsu co-2" style="float: right;" width="50px" height="50px;">
                      <h1 style="font-size: 80px; color: rgb(0, 148, 0);">
