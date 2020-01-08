@@ -10,7 +10,7 @@ public class MatdcupDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
-	public List matList() {
+	public List matList(){
 		
 		return sqlSession.selectList("mdSQL.matList"); 
 	}
