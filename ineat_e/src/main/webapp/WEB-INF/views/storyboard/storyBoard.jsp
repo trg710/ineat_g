@@ -210,7 +210,7 @@ $(function(){
 		        <div class="col-md-2"></div>
 		        <div class="col-md-2 border-bottom pb-1">
 			        <c:if test="${data.saveName == null }">
-		    			<img src="/oxo/img/ineat_noimage.jpg" width="50%" class="border">
+		    			<img src="/oxo/img/ineat_noimage.jpg" width="50%" class="border"  >
 		    		</c:if>
 		    		<c:if test="${data.saveName != null}">
 		    			<img src="/oxo/upload/${data.saveName }" width="50%"  >

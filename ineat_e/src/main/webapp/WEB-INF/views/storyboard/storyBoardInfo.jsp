@@ -253,7 +253,7 @@ $(function(){
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-3 pb-2 border-bottom">
 	    		<c:if test="${DATA.saveName == null }">
-	    			<img src="/oxo/img/ineat_noimage.jpg" width="100%" class="border">
+	    			<img src="/oxo/img/ineat_noimage.jpg" width="100%" class="border"  >
 	    		</c:if>
 	    		<c:if test="${DATA.saveName != null}">
 	    			<img src="/oxo/upload/${DATA.saveName }" width="100%">

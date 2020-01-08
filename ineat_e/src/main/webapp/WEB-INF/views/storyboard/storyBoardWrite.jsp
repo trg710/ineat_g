@@ -55,7 +55,7 @@ $(function(){
 	    </div>
 	    <div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
-	        <div class="col-md-8 border-bottom"></div>
+	        <div class="col-md-8 border-bottom"  ></div>
 	    </div>
 	    <form id="form1" method="post" action="/oxo/storyboard/storyBoardWriteProc.eat" enctype="multipart/form-data" class="kor">
 		    <div class="row mt-2">
