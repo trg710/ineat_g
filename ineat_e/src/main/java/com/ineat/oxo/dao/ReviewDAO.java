@@ -29,7 +29,7 @@ public class ReviewDAO {
 // 리뷰 정보 리스트를 가져오는 함수	
 	public List<ReviewVO> getReviewInfo(int ml_no){
 //		리뷰정보가져오는 함수.
-		List<ReviewVO> list = sqlSession.selectList("rvSQL.reviewinfo", ml_no);
+		List<ReviewVO> list = sqlSession.selectList("rvSQL.reviewinfolist", ml_no);
 		
 //		리뷰 갯수만큼 반복
 		for(int i = 0 ; i<list.size(); i++) {

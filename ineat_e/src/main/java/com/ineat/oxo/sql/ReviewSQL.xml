@@ -34,7 +34,7 @@
  	</select>
  	
  	<!-- 리뷰 텍스트내용 확인 -->
- 	<select id="reviewinfo" parameterType="int" resultType="rvVO">
+ 	<select id="reviewinfolist" parameterType="int" resultType="rvVO">
  	SELECT
 	    rv_no, rv_body, rv_date, rv_score ,
 	    (SELECT COUNT(*) FROM ie_re_fileup WHERE rf_rvno = rv_no) cnt,
