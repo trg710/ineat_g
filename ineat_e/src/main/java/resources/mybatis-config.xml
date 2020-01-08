@@ -19,7 +19,7 @@
 		<typeAlias alias="rvVO" type="com.ineat.oxo.vo.ReviewVO" /> 
 		<typeAlias alias="fVO" type="com.ineat.oxo.vo.FileVO" /> 
 		<typeAlias alias="tVO" type="com.ineat.oxo.vo.TasteInfoVO" /> 
-		<typeAlias alias="mcVO" type="com.ineat.oxo.vo.MatdcupVO" /> 
+		<typeAlias alias="mdVO" type="com.ineat.oxo.vo.MatdcupVO" /> 
 		<typeAlias alias="pUtil" type="com.ineat.oxo.util.PageUtil" /> 
 		<typeAlias alias="schVO" type="com.ineat.oxo.vo.SearchVO" />
 
