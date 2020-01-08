@@ -188,6 +188,7 @@ public class StoryBoard {
 	// 게시물 삭제 처리
 	@RequestMapping("sbDelete.eat")
 	public ModelAndView sbDelete(ModelAndView mv, RedirectView rv, HttpSession session, StoryBoardVO sbVO) {
+		sbDAO.sbcmtDelete(sbVO);
 		sbDAO.sblhDelete(sbVO);
 		sbDAO.sbfileDelete(sbVO);
 		sbDAO.sbDelete(sbVO);
@@ -199,13 +200,9 @@ public class StoryBoard {
 	
 	// 게시물 상세 보기
 	@RequestMapping("sbViewDetail.eat")
-	public @ResponseBody StoryBoardVO sbViewDetail(String id) {
-		StoryBoardVO sbVO = sbDAO.sbViewDetail(id);
+	public @ResponseBody StoryBoardVO sbViewDetail(StoryBoardVO sbVO) {
+		sbVO = sbDAO.sbViewDetail(sbVO);
 
-		System.out.println("###sbViewDetail.eat: " + sbVO.getBno());
-		System.out.println("###sbViewDetail.eat: " + sbVO.getMid());
-		System.out.println("###sbViewDetail.eat: " + sbVO.getTitle());
-		System.out.println("###sbViewDetail.eat: " + sbVO.getContent());
 		return sbVO;
 	}
 	
@@ -214,14 +211,10 @@ public class StoryBoard {
 	public @ResponseBody StoryBoardVO sbInfoEdit(StoryBoardVO sbVO) {
 		sbVO.setCnt(sbDAO.sbInfoEdit(sbVO));
 
-		System.out.println("###sbInfoEdit.eat" + sbVO.getBno());
-		System.out.println("###sbInfoEdit.eat" + sbVO.getTitle());
-		System.out.println("###sbInfoEdit.eat" + sbVO.getContent());
-
 		return sbVO;
 	}
 
-	// 댓글 함수 처리
+	// 댓글 입력 함수 처리
 	@RequestMapping("sbComment.eat")
 	public ModelAndView sbComment(ModelAndView mv, HttpSession session, StoryBoardVO sbVO) {
 		sbDAO.sbComment(sbVO);
@@ -229,6 +222,31 @@ public class StoryBoard {
 		mv.addObject("DATA", sbVO);
 		mv.setViewName("storyboard/sbInfoR");
 		return mv;
+	}
+	
+	// 댓글 상세 보기
+	@RequestMapping("sbCmtView.eat")
+	public @ResponseBody StoryBoardVO sbCmtView(StoryBoardVO sbVO) {
+		sbVO = sbDAO.sbCmtView(sbVO);
 
+		return sbVO;
+	}
+	
+	// 댓글 수정 처리
+	@RequestMapping("sbCmtEdit.eat")
+	public @ResponseBody StoryBoardVO sbCmtEdit(StoryBoardVO sbVO) {
+		sbVO.setCnt(sbDAO.sbCmtEdit(sbVO));
+
+		return sbVO;
+	}
+	
+	// 댓글 삭제 처리
+	@RequestMapping("sbCmtOneDelete.eat")
+	public ModelAndView sbCmtOneDelete(ModelAndView mv, RedirectView rv, HttpSession session, StoryBoardVO sbVO) {
+		sbDAO.sbCmtOneDelete(sbVO);
+		
+		mv.addObject("DATA", sbVO);
+		mv.setViewName("storyboard/sbInfoR");
+		return mv;
 	}
 }

@@ -31,20 +31,20 @@ $(function(){
 	});
 	
 	$('#delete').click(function(){
-
 		$('#deleteForm').submit();
 	});
 	
 	// 게시물 상세 보기
 	$('#toEdit').click(function(){
 		var aid = '${SID}';
-		
+		var abno = '${DATA.bno}';
 		$.ajax({
 			url		: "/oxo/storyboard/sbViewDetail.eat",
 			type	: "post",
 			dataType: "json",
 			data	: {
-				id : aid
+				mid : aid,
+				bno : abno
 			},
 			success : function(data){
 				$('#bno').html(data.bno);
@@ -116,21 +116,93 @@ $(function(){
 			alert('로그인 후 이용해주세요.');
 			return;
 		}else if(!content){
-			alert('내용을 입력해주세요.  ');
+			alert('내용을 입력해주세요.');
 			return;
 		};
 		$('#form1').submit();
 	}
 	$('#register').click(content);
 	
+	// 댓글 수정 처리
+	$('.toCmtEdit').click(function(){
+		var cno = $(this).attr('id');
+		alert(cno);
+		
+		$.ajax({
+			url		: "/oxo/storyboard/sbCmtView.eat",
+			type	: "post",
+			dataType: "json",
+			data	: {
+				cno : cno
+			},
+			success : function(data){
+				$('#cno').html(data.cno);
+				$('#cmid').html(data.mid);
+				$('#ccontent').html(data.ccontent);
+				
+				$('#cno2').html(data.cno);
+				$('#cmid2').html(data.mid);
+				$('#ccontent2').val(data.ccontent);
+			},
+			error : function(){
+				alert('회원 정보 요청에 실패했습니다.');
+			}
+		});
+	});
+
+	// 댓글 수정 처리
+	$('#cmtEdit').click(function(){
+		// 할 일
+		// 데이터 읽어오고
+		var content1 = $('#ccontent').text();
+		var content2 = $('#ccontent2').val();
+		var cno = $('#cno').text();
+		
+		
+		if(content1 == content2){
+			alert("수정 내용이 없습니다.")
+			return;
+		}
+		
+		$.ajax({
+			url		: "/oxo/storyboard/sbCmtEdit.eat",
+			type	: "post",
+			dataType: "json",
+			data	: {
+				content : content2,
+				cno  : cno
+			
+			},
+			
+			success : function(data){
+				
+				if(data.cnt == 1){
+					location.href="/oxo/storyboard/storyBoard.eat";
+					alert('정보가 수정 되었습니다.');
+				}else{
+					alert('정보 수정을 실패했습니다.');
+				}
+			},
+			error : function(){
+				alert('서버 오류');
+				
+			}
+		});		
+	});
+	
+	// 댓글 삭제
+	$('.cmtDelete').click(function(){
+		var cno = $(this).attr('id');
+		alert(cno);
+		$('#ccno').val(cno);
+				
+		$('#deleteForm2').submit();
+	});
 	
 });
 </script>
 </head>
 <body>
-
-
-
 
 	<form method="post" action="/oxo/storyboard/sbLike.eat" id="likeForm">
 		sid:<input type="text" name="mid" value="${SID }" />
@@ -147,6 +219,11 @@ $(function(){
 	<form method="post" action="/oxo/storyboard/sbDelete.eat" id="deleteForm">
 		sid:<input type="text" name="mid" value="${SID }" />
 		sbno:<input type="text" name="bno" value="${DATA.bno }" />
+	</form>
+	
+	<form method="post" action="/oxo/storyboard/sbCmtOneDelete.eat" id="deleteForm2">
+		cno:<input type="text" id="ccno" name="cno"/>
+		sbno:<input type="number" name="bno" value="${DATA.bno }" />
 	</form>
 
 
@@ -197,11 +274,18 @@ $(function(){
 	    <div class="row mt-2">
 	    	<c:forEach var="data" items="${LIST }">
 		    	<div class="col-md-2"></div>
-		    	<div class="col-md-1"></div>
+		    	<div class="col-md-1">${data.cno }</div>
 		    	<div class="col-md-5 border-bottom">${data.mid }<br><span class="ml-3">${data.ccontent }</span></div>
 		    	<div class="col-md-1 border-bottom">${data.cDate }</div>
+		    	<div class="col-md-2">
+		    		<c:if test="${SID == DATA.mid }">
+			    		<div class="btn-group" role="group">
+			    			<button type="button" id="${data.cno }" class="btn btn-light toCmtEdit" data-toggle="modal" data-target="#myModal2">수정</button>
+			    			<button type="button" id="${data.cno }" class="btn btn-light cmtDelete">삭제</button>
+			    		</div>
+			    	</c:if>
+		    	</div>
 		    	<div class="col-md-1"></div>
-		    	<div class="col-md-2"></div>
 		    </c:forEach>
 	    </div>
 	    
@@ -217,7 +301,7 @@ $(function(){
     		</div>
 	    	<div class="col-md-1"><button type="button" id="register" class="btn btn-light">등록</button></div>
 	    </div>
-	    <c:if test="${SID == mid }">
+	    <c:if test="${SID == DATA.mid }">
 		    <div class="row mt-4">
 		    	<div class="col-md-2"></div>
 		    	<div class="col-md-8">
@@ -272,6 +356,45 @@ $(function(){
 		    </div>
 		  </div>
 		</div>
+		
+	    <!-- 댓글 상세 보기 -->
+	    
+	    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title text-center" id="exampleModalLabel">inEat Story</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <div class="container-fluid">
+				    <div class="row">
+				        <div class="col-md-2"></div>
+				        <div class="col-md-2">댓글번호</div>
+				        <div class="col-md-5"><span id="cno"></span><span id="cno2"></span></div>
+				    </div>
+				    <div class="row">
+				        <div class="col-md-2"></div>
+				        <div class="col-md-2">아이디</div>
+				        <div class="col-md-5"><span id="cmid"></span><span id="cmid2"></span></div>
+				    </div>
+				    <div class="row">
+				        <div class="col-md-2"></div>
+				        <div class="col-md-2">내용</div>
+				        <div class="col-md-5"><span id="ccontent"></span><textarea id="ccontent2" name="ccontent2" cols="150" rows="10" style="width:100%"></textarea></div>
+				    </div>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		        <button type="button" id="cmtEdit" class="btn btn-primary">수정하기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	    
 	    
 	    <div class="row mt-4 text-center">
 	    	<div class="col-md-2"></div>

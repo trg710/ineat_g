@@ -83,6 +83,10 @@ public class StoryBoardDAO {
 	}
 	
 	// 삭제 처리
+	public int sbcmtDelete(StoryBoardVO sbVO) {
+		return sqlSession.delete("sbSQL.sbcmtDelete", sbVO);
+	}
+	
 	public int sblhDelete(StoryBoardVO sbVO) {
 		return sqlSession.delete("sbSQL.sblhDelete", sbVO);
 	}
@@ -95,8 +99,8 @@ public class StoryBoardDAO {
 		return sqlSession.delete("sbSQL.sbfileDelete", sbVO);
 	}
 	// 게시물 상세보기
-	public StoryBoardVO sbViewDetail(String id) {
-		return sqlSession.selectOne("sbSQL.sbViewDetail", id);
+	public StoryBoardVO sbViewDetail(StoryBoardVO sbVO) {
+		return sqlSession.selectOne("sbSQL.sbViewDetail", sbVO);
 	}
 
 	public int sbInfoEdit(StoryBoardVO sbVO) {
@@ -118,5 +122,17 @@ public class StoryBoardDAO {
 	
 	public int getTotalCnt() {
 		return sqlSession.selectOne("sbSQL.getTotalCnt");
+	}
+	// 댓글 상세보기
+	public StoryBoardVO sbCmtView(StoryBoardVO sbVO) {
+		return sqlSession.selectOne("sbSQL.sbCmtView", sbVO);
+	}
+	// 댓글 수정
+	public int sbCmtEdit(StoryBoardVO sbVO) {
+		return sqlSession.update("sbSQL.sbCmtEdit", sbVO);
+	}
+	// 댓글 삭제
+	public int sbCmtOneDelete(StoryBoardVO sbVO) {
+		return sqlSession.delete("sbSQL.sbCmtOneDelete", sbVO);
 	}
 }

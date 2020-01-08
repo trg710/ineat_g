@@ -206,28 +206,6 @@ sid:<input type="text" value="${SID }">
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 		<div class="row mt-3 text-center">
 			<div class="col-md-2"></div>
 	        <div class="col-md-8"><h3>inEat Story</h3></div>

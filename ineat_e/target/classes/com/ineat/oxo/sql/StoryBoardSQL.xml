@@ -296,6 +296,12 @@
 		    sblh_bno = #{bno}
  	</delete>
  	
+ 	<delete id="sbcmtDelete" parameterType="sbVO">
+ 		DELETE FROM IE_SB_COMMENTS
+		WHERE
+		    sbcmt_bno = #{bno}
+ 	</delete>
+ 	
  	<delete id="sbDelete" parameterType="sbVO">
  		DELETE FROM IE_STORY_BOARD
 		WHERE
@@ -309,14 +315,15 @@
  	</delete>
  	
  	<!-- 게시물 상세보기 -->
- 	<select id="sbViewDetail" resultType="sbVO" parameterType="string">
+ 	<select id="sbViewDetail" resultType="sbVO" parameterType="sbVO">
 		SELECT
 			sb_no bno, m_id mid, sb_title title, sb_content content
 		FROM
 			ie_member, ie_story_board
 		WHERE
 			m_no = sb_mno
-			AND m_id = #{id}
+			AND m_id = #{mid}
+			AND sb_no = #{bno}
 	</select>
 	
 	<!-- 게시물 수정 처리 -->
@@ -362,6 +369,7 @@
 			)
 	</insert>
 	
+	<!-- 댓글 보기 처리 -->
 	<select id="sbCommentList" resultType="sbVO" parameterType="sbVO">
 		SELECT
 		    SBCMT_NO cno, SBCMT_BNO bno, (SELECT M_ID FROM IE_MEMBER WHERE M_NO = SBCMT_MNO)mid, SBCMT_CONTENT ccontent, SBCMT_DATE cDate
@@ -372,4 +380,31 @@
 		ORDER BY
 		    SBCMT_DATE DESC
 	</select>
+	
+	 <!-- 댓글 상세보기 -->
+ 	<select id="sbCmtView" resultType="sbVO" parameterType="sbVO">
+		SELECT
+	        sbcmt_no cno, m_id mid, sbcmt_content ccontent
+	    FROM
+			ie_member, ie_sb_comments
+		WHERE
+			m_no = sbcmt_mno
+			AND sbcmt_no = #{cno}
+	</select>
+
+	<!-- 댓글 수정 처리 -->
+	<update id="sbCmtEdit" parameterType="sbVO">
+		UPDATE 
+		   IE_SB_COMMENTS
+		SET 
+		    SBCMT_CONTENT = #{content}
+		WHERE 
+		    SBCMT_NO = #{cno}
+	</update>
+	<!-- 댓글 삭제 처리 -->
+	<delete id="sbCmtOneDelete" parameterType="sbVO">
+ 		DELETE FROM IE_SB_COMMENTS
+		WHERE
+		    sbcmt_no = #{cno}
+ 	</delete>
 </mapper>
