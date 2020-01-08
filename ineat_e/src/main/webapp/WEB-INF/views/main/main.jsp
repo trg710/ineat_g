@@ -288,7 +288,7 @@
                   <h4 class="badge badge-warning" style="font-size: 13px;">${data.m_id }</h4>
                </div>
                <div class="review col-10 clearfix d-flex" style="margin-top: 3px;">
-                  <div class="col-6 rvimg">
+                  <div class="col-6 rvimg">  
 	                   <c:forEach var="data2" items="${data.rf_savename}">
                      <div><img src="upload/${data2}" width="112px;" height="112px"  style="float: left; border: solid white 1px;"></div>
                   </c:forEach>
