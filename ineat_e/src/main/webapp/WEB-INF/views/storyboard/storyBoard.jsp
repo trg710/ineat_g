@@ -122,7 +122,9 @@ sid:<input type="text" value="${SID }">
 	        		<c:if test="${data.title.length() lt 15 }">
 	        			${data.title}
 	        		</c:if>
-	        		[${data.cmtCnt }]
+	        		<c:if test="${data.cmtCnt > 0 }">
+		        		[${data.cmtCnt }]
+	        		</c:if>
 	        	</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.mid}</div>
 		        <div class="col-md-1 border-bottom pt-4">${data.sbDate }</div>
