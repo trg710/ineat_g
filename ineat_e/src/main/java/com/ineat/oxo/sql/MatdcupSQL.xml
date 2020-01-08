@@ -4,8 +4,16 @@
          PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
          
- <mapper namespace="mcSQL">
- 
- 
- 
+ <mapper namespace="mdSQL">
+	<select id="matList" resultType="mdVO">
+	<![CDATA[
+		SELECT
+    		ROWNUM rno, md_name,md_vic
+		FROM
+    		ie_matdcup
+		WHERE
+    		ROWNUM<9
+		ORDER BY DBMS_RANDOM.VALUE
+	]]>
+	</select> 
  </mapper>
