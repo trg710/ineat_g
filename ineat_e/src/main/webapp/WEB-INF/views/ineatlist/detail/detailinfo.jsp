@@ -82,8 +82,8 @@
         }
         .galls{
 	        overflow-x: auto;
-		    width: 90%;
 		    white-space: nowrap;
+		    width: 90%;
 		    margin: 0 auto;
         }
   		.pointStarRating {
@@ -110,6 +110,7 @@
 		    text-indent: -9999px;
 		}
 		.btns{
+			display:none;
 		    bottom: 0;
 		    position: absolute;
 		    left: 50%;
@@ -134,11 +135,36 @@
             $(document).on('mouseenter', '.reviews', function(e) {
     			e.stopImmediatePropagation();
     			$(this).css('background', '#8080801a');
+    			$(this).children('.text-center').children('.btns').css('display', 'block');
     		});
 
     		$(document).on('mouseleave', '.reviews', function(e) {
     			e.stopImmediatePropagation();
     			$(this).css('background', '0');
+    			$(this).children('.text-center').children('.btns').css('display', 'none');
+    		});
+    		
+    		$('.del').click(function(){
+    			var review = $(this);
+    			var rvno = review.attr('data-id');
+    			if(confirm('정말 삭제하시겠습니까?') == true){
+    				$.ajax({
+    					url : "/oxo/ineatlist/review/delreview.eat",
+    					type : "post",
+    					dataType : "json",
+    					data : {
+    						rv_no : rvno
+    					}
+    				});
+				review.parents('.reviews').remove();
+    			}else{
+    				return;
+    			}
+    		});
+    		
+    		$('.fix').click(function(){
+    			var rvno = $(this).attr('data-id');
+    			$(location).attr('href','/oxo/ineatlist/review/fixreview.eat?rv_no='+rvno);
     		});
         });
     </script>
@@ -181,12 +207,9 @@
         </div>
     </nav>
 
-
-
     <div class="container" style="margin-top: 100px;">
-
+        <!-- 탑인포영역 -->
         <div class="row m0 pb-3 bbg">
-            <!-- 탑인포영역 -->
             <div class="detail col-8 p-0 pr-3">
 
                 <!-- 해더 -->
@@ -233,18 +256,17 @@
                 </table>
                 <form action="/oxo/ineatlist/review/reviewform.eat" method="post" class="float-right">
                 	<input type="hidden" name="ml_no" id="mlno" value="${TVO.ml_no }">
-                <button class="btn btn-danger" id="addreview">리뷰작성</button>
+                	<c:if test="${not empty SID }">
+	                	<button class="btn btn-danger" id="addreview">리뷰작성</button>
+	                </c:if>
                 </form>
                 
             </div>
-            <div style="background-color: aqua;" class="col-4" id="map">
-                지도영역
-            </div>
+            <!-- 지도영역 -->
+            <div style="background-color: aqua;" class="col-4" id="map"></div>
         </div>
         <!-- 탑인포영역 종료 -->
-
-
-
+        
         <!-- 갤러리영역 -->
         <div class="row m0 bbg">
             <div class="text-center galls">
@@ -274,8 +296,8 @@
 				
                 <!-- 리뷰내용 -->
                 <div class="ml-4">
-                    <p> ${data.rv_date }</p>
-                    <p>${data.rv_body }</p>
+                    <p class="mb-1">${data.rv_date }</p>
+                    <p class="mb-1">${data.rv_body }</p>
                     <div class="gallery">
                     
                     	<c:forEach var="data2" items="${data.rf_savename }">
@@ -290,15 +312,18 @@
             </div>
 			
             <!-- 등록점수 -->
-            <div class="col-2 text-center mt-3">
+            <div class="col-2 text-center">
                 <h1 class="text-success"><b>${data.rv_score}</b></h1>
                 <span class="pointStarRating">
-                	<span class="pointStarCover"></span>
+                	<span class="pointStarCover" style="width:${data.rv_score*20}%;"></span>
                 </span>
+                <c:if test="${SID eq data.m_id}">
                 <div class="btns">
-	            	<button type="button" class="btn btn-info btn-sm ">수정</button>
-	            	<button type="button" class="btn btn-danger btn-sm ">삭제</button>
+	            	<button type="button" class="btn btn-info btn-sm fix" data-id="${data.rv_no }">수정</button>
+	            	<button type="button" class="btn btn-danger btn-sm del" data-id="${data.rv_no }">삭제</button>
             	</div>
+            	</c:if>
+            	
             </div>
             
         </div>
@@ -346,5 +371,6 @@ geocoder.addressSearch('${TVO.ml_newaddr }', function(result, status) {
     } 
 });    
 </script>
+
 </body>
 </html>

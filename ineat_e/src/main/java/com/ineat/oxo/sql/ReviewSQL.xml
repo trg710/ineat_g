@@ -45,6 +45,17 @@
 	    rv_mlno = #{ml_no}
  	</select>
  	
+ 	<!-- 리뷰 정보 한개 확인. -->
+ 	<select id="reviewinfo" parameterType="int" resultType="rvVO">
+ 	SELECT
+	    rv_body, rv_score ,
+	    (SELECT COUNT(*) FROM ie_re_fileup WHERE rf_rvno = rv_no) cnt
+	FROM
+	    ie_review
+	WHERE
+	    rv_no = #{rv_no}
+ 	</select>
+ 	
  	<!-- 리뷰 사진정보 확인 -->
  	<select id="rvfileinfo" parameterType="int" resultType="String">
  	SELECT
@@ -75,4 +86,8 @@
  		ie_review
  	ORDER BY  rv_date DESC	
  	</select>
+ 	
+ 	<delete id="delreview" parameterType="int">
+ 	DELETE FROM ie_review WHERE rv_no=${rv_no};
+ 	</delete>
  </mapper>

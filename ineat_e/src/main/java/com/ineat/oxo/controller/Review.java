@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -61,6 +62,20 @@ public class Review {
 		
 		rv.setUrl("/oxo/ineatlist/info.eat?ml_no="+rvVO.getRv_mlno());
 		mv.setView(rv);
+		return mv;
+	}
+	
+	@RequestMapping("delreview.eat")
+	@ResponseBody
+	public void delreview(int rv_no) {
+		rvDAO.delreview(rv_no);
+	}
+	
+	@RequestMapping("fixreview.eat")
+	public ModelAndView fixreviewform(ModelAndView mv, int rv_no) {
+		ReviewVO rvVO = rvDAO.getRievewInfoOne(rv_no);
+		mv.addObject(rvVO);
+		mv.setViewName("ineatlist/review/fixreview");
 		return mv;
 	}
 }

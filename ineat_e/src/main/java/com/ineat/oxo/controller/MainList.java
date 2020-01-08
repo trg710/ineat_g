@@ -59,7 +59,6 @@ public class MainList {
 	@RequestMapping("info.eat")
 	public ModelAndView detailinfo(ModelAndView mv, int ml_no, RedirectView rv) {
 		TasteInfoVO tVO = tDAO.tasteInfo(ml_no);
-		
 		List<ReviewVO> list = rvDAO.getReviewInfo(ml_no);
 		int cnt = rvDAO.getReviewCnt(ml_no);
 		double avg = 0;

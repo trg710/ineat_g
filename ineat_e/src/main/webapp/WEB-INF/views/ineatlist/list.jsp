@@ -308,6 +308,7 @@ ul {
 
 				<!-- 리스트 컬럼 -->
 				<div id="listbox">
+				
 					<c:forEach var="data" items="${LIST }" varStatus="sts">
 						<div class="d-flex mainlist pr-4">
 							<!-- 넘버 -->
@@ -376,6 +377,7 @@ ul {
 							</div>
 						</div>
 					</c:forEach>
+					
 				</div>
 
 

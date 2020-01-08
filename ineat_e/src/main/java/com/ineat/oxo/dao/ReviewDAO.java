@@ -48,6 +48,19 @@ public class ReviewDAO {
 //		리스트를 반환
 		return list;
 	}
+	// 리뷰정보 한개.
+	public ReviewVO getRievewInfoOne(int rv_no) {
+		ReviewVO rvVO = sqlSession.selectOne("rvSQL.reviewinfo", rv_no);
+		int cnt = rvVO.getCnt();
+		if(cnt > 0) {
+			rvVO.setRf_savename(sqlSession.selectList("rvSQL.rvfileinfo", rv_no));
+		}
+		return rvVO;
+	}
+	//리뷰 삭제
+	public void delreview(int rv_no) {
+		sqlSession.delete("rvSQL.delreview", rv_no);
+	}
 	
 	//메인에 노출될 리뷰
 	public List<ReviewVO> mainReview(){
