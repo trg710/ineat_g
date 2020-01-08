@@ -254,7 +254,7 @@
       <!-- 섹션1-->
       <div class="section" style="background: url('img/main.jpg') no-repeat; background-size: cover;">
          <div id="page1" style="margin-top: 5%;">
-            <a href="#"><img src="img/click1.jpg" width="28%" id="mainimg" class="goRecommend" style="margin-left: 15px;"></a>
+            <a href="#"><img src="img/click2.jpg" width="28%" id="mainimg" class="goRecommend" style="margin-left: 15px;"></a>
                <img src="img/ineat.png" width="30%" style="margin-right: 5%; margin-left: 5%;">
                <a href="#"><img src="img/matdcup1.jpg" width="28%" id="mainimg"></a>
          </div>
