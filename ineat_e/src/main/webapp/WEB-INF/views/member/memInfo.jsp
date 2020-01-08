@@ -27,7 +27,7 @@
 }
 .bt{
     position: absolute;
-    margin-left:300px;
+    right:40px;
 }
 .form-control{
     width: 60%;
@@ -127,7 +127,7 @@ $(function(){
             <div class="col-6" id="detail" style="border: solid orange 8px; padding : 20px 20px 0px 20px; margin-top:10px;" width="200px" height="500px">
                 <img src="/oxo/img/logo.png" width="50%">
                 <div style="padding:40px;">
-                    
+                
                     <div class="tel">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>Profile</em></h3>
                         <h6 class="text-muted right text-right"><img src="/oxo/img/member.png" width="100px" height="100px" id="pic"></h6>
@@ -200,7 +200,7 @@ $(function(){
         <div class="row text-center">
             <div id="detail" style="border: solid orange 8px; padding : 20px; margin: 20px;" width="200px" height="500px">
                 <img src="/oxo/img/logo.png" width="50%">
-                <div style="padding:40px;">
+                <div style="padding:40px;  position:relative;">
                     
                     <div class="tel">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>Profile</em></h3>
