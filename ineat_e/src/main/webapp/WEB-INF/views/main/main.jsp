@@ -147,6 +147,12 @@
    margin: 15px auto;
    padding: 5px;
 }
+.rvtext {
+width:244px;
+height: 115px;
+overflow:hidden;
+}
+
 .pic{
  border: solid white 1px;
  width: 100%;
@@ -311,7 +317,7 @@ object-fit: cover;
                      </div>
                   </c:forEach>
                   </div>
-                  <div class="col-4">
+                  <div class="col-4 rvtext">
                      <p>${data.rv_body }</p>
                   </div>
                   <div class="jumsu co-2" style="float: right;" width="50px" height="50px;">
