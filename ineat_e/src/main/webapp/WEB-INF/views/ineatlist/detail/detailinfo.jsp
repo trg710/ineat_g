@@ -81,11 +81,40 @@
             font-size: 24px;
         }
         .galls{
-        overflow-x: auto;
-	    width: 90%;
-	    white-space: nowrap;
-	    margin: 0 auto;
+	        overflow-x: auto;
+		    width: 90%;
+		    white-space: nowrap;
+		    margin: 0 auto;
         }
+  		.pointStarRating {
+ 		    position: relative;
+			width: 74px;
+		    height: 12px;
+		    overflow: hidden;
+		    display: inline-block;
+		    vertical-align: top;
+		    margin: 1px 0 0 0;
+		    padding-left: 1px;
+		    background: url(/oxo/img/sp_ico3.png) no-repeat;
+		    background-position: 0 -154px;
+		}
+		.pointStarCover{
+			height:100%;
+		    overflow: hidden;
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    z-index: 10;
+		    background: url(/oxo/img/sp_ico3.png) no-repeat;
+		    background-position: 0 -140px;
+		    text-indent: -9999px;
+		}
+		.btns{
+		    bottom: 0;
+		    position: absolute;
+		    left: 50%;
+		    transform: translateX(-50%);
+		}
     </style>
 
     <script>
@@ -263,12 +292,15 @@
             <!-- 등록점수 -->
             <div class="col-2 text-center mt-3">
                 <h1 class="text-success"><b>${data.rv_score}</b></h1>
-                <div>별모양 이미지</div>
+                <span class="pointStarRating">
+                	<span class="pointStarCover"></span>
+                </span>
+                <div class="btns">
+	            	<button type="button" class="btn btn-info btn-sm ">수정</button>
+	            	<button type="button" class="btn btn-danger btn-sm ">삭제</button>
+            	</div>
             </div>
-            <div class="col-12">
-            	<button type="button" class="btn btn-info btn-sm float-right">수정</button>
-            	<button type="button" class="btn btn-danger btn-sm float-right">삭제</button>
-            </div>
+            
         </div>
         <!-- 리뷰영역 종료 -->
         </c:forEach>

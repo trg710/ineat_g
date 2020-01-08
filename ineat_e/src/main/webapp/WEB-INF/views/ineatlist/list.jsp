@@ -106,6 +106,11 @@ ul {
 .detail {
 	cursor:pointer;
 }
+.favorite{
+	width:35px;
+	cursor:pointer;
+	height:35px;
+}
 </style>
 
 
@@ -131,6 +136,9 @@ ul {
 			e.stopImmediatePropagation();
 			var no = $(this).attr('data-id')
 			$(location).attr('href','/oxo/ineatlist/info.eat?ml_no='+no);
+		});
+		$(".loginpls").click(function(){
+			alert('로그인 후 처리하세요');
 		});
 		
 		$(".list_ajax").click(function(e) {
@@ -310,10 +318,21 @@ ul {
 								<img src="/oxo/mainlist/${data.ml_title}1.jpg">
 							</div>
 							<!-- 텍스트박스 -->
-							<div class="text_box">
-								<div style="position:absolute;">
-									버튼이미지
+							<div class="text_box position-relative">
+							
+								<c:if test="${empty SID }">
+								<div class="favorite loginpls position-absolute">
+									<img src="/oxo/img/favorite2.png" style="width: 100%;">
 								</div>
+								</c:if>
+								
+								<c:if test="${not empty SID }">
+								<div class="favorite position-absolute">
+									<img src="/oxo/img/favorite2.png" style="width: 100%;">
+									<img src="/oxo/img/favorite.png" style="width: 100%; display: none">
+								</div>
+								</c:if>
+								
 								<ul>
 									<li>
 										<h1 class="d-inline-block m-0 detail" data-id="${data.ml_no }">${data.ml_title }</h1>
