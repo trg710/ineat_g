@@ -254,16 +254,16 @@
       <!-- 섹션1-->
       <div class="section" style="background: url('img/main.jpg') no-repeat; background-size: cover;">
          <div id="page1" style="margin-top: 5%;">
-            <a href="#"><img src="img/click.jpg" width="28%" id="mainimg" class="goRecommend" style="margin-left: 15px;"></a>
+            <a href="#"><img src="img/click1.jpg" width="28%" id="mainimg" class="goRecommend" style="margin-left: 15px;"></a>
                <img src="img/ineat.png" width="30%" style="margin-right: 5%; margin-left: 5%;">
-               <a href="#"><img src="img/matdcup.jpg" width="28%" id="mainimg"></a>
+               <a href="#"><img src="img/matdcup1.jpg" width="28%" id="mainimg"></a>
          </div>
       </div>
       <!--임시섹션2-->
 		<div class="section mt-n1"
          style="background: url('img/main2.jpg') no-repeat; background-size: cover;">
          <div class="content2">
-            <div class="reviewTitle">
+            <div class="reviewTitle col-8">
                <h1 style="font-size: 38px; color: rgb(255, 255, 255);">
                   <em>R e v i e w</em>
                </h1>
@@ -271,13 +271,13 @@
             
             
             <c:forEach var="data" items="${REVIEW}"  begin="0" end="3"> 
-            <div class="reviewBox col-12">
+            <div class="reviewBox col-8">
                <div class="membInfo col-2 center-block mt-2" style="float: left; display: grid;">
                   <img src="img/member.png" width="70px" height="70px"  style="margin: 0 auto;">
                   <h6></h6>
                   <h4 class="badge badge-warning" style="font-size: 13px;">${data.m_id }</h4>
                </div>
-               <div class="review col-12 clearfix" style="margin-top: 3px;">
+               <div class="review col-10 clearfix" style="margin-top: 3px;">
                   <div style="margin-right: 20px;">
                      <img src="mainlist/텐마루1.jpg" width="112px;" height="112px"  style="float: left; border: solid white 1px;">
                      <img src="mainlist/텐마루1.jpg" width="112px;" height="112px" style="float: left; border: solid white 1px;">
