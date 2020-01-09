@@ -167,6 +167,7 @@ public class Member {
 		String email = mVO.getEmail();
 		String pw = null;
 		String pwck= "pwck";
+		String pwok = "pwok";
 		try{
 			pw = mDAO.passFind(mVO).getPw();
 		} catch(Exception e) {
