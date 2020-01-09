@@ -205,6 +205,29 @@ object-fit: cover;
    border: solid white 10px;
    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
 }
+<!--
+로그인 모달창 css-->
+.form-control:focus {
+   border: solid orange 2px;
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px
+      rgba(255, 165, 0, 0.4)
+}
+
+.btn-w {
+   width: 100%;
+   margin-bottom: 0.5rem;
+}
+
+.size {
+   font-size: 0.8rem;
+   display: inline;
+   text-align: center;
+}
+
+.w3-button:hover {
+   color: #000 !important;
+   background-color: rgba(253, 153, 0, 0.6) !important;
+}
 
 
 </style>
