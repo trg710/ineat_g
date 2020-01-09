@@ -30,6 +30,12 @@ public class MainList {
 	public ModelAndView List(ModelAndView mv) {
 		List<TasteInfoVO> list = tDAO.selectList();
 		
+		
+		for (int i = 0; i < list.size(); i++) {
+			int ml_no = list.get(i).getMl_no();
+			List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
+			list.get(i).setRvList(rlist);
+		}
 		int total = list.size();
 		
 		mv.addObject("LIST",list);
@@ -45,12 +51,24 @@ public class MainList {
 	@ResponseBody
 	public ArrayList<TasteInfoVO> morelist(TasteInfoVO tVO) {
 		ArrayList<TasteInfoVO> list = new ArrayList<TasteInfoVO>();
+		
 		String type = tVO.getMl_type();
 		String tag = tVO.getMl_tag();
+		
 		if(tag.length() == 0) {
 			list = (ArrayList<TasteInfoVO>)tDAO.moreList(tVO);
+			for (int i = 0; i < list.size(); i++) {
+				int ml_no = list.get(i).getMl_no();
+				List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
+				list.get(i).setRvList(rlist);
+			}
 		}else {
 			list = (ArrayList<TasteInfoVO>)tDAO.tagList(tVO);
+			for (int i = 0; i < list.size(); i++) {
+				int ml_no = list.get(i).getMl_no();
+				List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
+				list.get(i).setRvList(rlist);
+			}
 		}
 		return list;
 	}

@@ -1,5 +1,6 @@
 package com.ineat.oxo.vo;
 
+import java.util.List;
 
 //tVO
 public class TasteInfoVO {
@@ -17,7 +18,14 @@ public class TasteInfoVO {
 	private String ml_type;
 	private int rno;
 	private String mf_filename;
+	private List<ReviewVO> rvList;
 	
+	public List<ReviewVO> getRvList() {
+		return rvList;
+	}
+	public void setRvList(List<ReviewVO> rvList) {
+		this.rvList = rvList;
+	}
 	public String getMf_filename() {
 		return mf_filename;
 	}

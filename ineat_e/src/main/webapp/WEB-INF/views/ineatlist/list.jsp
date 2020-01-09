@@ -188,7 +188,9 @@ ul {
 			var no = $(this).attr('data-id')
 			$(location).attr('href','/oxo/ineatlist/info.eat?ml_no='+no);
 		});
-		$(".loginpls").click(function(){
+		
+		$(document).on('click', '.loginpls', function(e) {
+			e.stopImmediatePropagation();
 			alert('로그인 후 처리하세요');
 		});
 		
@@ -230,10 +232,18 @@ ul {
 						resultlist += '<div class="imgbox detail" data-id="'+data[i].ml_no +'">';
 						resultlist += '<img src="/oxo/mainlist/'+data[i].ml_title +'1.jpg">';
 						resultlist += '</div>';
-						resultlist += '<div class="text_box">';
-						resultlist += '<div style="position:absolute;">';
-						resultlist += '버튼이미지';
+						resultlist += '<div class="text_box position-relative">';
+						resultlist += '<c:if test="${empty SID }">';
+						resultlist += '<div class="favorite loginpls position-absolute">';
+						resultlist += '<img src="/oxo/img/favorite2.png" style="width: 100%;">';
 						resultlist += '</div>';
+						resultlist += '</c:if>';
+						resultlist += '<c:if test="${not empty SID }">';
+						resultlist += '<div class="favorite position-absolute">';
+						resultlist += '<img src="/oxo/img/favorite2.png" style="width: 100%;">';
+						resultlist += '<img src="/oxo/img/favorite.png" style="width: 100%; display: none">';
+						resultlist += '</div>';
+						resultlist += '</c:if>';
 						resultlist += '<ul>';
 						resultlist += '<li>';
 						resultlist += '<h1 class="d-inline-block m-0 detail" data-id="'+data[i].ml_no +'">'+data[i].ml_title +'</h1>';
@@ -244,30 +254,25 @@ ul {
 						resultlist += '<small class="text-muted">'+data[i].ml_newaddr+'</small>';
 						resultlist += '</h4>';
 						resultlist += '</li>';
-						resultlist += '<li class="d-flex mb-2">';
-						resultlist += '<div>';
-						resultlist += '<div class="pimgbox mr-2">';
-						resultlist += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQujpgIXc66CXx_lyy0TjzC2S26aKxpel6Yl_-qBrg3e06yfhKDyQ&s" alt="avt" class="pic">';
-						resultlist += '</div>';
-						resultlist += '</div>';
-						resultlist += '<div>';
-						resultlist += '<b>유저 id</b> 인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의';
-						resultlist += '이것이다. 어디 이것이야말로 힘차게 싹이 아니다. 실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.';
-						resultlist += '인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의';
-						resultlist += '이것이다. 어디 이것이야말로 힘차게 싹이 아니다. 실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.';
-						resultlist += '</div>';
-						resultlist += '</li>';
-						resultlist += '<li class="d-flex mb-2">';
-						resultlist += '<div>';
-						resultlist += '<div class="pimgbox mr-2">';
-						resultlist += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQujpgIXc66CXx_lyy0TjzC2S26aKxpel6Yl_-qBrg3e06yfhKDyQ&s" alt="avt" class="pic">';
-						resultlist += '</div>';
-						resultlist += '</div>';
-						resultlist += '<div>';
-						resultlist += '<b>유저 id</b> 인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의';
-						resultlist += '이것이다. 어디 이것이야말로 힘차게 싹이 아니다. 실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.';
-						resultlist += '</div>';
-						resultlist += '</li>';
+						var idx = 1;
+						if(data[i].rvList >= 2){
+							idx = 2;
+						}
+						for (var j = 0; j < idx; j++) {
+							var t1 = data[i].rvList;
+							if(t1.length > 0){
+							resultlist += '<li class="d-flex mb-2">';
+							resultlist += '<div>';
+							resultlist += '<div class="pimgbox mr-2">';
+							resultlist += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQujpgIXc66CXx_lyy0TjzC2S26aKxpel6Yl_-qBrg3e06yfhKDyQ&s" alt="avt" class="pic">';
+							resultlist += '</div>';
+							resultlist += '</div>';
+							resultlist += '<div>';
+							resultlist += ' <b>'+ t1[j].m_id+'</b>'+ t1[j].rv_body+' ';
+							resultlist += '</div>';
+							resultlist += '</li>';
+							}
+						}
 						resultlist += '</ul>';
 						resultlist += '<div style="position:absolute;" class="detail" data-id="'+data[i].ml_no +'">';
 						resultlist += '<h4>';
@@ -426,6 +431,7 @@ ul {
 											<small class="text-muted ">${data.ml_newaddr }</small>
 										</h4>
 									</li>
+									<c:forEach var="data2" items="${data.rvList}" varStatus="sts" begin="0" end="1">
 									<li class="d-flex mb-2">
 										<div>
 											<div class="pimgbox mr-2">
@@ -433,23 +439,10 @@ ul {
 											</div>
 										</div>
 										<div>
-											<b>유저 id</b> 인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의
-											이것이다. 어디 이것이야말로 힘차게 싹이 아니다. 실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.
-											인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의
-											이것이다. 어디 이것이야말로 힘차게 싹이 아니다. 실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.
+											<b>${data2.m_id }</b>${data2.rv_body}
 										</div>
 									</li>
-									<li class="d-flex mb-2">
-										<div>
-											<div class="pimgbox mr-2">
-												<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQujpgIXc66CXx_lyy0TjzC2S26aKxpel6Yl_-qBrg3e06yfhKDyQ&s" alt="avt" class="pic">
-											</div>
-										</div>
-										<div>
-											<b>유저 id</b> 인류의 긴지라 설산에서 넣는 힘있다. 목숨이 보이는 인간에 그와 인생을 황금시대의
-											이것이다. 어디 이것이야말로 힘차게 싹이 아니다. 실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.
-										</div>
-									</li>
+									</c:forEach>
 								</ul>
 								<div style="position:absolute;" class="detail" data-id="${data.ml_no }">
 									<h4>
@@ -506,6 +499,7 @@ ul {
                            <b>아이디찾기</b>
                            </p>
                         </div>
+                        
                         <script type="text/javascript">
                         $(function(){
                         	$('.idFind').click(function(){
