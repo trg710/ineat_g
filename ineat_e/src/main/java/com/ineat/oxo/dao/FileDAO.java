@@ -1,5 +1,7 @@
 package com.ineat.oxo.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,6 +33,17 @@ public class FileDAO {
 			cnt += sqlSession.insert("fSQL.rvFileaddProc", fVO);
 		}
 		
+		return cnt;
+	}
+	
+	public int rvFiledel(ReviewVO rvVO) {
+		int cnt =0;
+		
+		List<String> list = rvVO.getRf_savename();
+		
+		for(String savename : list ) {
+			cnt += sqlSession.delete("fSQL.rvFiledelete", savename);
+		}
 		return cnt;
 	}
 }

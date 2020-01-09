@@ -15,6 +15,12 @@
 		    (select NVL(MAX(rf_no)+1, 100000001) from ie_re_fileup), #{oriName}, #{saveName}, #{dir}, #{len}, (SELECT max(rv_no) from ie_review)
 		)
 	 </insert>
- 
+	 
+ 	<delete id="rvFiledelete" parameterType="String">
+ 	DELETE FROM
+ 		ie_re_fileup
+ 	WHERE
+ 		rf_savename=#{savename}
+ 	</delete>
  
  </mapper>

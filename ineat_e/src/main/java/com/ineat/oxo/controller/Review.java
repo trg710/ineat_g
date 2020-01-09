@@ -91,7 +91,7 @@ public class Review {
 		
 		List<String> list = rvVO.getRf_savename();
 		if(list != null) {
-			
+			fDAO.rvFiledel(rvVO);
 		}else {
 		}
 		rv.setUrl("/oxo/ineatlist/info.eat?ml_no="+rvVO.getRv_mlno());
