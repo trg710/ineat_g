@@ -165,7 +165,8 @@ public class Member {
 		String id= mVO.getId();
 		String name= mVO.getName();
 		String email = mVO.getEmail();
-		String pw = "";
+		String pw = null;
+		String pwck= "pwck";
 		try{
 			pw = mDAO.passFind(mVO).getPw();
 		} catch(Exception e) {
@@ -177,16 +178,20 @@ public class Member {
 			if(pw != null){
 				mVO.setContent("inEAT에서 보내는 메일입니다.\r\n"
 						+id+"님의 비밀번호는 "+pw+" 입니다.\r\n"
-						+"개인정보 보호를 위해 비밀번호 확인 후 변경해주세요.");
+						+"개인정보 보호를 위해 비밀번호 확인 후 변경해주세요.\r\n"
+						+ "\r\n"
+						+ "\r\n"
+						+ "\r\n"
+						+ "Copyright © INEAT Corp. All Rights Reserved.");
 				mVO.setReceiver(email);
 				mVO.setSubject(id+"님 비밀번호 찾기 메일입니다.");
 				mDAO.sendEmail(mVO);
 				rv.setUrl("/oxo/main.eat");
 			} else {
 				rv.setUrl("/oxo/member/passFind.eat");
+				mv.addObject("msg",pwck);
 			}
 
-//		mv.addObject("DATA",pw);
 //		mv.addObject("EMAIL",email);
 		mv.setView(rv);
 		return mv;

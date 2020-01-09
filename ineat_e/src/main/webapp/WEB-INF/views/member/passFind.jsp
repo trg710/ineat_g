@@ -33,9 +33,21 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	var pw = '${param.msg}';
 	$('#home').click(function(){
 		$(location).attr('href','/oxo/main.eat');		
 	});
+	$('#pwalert').css('display','none');
+	
+	if("pwck"== pw){
+		$('#pwalert').css('display','block');
+		}
+    $('#x').click(function() {
+        $('#pwalert').css('display', 'none');
+     });
+     
+
+	
 /*
 	$('#sm').click(function(){
 		var email = $('#email').val();
@@ -75,10 +87,10 @@ $(function(){
                     <br>
                     <input type="text" class="form-control inputheight " id="email" name="email" placeholder="E-mail">
 <!--                     <input type="hidden" class="form-control inputheight " id="pw" name="pw" value=${EMAIL.email }>
-                    <input type="hidden" class="form-control inputheight " id="pw" name="pw" value=${DATA.pw }>
                     
                     <b><p class="text-center text-warning" id="passok"><b>　</b></p></b>
                      -->
+                    <input type="hidden" class="form-control inputheight " id="pw" name="pw" value=${MSG }>
                     <br>
                 </div>
                 
@@ -93,7 +105,14 @@ $(function(){
         </div>
     </div>
 </div>
-
+  <div id="pwalert" class="w3-modal">
+	<div class="w3-modal-content alert alert-dismissible alert-warning col-4 container" >
+	  <button type="button" class="close" data-dismiss="alert" id="x">&times;</button>
+	  <h4 class="alert-heading">회원정보가 틀렸습니다!</h4>
+	  <br>
+	  <p class="mb-0">회원정보를 다시 확인해주세요.</p>
+	</div>
+</div>
 </form>
 </body>
 </html>
