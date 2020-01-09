@@ -62,6 +62,17 @@
             object-fit: cover;
             cursor: pointer;
         }
+        .del_pic{
+       	    position: absolute;
+		    top: 0;
+		    right: 10px;
+		    color: white;
+		    cursor: pointer;
+		    display:none;
+        }
+        .blurEffect {
+            filter: brightness(30%);
+        }
     </style>
     <script type="text/javascript">
         $(function () {
@@ -74,23 +85,24 @@
                 this.style.height = '150px';
                 this.style.height = (this.scrollHeight) + 'px';
             });
-
-            var bool = true;
-            var c_index;
-            var c_star = '#'+'${RVO.rv_score}';
-            var c_score = '${RVO.rv_score}';
             
-            $('.pointStarlist').click(function () {
+			var bool = true;
+            var c_score = '${RVO.rv_score}';
+            var c_index;
+            
+            $('#sc').text(c_score);
+            
+            $('.pointStarlist').click(function() {
                 c_star = $(this);
                 c_index = c_star.index();
                 bool = false;
-                c_score = $(this).attr('id');
+                c_score = $(this).attr('data-id');
                 $('#score').val(c_score);
             });
 
             $('.pointStarlist').mouseenter(function () {
                 var star = $(this);
-                var t_score = $(this).attr('id');
+                var t_score = $(this).attr('data-id');
                 $('#sc').text(t_score);
                 var t_index = star.index();
                 if ((t_index % 2) == 0) {
@@ -104,7 +116,7 @@
                 star.prevAll('.even').css('background-position', '-13px -1031px');
                 star.nextAll().css('background-position', '0 -9999px');
             });
-            
+
             $('.pointStarRating').mouseleave(function () {
                 if (bool == true) {
                 	$('#sc').text(0);
@@ -123,6 +135,8 @@
                 }
             });
             
+            
+            
             $('#ck').click(function(){
             	var f_value = $('#f1').val();
             	if(f_value ==""){
@@ -138,8 +152,11 @@
     			e.stopImmediatePropagation();
     			
     			f_this = $(this).find('img');
-            	f_no = $(this).index()+1;
+    			
+            	f_no = ($(this).index()+1)-'${RVO.cnt}';
+            	
             	f_id = "#f"+f_no;
+            	
             	$(f_id).click();
             });
             
@@ -149,7 +166,7 @@
             	
             	var tmp = URL.createObjectURL(e.target.files[0]);
             	f_this.attr('src', tmp);
-            	
+            	f_this.addClass('inimg');
             	var f_value = $(this).val();
             	if( count < f_no && count <= 10){
             		count += 1;
@@ -166,6 +183,27 @@
             	            	
             });
             
+            $(document).on('mouseenter', '.inimg', function(e) {
+            	e.stopImmediatePropagation();
+            	$(this).find('img').addClass('blurEffect');
+            	$(this).find('img').css('cursor','auto');
+            	$(this).find('span').css('display','block');
+            });
+            $(document).on('mouseleave', '.inimg', function(e) {
+            	e.stopImmediatePropagation();
+            	$(this).find('img').removeClass('blurEffect');
+            	$(this).find('img').css('cursor','pointer');
+            	$(this).find('span').css('display','none');
+            	
+            });
+            $(document).on('click', '.del_pic', function(e) {
+            	e.stopImmediatePropagation();
+            	$(this).parents('.pic_1').remove();
+            	var savename = $(this).attr('data-id');
+            	var del_file = '<input type="text" name="rf_savename" value="'+savename+'">';
+            	$('#del_file_box').append(del_file);
+            });
+            
         });
         function reviewsubmit(){
         	$('.files:last').remove();
@@ -175,6 +213,8 @@
 </head>
 
 <body>
+<button id="my-btn" onclick="alert('클릭이벤트 발생')">버튼</button>
+
     <!-- 메인 -->
 
     <!--네비게이션바-->
@@ -217,29 +257,41 @@
                     <h3> <b class="text-warning">리뷰 수정</b> </h3>
                     <div class="d-flex">
 	                    <div class="pointStarRating d-flex">
-	                        <div class="pointStarlist odd" id="0.5"></div>
-	                        <div class="pointStarlist even" id="1.0"></div>
-	                        <div class="pointStarlist odd" id="1.5"></div>
-	                        <div class="pointStarlist even" id="2.0"></div>
-	                        <div class="pointStarlist odd" id="2.5"></div>
-	                        <div class="pointStarlist even" id="3.0"></div>
-	                        <div class="pointStarlist odd" id="3.5"></div>
-	                        <div class="pointStarlist even" id="4.0"></div>
-	                        <div class="pointStarlist odd" id="4.5"></div>
-	                        <div class="pointStarlist even" id="5.0"></div>
+	                        <div class="pointStarlist odd" data-id="0.5"></div>
+	                        <div class="pointStarlist even" data-id="1.0"></div>
+	                        <div class="pointStarlist odd" data-id="1.5"></div>
+	                        <div class="pointStarlist even" data-id="2.0"></div>
+	                        <div class="pointStarlist odd" data-id="2.5"></div>
+	                        <div class="pointStarlist even" data-id="3.0"></div>
+	                        <div class="pointStarlist odd" data-id="3.5"></div>
+	                        <div class="pointStarlist even" data-id="4.0"></div>
+	                        <div class="pointStarlist odd" data-id="4.5"></div>
+	                        <div class="pointStarlist even" data-id="5.0"></div>
 	                    </div>
                         <div class="starscore mr-2"><h3><b id="sc">0</b></h3></div>
                     </div>
                     <div>
                     
-                        <form class="wrap" enctype="multipart/form-data" method="post" action="/oxo/ineatlist/review/addreview.eat" id="reviewfrm">
-                            <input type="hidden" id="score" name="s_score" value="">
-                            <input type="hidden" id="mlno" name="rv_mlno" value="${MLNO}">
+                        <form class="wrap" enctype="multipart/form-data" method="post" action="/oxo/ineatlist/review/fixreviewproc.eat" id="reviewfrm">
+                            <input type="hidden" id="score" name="rv_score" value="${RVO.rv_score}">
+                            <input type="hidden" id="mlno" name="rv_mlno" value="${RVO.rv_mlno}">
+                            <input type="hidden" id="mlno" name="rv_no" value="${RVO.rv_no}">
                             <div id="file_box" style="display: none;">
 	                           	<input type="file" class="form-control-file files" name="sfile" id="f1">
                             </div>
-                            <textarea name="rv_body" class="p-3 mt-3 mb-3 reviewarea" placeholder="리뷰 내용을 작성해 주세요" maxlength="1000"></textarea>
+                            <div id="del_file_box" style="display: none;">
+                            	
+                            </div>
+                            <textarea name="rv_body" class="p-3 mt-3 mb-3 reviewarea" placeholder="리뷰 내용을 작성해 주세요" maxlength="1000">${RVO.rv_body }</textarea>
                             <div class="gallery" id="gall">
+                            
+                       			<c:forEach var="data" items="${RVO.rf_savename }">
+                   				<div class="inimg pic_1 ml-2">
+                       				<img src="/oxo/upload/${data }" class="pic up_pic">
+                       				<span class="del_pic" data-id="${data }">X</span>
+                                </div>
+                       			</c:forEach>
+                       			
                         		<div class="pic_1 ml-2">
                             		<img src="/oxo/img/moreimg.png" class="pic">
                                 </div>

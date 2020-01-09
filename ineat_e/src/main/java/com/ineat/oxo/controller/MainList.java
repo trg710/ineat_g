@@ -69,7 +69,6 @@ public class MainList {
 		
 		List<String> rvimgs = tDAO.reviewImgs(ml_no);
 		
-		System.out.println(list.size());
 		
 		mv.addObject("IMGS",rvimgs);
 		mv.addObject("AVG", avg);
@@ -88,7 +87,6 @@ public class MainList {
 	
 	@RequestMapping("mainList.eat")
 	public ModelAndView mainList(ModelAndView mv, TasteInfoVO tVO) {
-		System.out.println(tVO.getMl_tag());
 		ArrayList<TasteInfoVO> list = new ArrayList<TasteInfoVO>();
 		String type = tVO.getMl_type();
 		String tag = tVO.getMl_tag();

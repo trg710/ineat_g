@@ -48,7 +48,7 @@
  	<!-- 리뷰 정보 한개 확인. -->
  	<select id="reviewinfo" parameterType="int" resultType="rvVO">
  	SELECT
-	    rv_body, rv_score ,
+	    rv_no, rv_body, rv_score , rv_mlno,
 	    (SELECT COUNT(*) FROM ie_re_fileup WHERE rf_rvno = rv_no) cnt
 	FROM
 	    ie_review
@@ -87,10 +87,23 @@
  	ORDER BY  rv_date DESC	
  	</select>
  	
+ 	
  	<delete id="delreview" parameterType="int">
  	DELETE FROM
  		ie_review 
  	WHERE
  		rv_no=#{rv_no}
  	</delete>
+ 	
+ 	<!-- 리뷰 수정 -->
+ 	<update id="fixreview" parameterType="rvVO">
+ 	UPDATE
+	    ie_review
+	SET
+	    rv_body = #{rv_body},
+	    rv_score = #{rv_score}
+	WHERE
+	    rv_no = #{rv_no}
+ 	</update>
+ 	
  </mapper>

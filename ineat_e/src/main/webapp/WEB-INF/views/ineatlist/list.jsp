@@ -12,12 +12,17 @@
 
 <link rel="stylesheet" href="/oxo/css/w3.css">
 <link rel="stylesheet" href="/oxo/css/bootstrap.css">
-
+<link rel="stylesheet" href="/oxo/fonts/Jua-Regular.ttf">
+<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <script type="text/javascript" src="/oxo/js/jquery.min.js"></script>
 <script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/oxo/js/popper.min.js"></script>
 
 <style>
+.btn-group-toggle{
+	font-family: "Jua", sans-serif;
+	
+}
 ul {
 	list-style: none;
 	width: auto;

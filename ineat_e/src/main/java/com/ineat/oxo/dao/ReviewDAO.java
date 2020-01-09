@@ -35,12 +35,10 @@ public class ReviewDAO {
 		for(int i = 0 ; i<list.size(); i++) {
 //			i번째 리뷰의 사진갯수를 가져옴.
 			int cnt = list.get(i).getCnt();
-			System.out.println(i+"번째 리뷰의 사진갯수 : "+cnt);
 //			사진갯수가 0보다 크면
 			if(cnt > 0) {
 //				i번째 리뷰번호를 받아서
 				int rvno =list.get(i).getRv_no();
-				System.out.println(i+" i번째리뷰의  rvno : "+rvno);
 //				사진정보(savename)을 i번째 리뷰에 넣는다.
 				list.get(i).setRf_savename(sqlSession.selectList("rvSQL.rvfileinfo", rvno));
 			}
@@ -68,16 +66,18 @@ public class ReviewDAO {
 		for(int i = 0 ; i<list.size(); i++) {
 //			i번째 리뷰의 사진갯수를 가져옴.
 			int cnt = list.get(i).getCnt();
-			System.out.println(i+"번째 리뷰의 사진갯수 : "+cnt);
 //			사진갯수가 0보다 크면
 			if(cnt > 0) {
 //				i번째 리뷰번호를 받아서
 				int rvno =list.get(i).getRv_no();
-				System.out.println(i+" i번째리뷰의  rvno : "+rvno);
 //				사진정보(savename)을 i번째 리뷰에 넣는다.
 				list.get(i).setRf_savename(sqlSession.selectList("rvSQL.rvfileinfo", rvno));
 			}
 		}
 		return list;
+	}
+	
+	public void fixreview(ReviewVO rvVO) {
+		sqlSession.update("rvSQL.fixreview", rvVO);
 	}
 }

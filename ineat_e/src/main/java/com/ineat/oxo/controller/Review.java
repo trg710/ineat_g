@@ -1,5 +1,7 @@
 package com.ineat.oxo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,14 +54,11 @@ public class Review {
 		Double score = Double.parseDouble(rvVO.getS_score());
 		rvVO.setRv_score(score);
 		rvDAO.addreview(rvVO);
-
-		System.out.println(sfile);
+		
 		if(sfile != null) {
 			String[] savename = fileSrvc.uploadProc(session, sfile);
 			fDAO.rvFileaddProc(rvVO, savename);
 		}
-		rvVO.getRv_mlno();
-		
 		rv.setUrl("/oxo/ineatlist/info.eat?ml_no="+rvVO.getRv_mlno());
 		mv.setView(rv);
 		return mv;
@@ -74,10 +73,29 @@ public class Review {
 	@RequestMapping("fixreview.eat")
 	public ModelAndView fixreviewform(ModelAndView mv, int rv_no) {
 		ReviewVO rvVO = rvDAO.getRievewInfoOne(rv_no);
-		System.out.println(rvVO.getRv_score());
 		
 		mv.addObject("RVO",rvVO);
 		mv.setViewName("ineatlist/review/fixreview");
+		return mv;
+	}
+	
+	@RequestMapping("fixreviewproc.eat")
+	public ModelAndView fixreviewporc(ModelAndView mv, ReviewVO rvVO, RedirectView rv, HttpSession session) {
+		rvDAO.fixreview(rvVO);
+		
+		MultipartFile[] sfile =rvVO.getSfile();
+		if(sfile != null) {
+			String[] savename = fileSrvc.uploadProc(session, sfile);
+			fDAO.rvFileaddProc(rvVO, savename);
+		}
+		
+		List<String> list = rvVO.getRf_savename();
+		if(list != null) {
+			
+		}else {
+		}
+		rv.setUrl("/oxo/ineatlist/info.eat?ml_no="+rvVO.getRv_mlno());
+		mv.setView(rv);
 		return mv;
 	}
 }
