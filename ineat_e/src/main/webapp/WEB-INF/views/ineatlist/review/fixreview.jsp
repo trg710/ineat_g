@@ -7,7 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>리뷰수정</title>
+	<link rel="stylesheet" href="/oxo/css/w3.css">
     <link rel="stylesheet" href="/oxo/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="/oxo/css/nav.css">
     <script src="/oxo/js/popper.min.js"></script>
     <script src="/oxo/js/jquery.min.js"></script>
     <script src="/oxo/js/bootstrap.min.js"></script>
@@ -76,6 +78,51 @@
     </style>
     <script type="text/javascript">
         $(function () {
+        	//로그인처리
+    	      $('#login').css('display', 'none');
+    	      $('#loginbtn').click(function() {
+    	         $('#login').css('display', 'block');
+    	      });
+    	      $('#x').click(function() {
+    	         $('#login').css('display', 'none');
+    	      });
+    	      
+    	      $('#loginsub').click(function(){
+    	         $.ajax({
+    	            url : "/oxo/member/loginProc.eat",
+    	            type : "post",
+    	            dataType : "json",
+    	            data : {"id" : $('#id').val(),
+    	               "pw" : $('#password').val()},
+    	            success : function(cnt){
+    	               if(cnt==1){
+    	                  location.reload();
+    	               }else{
+    	                  alert('로그인에 실패하였습니다.');
+    	               }
+    	            },
+    	            error : function(){
+    	               alert('###에러');
+    	            }
+    	         });
+    	      });
+    	      
+    	      
+    	      //로그아웃
+    	      $('#logout').click(function(){
+    	         $(location).attr('href', '/oxo/member/logout.eat');
+    	      });
+    	      
+    	      //회원가입처리
+    	      $('#joinbtn').click(function() {
+    	         $(location).attr('href', '/oxo/member/join.eat');
+    	      });
+    	   	//회원정보보기로 이동
+    	   		var id = '${SID}'
+    	   		$('#memInfo').click(function(){
+    	   			$(location).attr('href','/oxo/member/memInfo.eat?id='+id);
+    	   		});
+  ///////////////////////
 			
             $('.pointStarRating>div:odd').css('width', '19px');
 
@@ -217,39 +264,61 @@
 
     <!-- 메인 -->
 
-    <!--네비게이션바-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
-        <a class="navbar-brand" href="#"><img src="/oxo/img/logo.png" style="margin-left: 30px; width: 100px;"></a>
-        <!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
-            aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>-->
+   <!--네비게이션바-->
+   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
+      <a class="navbar-brand" href="#"><img src="/oxo/img/logo.png"
+         style="margin-left: 30px; width: 100px;"></a>
+		<script type="text/javascript">
+		 $(function() {
+		      //네비바 로고 클릭 시 메인화면으로 이동
+		      $('.navbar-brand').click(function() {
+		         $(location).attr('href', '/oxo/main.eat');
+		      });
+		   });
+		  
+		</script>
 
-        <div class="collapse navbar-collapse" id="navbar">
-            <form class="form-inline col-9">
-                <input class=" form-control col-10 mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-warning" type="submit">Search</button>
-            </form>
-            <ul class="navbar-nav float-left" style="width: 200px; margin-right: 20px;">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Story</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Matdcup</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">List</a>
-                </li>
-                <li class="nav-item">
-                    <img src="/oxo/img/member.png" width="30x" style="margin-left: 15px;"
-                        onclick="document.getElementById('login').style.display='block'">
-                </li>
-            </ul>
-            <div>
-            </div>
-        </div>
-    </nav>
-    <!--네비게이션바-->
+      <div class="collapse navbar-collapse" id="navbar">
+         <form class="form-inline col-10" action="/oxo/searchProc.eat" method="POST">
+            <input class=" form-control col-11 mr-sm-2" type="text" placeholder="Search" name="contents">
+            <button class="btn btn-warning" type="submit">Search</button>
+         </form>
+         <ul class="navbar-nav float-left"
+            style="width: 200px; margin-right: 20px;">
+            <li class="nav-item" id="story"><a class="nav-link" href="#">Story</a></li>
+            <li class="nav-item" id="cup"><a class="nav-link" href="#">Matdcup</a></li>
+            <li class="nav-item" id="list"><a class="nav-link" href="#">List</a></li>
+			<script type="text/javascript">
+			  $(function(){
+			  	//스토리 이동
+			  	$('#story').click(function(){
+			  		$(location).attr('href','/oxo/storyboard/storyBoard.eat');
+			  	});
+			  	//맛드컵 이동
+			  	//리스트 이동
+			  	$('#list').click(function(){
+			  		$(location).attr('href','/oxo/ineatlist/list.eat');
+			  	});
+			   });
+			</script>
+              <li class="nav-item"><img src="/oxo/img/member.png" width="30x"
+               style="margin-left: 15px;">
+               <ul class="navbar-nav">
+                  <c:if test="${empty SID}">
+                  <li class="nav-item" id="loginbtn"><a class="nav-link" href="#">로그인</a></li>
+                  <li class="nav-item" id="joinbtn"><a class="nav-link" href="#">회원가입</a></li>
+                  </c:if>
+                  <c:if test="${not empty SID}">
+                     <li class="nav-item"><a class="nav-link" href="#" id="logout">로그아웃</a></li>
+                     <li class="nav-item"><a class="nav-link" href="#" id="memInfo">회원정보보기</a></li>
+                  </c:if>
+               </ul></li>
+         </ul>
+      </div>
+   </nav>
+   <!--네비게이션바-->
+   
+
     <div class="container" style="margin-top: 100px;">
         <div class="row">
             <div class="col-12">
@@ -308,5 +377,70 @@
             </div>
         </div>
     </div>
+       <!-- 로그인 모달창 -->
+   <div id="login" class="w3-modal">
+      <div class="w3-modal-content" style="width: 35%">
+         <div class="w3-container w3-padding">
+            <span id="x" style="margin: 10px 18px 0px 0px;"
+               class="w3-button w3-display-topright">&times;</span>
+            <!-- 로그인 모달 실제코드 -->
+
+            <div style="border: solid orange 2px;">
+               <div>
+                  <div style="text-align: center;">
+                     <img src="/oxo/img/logo.png" width="50%"
+                        style="align-content: center; padding-top: 20px;">
+                  </div>
+                  <div
+                     style="padding: 20px 20px 0px 20px; margin: 20px 20px 20px 20px;">
+                     <div>
+                        <input type="text" class="form-control inputheight " id="id" name="id"
+                           placeholder="I D"">
+                     </div>
+                     <div>
+                        <input type="password" class="form-control inputheight "
+                           style="margin-top: 10px;" id="password" name="pw" placeholder="Password">
+                     </div>
+                     <div>
+                        <br>
+                        <button type="button" class="btn btn-warning btn-w" id="loginsub">Login</button>
+                     </div>
+                     <div style="display: inline-block; margin: 0px;"  class="row col-md-12">
+                        <div class="size col-md-6" style="float: left;">
+                           <p class="text-warning size idFind">
+                           <b>아이디찾기</b>
+                           </p>
+                        </div>
+                        <script type="text/javascript">
+                        $(function(){
+                        	$('.idFind').click(function(){
+                        		$(location).attr('href','/oxo/member/idFind.eat');
+                        	});
+                        });
+                        </script>
+                        <div class="size col-md-6" style="float: right;">
+                           <p class="text-warning size passFind">
+                              <b>비밀번호찾기</b>
+                           </p>
+                        </div>
+                        <script>
+                        $(function(){
+                		//비밀번호 찾기 버튼 클릭시 비밀번호 찾는 창으로 이동
+                		$('.passFind').click(function(){
+                			$(location).attr('href','/oxo/member/passFind.eat');
+                		});
+                        });
+                        </script>
+                     </div>
+                     <p></p>
+                     <p class="text-muted text-center pt-1">Copyright © INEAT Corp. All Rights Reserved.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- 로그인 모달 실제코드 여기까지 -->
+      </div>
+   </div>
+   <!-- 모달 ㅂㅂ  -->
 </body>
 </html>
