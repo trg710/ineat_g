@@ -181,7 +181,6 @@ color:#ff7702;
 <script type="text/javascript" src="/oxo/js/nav.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		${'#list_ml_menu'}.slideUp(500);
 		$.getJSON(
 					'http://api.openweathermap.org/data/2.5/weather?id=1835848&APPID=44b647d32d3a2207ba2169b2aa1a7f92&units=metric',
 						function(data) {
