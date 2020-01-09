@@ -16,33 +16,38 @@
 
 	<!-- storyBaord 출력 -->
 	<select id="storyBoard" resultType="sbVO" parameterType="pUtil">
-		SELECT
-		     *
+		SELECT 
+		    *
 		FROM
-		    (
-		    SELECT
-		        ROWNUM rno, sb_no bno, m_id mid, sb_title title, sb_date sbDate, sb_views views,
-		    	(SELECT COUNT(*)
-			    FROM IE_SB_LIKEHATE
+			(
+			SELECT
+			    ROWNUM rno, bno, mid, title, sbDate, views, LLIKE, HHATE, saveName, cmtCnt
+			FROM
+			    (
+			    SELECT
+			        sb_no bno, m_id mid, sb_title title, sb_date sbDate, sb_views views,
+			    	(SELECT COUNT(*)
+				    FROM IE_SB_LIKEHATE
+				    WHERE
+				    sb_no = sblh_bno
+				    and SBLH_ISSHOW = 'Y'
+				    ) LLIKE,
+				    (SELECT COUNT(*) 
+				    FROM IE_SB_LIKEHATE
+				    WHERE
+				    sb_no = sblh_bno
+				    and SBLH_ISSHOW = 'N'
+				    ) HHATE,
+			        (SELECT NVL(sbf_savename, '') 
+			        FROM IE_SB_FILEUP WHERE SB_NO = SBF_BNO) saveName,
+			        (SELECT COUNT(*) FROM IE_SB_COMMENTS WHERE SB_NO = SBCMT_BNO) cmtCnt
+			    FROM
+			        IE_STORY_BOARD, IE_MEMBER
 			    WHERE
-			    sb_no = sblh_bno
-			    and SBLH_ISSHOW = 'Y'
-			    ) LLIKE,
-			    (SELECT COUNT(*) 
-			    FROM IE_SB_LIKEHATE
-			    WHERE
-			    sb_no = sblh_bno
-			    and SBLH_ISSHOW = 'N'
-			    ) HHATE,
-		        (SELECT NVL(sbf_savename, '') 
-		        FROM IE_SB_FILEUP WHERE SB_NO = SBF_BNO) saveName,
-		        (SELECT COUNT(*) FROM IE_SB_COMMENTS WHERE SB_NO = SBCMT_BNO) cmtCnt
-		    FROM
-		        IE_STORY_BOARD, IE_MEMBER
-		    WHERE
-			    sb_mno = m_no
-			ORDER BY
-			    sb_no DESC
+				    sb_mno = m_no
+			    ORDER BY
+			        sbDate DESC
+			    )
 		    )
 		WHERE
 		    rno BETWEEN #{startCont} AND #{endCont}
@@ -50,14 +55,14 @@
 	
 	<!--  storyBoardInfo 출력 -->
 	<select id="storyBoardInfo" resultType="sbVO">
-		SELECT
+				SELECT
 		    m_id mid, sb_no bno,
 		    	(SELECT 
 				    NVL(sbf_savename, '')
 				FROM 
 				    ie_story_board,ie_member,ie_sb_fileup 
 				WHERE 
-				    sb_no = #{bno} 
+				    sb_no = #{bno}
 				    and sbf_bno = sb_no
 				    and sb_mno = m_no 
 				    and sb_mno = sbf_mno) saveName,
@@ -74,8 +79,11 @@
 		    WHERE
 		    sb_no = sblh_bno
 		    and SBLH_ISSHOW = 'N'
-		    ) HHATE
-		    
+		    ) HHATE,
+            (SELECT sblh_isshow
+            FROM ie_sb_likehate
+            WHERE sblh_mno = (select m_no from ie_member where m_id = #{mid})
+            AND sblh_bno = #{bno}) isshow
 		FROM
 		    IE_STORY_BOARD, IE_MEMBER
 		WHERE
@@ -317,12 +325,11 @@
  	<!-- 게시물 상세보기 -->
  	<select id="sbViewDetail" resultType="sbVO" parameterType="sbVO">
 		SELECT
-			sb_no bno, m_id mid, sb_title title, sb_content content
+			sb_no bno, m_id mid, sb_title title, sb_content content, nvl((select sbf_savename from ie_sb_fileup where sbf_bno = sb_no), '') saveName
 		FROM
 			ie_member, ie_story_board
 		WHERE
 			m_no = sb_mno
-			AND m_id = #{mid}
 			AND sb_no = #{bno}
 	</select>
 	
@@ -340,6 +347,12 @@
 			</trim>
 		</if>
 	</update>
+	
+	<delete id="sbInfoImgDelete" parameterType="sbVO">
+		DELETE FROM IE_SB_FILEUP
+		WHERE
+		    sbF_bno = #{bno}
+	</delete>
 	
 	<!-- 조회수 함수 처리 -->
 	<update id="viewsCnt" parameterType="int">
@@ -378,7 +391,7 @@
 		WHERE
 		    SBCMT_BNO = #{bno}
 		ORDER BY
-		    SBCMT_DATE DESC
+		    SBCMT_DATE
 	</select>
 	
 	 <!-- 댓글 상세보기 -->

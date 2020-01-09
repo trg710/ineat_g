@@ -9,12 +9,7 @@
 <script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 
-<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap&subset=korean" rel="stylesheet">
-<style>
-	.kor{
-		font-family: "Noto Serif KR", sans-serif;
-	}
-</style>
+
 <script type="text/javascript">
 $(function(){
 	// 스토리보드로 돌아가기
@@ -34,12 +29,14 @@ $(function(){
 	}
 	$('#write').click(content);
 	
-	
+	// 글자 제한
     $('#content').on('keyup', function() {
         if($(this).val().length > 1000) {
             $(this).val($(this).val().substring(0, 1000));
         }
     });
+    
+   
 
 });
 </script>
@@ -51,13 +48,13 @@ $(function(){
 	<div class="container-fluid">
 		<div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
-	        <div class="col-md-8 text-primary font-italic"><h1>writing in inEat Story</h1></div>
+	        <div class="col-md-8 text-warning font-italic"><h1>writing in inEat Story</h1></div>
 	    </div>
 	    <div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
 	        <div class="col-md-8 border-bottom"  ></div>
 	    </div>
-	    <form id="form1" method="post" action="/oxo/storyboard/storyBoardWriteProc.eat" enctype="multipart/form-data" class="kor">
+	    <form id="form1" method="post" action="/oxo/storyboard/storyBoardWriteProc.eat" enctype="multipart/form-data">
 		    <div class="row mt-2">
 		        <div class="col-md-2"><input type="hidden" name="mid" value="${SID }"></div>
 		        <div class="col-md-1 text-center">제목</div>
@@ -68,7 +65,7 @@ $(function(){
 		        <div class="col-md-1 text-center">내용</div>
 		        <div class="col-md-6"><textarea id="content" name="content" cols="150" rows="10" style="width:100%"></textarea></div>
 		    </div>
-		    <div class="row mt-2 kor">
+		    <div class="row mt-2">
 		        <div class="col-md-2"></div>
 		        <div class="col-md-1 text-center">파일</div>
 		        <div class="col-md-6">

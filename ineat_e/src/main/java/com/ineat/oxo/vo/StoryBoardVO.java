@@ -14,6 +14,7 @@ public class StoryBoardVO {
 	private String mid;
 	private String title;
 	private String content;
+	private String content2;
 	private Date sbDate;
 	private int views;
 	private MultipartFile sFile;
@@ -28,9 +29,17 @@ public class StoryBoardVO {
 	private int cno;
 	private Date cDate;
 	private int cmtCnt;
+	private String sid;
 	
 	
 	
+	
+	public String getSid() {
+		return sid;
+	}
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
 	public int getCmtCnt() {
 		return cmtCnt;
 	}
@@ -150,6 +159,7 @@ public class StoryBoardVO {
 	}
 	public void setContent(String content) {
 		this.content = content;
+		setContent2();
 	}
 	public Date getSbDate() {
 		return sbDate;
@@ -171,6 +181,15 @@ public class StoryBoardVO {
 				" | content : " + content +
 				" | writer : " + writer
 				; 
+	}
+	public String getContent2() {
+		return content2;
+	}
+	public void setContent2(String content2) {
+		this.content2 = content2;
+	}
+	public void setContent2() {
+		this.content2 = content.replaceAll("\r\n", "<br>");
 	}
 	
 }

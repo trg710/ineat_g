@@ -20,8 +20,8 @@ public class StoryBoardDAO {
 	}
 	
 	// sb 상세보기
-	public StoryBoardVO storyBoardInfo(int bno) {
-		return sqlSession.selectOne("sbSQL.storyBoardInfo", bno);
+	public StoryBoardVO storyBoardInfo(StoryBoardVO sbVO) {
+		return sqlSession.selectOne("sbSQL.storyBoardInfo", sbVO);
 	}
 	
 	// sb write 처리
@@ -113,6 +113,11 @@ public class StoryBoardDAO {
 
 	public int sbComment(StoryBoardVO sbVO) {
 		return sqlSession.insert("sbSQL.sbComment", sbVO);
+	}
+	
+	// 게시물 수정 사진 삭제
+	public int sbInfoImgDelete(StoryBoardVO sbVO) {
+		return sqlSession.delete("sbSQL.sbInfoImgDelete", sbVO);
 	}
 
 	// 댓글 가져오는 함수

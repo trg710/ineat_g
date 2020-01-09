@@ -17,6 +17,7 @@
 <body>
 	<form method="POST" action="/oxo/storyboard/storyBoardInfo.eat" id="form1">
 		<input type="hidden" name="bno" value="${DATA.bno}">
+		<input type="hidden" name="mid" value="${DATA.mid }">
 	</form>
 </body>
 </html>

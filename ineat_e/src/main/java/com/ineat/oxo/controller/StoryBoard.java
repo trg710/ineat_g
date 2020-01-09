@@ -56,6 +56,7 @@ public class StoryBoard {
 		List<StoryBoardVO> list = sbDAO.storyBoard(pUtil);
 		mv.addObject("LIST", list);
 		mv.addObject("PAGE", pUtil);
+		
 		String sid = (String) session.getAttribute("SID");
 		session.setAttribute("SID", sid);
 		System.out.println("*storyBoard.eat sid: " + sid);
@@ -74,7 +75,7 @@ public class StoryBoard {
 		mv.addObject("LIST", list);
 		
 		// 내용 불러오기
-		sbVO = sbDAO.storyBoardInfo(sbVO.getBno());
+		sbVO = sbDAO.storyBoardInfo(sbVO);
 
 		mv.addObject("DATA", sbVO);
 		
@@ -119,27 +120,31 @@ public class StoryBoard {
 	// 좋아요 처리
 	@RequestMapping("sbLike.eat")
 	public ModelAndView sbLike(ModelAndView mv, HttpSession session, StoryBoardVO sbVO) {
+		
 		// 데이터가 있는지 먼저 확인
 		int cnt = sbDAO.sbLike(sbVO);
 		
 		if(cnt == 1) {
-			System.out.println("이미 좋아요를 눌렀습니다.");
+			System.out.println("좋아요를 취소합니다.");
 			sbDAO.sbLikeU(sbVO);
 		}else {
 			int cnt2 = sbDAO.sbLikeHC(sbVO);
 			
 			if(cnt2 == 1) {
-				System.out.println("이미 싫어요를 눌렀습니다.");
-					
+				
+				sbDAO.sbLikeU2(sbVO);
+				System.out.println("싫어요를 취소하고 좋아요를 누릅니다.");
 			}else {
+				
 				int cnt3 = sbDAO.sbLikeZC(sbVO);
 				
 				if(cnt3 == 1) {
-					System.out.println("이미 Z값이 있습니다.");
-					sbDAO.sbLikeU2(sbVO);
 					
+					System.out.println("좋아요를 누릅니다.");
+					sbDAO.sbLikeU2(sbVO);
 				}else {
-					System.out.println("좋아요를 눌러도 좋습니다.");
+					
+					System.out.println("좋아요를 누릅니다.");
 					sbDAO.sbLike2(sbVO);	
 				}
 			}
@@ -158,23 +163,24 @@ public class StoryBoard {
 		int cnt = sbDAO.sbHate(sbVO);
 		
 		if(cnt == 1) {
-			System.out.println("이미 싫어요를 눌렀습니다.");
+			System.out.println("싫어요를 취소합니다.");
 			sbDAO.sbHateU(sbVO);
 		}else {
 			int cnt2 = sbDAO.sbHateLC(sbVO);
 			
 			if(cnt2 == 1) {
-				System.out.println("이미 좋아요를 눌렀습니다.");
+				sbDAO.sbHateU2(sbVO);
+				System.out.println("좋아요를 취소하고 싫어요를 누릅니다..");
 					
 			}else {
 				int cnt3 = sbDAO.sbHateZC(sbVO);
 				
 				if(cnt3 == 1) {
-					System.out.println("이미 Z값이 있습니다.");
+					System.out.println("싫어요를 누릅니다.");
 					sbDAO.sbHateU2(sbVO);
 					
 				}else {
-					System.out.println("싫어요를 눌러도 좋습니다.");
+					System.out.println("싫어요를 누릅니다.");
 					sbDAO.sbHate2(sbVO);	
 				}
 			}
@@ -212,6 +218,16 @@ public class StoryBoard {
 		sbVO.setCnt(sbDAO.sbInfoEdit(sbVO));
 
 		return sbVO;
+	}
+	
+	// 게시물 사진 삭제 처리
+	@RequestMapping("sbInfoImgDelete.eat")
+	public ModelAndView sbInfoImgDelete(ModelAndView mv, StoryBoardVO sbVO) {
+		sbDAO.sbInfoImgDelete(sbVO);
+		
+		mv.addObject("DATA", sbVO);
+		mv.setViewName("storyboard/sbInfoR");
+		return mv;
 	}
 
 	// 댓글 입력 함수 처리

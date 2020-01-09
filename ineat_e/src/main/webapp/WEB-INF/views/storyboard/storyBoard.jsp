@@ -12,12 +12,7 @@
 <link rel="stylesheet" href="/oxo/css/w3.css">
 <link rel="stylesheet" href="/oxo/css/nav.css">
 
-<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap&subset=korean" rel="stylesheet">
-<style>
-	.kor{
-		font-family: "Noto Serif KR", sans-serif;
-	}
-</style>
+
 <script type="text/javascript">
 $(function(){
 	// 작성페이지로
@@ -178,9 +173,10 @@ $(function(){
 	<!--네비게이션바-->
 	</div>
 
-	<div style="display:none">
+	<div style="margin-top:80px; display:none;">
 		<form method="post" action="/oxo/storyboard/storyBoardInfo.eat" id="form1">
 			bno:<input type="text" name="bno" id="bno">
+			sid:<input type="text" name="mid" value="${SID }">
 		</form>
 		
 	sid:<input type="text" value="${SID }">
@@ -193,44 +189,44 @@ $(function(){
 	<div class="container-fluid" style="margin-top:80px">
 		<div class="row text-center">
 			<div class="col-md-2"></div>
-	        <div class="col-md-8 text-primary font-italic"><h1>inEat Story</h1></div>
+	        <div class="col-md-8 text-warning font-italic"><h1>inEat Story</h1></div>
 	    </div>
 	
 	    <div class="row mt-3 text-center">
 	        <div class="col-md-2"></div>
-	        <div class="col-md-2 border-bottom"></div>
-	        <div class="col-md-2 border-bottom kor">제목</div>
-	        <div class="col-md-1 border-bottom kor">작성자</div>
-	        <div class="col-md-1 border-bottom kor">작성일</div>
-	        <div class="col-md-1 border-bottom kor">L&H</div>
-	        <div class="col-md-1 border-bottom kor">조회수</div>
+	        <div class="col-md-1 border-bottom"></div>
+	        <div class="col-md-3 border-bottom">제목</div>
+	        <div class="col-md-1 border-bottom">작성자</div>
+	        <div class="col-md-1 border-bottom">작성일</div>
+	        <div class="col-md-1 border-bottom">L&H</div>
+	        <div class="col-md-1 border-bottom">조회수</div>
 	    </div>
 	    <c:forEach var="data" items="${LIST }">
 		    <div class="row mt-1 text-center">
 		        <div class="col-md-2"></div>
-		        <div class="col-md-2 border-bottom pb-1">
+		        <div class="col-md-1 border-bottom pb-1" style="width:100px; height:100px;">
 			        <c:if test="${data.saveName == null }">
-		    			<img src="/oxo/img/ineat_noimage.jpg" width="50%" class="border"  >
+		    			<img src="/oxo/img/ineat_noimage.jpg" style="width:100%; height:100%" class="border"  >
 		    		</c:if>
 		    		<c:if test="${data.saveName != null}">
-		    			<img src="/oxo/upload/${data.saveName }" width="50%"  >
+		    			<img src="/oxo/upload/${data.saveName }" style="width:100%; height:100%;" class="border">
 		    		</c:if>
 		        </div>
-		        <div class="col-md-2 border-bottom toInfo kor" id="${data.bno}" style="padding-top:33px">
-		        	<c:if test="${data.title.length() ge 14 }">
-	        			${data.title.substring(0, 14) }...
+		        <div class="col-md-3 border-bottom toInfo" id="${data.bno}" style="padding-top:33px">
+		        	<c:if test="${data.title.length() ge 15 }">
+	        			${data.title.substring(0, 15) }...
 	        		</c:if>
-	        		<c:if test="${data.title.length() lt 14 }">
+	        		<c:if test="${data.title.length() lt 15 }">
 	        			${data.title}
 	        		</c:if>
 	        		<c:if test="${data.cmtCnt > 0 }">
 		        		[${data.cmtCnt }]
 	        		</c:if>
 	        	</div>
-		        <div class="col-md-1 border-bottom kor" style="padding-top:33px">${data.mid}</div>
-		        <div class="col-md-1 border-bottom kor" style="padding-top:33px">${data.sbDate }</div>
+		        <div class="col-md-1 border-bottom" style="padding-top:33px">${data.mid}</div>
+		        <div class="col-md-1 border-bottom" style="padding-top:33px">${data.sbDate }</div>
 		        <div class="col-md-1 border-bottom" style="padding-top:23px"><img src="/oxo/img/like_16px.jpg">${data.llike }<p><img src="/oxo/img/hate_16px.jpg">${data.hhate }</div>
-		        <div class="col-md-1 border-bottom kor" style="padding-top:33px">${data.views }</div>
+		        <div class="col-md-1 border-bottom" style="padding-top:33px">${data.views }</div>
 		        <div class="col-md-2"></div>
 		    </div>
 	    </c:forEach>
