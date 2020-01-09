@@ -305,8 +305,7 @@ object-fit: cover;
                <h1 style="font-size: 38px; color: rgb(255, 255, 255);">
                   <em>R e v i e w</em>
                </h1>
-            </div>
-            
+            </div>            
             
             <c:forEach var="data" items="${REVIEW}"  begin="0" end="3"> 
             <div class="reviewBox col-8">

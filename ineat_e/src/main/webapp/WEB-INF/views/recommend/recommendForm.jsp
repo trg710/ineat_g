@@ -36,6 +36,23 @@ body {
 	background-size: cover;
 }
 
+
+.card border-danger{
+	width:450px;
+	
+}
+#thumNail{
+	width: 430px;
+	height: 330px;
+	margin : 0px auto;
+	margin-top:10px;
+	padding : 8px;
+	border:1px solid rgba(255,119,0,0.5);
+}
+#recommendID{
+	position:absolute;
+	right:10px;
+}
 .conImg img {
 	height: 300px;
 	opacity: 0.7;
@@ -46,14 +63,27 @@ body {
 }
 
 .white {
-	background: rgba(255, 255, 255, 0.7);
+	background: rgba(255, 255, 255, 0.8);
+	padding: 15px;
 }
 .imgClass{
 	height:350px;
 }
 .apiFont{
-	font-size:30px;
+	font-size:20px;
+	color:#ff7702;
+	font-weight:600;
 }
+ul{
+cursor:pointer;	
+}
+ul li:hover {
+	color:#ff7702;
+}
+h2{
+color:#ff7702;
+}
+
 </style>
 <script type="text/javascript" src="/oxo/js/nav.js"></script>
 </head>
@@ -99,20 +129,19 @@ body {
 	<div class="container-fhd">
 		<div class="row" style="padding: 50px;">
 			<div class="col-sm-4 white">
-				<h1>날씨</h1>
-				<div class="card border-danger">
-					<img id="thumNail"
-						class="imgClass img-thumbnail card-img-top img-responsive">
+				<h2><em>inEAT Recommend</em></h2>
+				<div class="card " id="box1" style="height: 505px;">
+					<img id="thumNail" class="imgClass img-thumbnail card-img-top img-responsive">
 					<div class="card-body">
 						<p class="card-text">
-							현재 기온은 <span class="apiFont" id="ctemp"></span>도로 <span class="apiFont" id="dayCondition"></span>
+							현재 기온은 <span class="apiFont" id="ctemp"></span>℃로 <span class="apiFont" id="dayCondition"></span>
 							입니다.<br>
-							<span class="recommendTitle apiFont"></span>가게의  
-							<span class="recommendMenu apiFont"></span>는 어떠실까요??
+							<span class="recommendTitle apiFont"></span>의 
+							<span class="recommendMenu apiFont"></span>, 추천드립니다!
 						</p>
+					<div class="">
+						<button type="button" class="btn btn-warning " id="recommendID" style="bottom: 10px;"><span class="recommendTitle"></span>&nbsp검색</button>
 					</div>
-					<div class="card-title">
-						<button type="button" class="btn btn-warning float-right" id="recommendID"><span class="recommendTitle"></span>&nbsp검색하기</button>
 					</div>
 
 				</div>
@@ -124,20 +153,20 @@ body {
                 <input type="hidden" id="contents" name="contents">
            </form>
     
-				<h1>많이 검색한 메뉴</h1>
+				<h2><em>Best Menu</em></h2>
 				<ul class="list-group">
 					<c:forEach var="listMenu" items="${LISTMENU}">
-						<li class="list-group-item listMenu" id="list_ml_menu"><h3>${listMenu.ml_menu}</h3></li>
+						<li class="list-group-item listMenu" id="list_ml_menu"><h5>${listMenu.ml_menu}</h5></li>
 					</c:forEach>
 				</ul>
 			</div>
 			
 			<!-- 스토리로 보내기 -->
 			<div class="col-sm-4 white">
-				<h1>많이 검색한 맛집</h1>
+				<h2><em>Best Store</em></h2>
 				<ul class="list-group">
 					<c:forEach var="list" items="${LIST}">
-						<li class="list-group-item listTitle" id="${list.ml_no}"><h3>${list.ml_title}</h3></li>
+						<li class="list-group-item listTitle" id="${list.ml_no}"><h5>${list.ml_title}</h5></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -152,6 +181,7 @@ body {
 <script type="text/javascript" src="/oxo/js/nav.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
+		${'#list_ml_menu'}.slideUp(500);
 		$.getJSON(
 					'http://api.openweathermap.org/data/2.5/weather?id=1835848&APPID=44b647d32d3a2207ba2169b2aa1a7f92&units=metric',
 						function(data) {
