@@ -117,6 +117,12 @@
 		    left: 50%;
 		    transform: translateX(-50%);
 		}
+		.favorite, .loginpls{
+			width:35px;
+			cursor:pointer;
+			height:35px;
+		    right: 0;
+		}
     </style>
 
     <script>
@@ -165,7 +171,41 @@
   	   		$('#memInfo').click(function(){
   	   			$(location).attr('href','/oxo/member/memInfo.eat?id='+id);
   	   		});
-///////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+			$(document).on('click', '.loginpls', function(e) {
+				e.stopImmediatePropagation();
+				alert('로그인 후 처리하세요');
+			});
+			
+			$(document).on('click', '.favorite', function(e) {
+				e.stopImmediatePropagation();
+				var fav = $(this);
+				
+				var ml_no = fav.attr('data-id');
+				 $.ajax({
+		            url : "/oxo/ineatlist/favoriteup.eat",
+		            type : "post",
+		            dataType : "json",
+		            data : {
+						ml_no : ml_no
+		            },
+		            success : function(data){
+		            	if(fav.find('img').attr('src').includes("favorite2")) {
+		    				fav.find('img').attr('src','/oxo/img/favorite.png');
+		    				fav.removeClass('f_in');
+		    				fav.addClass('f_out');
+		    			}else {
+		    				fav.find('img').attr('src','/oxo/img/favorite2.png');
+		    				fav.removeClass('f_out');
+		    				fav.addClass('f_in');
+		    			}
+		            },
+		            error : function(){
+		               alert('###에러');
+		            }
+				});
+			});
+			
             $('.gallery').each(function () {
                 if ($('div', this).length > 6) {
                     var gal = $(this).children().eq(4);
@@ -283,7 +323,23 @@
                 <div class="header d-flex position-relative">
                     <h2><b>${TVO.ml_title}</b></h2>
                     <span class="ml-3 text-success"><h2><b>${AVG}</b></h2></span>
-                    <div class="position-absolute" style="right: 0;">이미지</div>
+                    <c:choose>
+						<c:when test="${TVO.favorite eq '0'}">
+							<div class="favorite f_in position-absolute" data-id="${TVO.ml_no }">
+								<img src="/oxo/img/favorite2.png" style="width: 100%;">
+							</div>
+						</c:when>
+						<c:when test="${TVO.favorite eq '1'}">
+							<div class="favorite f_out position-absolute" data-id="${TVO.ml_no }">
+								<img src="/oxo/img/favorite.png" style="width: 100%;">
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="loginpls position-absolute">
+								<img src="/oxo/img/favorite2.png" style="width: 100%;">
+							</div>
+						</c:otherwise>
+					</c:choose>
                 </div>
 
                 <!-- 탑 -->

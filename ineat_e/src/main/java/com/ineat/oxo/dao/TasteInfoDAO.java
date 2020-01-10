@@ -31,9 +31,7 @@ public class TasteInfoDAO {
 	
 	public TasteInfoVO tasteInfo(int ml_no) {
 		sqlSession.update("tSQL.upcount", ml_no);
-		TasteInfoVO tVO = sqlSession.selectOne("tSQL.tasteInfo", ml_no);
-		
-		return tVO;
+		return sqlSession.selectOne("tSQL.tasteInfo", ml_no);
 	}
 	
 	public List<String> reviewImgs(int ml_no){
@@ -42,5 +40,20 @@ public class TasteInfoDAO {
 	
 	public int checkfavorite(TasteInfoVO tVO) {
 		return sqlSession.selectOne("tSQL.checkfavorite", tVO);
+	}
+	
+	public int favoriteProc(TasteInfoVO tVO) {
+		int cnt = sqlSession.selectOne("tSQL.checkfavorite", tVO);
+		
+		System.out.println(tVO.getMl_no());
+		System.out.println(tVO.getM_id());
+		if(cnt == 1) {
+			sqlSession.delete("tSQL.favoriteDel", tVO );
+			cnt = 0;
+		}else {
+			sqlSession.insert("tSQL.favoriteIn", tVO);
+			cnt = 1;
+		}
+		return cnt;
 	}
 }

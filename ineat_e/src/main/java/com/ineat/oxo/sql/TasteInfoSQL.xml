@@ -13,7 +13,7 @@
 		(SELECT ml_no, ml_title, ml_newaddr, ml_count ,ROWNUM rno
 		FROM ie_mainlist)
         WHERE rno BETWEEN 1 and 5
-        order by rno
+        order by ml_count desc
  	</select>
  	
  	<select id="morelist" resultType="tVO" parameterType="tVO">
@@ -23,7 +23,7 @@
 		FROM ie_mainlist
         order by ml_count desc)
 		WHERE rno between #{rno} AND #{rno}+4
-        order by rno
+        order by ml_count desc
  	</select>
  	
  	<select id="taglist" resultType="tVO" parameterType="tVO">
@@ -65,22 +65,34 @@
  	</select>
  	
  	<select id="checkfavorite" parameterType="tVO" resultType="int">
-	 		SELECT
-    			count(*)
-			FROM
-			    IE_ML_FAVORITES
-			WHERE
-			    MLF_MNO = (SELECT m_no
-			            FROM ie_member
-			            WHERE m_id = #{m_id}) AND
-				MLF_MLNO = #{ml_no}
-	 	</select>
+	SELECT
+		count(*)
+	FROM
+	    IE_ML_FAVORITES
+	WHERE
+	    MLF_MNO = (SELECT m_no
+	            FROM ie_member
+	            WHERE m_id = #{m_id}) AND
+		MLF_MLNO = #{ml_no}
+ 	</select>
  	
- 	<insert id="" parameterType="tVO">
- 		INSERT INTO
-		ie_review(rv_no, rv_mlno, rv_mno, rv_body, rv_date, rv_score)
+	<insert id="favoriteIn" parameterType="tVO">
+	INSERT INTO
+		IE_ML_FAVORITES
 	VALUES(
-    	(SELECT NVL(MAX(rv_no)+1, 100001) from ie_review), #{rv_mlno}, #{rv_mno}, #{rv_body}, sysdate, #{rv_score}
+		(SELECT NVL(MAX(MLF_NO)+1, 1000001) from IE_ML_FAVORITES),
+		#{ml_no},
+		(SELECT m_no FROM ie_member WHERE m_id = #{m_id}) 
 	)
- 	</insert>
+	</insert>
+	
+	
+	<delete id="favoriteDel" parameterType="tVO">
+	DELETE FROM 
+	    IE_ML_FAVORITES
+	WHERE
+    	mlf_mlno = #{ml_no}
+    	AND
+    	mlf_mno = (SELECT m_no FROM ie_member WHERE m_id = #{m_id})
+	</delete>
  </mapper>

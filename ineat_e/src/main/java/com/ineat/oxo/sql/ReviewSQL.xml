@@ -8,6 +8,8 @@
  
  	<!--  리뷰 작성하는 함수-->
  	<insert id="addreview" parameterType="rvVO">
+ 	
+ 	
  	<selectKey keyProperty="rv_mno" resultType="int" order="BEFORE">
 	SELECT
 		M_NO
@@ -16,6 +18,8 @@
 	WHERE
 		M_ID = #{m_id}
  	</selectKey>
+ 	
+ 	
  	INSERT INTO
 		ie_review(rv_no, rv_mlno, rv_mno, rv_body, rv_date, rv_score)
 	VALUES(

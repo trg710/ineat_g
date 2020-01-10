@@ -193,52 +193,38 @@ ul {
 			alert('로그인 후 처리하세요');
 		});
 		
-		/* $(document).on('click', '.f_in', function(e) {
-			var fav = $(this).find('img');
-			fav.attr('src','/oxo/img/favorite.png');
-			$(this).removeClass('f_in');
-			$(this).addClass('f_out');
-		});
 		
-		$(document).on('click', '.f_out', function(e) {
-			var fav = $(this).find('img');
-			fav.attr('src','/oxo/img/favorite2.png');
-			$(this).removeClass('f_out');
-			$(this).addClass('f_in');
-		}); */
 		
 		$(document).on('click', '.favorite', function(e) {
+			e.stopImmediatePropagation();
 			var fav = $(this);
 			
-			if($(this).find('img').attr('src').includes("favorite2")) {
-				fav.attr('src','/oxo/img/favorite.png');
-				fav.removeClass('f_in');
-				fav.addClass('f_out');
-				console.log('성공');
-			}else {
-				fav.attr('src','/oxo/img/favorite2.png');
-				fav.removeClass('f_out');
-				fav.addClass('f_in');
-				console.log('실패');
-			}
-			
-			/* $.ajax({
-	            url : "/oxo/member/loginProc.eat",
+			var ml_no = fav.attr('data-id');
+			 $.ajax({
+	            url : "/oxo/ineatlist/favoriteup.eat",
 	            type : "post",
 	            dataType : "json",
-	            data : {"id" : $('#id').val(),
-	               "pw" : $('#password').val()},
-	            success : function(cnt){
-	               if(cnt==1){
-	                  location.reload();
-	               }else{
-	                  alert('로그인에 실패하였습니다.');
-	               }
+	            data : {
+					ml_no : ml_no
+	            },
+	            success : function(data){
+	            	console.log(data);
+	            	if(fav.find('img').attr('src').includes("favorite2")) {
+	    				fav.find('img').attr('src','/oxo/img/favorite.png');
+	    				fav.removeClass('f_in');
+	    				fav.addClass('f_out');
+	    				console.log('성공');
+	    			}else {
+	    				fav.find('img').attr('src','/oxo/img/favorite2.png');
+	    				fav.removeClass('f_out');
+	    				fav.addClass('f_in');
+	    				console.log('실패');
+	    			}
 	            },
 	            error : function(){
 	               alert('###에러');
 	            }
-			}); */
+			});
 		});
 		$(".list_ajax").click(function(e) {
 			e.preventDefault();
@@ -273,7 +259,6 @@ ul {
 						$('.more').css('display', 'none');
 					}
 					for (var i = 0; i < length; i++) {
-						console.log(data[i].favorite);
 						var resultlist = '';
 						resultlist += '<div class="d-flex mainlist pr-4">';
 						resultlist += '<h1 style="display: inline-block; margin-right: 10px;">'+data[i].rno+'.</h1>';
@@ -281,12 +266,13 @@ ul {
 						resultlist += '<img src="/oxo/mainlist/'+data[i].ml_title +'1.jpg">';
 						resultlist += '</div>';
 						resultlist += '<div class="text_box position-relative">';
+						
 						if(data[i].favorite == '0'){
-							resultlist += '<div class="favorite f_in position-absolute">';
+							resultlist += '<div class="favorite f_in position-absolute" data-id="'+data[i].ml_no +'">';
 							resultlist += '<img src="/oxo/img/favorite2.png" style="width: 100%;">';
 							resultlist += '</div>';
 						}else if(data[i].favorite == '1'){
-							resultlist += '<div class="favorite f_out position-absolute">';
+							resultlist += '<div class="favorite f_out position-absolute" data-id="'+data[i].ml_no +'">';
 							resultlist += '<img src="/oxo/img/favorite.png" style="width: 100%;">';
 							resultlist += '</div>';
 						}else if(data[i].favorite == null){
@@ -294,6 +280,7 @@ ul {
 							resultlist += '<img src="/oxo/img/favorite2.png" style="width: 100%;">';
 							resultlist += '</div>';
 						}
+						
 						resultlist += '<ul>';
 						resultlist += '<li>';
 						resultlist += '<h1 class="d-inline-block m-0 detail" data-id="'+data[i].ml_no +'">'+data[i].ml_title +'</h1>';
@@ -461,12 +448,12 @@ ul {
 							
 								<c:choose>
 									<c:when test="${data.favorite eq '0'}">
-										<div class="favorite f_in position-absolute">
+										<div class="favorite f_in position-absolute" data-id="${data.ml_no }">
 											<img src="/oxo/img/favorite2.png" style="width: 100%;">
 										</div>
 									</c:when>
 									<c:when test="${data.favorite eq '1'}">
-										<div class="favorite f_out position-absolute">
+										<div class="favorite f_out position-absolute" data-id="${data.ml_no }">
 											<img src="/oxo/img/favorite.png" style="width: 100%;">
 										</div>
 									</c:when>
