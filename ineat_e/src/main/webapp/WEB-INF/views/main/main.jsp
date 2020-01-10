@@ -59,9 +59,8 @@
 	         $(location).attr('href', '/oxo/member/join.eat');
 	      });
 	   	//회원정보보기로 이동
-	   		var id = '${SID}'
 	   		$('#memInfo').click(function(){
-	   			$(location).attr('href','/oxo/member/memInfo.eat?id='+id);
+	   			$(location).attr('href','/oxo/member/memInfo.eat?id='+'${SID}');
 	   		});
    
     //추천페이지로 이동 ---태은추가

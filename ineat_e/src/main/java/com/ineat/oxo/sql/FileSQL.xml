@@ -23,4 +23,68 @@
  		rf_savename=#{savename}
  	</delete>
  
+ 
+ 	<!-- 회원정보수정 파일업로드 관련 -->
+ 	<insert id="memInfoPic" parameterType="fVO">
+ 	<selectKey keyProperty="mno" resultType="int" order="BEFORE">
+ 		SELECT
+ 			m_no
+ 		FROM
+ 			ie_member
+ 		WHERE
+ 			m_id = #{mid}
+ 	</selectKey>
+ 		INSERT INTO
+ 			ie_profile
+ 		VALUES(
+ 			(SELECT NVL(MAX(p_no)+1, 1000001) from ie_profile), #{mno}, #{oriName}, #{saveName}, #{len}, #{dir}, sysdate
+ 		)
+ 	</insert>
+ 	
+ 	<!-- 회원 사진 유무 체크 -->
+ 	<select id="profCk" parameterType="String" resultType="int">
+ 		SELECT
+ 			count(*)
+ 		FROM
+ 			ie_profile
+ 		WHERE
+ 			p_mno = (SELECT
+ 						m_no
+ 					FROM
+ 						ie_member
+ 					WHERE
+ 						m_id = #{id})
+ 	</select>
+ 	
+ 	<!-- 회원정보수정 파일 업데이트관련 -->
+ 	<update id="profUp" parameterType="fVO">
+ 		UPDATE
+ 			ie_profile
+ 		SET
+ 			p_oriname = #{oriName}
+ 			, p_savename = #{saveName}
+            ,p_len = #{len}
+ 		WHERE
+ 			p_mno = (SELECT
+ 						m_no
+ 					FROM
+ 						ie_member
+ 					WHERE
+ 						m_id = #{mid})
+ 	
+ 	</update>
+ 	<!-- 회원정보 사진 가져오깅 ~~ -->
+ 	<select id="getProf" parameterType="fVO" resultType="String">
+ 		SELECT
+ 			p_savename
+ 		FROM
+ 			ie_profile
+ 		WHERE
+ 			p_mno = (SELECT
+ 						m_no
+ 					FROM
+ 						ie_member
+ 					WHERE
+ 						m_id = #{mid})
+ 	</select>
  </mapper>

@@ -130,7 +130,15 @@ $(function(){
                 
                     <div class="tel">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>Profile</em></h3>
-                        <h6 class="text-muted right text-right"><img src="/oxo/img/member.png" width="100px" height="100px" id="pic"></h6>
+                        <c:if test='${DATA.rdCode == -1}'>
+                        <h6 class="text-muted right text-right"><img src="/oxo/upload/${param.PROF}" width="100px" height="100px" id="pic"></h6>
+                    	</c:if>
+                        <script type="text/javascript">
+                        	alert('${DATA.rdCode}');
+                        </script>
+                        <c:if test="${DATA.rdCode == 0}">
+                        <h6 class="text-muted right text-right"><img src="/oxo/upload/${SNAME}" width="100px" height="100px" id="pic"></h6>
+                    	</c:if>
                     </div>
                     <br> 
 
@@ -193,7 +201,7 @@ $(function(){
     </div>
     
     <!-- 회원정보수정 모달창 -->
-<form method="post" action="/oxo/member/editProc.eat">
+<form method="post" action="/oxo/member/editProc.eat"  enctype = multipart/form-data>
   <div id="editInfo" class="w3-modal">
       <div class="w3-modal-content" style="width:40%;">
          <div class="w3-container">
@@ -204,8 +212,8 @@ $(function(){
                     
                     <div class="tel">
                         <h3 class="text-warning left text-left" style="margin-bottom: -20px;"><em>Profile</em></h3>
-                        <h6 class="text-muted right text-right"><img src="/oxo/img/member.png" width="100px" height="100px" id="pic">
-                        <small><input type="file" class="form-control-file right" id="exampleInputFile" aria-describedby="fileHelp"></small></h6>
+                        <h6 class="text-muted right text-right"><img src="/oxo/upload/${SNAME}" width="100px" height="100px" id="pic">
+                        <small><input type="file" class="form-control-file right" id="exampleInputFile" name="sFile" aria-describedby="fileHelp"></small></h6>
                     </div>
                     <br> 
 

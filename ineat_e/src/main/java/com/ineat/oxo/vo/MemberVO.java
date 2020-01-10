@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.springframework.web.multipart.MultipartFile;
+
 // mVO
 public class MemberVO {
 	private int mno;
@@ -19,13 +21,29 @@ public class MemberVO {
 	private String sDate;
 	private Time wTime;
 	private String sTime;
+	private MultipartFile sFile;
 	
     private String subject;
     private String content;
     private String receiver;
+    private int rdCode;
     
     
 
+    
+    
+	public int getRdCode() {
+		return rdCode;
+	}
+	public void setRdCode(int rdCode) {
+		this.rdCode = rdCode;
+	}
+	public MultipartFile getsFile() {
+		return sFile;
+	}
+	public void setsFile(MultipartFile sFile) {
+		this.sFile = sFile;
+	}
 	public String getSubject() {
 		return subject;
 	}

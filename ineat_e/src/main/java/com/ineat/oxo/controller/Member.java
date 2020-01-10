@@ -10,10 +10,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.ineat.oxo.dao.FileDAO;
 import com.ineat.oxo.dao.MemberDAO;
+import com.ineat.oxo.services.FileService;
+import com.ineat.oxo.vo.FileVO;
 import com.ineat.oxo.vo.MemberVO;
 
 @Controller
@@ -22,7 +26,11 @@ public class Member {
 	@Autowired
 	MemberDAO mDAO;
 	@Autowired
+	FileDAO fDAO;
+	@Autowired
 	MemberVO mVO;
+	@Autowired
+	FileService fileSrvc;
 
 	/*회원 가입 및 로그인*/
 
@@ -103,24 +111,38 @@ public class Member {
 	/*회원 정보 관련*/
 	//정보보기
 	@RequestMapping("memInfo.eat")
-	public ModelAndView memInfo(MemberVO mVO,ModelAndView mv) {
+	public ModelAndView memInfo(MemberVO mVO, ModelAndView mv, FileVO fVO, RedirectView rv, HttpSession session) {
 		MemberVO memVO = mDAO.memInfo(mVO);
+		memVO.setRdCode(mVO.getRdCode());
+		fVO.setMid(mVO.getId());
+		String sname = fDAO.getProf(fVO);
+		mv.addObject("SNAME",sname);
 		mv.addObject("DATA", memVO);
+		/*
+		rv.setUrl("/oxo/member/memInfo.eat");
+		mv.setView(rv);
+		*/
+		System.out.println("### isRD : " + mVO.getRdCode());
 		mv.setViewName("member/memInfo");
 		return mv;
 	}
 	//회원정보수정
 	@RequestMapping("editProc.eat")
-	public ModelAndView editProc(ModelAndView mv, MemberVO mVO, RedirectView rv) {
+	public ModelAndView editProc(ModelAndView mv, MemberVO mVO, RedirectView rv, HttpSession session) {
 		int result = mDAO.infoEdit(mVO);
 //		System.out.println("## membEdit : " + mVO);
+		MultipartFile sfile = mVO.getsFile();
+		String sid = (String)session.getAttribute("SID");
+		String sname;
 		
-		if(result == 1) {
-			rv.setUrl("/oxo/member/memInfo.eat");
-//			System.out.println("*********** : " + mVO.getId());
-		}else {
-			rv.setUrl("/oxo/member/memInfo.eat");
+		if(sfile!=null) {
+			sname = fileSrvc.singleUpProc(session, sfile);
+			fDAO.memInfoPic(sfile, sname, sid);
+			System.out.println(sname);
+			mv.addObject("PROF", sname);
 		}
+
+		rv.setUrl("/oxo/member/memInfo.eat");
 /*		
 		if(result == 1) {
 			rv.setUrl("/oxo/member/memInfo.eat?id="+mVO.getId());
@@ -129,6 +151,7 @@ public class Member {
 			rv.setUrl("/oxo/member/memInfo.eat?id="+mVO.getId());
 		}
 */
+		mv.addObject("rdCode", -1);
 		mv.addObject("id", mVO.getId());
 		mv.setView(rv);
 		return mv;
