@@ -22,7 +22,6 @@
 <style>
 .btn-group-toggle{
 	font-family: "Jua", sans-serif;
-	
 }
 ul {
 	list-style: none;
@@ -85,6 +84,10 @@ ul {
 	border-bottom: 1px solid #dbdbdb;
 	position: relative;
 }
+.mainlist:hover {
+	background:#8080801a;
+}
+
 
 .listtop {
 	padding-top: 30px;
@@ -113,6 +116,11 @@ ul {
 	cursor:pointer;
 }
 .favorite{
+	width:35px;
+	cursor:pointer;
+	height:35px;
+}
+.loginpls{
 	width:35px;
 	cursor:pointer;
 	height:35px;
@@ -173,16 +181,7 @@ ul {
 		var type = 'nomal';
 		var tag = '';
 		var total = 5;
-
-		$(document).on('mouseenter', '.mainlist', function(e) {
-			e.stopImmediatePropagation();
-			$(this).css('background', '#8080801a');
-		});
-
-		$(document).on('mouseleave', '.mainlist', function(e) {
-			e.stopImmediatePropagation();
-			$(this).css('background', '0');
-		});
+		
 		$(document).on('click', '.detail', function(e) {
 			e.stopImmediatePropagation();
 			var no = $(this).attr('data-id')
@@ -194,6 +193,53 @@ ul {
 			alert('로그인 후 처리하세요');
 		});
 		
+		/* $(document).on('click', '.f_in', function(e) {
+			var fav = $(this).find('img');
+			fav.attr('src','/oxo/img/favorite.png');
+			$(this).removeClass('f_in');
+			$(this).addClass('f_out');
+		});
+		
+		$(document).on('click', '.f_out', function(e) {
+			var fav = $(this).find('img');
+			fav.attr('src','/oxo/img/favorite2.png');
+			$(this).removeClass('f_out');
+			$(this).addClass('f_in');
+		}); */
+		
+		$(document).on('click', '.favorite', function(e) {
+			var fav = $(this);
+			
+			if($(this).find('img').attr('src').includes("favorite2")) {
+				fav.attr('src','/oxo/img/favorite.png');
+				fav.removeClass('f_in');
+				fav.addClass('f_out');
+				console.log('성공');
+			}else {
+				fav.attr('src','/oxo/img/favorite2.png');
+				fav.removeClass('f_out');
+				fav.addClass('f_in');
+				console.log('실패');
+			}
+			
+			/* $.ajax({
+	            url : "/oxo/member/loginProc.eat",
+	            type : "post",
+	            dataType : "json",
+	            data : {"id" : $('#id').val(),
+	               "pw" : $('#password').val()},
+	            success : function(cnt){
+	               if(cnt==1){
+	                  location.reload();
+	               }else{
+	                  alert('로그인에 실패하였습니다.');
+	               }
+	            },
+	            error : function(){
+	               alert('###에러');
+	            }
+			}); */
+		});
 		$(".list_ajax").click(function(e) {
 			e.preventDefault();
 			var tid = $(this).attr('id');
@@ -220,12 +266,14 @@ ul {
 					ml_tag : tag
 				},
 				success : function(data) {
+					
 					var length = data.length;
 					$('.more').css('display', 'block');
 					if (length < 5) {
 						$('.more').css('display', 'none');
 					}
 					for (var i = 0; i < length; i++) {
+						console.log(data[i].favorite);
 						var resultlist = '';
 						resultlist += '<div class="d-flex mainlist pr-4">';
 						resultlist += '<h1 style="display: inline-block; margin-right: 10px;">'+data[i].rno+'.</h1>';
@@ -233,17 +281,19 @@ ul {
 						resultlist += '<img src="/oxo/mainlist/'+data[i].ml_title +'1.jpg">';
 						resultlist += '</div>';
 						resultlist += '<div class="text_box position-relative">';
-						resultlist += '<c:if test="${empty SID }">';
-						resultlist += '<div class="favorite loginpls position-absolute">';
-						resultlist += '<img src="/oxo/img/favorite2.png" style="width: 100%;">';
-						resultlist += '</div>';
-						resultlist += '</c:if>';
-						resultlist += '<c:if test="${not empty SID }">';
-						resultlist += '<div class="favorite position-absolute">';
-						resultlist += '<img src="/oxo/img/favorite2.png" style="width: 100%;">';
-						resultlist += '<img src="/oxo/img/favorite.png" style="width: 100%; display: none">';
-						resultlist += '</div>';
-						resultlist += '</c:if>';
+						if(data[i].favorite == '0'){
+							resultlist += '<div class="favorite f_in position-absolute">';
+							resultlist += '<img src="/oxo/img/favorite2.png" style="width: 100%;">';
+							resultlist += '</div>';
+						}else if(data[i].favorite == '1'){
+							resultlist += '<div class="favorite f_out position-absolute">';
+							resultlist += '<img src="/oxo/img/favorite.png" style="width: 100%;">';
+							resultlist += '</div>';
+						}else if(data[i].favorite == null){
+							resultlist += '<div class="loginpls position-absolute">';
+							resultlist += '<img src="/oxo/img/favorite2.png" style="width: 100%;">';
+							resultlist += '</div>';
+						}
 						resultlist += '<ul>';
 						resultlist += '<li>';
 						resultlist += '<h1 class="d-inline-block m-0 detail" data-id="'+data[i].ml_no +'">'+data[i].ml_title +'</h1>';
@@ -274,11 +324,11 @@ ul {
 							}
 						}
 						resultlist += '</ul>';
-						resultlist += '<div style="position:absolute;" class="detail" data-id="'+data[i].ml_no +'">';
+						resultlist += '</div>';
+						resultlist += '<div style="position:absolute; bottom: 10px; right: 5px;" class="detail" data-id="'+data[i].ml_no +'">';
 						resultlist += '<h4>';
 						resultlist += '<small class="text-muted"> 자세히 보기 > </small>';
 						resultlist += '</h4>';
-						resultlist += '</div>';
 						resultlist += '</div>';
 						resultlist += '</div>';
 						$('#listbox').append(resultlist);
@@ -398,9 +448,10 @@ ul {
 				
 					<c:forEach var="data" items="${LIST }" varStatus="sts">
 						<div class="d-flex mainlist pr-4">
+						
 							<!-- 넘버 -->
 							<h1 style="display: inline-block; margin-right: 10px;">${sts.count}.</h1>
-
+							
 							<!-- 이미지박스 -->
 							<div class="imgbox detail" data-id="${data.ml_no }">
 								<img src="/oxo/mainlist/${data.ml_title}1.jpg">
@@ -408,18 +459,23 @@ ul {
 							<!-- 텍스트박스 -->
 							<div class="text_box position-relative">
 							
-								<c:if test="${empty SID }">
-								<div class="favorite loginpls position-absolute">
-									<img src="/oxo/img/favorite2.png" style="width: 100%;">
-								</div>
-								</c:if>
-								
-								<c:if test="${not empty SID }">
-								<div class="favorite position-absolute">
-									<img src="/oxo/img/favorite2.png" style="width: 100%;">
-									<img src="/oxo/img/favorite.png" style="width: 100%; display: none">
-								</div>
-								</c:if>
+								<c:choose>
+									<c:when test="${data.favorite eq '0'}">
+										<div class="favorite f_in position-absolute">
+											<img src="/oxo/img/favorite2.png" style="width: 100%;">
+										</div>
+									</c:when>
+									<c:when test="${data.favorite eq '1'}">
+										<div class="favorite f_out position-absolute">
+											<img src="/oxo/img/favorite.png" style="width: 100%;">
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="loginpls position-absolute">
+											<img src="/oxo/img/favorite2.png" style="width: 100%;">
+										</div>
+									</c:otherwise>
+								</c:choose>
 								
 								<ul>
 									<li>
@@ -444,11 +500,11 @@ ul {
 									</li>
 									</c:forEach>
 								</ul>
-								<div style="position:absolute;" class="detail" data-id="${data.ml_no }">
-									<h4>
-										<small class="text-muted">자세히 보기 > </small>
-									</h4>
-								</div>
+							</div>
+							<div style="position:absolute; bottom: 10px; right: 5px;" class="detail" data-id="${data.ml_no }">
+								<h4>
+									<small class="text-muted">자세히 보기 > </small>
+								</h4>
 							</div>
 						</div>
 					</c:forEach>

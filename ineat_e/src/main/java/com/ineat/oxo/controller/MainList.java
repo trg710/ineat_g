@@ -17,6 +17,7 @@ import com.ineat.oxo.vo.TasteInfoVO;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
   
 @Controller
 @RequestMapping("/ineatlist/")
@@ -27,38 +28,55 @@ public class MainList {
 	ReviewDAO rvDAO;
 	
 	@RequestMapping("list.eat")
-	public ModelAndView List(ModelAndView mv) {
+	public ModelAndView List(ModelAndView mv, HttpSession session) {
 		List<TasteInfoVO> list = tDAO.selectList();
-		
+		String sid = (String)session.getAttribute("SID");
 		
 		for (int i = 0; i < list.size(); i++) {
 			int ml_no = list.get(i).getMl_no();
+			if(sid != null) {
+				list.get(i).setM_id(sid);
+				list.get(i).setFavorite(""+tDAO.checkfavorite(list.get(i)));
+			}
 			List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
 			list.get(i).setRvList(rlist);
 		}
+		
 		int total = list.size();
 		
 		mv.addObject("LIST",list);
 		mv.addObject("TOTAL", total);
 		mv.addObject("type","조회");
 		mv.setViewName("ineatlist/list");
-		
 		return mv;
 	}
-	
+	@RequestMapping("")
+	@ResponseBody
+	public String Favorite(TasteInfoVO tVO) {
+		
+		
+		return "";
+	}
 	
 	@RequestMapping("morelist.eat")
 	@ResponseBody
-	public ArrayList<TasteInfoVO> morelist(TasteInfoVO tVO) {
+	public ArrayList<TasteInfoVO> morelist(TasteInfoVO tVO, HttpSession session) {
 		ArrayList<TasteInfoVO> list = new ArrayList<TasteInfoVO>();
 		
 		String type = tVO.getMl_type();
 		String tag = tVO.getMl_tag();
+		String sid = (String)session.getAttribute("SID");
+		
 		
 		if(tag.length() == 0) {
 			list = (ArrayList<TasteInfoVO>)tDAO.moreList(tVO);
 			for (int i = 0; i < list.size(); i++) {
 				int ml_no = list.get(i).getMl_no();
+				if(sid != null) {
+					
+					list.get(i).setM_id(sid);
+					list.get(i).setFavorite(""+tDAO.checkfavorite(list.get(i)));
+				}
 				List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
 				list.get(i).setRvList(rlist);
 			}
@@ -66,6 +84,10 @@ public class MainList {
 			list = (ArrayList<TasteInfoVO>)tDAO.tagList(tVO);
 			for (int i = 0; i < list.size(); i++) {
 				int ml_no = list.get(i).getMl_no();
+				if(sid != null) {
+					list.get(i).setM_id(sid);
+					list.get(i).setFavorite(""+tDAO.checkfavorite(list.get(i)));
+				}
 				List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
 				list.get(i).setRvList(rlist);
 			}

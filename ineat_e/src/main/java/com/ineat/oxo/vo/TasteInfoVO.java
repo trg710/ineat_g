@@ -19,7 +19,22 @@ public class TasteInfoVO {
 	private int rno;
 	private String mf_filename;
 	private List<ReviewVO> rvList;
+	private String favorite;
+	private String m_id;
 	
+	
+	public String getM_id() {
+		return m_id;
+	}
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
+	public String getFavorite() {
+		return favorite;
+	}
+	public void setFavorite(String favorite) {
+		this.favorite = favorite;
+	}
 	public List<ReviewVO> getRvList() {
 		return rvList;
 	}

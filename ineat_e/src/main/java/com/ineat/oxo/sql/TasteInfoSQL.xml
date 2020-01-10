@@ -63,4 +63,24 @@
 	    rv_no = rf_rvno(+) AND
 	    rv_no = rf_rvno
  	</select>
+ 	
+ 	<select id="checkfavorite" parameterType="tVO" resultType="int">
+	 		SELECT
+    			count(*)
+			FROM
+			    IE_ML_FAVORITES
+			WHERE
+			    MLF_MNO = (SELECT m_no
+			            FROM ie_member
+			            WHERE m_id = #{m_id}) AND
+				MLF_MLNO = #{ml_no}
+	 	</select>
+ 	
+ 	<insert id="" parameterType="tVO">
+ 		INSERT INTO
+		ie_review(rv_no, rv_mlno, rv_mno, rv_body, rv_date, rv_score)
+	VALUES(
+    	(SELECT NVL(MAX(rv_no)+1, 100001) from ie_review), #{rv_mlno}, #{rv_mno}, #{rv_body}, sysdate, #{rv_score}
+	)
+ 	</insert>
  </mapper>

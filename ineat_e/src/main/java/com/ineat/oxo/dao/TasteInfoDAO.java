@@ -39,4 +39,8 @@ public class TasteInfoDAO {
 	public List<String> reviewImgs(int ml_no){
 		return sqlSession.selectList("tSQL.reviewimgs", ml_no);
 	}
+	
+	public int checkfavorite(TasteInfoVO tVO) {
+		return sqlSession.selectOne("tSQL.checkfavorite", tVO);
+	}
 }
