@@ -54,7 +54,9 @@ $(function(){
 				var savename = $('#savename').html();
 				if(savename == ''){
 					$('#infoImg').css("display","none");
-				}
+				}else if(savename != ''){
+					$('#infoImgUp').css("display","none");
+				};
 				
 				$('#bno2').html(data.bno);
 				$('#mid2').html(data.mid);
@@ -214,6 +216,11 @@ $(function(){
 		$('#deleteForm2').submit();
 	});
 	
+	// 수정에서 사진 올리기
+	$('#imgUpload').click(function(){
+		$('#form2').submit();
+	});
+	
 });
 </script>
 </head>
@@ -243,6 +250,7 @@ $(function(){
 	
 	<form method="post" action="/oxo/storyboard/storyBoardInfo.eat" id="bnoInfo">
 		sbno:<input type="number" name="bno" value="${DATA.bno }" />
+		smid:<input type="text" name="mid" value="${DATA.mid }"/>
 	</form>
 	
 	<form method="post" action="/oxo/storyboard/sbInfoImgDelete.eat" id="infoImgDelete">
@@ -382,6 +390,20 @@ $(function(){
 				        <div class="col-md-2"><span id="savename"></span></div>
 				        <div class="col-md-2">
 				        	<button type="button" id="imgDelete" class="btn btn-light">사진삭제</button>
+				        </div>
+				    </div>
+				    <div class="row" id="infoImgUp">
+				        <div class="col-md-2"></div>
+				        <div class="col-md-2">사진</div>
+				        <div class="col-md-5">
+				        	<form id="form2" method="post" action="/oxo/storyboard/sbInfoImgUp.eat" enctype="multipart/form-data">
+				        		<input type="number" name="bno" value="${DATA.bno }">
+				        		<input type="text" name="mid" value="${DATA.mid }">
+				        		<input type="file" name="sFile">
+				        	</form>
+				        </div>
+				        <div class="col-md-2">
+				        	<button type="button" id="imgUpload" class="btn btn-light">사진 올리기</button>
 				        </div>
 				    </div>
 				</div>

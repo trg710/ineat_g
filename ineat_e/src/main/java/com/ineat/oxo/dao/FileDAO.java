@@ -20,6 +20,11 @@ public class FileDAO {
 		return sqlSession.insert("sbSQL.sbFileAddProc", fVO);
 	}
 	
+	// sb 수정에서 사진 올리기 함수
+	public int sbInfoImgUp(FileVO fVO) {
+		return sqlSession.insert("sbSQL.sbInfoImgUp", fVO);
+	}
+	
 	public int rvFileaddProc(ReviewVO rvVO, String[] savename) {
 		FileVO fVO = new FileVO();
 		int cnt=0;

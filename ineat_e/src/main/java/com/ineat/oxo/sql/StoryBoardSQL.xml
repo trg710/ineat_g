@@ -354,6 +354,22 @@
 		    sbF_bno = #{bno}
 	</delete>
 	
+	<insert id="sbInfoImgUp" parameterType="fVO">
+		<selectKey keyProperty="writer" resultType="int" order="BEFORE">
+			SELECT
+				M_NO
+			FROM
+				IE_MEMBER
+			WHERE
+				M_ID = #{mid}
+		</selectKey>
+		INSERT INTO
+			ie_sb_fileup(sbf_bno, sbf_mno, sbf_oriname, sbf_savename, sbf_len, sbf_dir)
+		VALUES(
+			#{bno}, #{writer}, #{oriName}, #{saveName}, #{len}, #{dir}
+		)
+	</insert>
+	
 	<!-- 조회수 함수 처리 -->
 	<update id="viewsCnt" parameterType="int">
 		UPDATE 

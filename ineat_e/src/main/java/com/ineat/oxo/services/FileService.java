@@ -165,5 +165,31 @@ public class FileService {
 		
 		return cnt;
 	}
+	
+	// sb 수정에서 사진 올리기
+	public FileVO sbInfoImgUp(HttpSession session, StoryBoardVO sbVO) {
+		String savename = singleUpProc(session, sbVO.getsFile());
+		
+		FileVO fVO = new FileVO();
+		
+		fVO.setBno(sbVO.getBno());
+		fVO.setMid(sbVO.getMid());
+		fVO.setOriName(sbVO.getsFile().getOriginalFilename());
+		fVO.setSaveName(savename);
+		fVO.setDir("\\upload");
+		fVO.setLen(sbVO.getsFile().getSize());
+		
+		
+		System.out.println("sbInfoImgUp() bno: "+ fVO.getBno());
+		System.out.println("sbInfoImgUp() mid: "+ fVO.getMid());
+		System.out.println("sbInfoImgUp() oriName: "+ fVO.getOriName());
+		System.out.println("sbInfoImgUp() savename: " + savename);
+		System.out.println("sbInfoImgUp() dir: "+ fVO.getDir());
+		System.out.println("sbInfoImgUp() len: " + fVO.getLen());
+		
+		((FileDAO)dao).sbInfoImgUp(fVO);
+		
+		return fVO;
+	}
 }
 

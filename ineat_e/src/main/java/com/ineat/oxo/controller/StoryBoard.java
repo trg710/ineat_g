@@ -230,6 +230,17 @@ public class StoryBoard {
 		return mv;
 	}
 
+	// 수정에서 사진 올리기
+	@RequestMapping("sbInfoImgUp.eat")
+	public ModelAndView sbInfoImgUp(ModelAndView mv, StoryBoardVO sbVO, HttpSession session){
+		fileSrvc.setDAO(fDAO);
+		fileSrvc.sbInfoImgUp(session, sbVO);
+		
+		mv.addObject("DATA", sbVO);
+		mv.setViewName("storyboard/sbInfoR");
+		return mv;
+	}
+	
 	// 댓글 입력 함수 처리
 	@RequestMapping("sbComment.eat")
 	public ModelAndView sbComment(ModelAndView mv, HttpSession session, StoryBoardVO sbVO) {
