@@ -21,6 +21,7 @@ public class TasteInfoVO {
 	private List<ReviewVO> rvList;
 	private String favorite;
 	private String m_id;
+	private double avg; //리뷰평균
 	
 	
 	public String getM_id() {
@@ -124,6 +125,12 @@ public class TasteInfoVO {
 	}
 	public void setMl_isshow(String ml_isshow) {
 		this.ml_isshow = ml_isshow;
+	}
+	public double getAvg() {
+		return avg;
+	}
+	public void setAvg(double avg) {
+		this.avg = avg;
 	}
 	
 	
