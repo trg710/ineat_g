@@ -11,7 +11,18 @@
 <link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 <link rel="stylesheet" href="/oxo/css/w3.css">
 <link rel="stylesheet" href="/oxo/css/nav.css">
-
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Sunflower:300,500,700&display=swap&subset=korean" rel="stylesheet">
+<style>
+	.kor{
+		font-family: 'Do Hyeon', sans-serif;
+	}
+	.kor2{
+		font-family: 'Sunflower', sans-serif;
+		font-weight:300;
+	}
+	
+	
+</style>
 
 <script type="text/javascript">
 $(function(){
@@ -257,42 +268,42 @@ $(function(){
 	        <div class="col-md-8 text-warning font-italic"><h1>inEat Story</h1></div>
 	    </div>
 	
-	    <div class="row mt-3 text-center">
-	        <div class="col-md-2"></div>
+	    <div class="row mt-5 text-center kor" style="height:30px;">
+	        <div class="col-md-1"></div>
 	        <div class="col-md-1 border-bottom"></div>
-	        <div class="col-md-3 border-bottom">제목</div>
-	        <div class="col-md-1 border-bottom">작성자</div>
+	        <div class="col-md-4 border-bottom">제목</div>
+	        <div class="col-md-2 border-bottom">작성자</div>
 	        <div class="col-md-1 border-bottom">작성일</div>
 	        <div class="col-md-1 border-bottom">L&H</div>
 	        <div class="col-md-1 border-bottom">조회수</div>
 	    </div>
 	    <c:forEach var="data" items="${LIST }">
-		    <div class="row mt-1 text-center">
-		        <div class="col-md-2"></div>
-		        <div class="col-md-1 border-bottom pb-1" style="width:100px; height:100px;">
+		    <div class="row mt-1 text-center kor2">
+		        <div class="col-md-1"></div>
+		        <div class="col-md-1 border-bottom" style="height:105px;">
 			        <c:if test="${data.saveName == null }">
-		    			<img src="/oxo/img/ineat_noimage.jpg" style="width:100%; height:100%" class="border"  >
+		    			<img src="/oxo/img/ineat_noimage.jpg" style="position:absolute; top:0; left:0; width:100%; height:98%; object-fit:cover;" class="border"  >
 		    		</c:if>
 		    		<c:if test="${data.saveName != null}">
-		    			<img src="/oxo/upload/${data.saveName }" style="width:100%; height:100%;" class="border">
+		    			<img src="/oxo/upload/${data.saveName }" style="position:absolute; top:0; left:0; width:100%; height:98%; object-fit:cover;" class="border">
 		    		</c:if>
 		        </div>
-		        <div class="col-md-3 border-bottom toInfo" id="${data.bno}" style="padding-top:33px">
-		        	<c:if test="${data.title.length() ge 15 }">
-	        			${data.title.substring(0, 15) }...
+		        <div class="col-md-4 border-bottom toInfo" id="${data.bno}" style="padding-top:35px; cursor:pointer;">
+		        	<c:if test="${data.title.length() ge 25 }">
+	        			${data.title.substring(0, 25) }...
 	        		</c:if>
-	        		<c:if test="${data.title.length() lt 15 }">
+	        		<c:if test="${data.title.length() lt 25 }">
 	        			${data.title}
 	        		</c:if>
 	        		<c:if test="${data.cmtCnt > 0 }">
 		        		[${data.cmtCnt }]
 	        		</c:if>
 	        	</div>
-		        <div class="col-md-1 border-bottom" style="padding-top:33px">${data.mid}</div>
-		        <div class="col-md-1 border-bottom" style="padding-top:33px">${data.sbDate }</div>
+		        <div class="col-md-2 border-bottom" style="padding-top:35px">${data.mid}</div>
+		        <div class="col-md-1 border-bottom" style="padding-top:35px">${data.sbDate }</div>
 		        <div class="col-md-1 border-bottom" style="padding-top:23px"><img src="/oxo/img/like_16px.jpg">${data.llike }<p><img src="/oxo/img/hate_16px.jpg">${data.hhate }</div>
-		        <div class="col-md-1 border-bottom" style="padding-top:33px">${data.views }</div>
-		        <div class="col-md-2"></div>
+		        <div class="col-md-1 border-bottom" style="padding-top:35px">${data.views }</div>
+		        <div class="col-md-1"></div>
 		    </div>
 	    </c:forEach>
 		  <ul class="pagination justify-content-center mt-3">
@@ -307,13 +318,13 @@ $(function(){
 		    </li>
 		  </ul>
 		
-	    <div class="row mt-4">
-	        <div class="col-md-2"></div>
-	        <div class="col-md-6"></div>
+	    <div class="row mt-4 kor2">
+	        <div class="col-md-1"></div>
+	        <div class="col-md-8"></div>
 	        <div class="col-md-2">
 	        	<div class="btn-group" role="group">
-	        		<button type="button" id="toHome" class="btn btn-light">홈으로</button>
-	        		<button type="button" id="toWrite" class="btn btn-light">글쓰기</button>
+	        		<button type="button" id="toHome" class="btn btn-warning">홈으로</button>
+	        		<button type="button" id="toWrite" class="btn btn-warning">글쓰기</button>
 	        	</div>
 	        </div>
 	    </div>

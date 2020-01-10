@@ -9,6 +9,16 @@
 <script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Sunflower:300,500,700&display=swap&subset=korean" rel="stylesheet">
+<style>
+	.kor{
+		font-family: 'Do Hyeon', sans-serif;
+	}
+	.kor2{
+		font-family: 'Sunflower', sans-serif;
+		font-weight:300;
+	}
+</style>
 <script type="text/javascript">
 $(function(){
 	$('#toList').click(function(){
@@ -274,7 +284,7 @@ $(function(){
 	        <div class="col-md-2"></div>
 	        <div class="col-md-8 text-warning font-italic"><h1>My story in inEat Story</h1></div>
 	    </div>
-	    <div class="row mt-3">
+	    <div class="row mt-3 kor2">
 	        <div class="col-md-2"></div>
 	        <div class="col-md-3 border-bottom font-weight-bold" style="font-size:17px">제목:&nbsp;${DATA.title }</div>
 	        <div class="col-md-2 border-bottom text-right">작성자:&nbsp;${DATA.mid }</div>
@@ -291,12 +301,12 @@ $(function(){
 	    			<img src="/oxo/upload/${DATA.saveName }" width="100%" class="border">
 	    		</c:if>
 	    	</div>
-	    	<div class="col-md-5 border-bottom pt-3" style="font-size:17px; overflow-wrap:break-word;">${DATA.content2 }</div>
+	    	<div class="col-md-5 border-bottom pt-3 kor2" style="font-size:17px; overflow-wrap:break-word;">${DATA.content2 }</div>
 	    </div>
 	    <div class="row mt-2 text-left">
 	        <div class="col-md-2"></div>
 	        <div class="col-md-2">
-	        	<span id="${DATA.bno }" class="like" >
+	        	<span id="${DATA.bno }" class="like" style="cursor:pointer">
 	        		<c:if test="${DATA.isshow == 'Z' || DATA.isshow == null || DATA.isshow == 'N'}">
 		        		<img src="/oxo/img/likeoff_24px.png">
 		        	</c:if>
@@ -304,7 +314,7 @@ $(function(){
 		        		<img src="/oxo/img/likeon_24px.png">
 		        	</c:if>&nbsp; &nbsp; ${DATA.llike }
 		        </span>
-		        <span id="${DATA.bno }" class="hate ml-4">
+		        <span id="${DATA.bno }" class="hate ml-4" style="cursor:pointer">
 		        	<c:if test="${DATA.isshow == 'Z' || DATA.isshow == null || DATA.isshow == 'Y' }">
 		        		<img src="/oxo/img/hateoff_24px.png">
 		        	</c:if>
@@ -319,7 +329,7 @@ $(function(){
 	    </div>
 	    
 	    <!-- 댓글 보기 처리 -->
-	    <div class="row mt-2">
+	    <div class="row mt-2 kor2">
 	    	<c:forEach var="data" items="${LIST }">
 		    	<div class="col-md-2"></div>
 		    	<div class="col-md-1"></div>
@@ -347,13 +357,13 @@ $(function(){
 				    <input type="hidden" name="mid" value="${SID}">
 				</form>
 	    	</div>
-	    	<div class="col-md-1"><button type="button" id="register" class="btn btn-light">등록</button></div>
+	    	<div class="col-md-1 kor2"><button type="button" id="register" class="btn btn-light">등록</button></div>
 	    </div>
 	    <c:if test="${SID == DATA.mid }">
 		    <div class="row mt-4">
 		    	<div class="col-md-2"></div>
 		    	<div class="col-md-8">
-		    		<div class="btn-group" role="group">
+		    		<div class="btn-group kor2" role="group">
 		    			<button type="button" id="toEdit" class="btn btn-light" data-toggle="modal" data-target="#myModal1">수정하기</button>
 		    			<button type="button" id="delete" class="btn btn-light">삭제하기</button>
 		    		</div>
@@ -364,7 +374,7 @@ $(function(){
 	    
 	    <!-- 게시물 상세 보기 -->
 	    
-	    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	    <div class="modal fade kor2" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -466,9 +476,9 @@ $(function(){
 		</div>
 	    
 	    
-	    <div class="row mt-4 text-center">
+	    <div class="row mt-4 text-center kor2">
 	    	<div class="col-md-2"></div>
-	    	<div class="col-md-8"><button type="button" id="toList" class="btn btn-light">목록으로</button></div>
+	    	<div class="col-md-8"><button type="button" id="toList" class="btn btn-warning">목록으로</button></div>
 	    </div>
 	</div>
 </body>

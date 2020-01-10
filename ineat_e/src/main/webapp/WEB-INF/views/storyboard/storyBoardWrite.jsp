@@ -8,7 +8,16 @@
 <script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
-
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Sunflower:300,500,700&display=swap&subset=korean" rel="stylesheet">
+<style>
+	.kor{
+		font-family: 'Do Hyeon', sans-serif;
+	}
+	.kor2{
+		font-family: 'Sunflower', sans-serif;
+		font-weight:300;
+	}
+</style>
 
 <script type="text/javascript">
 $(function(){
@@ -54,7 +63,7 @@ $(function(){
 	        <div class="col-md-2"></div>
 	        <div class="col-md-8 border-bottom"  ></div>
 	    </div>
-	    <form id="form1" method="post" action="/oxo/storyboard/storyBoardWriteProc.eat" enctype="multipart/form-data">
+	    <form id="form1" method="post" action="/oxo/storyboard/storyBoardWriteProc.eat" enctype="multipart/form-data" class="kor2">
 		    <div class="row mt-2">
 		        <div class="col-md-2"><input type="hidden" name="mid" value="${SID }"></div>
 		        <div class="col-md-1 text-center">제목</div>
@@ -75,13 +84,13 @@ $(function(){
 		    </div>
 	    </form>
 	    
-	    <div class="row mt-4">
+	    <div class="row mt-4 kor2">
 	        <div class="col-md-2"></div>
 	        <div class="col-md-6"></div>
 	        <div class="col-md-2">
 	        	<div class="btn-group" role="group">
-	        		<button type="button" id="cancel" class="btn btn-light">취소</button>
-	        		<button type="button" id="write" class="btn btn-light">작성하기</button>
+	        		<button type="button" id="cancel" class="btn btn-warning">취소</button>
+	        		<button type="button" id="write" class="btn btn-warning">작성하기</button>
 	        	</div>
 	        </div>
 	    </div>
