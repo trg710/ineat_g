@@ -218,7 +218,18 @@ $(function(){
 	
 	// 수정에서 사진 올리기
 	$('#imgUpload').click(function(){
-		$('#form2').submit();
+		var uploadFile = $('#uploadFile').val();
+		
+		if(!uploadFile){
+			alert('파일을 선택주세요.');
+		}else{
+			if(confirm('업로드하시겠습니까?')){
+				$('#form2').submit();
+				alert('사진을 업로드되었습니다.');
+			}else{
+				
+			};
+		}
 	});
 	
 });
@@ -397,9 +408,9 @@ $(function(){
 				        <div class="col-md-2">사진</div>
 				        <div class="col-md-5">
 				        	<form id="form2" method="post" action="/oxo/storyboard/sbInfoImgUp.eat" enctype="multipart/form-data">
-				        		<input type="number" name="bno" value="${DATA.bno }">
-				        		<input type="text" name="mid" value="${DATA.mid }">
-				        		<input type="file" name="sFile">
+				        		<input type="hidden" name="bno" value="${DATA.bno }">
+				        		<input type="hidden" name="mid" value="${DATA.mid }">
+				        		<input id="uploadFile" type="file" name="sFile">
 				        	</form>
 				        </div>
 				        <div class="col-md-2">

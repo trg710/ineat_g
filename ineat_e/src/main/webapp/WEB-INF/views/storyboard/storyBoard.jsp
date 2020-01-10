@@ -172,6 +172,71 @@ $(function(){
 	</nav>
 	<!--네비게이션바-->
 	</div>
+	
+	<!-- 로그인 모달창 -->
+   <div id="login" class="w3-modal">
+      <div class="w3-modal-content" style="width: 35%">
+         <div class="w3-container w3-padding">
+            <span id="x" style="margin: 10px 18px 0px 0px;"
+               class="w3-button w3-display-topright">&times;</span>
+            <!-- 로그인 모달 실제코드 -->
+
+            <div style="border: solid orange 2px;">
+               <div>
+                  <div style="text-align: center;">
+                     <img src="/oxo/img/logo.png" width="50%"
+                        style="align-content: center; padding-top: 20px;">
+                  </div>
+                  <div
+                     style="padding: 20px 20px 0px 20px; margin: 20px 20px 20px 20px;">
+                     <div>
+                        <input type="text" class="form-control inputheight " id="id" name="id"
+                           placeholder="I D"">
+                     </div>
+                     <div>
+                        <input type="password" class="form-control inputheight "
+                           style="margin-top: 10px;" id="password" name="pw" placeholder="Password">
+                     </div>
+                     <div>
+                        <br>
+                        <button type="button" class="btn btn-warning btn-w" id="loginsub">Login</button>
+                     </div>
+                     <div style="display: inline-block; margin: 0px;"  class="row col-md-12">
+                        <div class="size col-md-6" style="float: left;">
+                           <p class="text-warning size idFind">
+                           <b>아이디찾기</b>
+                           </p>
+                        </div>
+                        <script type="text/javascript">
+                        $(function(){
+                        	$('.idFind').click(function(){
+                        		$(location).attr('href','/oxo/member/idFind.eat');
+                        	});
+                        });
+                        </script>
+                        <div class="size col-md-6" style="float: right;">
+                           <p class="text-warning size passFind">
+                              <b>비밀번호찾기</b>
+                           </p>
+                        </div>
+                        <script>
+                        $(function(){
+                		//비밀번호 찾기 버튼 클릭시 비밀번호 찾는 창으로 이동
+                		$('.passFind').click(function(){
+                			$(location).attr('href','/oxo/member/passFind.eat');
+                		});
+                        });
+                        </script>
+                     </div>
+                     <p></p>
+                     <p class="text-muted text-center pt-1">Copyright © INEAT Corp. All Rights Reserved.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- 로그인 모달 실제코드 여기까지 -->
+      </div>
+   </div>
 
 	<div style="margin-top:80px; display:none;">
 		<form method="post" action="/oxo/storyboard/storyBoardInfo.eat" id="form1">
