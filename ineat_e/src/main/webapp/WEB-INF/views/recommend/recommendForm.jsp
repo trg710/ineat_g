@@ -196,6 +196,8 @@ color:#ff7702;
 							}
 							$('#dayCondition').append(dayCondition);
 							$('#ctemp').append(nowTemp);
+							
+							
 							$.ajax({
 								url : "weather.eat",
 								type : "post",

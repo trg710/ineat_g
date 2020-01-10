@@ -14,4 +14,15 @@ public class MatdcupDAO {
 		
 		return sqlSession.selectList("mdSQL.matList"); 
 	}
+	
+	public int insertCount(String winName) {
+		
+		System.out.println("dao===winName ======== " + winName);
+		
+		int cnt  = sqlSession.update("mdSQL.matWinCount", winName);
+		
+		System.out.println("dao===cnt ||   " + cnt);
+		
+		return cnt;
+	}
 }

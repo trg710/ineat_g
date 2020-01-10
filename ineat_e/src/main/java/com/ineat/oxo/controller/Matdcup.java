@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ineat.oxo.dao.MatdcupDAO;
@@ -20,5 +22,15 @@ public class Matdcup {
 		mv.addObject("MLIST", mlist);
 		mv.setViewName("matdcup/matdcup");
 		return mv;
+		
+
+	}
+	
+	@RequestMapping("matdcupWin.eat")
+	@ResponseBody
+	public int matdcupInsertCount(@RequestParam String winName) {
+		System.out.println(winName);
+		int cnt = mdDAO.insertCount(winName);
+	return cnt;
 	}
 }

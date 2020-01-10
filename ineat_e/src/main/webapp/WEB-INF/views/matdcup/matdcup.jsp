@@ -25,7 +25,6 @@
         width: 350px;
         height: 200px;
         display: none;
-        border: 1px solid red;
         z-index: 1000;
     }
 
@@ -34,13 +33,11 @@
         position: absolute;
         bottom: 5%;
         width: 100%;
-        border: 1px solid red;
     }
 
     /*4강*/
     .class4gang {
         position: absolute;
-        border: 1px solid blue;
         bottom: 20%;
         width: 100%;
         display: inline-block;
@@ -49,7 +46,6 @@
     /*결승*/
     .class2gang {
         position: absolute;
-        border: 1px solid black;
         bottom: 35%;
         width: 100%;
     }
@@ -57,7 +53,6 @@
     /*우승자*/
     .classVictory{
         position: absolute;
-        border: 1px solid orange;
         bottom: 50%;
         width: 100%;
     }
@@ -74,23 +69,6 @@
         height: 250px;
     }
 
-    .imgBox {
-        border: 1px solid yellow;
-        width: 25%;
-        float: left;
-    }
-
-    .imgBox img {
-        width: 42%;
-    }
-
-    .finalwinner {
-        position: absolute;
-        top: 90px;
-        border: 1px solid green;
-        width: 50%;
-        height: 195px;
-    }
 
     .modalBack {
         position: absolute;
@@ -119,6 +97,8 @@
         <div class="w3-col w3-m5">
         </div>
     </div>
+    
+    
 
 
 	<!-- 결승 -->
@@ -179,26 +159,6 @@
 		</div>
 	</div>
 
-
-		<!-- <div class="imgBox">
-			<img src="img/1.jpg" id="1" class="w3-margin w3-card-6 w3-round">
-			<img src="img/2.jpg" id="2" class="w3-margin w3-card-4 w3-round">
-		</div>
-
-		<div class="imgBox">
-			<img src="img/3.jpg" id="3" class="w3-margin w3-card-4 w3-round">
-			<img src="img/4.jpg" id="4" class="w3-margin w3-card-4 w3-round">
-		</div>
-		<div class="imgBox">
-			<img src="img/5.jpg" id="5" class="w3-margin w3-card-4 w3-round">
-			<img src="img/6.jpg" id="6" class="w3-margin w3-card-4 w3-round">
-		</div>
-		<div class="imgBox">
-			<img src="img/7.jpg" id="7" class="w3-margin w3-card-4 w3-round">
-			<img src="img/8.jpg" id="8" class="w3-margin w3-card-4 w3-round">
-		</div> -->
-
-
 	<div class="modalBack"></div>
 	<div class="match">
 		<img id="match1player"> <img id="match2player">
@@ -221,6 +181,8 @@
 				var str = $(this).attr('id');
 				alert(str);
 			});
+			
+            
 		});
 	</script>
 </body>

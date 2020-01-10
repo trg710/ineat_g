@@ -9,11 +9,24 @@
 	<![CDATA[
 		SELECT
     		ROWNUM rno, md_name,md_vic
-		FROM
-    		ie_matdcup
+		FROM(
+        	SELECT
+            	md_name,md_vic
+			FROM
+    			ie_matdcup
+        	ORDER BY DBMS_RANDOM.VALUE
+    		)
 		WHERE
-    		ROWNUM<9
-		ORDER BY DBMS_RANDOM.VALUE
+    		ROWNUM <9
 	]]>
-	</select> 
+	</select>
+	
+	<update id="matWinCount" parameterType="String">
+		UPDATE
+				ie_matdcup
+        SET
+                md_vic = md_vic + 1
+        WHERE
+            md_name LIKE #{winName}
+	</update>
  </mapper>
