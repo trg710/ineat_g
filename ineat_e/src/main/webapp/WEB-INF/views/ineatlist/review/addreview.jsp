@@ -183,7 +183,6 @@
             var count = 0;
             $(document).on('click', '.pic_1', function(e) {
     			e.stopImmediatePropagation();
-    			
     			f_this = $(this).find('img');
             	f_no = $(this).index()+1;
             	f_id = "#f"+f_no;
@@ -312,7 +311,7 @@
                         	</div>
                         	
                             <div class="text-right">
-                                <button type="button" class="btn btn-secondary btn-lg"> 취소 </button>
+                                <button type="button" class="btn btn-secondary btn-lg" onclick="$(location).attr('href','/oxo/ineatlist/info.eat?ml_no=${MLNO}')"> 취소 </button>
                                 <button type="button" class="btn btn-warning btn-lg ml-3" onclick="reviewsubmit()"> 글 작성 완료</button>
                             </div>
                         </form>

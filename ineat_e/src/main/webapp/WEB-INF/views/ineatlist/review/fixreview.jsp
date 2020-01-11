@@ -50,7 +50,7 @@
 		    background: url(/oxo/img/sp_ico3.png) no-repeat;
 		    background-position: 0 -9999px;
 		}
-		.pic_1 {
+		.pic_1, .pic_up {
             display: inline-block;
             position: relative;
             width: 100px;
@@ -64,7 +64,7 @@
             object-fit: cover;
             cursor: pointer;
         }
-        .del_pic{
+        .del_pic, .idel_pic{
        	    position: absolute;
 		    top: 0;
 		    right: 10px;
@@ -184,50 +184,34 @@
             
             
             
-            $('#ck').click(function(){
-            	var f_value = $('#f1').val();
-            	if(f_value ==""){
-            		console.log('비어있음');
+            $('.pic_up').click(function(){
+            	var f_last = $('.files:last');
+            	var fl_val = f_last.val();
+            	alert(fl_val);
+            	if(fl_val == '' || fl_val == undefined){
+            		f_last.remove();
+	            	var f_len = $('#file_box>input').length +1;
+	            	var inputfile = '<input type="file" class="form-control-file files" name="sfile" id="f'+f_len+'">';
+	            	$('#file_box').append(inputfile);
+            	}else{
+            		var f_len = $('#file_box>input').length +1;
+	            	var inputfile = '<input type="file" class="form-control-file files" name="sfile" id="f'+f_len+'">';
+	            	$('#file_box').append(inputfile);
             	}
-            });
-            
-            var f_no;
-            var f_id;
-            var f_this;
-            var count = 0;
-            $(document).on('click', '.pic_1', function(e) {
-    			e.stopImmediatePropagation();
-    			
-    			f_this = $(this).find('img');
-    			
-            	f_no = ($(this).index()+1)-'${RVO.cnt}';
+            	$('.files:last').click();
             	
-            	f_id = "#f"+f_no;
-            	
-            	$(f_id).click();
             });
             
             $(document).on('change', '.files' , function(e) {
             	e.stopImmediatePropagation();
-            	console.log($(this).val());
             	
             	var tmp = URL.createObjectURL(e.target.files[0]);
-            	f_this.attr('src', tmp);
-            	f_this.addClass('inimg');
-            	var f_value = $(this).val();
-            	if( count < f_no && count <= 10){
-            		count += 1;
-	            	var resultlist ='';
-	            	resultlist +='<div class="pic_1 ml-2">';
-	            	resultlist +='<img src="/oxo/img/moreimg.png" class="pic">';
-	            	resultlist +='</div>';
-	            	$('#gall').append(resultlist);
-	            	
-	            	f_id = 'f'+(f_no+1);
-	            	var inputfile = '<input type="file" class="form-control-file files" name="sfile" id="'+f_id+'">';
-	            	$('#file_box').append(inputfile);
-            	}
-            	            	
+            	var resultlist ='';
+            	resultlist +='<div class="inimg pic_1 ml-2 f" >';
+            	resultlist +='<img src="'+tmp+'" class="pic">';
+            	resultlist +='<span class="idel_pic">X</span>';
+            	resultlist +='</div>';
+            	$('.pic_up').before(resultlist);
             });
             
             $(document).on('mouseenter', '.inimg', function(e) {
@@ -246,9 +230,24 @@
             $(document).on('click', '.del_pic', function(e) {
             	e.stopImmediatePropagation();
             	$(this).parents('.pic_1').remove();
+            	
             	var savename = $(this).attr('data-id');
+            	
             	var del_file = '<input type="text" name="rf_savename" value="'+savename+'">';
             	$('#del_file_box').append(del_file);
+            });
+            
+            $(document).on('click', '.idel_pic', function(e) {
+            	e.stopImmediatePropagation();
+            	var this_i = $(this).parents('.pic_1');
+            	var i = this_i.index()+1;
+            	var length_i = $('.up_pic').length;
+            	var index = i-length_i;
+            	console.log('현재값 '+i);
+            	console.log('토탈값 '+length_i);
+            	console.log(index);
+            	this_i.remove();
+            	$('#f'+index).remove();
             });
             
         });
@@ -344,30 +343,28 @@
                         <form class="wrap" enctype="multipart/form-data" method="post" action="/oxo/ineatlist/review/fixreviewproc.eat" id="reviewfrm">
                             <input type="hidden" id="score" name="rv_score" value="${RVO.rv_score}">
                             <input type="hidden" id="mlno" name="rv_mlno" value="${RVO.rv_mlno}">
-                            <input type="hidden" id="mlno" name="rv_no" value="${RVO.rv_no}">
+                            <input type="hidden" id="rvno" name="rv_no" value="${RVO.rv_no}">
                             <div id="file_box" style="display: none;">
-	                           	<input type="file" class="form-control-file files" name="sfile" id="f1">
                             </div>
                             <div id="del_file_box" style="display: none;">
                             	
                             </div>
                             <textarea name="rv_body" class="p-3 mt-3 mb-3 reviewarea" placeholder="리뷰 내용을 작성해 주세요" maxlength="1000">${RVO.rv_body }</textarea>
                             <div class="gallery" id="gall">
-                            
-                       			<c:forEach var="data" items="${RVO.rf_savename }">
-                   				<div class="inimg pic_1 ml-2">
+                       			<c:forEach var="data" items="${RVO.rf_savename }" varStatus="status">
+                   				<div class="inimg pic_1 ml-2 f" data-id="f${status.count }">
                        				<img src="/oxo/upload/${data }" class="pic up_pic">
                        				<span class="del_pic" data-id="${data }">X</span>
                                 </div>
                        			</c:forEach>
                        			
-                        		<div class="pic_1 ml-2">
+                        		<div class="pic_up ml-2">
                             		<img src="/oxo/img/moreimg.png" class="pic">
                                 </div>
                         	</div>
                         	
                             <div class="text-right">
-                                <button type="button" class="btn btn-secondary btn-lg"> 취소 </button>
+                                <button type="button" class="btn btn-secondary btn-lg" onclick="$(location).attr('href','/oxo/ineatlist/info.eat?ml_no=${RVO.rv_mlno}')"> 취소 </button>
                                 <button type="button" class="btn btn-warning btn-lg ml-3" onclick="reviewsubmit()"> 글 작성 완료</button>
                             </div>
                         </form>
