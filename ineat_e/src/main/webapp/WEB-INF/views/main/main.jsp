@@ -67,6 +67,10 @@
    	  $('.goRecommend').click(function(){
    		  $(location).attr('href','/oxo/recommend/recommend.eat');
    	  });
+   	//맛드컵 이동
+   		$('.matdcup').click(function(){
+            $(location).attr('href','/oxo/mat/matdcup.eat');
+         });
  	//2섹션 이미지
  	$('.rvimg').each(function () {
                 if ($('div', this).length > 3) {
@@ -110,6 +114,9 @@
   
 </script>
 <style>
+img{
+cursor: pointer;
+}
 .short_txt02{
     overflow:hidden;
     display:-webkit-box;
@@ -235,7 +242,7 @@ object-fit: cover;
    <!-- 메인 -->
 <!--네비게이션바-->
    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
-      <a class="navbar-brand" href="#"><img src="img/logo.png"
+      <a class="navbar-brand" href=""><img src="img/logo.png"
          style="margin-left: 30px; width: 100px;"></a>
 		<script type="text/javascript">
 		 $(function() {
@@ -254,9 +261,9 @@ object-fit: cover;
          </form>
          <ul class="navbar-nav float-left"
             style="width: 200px; margin-right: 20px;">
-            <li class="nav-item" id="story"><a class="nav-link" href="#">Story</a></li>
-            <li class="nav-item" id="cup"><a class="nav-link" href="#">Matdcup</a></li>
-            <li class="nav-item" id="list"><a class="nav-link" href="#">List</a></li>
+            <li class="nav-item" id="story"><a class="nav-link" href="">Story</a></li>
+            <li class="nav-item" id="cup"><a class="nav-link" href="">Matdcup</a></li>
+            <li class="nav-item" id="list"><a class="nav-link" href="">List</a></li>
 			<script type="text/javascript">
 			  $(function(){
 			  	//스토리 이동
@@ -264,6 +271,9 @@ object-fit: cover;
 			  		$(location).attr('href','/oxo/storyboard/storyBoard.eat');
 			  	});
 			  	//맛드컵 이동
+			  	$('#cup').click(function(){
+		           	$(location).attr('href','/oxo/mat/matdcup.eat');
+		        });
 			  	//리스트 이동
 			  	$('#list').click(function(){
 			  		$(location).attr('href','/oxo/ineatlist/list.eat');
@@ -274,12 +284,12 @@ object-fit: cover;
                style="margin-left: 15px;">
                <ul class="navbar-nav">
                   <c:if test="${empty SID}">
-                  <li class="nav-item" id="loginbtn"><a class="nav-link" href="#">로그인</a></li>
-                  <li class="nav-item" id="joinbtn"><a class="nav-link" href="#">회원가입</a></li>
+                  <li class="nav-item" id="loginbtn"><a class="nav-link" href="">로그인</a></li>
+                  <li class="nav-item" id="joinbtn"><a class="nav-link" href="">회원가입</a></li>
                   </c:if>
                   <c:if test="${not empty SID}">
-                     <li class="nav-item"><a class="nav-link" href="#" id="logout">로그아웃</a></li>
-                     <li class="nav-item"><a class="nav-link" href="#" id="memInfo">회원정보보기</a></li>
+                     <li class="nav-item"><a class="nav-link" href="" id="logout">로그아웃</a></li>
+                     <li class="nav-item"><a class="nav-link" href="" id="memInfo">회원정보보기</a></li>
                   </c:if>
                </ul></li>
          </ul>
@@ -292,9 +302,9 @@ object-fit: cover;
       <!-- 섹션1-->
       <div class="section" style="background: url('img/main.jpg') no-repeat; background-size: cover;">
          <div id="page1" style="margin-top: 5%;">
-            <a href="#"><img src="img/click2.jpg" width="28%" id="mainimg" class="goRecommend" style="margin-left: 15px;"></a>
+            <img src="img/click2.jpg" width="28%" id="mainimg" class="goRecommend" style="margin-left: 15px;">
                <img src="img/ineat.png" width="30%" style="margin-right: 5%; margin-left: 5%;">
-               <a href="#"><img src="img/matdcup1.jpg" width="28%" id="mainimg"></a>
+               <img src="img/matdcup1.jpg" width="28%" id="mainimg" class="matdcup">
          </div>
       </div>
       <!--임시섹션2-->
