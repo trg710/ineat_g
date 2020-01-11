@@ -4,28 +4,38 @@
          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="rSQL">
-	<!-- 맛집가게명 가져오기 -->
+	<!-- 지난주 리뷰랭킹 가져오기 -->
 	<select id="showList" resultType="tVO">
+	<![CDATA[
 		SELECT
-		ml_title, ml_no
+   			ml_no, ml_title, avg
 		FROM
-		IE_MAINLIST
+			(
+			SELECT
+    			ml_no, ml_title , TRUNC(avg(rv_score),1) avg
+			FROM
+   				(
+    			SELECT
+        			m.ml_no ml_no, m.ml_title ml_title , r.rv_score rv_score
+    			FROM
+        			ie_review r ,ie_mainlist m
+    			WHERE
+        			r.rv_mlno = m.ml_no
+    			AND
+        			r.rv_date
+    			BETWEEN TO_CHAR(TRUNC(sysdate, 'iw') - 7, 'yyyymmdd') and TO_CHAR(TRUNC(sysdate, 'iw') - 1, 'yyyymmdd')
+  				)
+			GROUP BY ml_no,ml_title
+			ORDER BY avg DESC
+			)
 		WHERE
-		ml_no BETWEEN 1000001 AND 1000010
+    	ROWNUM <=7
+	]]>
 	</select>
 	
 	<!-- 메뉴리스트 가져오기 -->
 	<select id="menuList" resultType="tVO">
-	<![CDATA[
-		SELECT
-    		*
-		FROM
-			(
-				SELECT DISTINCT ROWNUM rno, ml_menu, ml_title, ml_tel FROM ie_mainlist
-			)
-		WHERE rno <11
-		ORDER BY rno
-   ]]>
+		SELECT DISTINCT  ml_menu FROM ie_mainlist
 	</select>
 	
 	  <!--날씨관련메뉴 가져오기-->

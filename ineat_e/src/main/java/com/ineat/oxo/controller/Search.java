@@ -21,7 +21,7 @@ public class Search {
 	public ModelAndView searchFrom(ModelAndView mv) {
 		mv.setViewName("search/searchResult");
 		
-		return mv;
+		return mv;    
 	}
 	
 	@RequestMapping("/searchProc.eat")
