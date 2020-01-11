@@ -5,6 +5,7 @@ import java.util.List;
 //tVO
 public class TasteInfoVO {
 	private int ml_no;
+	private String m_id;
 	private String ml_time;
 	private String ml_title;
 	private String ml_tel;
@@ -17,24 +18,39 @@ public class TasteInfoVO {
 	private String ml_isshow;
 	private String ml_type;
 	private int rno;
+	private int sprice; // 가격대 ~ 기준으로 잘랐을 시 시작 가격
+	private int eprice; // 가격대 ~ 기준으로 잘랐을 시 뒤에 가격 
 	private String mf_filename;
 	private List<ReviewVO> rvList;
 	private String favorite;
-	private String m_id;
-	private double avg; //리뷰평균
 	
 	
+	
+	
+	
+	public String getFavorite() {
+		return favorite;
+	}
+	public void setFavorite(String favorite) {
+		this.favorite = favorite;
+	}
 	public String getM_id() {
 		return m_id;
 	}
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
-	public String getFavorite() {
-		return favorite;
+	public int getSprice() {
+		return sprice;
 	}
-	public void setFavorite(String favorite) {
-		this.favorite = favorite;
+	public void setSprice(int sprice) {
+		this.sprice = sprice;
+	}
+	public int getEprice() {
+		return eprice;
+	}
+	public void setEprice(int eprice) {
+		this.eprice = eprice;
 	}
 	public List<ReviewVO> getRvList() {
 		return rvList;
@@ -126,12 +142,7 @@ public class TasteInfoVO {
 	public void setMl_isshow(String ml_isshow) {
 		this.ml_isshow = ml_isshow;
 	}
-	public double getAvg() {
-		return avg;
-	}
-	public void setAvg(double avg) {
-		this.avg = avg;
-	}
+	
 	
 	
 	

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title> </title>
+<title>inEat </title>
 
 <link rel="stylesheet" href="/oxo/css/w3.css" >
 <link rel="stylesheet" href="/oxo/css/bootstrap.css" >
@@ -93,6 +93,48 @@
 	#filter{
 		float:right;
 	}
+	
+	
+	.round-btn { 
+ 
+ 
+    
+ 
+    width:120px; 
+ 
+    height:120px; 
+ 
+    line-height:120px; 
+ 
+    border: 5px solid #f5f5f5; 
+ 
+    border-radius: 50%; 
+ 
+    color:#f5f5f5; 
+ 
+    text-align:center; 
+ 
+    background-color: green; 
+ 
+    font-size:20px; 
+ 
+    font-weight:bold; 
+ 
+    text-decoration: none; 
+ 
+    
+ 
+    
+ 
+} 
+ 
+.click-btn { 
+    color: #17BAEF; 
+ 
+    background-color: orange; 
+ 
+    text-decoration: none; 
+}
 </style>
 
 
@@ -100,40 +142,128 @@
 $(function(){
 		var listno = 5;
 		var body = '${SCH.contents}';
+		var cost = new Array();
+		// 필터원형 버튼에 관한
+		$('.round-btn').click(function(){
+			$(this).toggleClass('click-btn');
+		});
+		// 적용 or 취소 버튼 클릭시 
+		$('#commit').click(function(){
+			for(var i = 0; i< $('.click-btn').length; i++){
+			if($('.click-btn').eq(i).html() == '1만원대'){
+				cost[i] = 1;
+			}
+			else if($('.click-btn').eq(i).html() == '2만원대'){
+				cost[i] = 2;
+			}
+			else if($('.click-btn').eq(i).html() == '3만원대'){
+				cost[i] = 3;
+			}
+			else if($('.click-btn').eq(i).html() == '4만원대'){
+				cost[i] = 4;
+			}
+			else if($('.click-btn').eq(i).html() == '5만원대'){
+				cost[i] = 5;
+			}// end if
+			
+			} // end for
+			
+			$.ajax({
+				url:"/oxo/filterSearch.eat",
+				type:"post",
+				traditional : true,
+				dataType:"json",
+				data:{
+					"contents":body,
+					"price":cost
+				},
+				success:function(data){
+					alert(body+cost);
+					
+					$('#listbox').empty();
+					for(var i = 0; i<data.length; i++){
+						var resultlist = '';
+						resultlist +='<div class="d-flex mainlist" data-id="'+data[i].ml_no+'">';
+						resultlist +='<h2 style="display: inline-block; margin-right:10px;">'+data[i].rno+'.</h2>';
+						resultlist +='<div class="imgbox">';
+						resultlist +='<img src="/oxo/mainlist/'+data[i].ml_title+'1.jpg">';
+						resultlist +='</div>';
+						resultlist +='<div class="text_box">';
+						resultlist +='<div> 버튼이미지 </div>';
+						resultlist +='<ul>';
+						resultlist +='<li>';
+						resultlist +='<h2 class="d-inline-block">'+data[i].ml_title+'</h2>';
+						resultlist +='<h2 class="d-inline-block"> <span>4.5</span>';
+						resultlist +='</h2>';
+						resultlist +='</li>';
+						resultlist +='<li>';
+						resultlist +=''+data[i].ml_newaddr+'';
+						resultlist +='</li>';
+						resultlist +='<li>';
+						resultlist +=''+data[i].ml_oldaddr+''; 
+						resultlist +='</li>';
+						resultlist +='<li>';
+						resultlist +=''+data[i].ml_menu+'';
+						resultlist +='</li>';
+						resultlist +='</ul>';
+						resultlist +='<div> 자세히 보기 > </div>';
+						resultlist +='</div>';
+						resultlist +='</div>';
+		                $('#listbox').append(resultlist);
+						
+						
+						}
+					
+					$('#filterModal').css('display','none');
+				}
+			});
+		});	
+		
+		$('#cancle').click(function(){
+			$('.round-btn').removeClass('click-btn');
+			$('#filterModal').css('display','none');
+		});
+		
+		
 		$(window).scroll(function() { 
 			if ($(window).scrollTop() == $(document).height() - $(window).height())
 			{ 
+				
+				
+				
 				$.ajax({
 					url:"/oxo/moreResult.eat",
 					type: "post",
+					 traditional : true,
 					dataType:"json",
 					data:{
 						num : listno,
-						contents:body
+						contents:body,
+						price:cost
 					},
 					success: function(data){
-					
-						$(data).each(function(){
+						alert(body+cost);
+						listno += 5;
+						for(var i = 0; i<data.length; i++){
 							var resultlist = '';
-							listno += 1;
 							
-							console.log(listno);
 							
-							resultlist +='<div class="d-flex mainlist" data-id="'+this.ml_no+'">';
-							resultlist +='<h2 style="display: inline-block; margin-right:10px;">'+listno+'.</h2>';
+							
+							resultlist +='<div class="d-flex mainlist" data-id="'+data[i].ml_no+'">';
+							resultlist +='<h2 style="display: inline-block; margin-right:10px;">'+data[i].rno+'.</h2>';
 							resultlist +='<div class="imgbox">';
-							resultlist +='<img src="/oxo/mainlist/'+this.ml_title+'1.jpg">';
+							resultlist +='<img src="/oxo/mainlist/'+data[i].ml_title+'1.jpg">';
 							resultlist +='</div>';
 							resultlist +='<div class="text_box">';
 							resultlist +='<div> 버튼이미지 </div>';
 							resultlist +='<ul>';
 							resultlist +='<li>';
-							resultlist +='<h2 class="d-inline-block">'+this.ml_title+'</h2>';
+							resultlist +='<h2 class="d-inline-block">'+data[i].ml_title+'</h2>';
 							resultlist +='<h2 class="d-inline-block"> <span>4.5</span>';
 							resultlist +='</h2>';
 							resultlist +='</li>';
 							resultlist +='<li>';
-							resultlist +=''+this.ml_newaddr+'';
+							resultlist +=''+data[i].ml_newaddr+'';
 							resultlist +='</li>';
 							resultlist +='<li>';
 							resultlist +='실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.'; 
@@ -148,12 +278,21 @@ $(function(){
 			                $('#listbox').append(resultlist);
 						
 						
-						});
+							}
+						
+						$('#filterModal').css('display','none');
 						}
 					});
 			}
 			
 		}); 
+		
+		
+		$('.mailist').click(function(){
+		var id = $(this).data('id');
+		$(location).attr('href','/oxo/ineatlist/info.eat?ml_no='+id);
+			alert(id);
+		});
 		
 	
 });
@@ -161,6 +300,8 @@ $(function(){
 <script>
 	$("#lr").click(function() {
 		var str = (this).val();
+		
+		
 	});
 </script>
 </head>
@@ -232,8 +373,50 @@ $(function(){
                 <div class="list_row d-flex"></div>
                 </div>
 				
+					<!--  맛집리스트 부분 -->
+				<div id = "listbox">
+	                <c:forEach var="data" items="${LIST }" varStatus="sts">
+		                <div class="d-flex mailist" data-id="${data.ml_no }">
+		                	
+		                    <!-- 넘버 -->
+		                    <h2 style="display: inline-block; margin-right:10px;">${sts.count}.</h2>
+		
+		                    <!-- 이미지박스 -->
+		                    <div class="imgbox">
+		                        <!-- <img src="http://starpizza.co.kr/data/goodsImages/GOODS1_1525318753.jpg"> -->
+		                        <img src="/oxo/mainlist/${data.ml_title }1.jpg">
+		                    </div>
+							
+		                    <!-- 텍스트박스 -->
+		                    <div class="text_box">
+		                        <div> 버튼이미지 </div>
+		                        <ul>
+		                            <li>
+		                                <h2 class="d-inline-block"> ${data.ml_title }</h2>
+		                                <h2 class="d-inline-block"> <span>4.5</span>
+		                                </h2>
+		                            </li>
+		                            <li>
+		                                ${data.ml_newaddr }
+		                            </li>
+		                            <li>
+		                                <b>유저 id</b> 
+		                            </li>
+		                            <li>
+		                                <b>유저 id</b> 
+		                            </li>
+		                        </ul>
+		                        <div> 자세히 보기 > </div>
+		                    </div>
+		                </div>
+	                </c:forEach>
+				</div>
+				<!--  end 맛집리스트 -->
+				
+				
+				
                 <!-- 리스트 컬럼 -->
-                <div id = "listbox2">
+                <div id = "listbox">
 	                <c:forEach var="data" items="${LIST2 }" varStatus="sts">
 		                <div class="d-flex mainlist" data-id="${data.ml_no }">
 		                	
@@ -274,45 +457,7 @@ $(function(){
 	                </c:forEach>
 				</div>
 				
-				<!--  스토리 보드 부분 -->
-				<div id = "listbox">
-	                <c:forEach var="data" items="${LIST }" varStatus="sts">
-		                <div class="d-flex mainlist" data-id="${data.ml_no }">
-		                	
-		                    <!-- 넘버 -->
-		                    <h2 style="display: inline-block; margin-right:10px;">${sts.count}.</h2>
-		
-		                    <!-- 이미지박스 -->
-		                    <div class="imgbox">
-		                        <!-- <img src="http://starpizza.co.kr/data/goodsImages/GOODS1_1525318753.jpg"> -->
-		                        <img src="/oxo/mainlist/${data.ml_title }1.jpg">
-		                    </div>
-							
-		                    <!-- 텍스트박스 -->
-		                    <div class="text_box">
-		                        <div> 버튼이미지 </div>
-		                        <ul>
-		                            <li>
-		                                <h2 class="d-inline-block"> ${data.ml_title }</h2>
-		                                <h2 class="d-inline-block"> <span>4.5</span>
-		                                </h2>
-		                            </li>
-		                            <li>
-		                                ${data.ml_newaddr }
-		                            </li>
-		                            <li>
-		                                <b>유저 id</b> 
-		                            </li>
-		                            <li>
-		                                <b>유저 id</b> 
-		                            </li>
-		                        </ul>
-		                        <div> 자세히 보기 > </div>
-		                    </div>
-		                </div>
-	                </c:forEach>
-				</div>
-				<!--  end 스토리보드 -->
+			
 
 
             </div>
@@ -328,7 +473,11 @@ $(function(){
           <center>
           <h6 class="display-3">검색 필터</h6>
           <hr>
-          
+          <a class="round-btn" href="#">1만원대</a><a class="round-btn" href="#">2만원대</a>
+          <a class="round-btn" href="#">3만원대</a><a class="round-btn" href="#">4만원대</a>
+          <a class="round-btn" href="#">5만원대</a>
+          <button class="w3-button w3-block w3-orange" id="commit">적용</button>
+          <button class="w3-button w3-block w3-green" id="cancle">취소</button>
 		</center>
       </div>
    </div>

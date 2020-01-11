@@ -21,7 +21,7 @@ public class Search {
 	public ModelAndView searchFrom(ModelAndView mv) {
 		mv.setViewName("search/searchResult");
 		
-		return mv;    
+		return mv;
 	}
 	
 	@RequestMapping("/searchProc.eat")
@@ -33,11 +33,20 @@ public class Search {
 		return mv;
 	}
 	
+	@RequestMapping("/filterSearch.eat")
+	@ResponseBody
+	public List<TasteInfoVO> filterResult(SearchVO schVO) {
+		List<TasteInfoVO> list = schDAO.searchM(schVO);
+		
+		return list;
+	}
+	
+	
 	@RequestMapping("/moreResult.eat")
 	@ResponseBody
 	public List<TasteInfoVO> moreResult(SearchVO schVO) {
 		List<TasteInfoVO> list = schDAO.moreResult(schVO);
-		
+		System.out.println(schVO.getNum());
 		return list;
 		
 	}
