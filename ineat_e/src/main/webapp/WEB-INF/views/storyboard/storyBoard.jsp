@@ -8,20 +8,47 @@
 <script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 <link rel="stylesheet" href="/oxo/css/w3.css">
+<link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 <link rel="stylesheet" href="/oxo/css/nav.css">
-<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Sunflower:300,500,700&display=swap&subset=korean" rel="stylesheet">
 <style>
-	.kor{
-		font-family: 'Do Hyeon', sans-serif;
-	}
-	.kor2{
-		font-family: 'Sunflower', sans-serif;
-		font-weight:300;
-	}
-	
-	
+<!--
+로그인 모달창 css-->
+.form-control:focus {
+   border: solid orange 2px;
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px
+      rgba(255, 165, 0, 0.4)
+}
+
+.btn-w {
+   width: 100%;
+   margin-bottom: 0.5rem;
+}
+
+.size {
+   font-size: 0.8rem;
+   display: inline;
+   text-align: center;
+}
+
+.w3-button:hover {
+   color: #000 !important;
+   background-color: rgba(253, 153, 0, 0.6) !important;
+}
+
+.title{
+	color:white;
+	font-size:14px;
+	font-weight: 900;
+	height: 50px;
+	line-height :30px;
+}
+
+#toWrite{
+	width:100px;
+	right:-25px;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -262,20 +289,23 @@ $(function(){
 		</form>
 	</div>
 
-	<div class="container-fluid" style="margin-top:80px">
-		<div class="row text-center">
-			<div class="col-md-2"></div>
-	        <div class="col-md-8 text-warning font-italic"><h1>inEat Story</h1></div>
+	<div class="container-fluid" style="margin-top:110px">
+
 	    </div>
+<!-- 		<div class="row text-center">
+			<div class="col-md-2"></div>
+	        <div class="col-md-8 text-warning font-italic"><h1>inEat Story</h1></div>  -->
+	    </div>
+
 	
-	    <div class="row mt-5 text-center kor" style="height:30px;">
+	    <div class="row mt-3 text-center kor title row align-items-center" style="height:20px;">
 	        <div class="col-md-1"></div>
-	        <div class="col-md-1 border-bottom"></div>
-	        <div class="col-md-4 border-bottom">제목</div>
-	        <div class="col-md-2 border-bottom">작성자</div>
-	        <div class="col-md-1 border-bottom">작성일</div>
-	        <div class="col-md-1 border-bottom">L&H</div>
-	        <div class="col-md-1 border-bottom">조회수</div>
+	        <div class="col-md-1 border-bottom" style="background-color:orange; margin-top:-20px;">　</div>
+	        <div class="col-md-4 border-bottom " style="background-color:orange;  margin-top:-20px;">제목</div>
+	        <div class="col-md-2 border-bottom" style="background-color:orange; margin-top:-20px;">작성자</div>
+	        <div class="col-md-1 border-bottom" style="background-color:orange; margin-top:-20px;">작성일</div>
+	        <div class="col-md-1 border-bottom" style="background-color:orange; margin-top:-20px;">L&H</div>
+	        <div class="col-md-1 border-bottom" style="background-color:orange; margin-top:-20px;">조회수</div>
 	    </div>
 	    <c:forEach var="data" items="${LIST }">
 		    <div class="row mt-1 text-center kor2">
@@ -306,7 +336,7 @@ $(function(){
 		        <div class="col-md-1"></div>
 		    </div>
 	    </c:forEach>
-		  <ul class="pagination justify-content-center mt-3">
+		  <ul class="pagination justify-content-center mt-3 " style="margin-bottom:-20px;">
 		    <li class="page-item">
 		      <a class="page-link pBtn" href="#" tabindex="-1" aria-disabled="true" id="preBtn">Prev</a>
 		    </li>
@@ -317,17 +347,17 @@ $(function(){
 		      <a class="page-link pBtn" href="#" id="nextBtn">Next</a>
 		    </li>
 		  </ul>
-		
-	    <div class="row mt-4 kor2">
-	        <div class="col-md-1"></div>
-	        <div class="col-md-8"></div>
-	        <div class="col-md-2">
+		  
+		  <div class="row kor2">
+	        <div class="col-md-10"></div>
 	        	<div class="btn-group" role="group">
-	        		<button type="button" id="toHome" class="btn btn-warning">홈으로</button>
-	        		<button type="button" id="toWrite" class="btn btn-warning">글쓰기</button>
+	        		<button type="button" id="toWrite" style="bottom:15px;" class="btn btn-warning">글 쓰 기</button>
 	        	</div>
 	        </div>
-	    </div>
+		
+
+	    
+	    
 	</div>
 </body>
 </html>
