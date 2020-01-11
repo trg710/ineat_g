@@ -7,17 +7,13 @@
 <title>story board info</title>
 <script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
 
-<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Sunflower:300,500,700&display=swap&subset=korean" rel="stylesheet">
+<link rel="stylesheet" href="/oxo/css/w3.css">
+<link rel="stylesheet" href="/oxo/css/bootstrap.min.css">
+<link rel="stylesheet" href="/oxo/css/nav.css">
+
 <style>
-	.kor{
-		font-family: 'Do Hyeon', sans-serif;
-	}
-	.kor2{
-		font-family: 'Sunflower', sans-serif;
-		font-weight:300;
-	}
+
 </style>
 <script type="text/javascript">
 $(function(){
