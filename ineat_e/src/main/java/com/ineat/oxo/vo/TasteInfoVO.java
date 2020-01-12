@@ -23,6 +23,7 @@ public class TasteInfoVO {
 	private String mf_filename;
 	private List<ReviewVO> rvList;
 	private String favorite;
+	private double avg;
 	
 	
 	
@@ -142,6 +143,13 @@ public class TasteInfoVO {
 	public void setMl_isshow(String ml_isshow) {
 		this.ml_isshow = ml_isshow;
 	}
+	public double getAvg() {
+		return avg;
+	}
+	public void setAvg(double avg) {
+		this.avg = avg;
+	}
+	
 	
 	
 	
