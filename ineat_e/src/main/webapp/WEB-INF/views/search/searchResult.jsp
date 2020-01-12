@@ -135,6 +135,16 @@
  
     text-decoration: none; 
 }
+
+.btn-primary{
+	background-color:orange;
+	border-color:orange;
+}
+
+.btn-primary:hover{
+	background-color:orange;
+	border-color:orange;
+}
 </style>
 
 
@@ -266,10 +276,10 @@ $(function(){
 							resultlist +=''+data[i].ml_newaddr+'';
 							resultlist +='</li>';
 							resultlist +='<li>';
-							resultlist +='실현에 그들의 있는 인도하겠다는 것은 구하지 것이다.'; 
+							resultlist +=''+data[i].ml_newaddr+'';
 							resultlist +='</li>';
 							resultlist +='<li>';
-							resultlist +='이것이야말로 힘차게 싹이 아니다.';
+							resultlist +=''+data[i].ml_menu+'';
 							resultlist +='</li>';
 							resultlist +='</ul>';
 							resultlist +='<div> 자세히 보기 > </div>';
@@ -281,6 +291,8 @@ $(function(){
 							}
 						
 						$('#filterModal').css('display','none');
+						
+					
 						}
 					});
 			}
@@ -288,7 +300,7 @@ $(function(){
 		}); 
 		
 		
-		$('.mailist').click(function(){
+		$(document).on('click','.mainlist', function(e){
 		var id = $(this).data('id');
 		$(location).attr('href','/oxo/ineatlist/info.eat?ml_no='+id);
 			alert(id);
@@ -335,6 +347,19 @@ $(function(){
             <li class="nav-item"><a class="nav-link" href="#">List</a></li>
             <li class="nav-item"><img src="img/member.png" width="30x"
                style="margin-left: 15px;">
+               <script type="text/javascript">
+			  $(function(){
+			  	//스토리 이동
+			  	$('#story').click(function(){
+			  		$(location).attr('href','/oxo/storyboard/storyBoard.eat');
+			  	});
+			  	//맛드컵 이동
+			  	//리스트 이동
+			  	$('#list').click(function(){
+			  		$(location).attr('href','/oxo/ineatlist/list.eat');
+			  	});
+			   });
+			</script>
                <ul class="navbar-nav">
                   <c:if test="${empty SID}">
                   <li class="nav-item" id="loginbtn"><a class="nav-link" href="#">로그인</a></li>
@@ -376,7 +401,7 @@ $(function(){
 					<!--  맛집리스트 부분 -->
 				<div id = "listbox">
 	                <c:forEach var="data" items="${LIST }" varStatus="sts">
-		                <div class="d-flex mailist" data-id="${data.ml_no }">
+		                <div class="d-flex mainlist" data-id="${data.ml_no }">
 		                	
 		                    <!-- 넘버 -->
 		                    <h2 style="display: inline-block; margin-right:10px;">${sts.count}.</h2>
@@ -400,10 +425,13 @@ $(function(){
 		                                ${data.ml_newaddr }
 		                            </li>
 		                            <li>
-		                                <b>유저 id</b> 
+		                                <b>${data.ml_oldaddr }</b> 
 		                            </li>
 		                            <li>
-		                                <b>유저 id</b> 
+		                                <b>${data.ml_menu }</b> 
+		                            </li>
+		                            <li>가격대 :
+		                                <b>${data.ml_price }</b> 
 		                            </li>
 		                        </ul>
 		                        <div> 자세히 보기 > </div>
@@ -416,7 +444,7 @@ $(function(){
 				
 				
                 <!-- 리스트 컬럼 -->
-                <div id = "listbox">
+                <div id = "listbox2">
 	                <c:forEach var="data" items="${LIST2 }" varStatus="sts">
 		                <div class="d-flex mainlist" data-id="${data.ml_no }">
 		                	
