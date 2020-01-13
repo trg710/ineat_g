@@ -313,6 +313,7 @@ object-fit: cover;
                </h1>
             </div>            
             
+            
             <c:forEach var="data" items="${REVIEW}"  begin="0" end="3"> 
             <div class="reviewBox col-8">
                <div class="membInfo col-2 center-block mt-2" style="float: left; display: grid;">
