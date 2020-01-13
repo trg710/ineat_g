@@ -1,9 +1,9 @@
 package com.ineat.oxo.vo;
 
 
-//mcVO
+//mdVO
 public class MatdcupVO {
-	
+	  
 	private String md_name;
 	private int md_vic;
 	

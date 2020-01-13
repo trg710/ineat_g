@@ -29,4 +29,16 @@
         WHERE
             md_name LIKE #{winName}
 	</update>
+	
+	<select id="ranking" resultType="mdVO">
+	<![CDATA[
+		SELECT
+    		md_name,md_vic
+		FROM
+    		ie_matdcup
+		WHERE
+    		ROWNUM <=10
+		ORDER BY md_vic DESC
+	]]>
+	</select>
  </mapper>

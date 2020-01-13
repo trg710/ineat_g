@@ -31,7 +31,7 @@ $(document).ready(function() {
       });
 
    }
-   ;
+   
 
    // 4강
    function startFour() {
@@ -84,7 +84,39 @@ $(document).ready(function() {
       });
 
    }
-
+   
+   $('#match1player').mouseenter(function(){
+	   $(this).css('opacity','0.6');
+   });
+   $('#match1player').mouseleave(function(){
+	   $(this).css('opacity','1');
+   });
+  
+   //맛드컵우승자에서 메인으로 가기
+/*   $('#goMain').click(function(){
+	  $(location).attr('href','/oxo/main.eat');
+   });*/
+   
+/*   $('#goRanking').click(function(){
+	  $('.ranking').css({
+		  "display" : "block",
+		  "z-index" : "1200"
+	  });
+	   
+	  $.ajax({
+		  url : "matdcupRanking.eat",
+          type : "post",
+          dataType : "json",
+          success : function(list){
+        	  alert(list.length);
+          },
+          error: function(){
+        	alert('통신오류');  
+          }
+	  });
+   });*/
+   
+   //맛드컵 시작하기 클릭
    $('#start').click(function() {
       $('.nGangClass').css('display', 'block');
       var eight = '8강';
@@ -95,7 +127,10 @@ $(document).ready(function() {
       $('.match').css('display', 'block');
    });
 
+
    start8gang();
+   
+   
    // 이미지 선택하면 승자로 가기
    $('.match img').click(function() {
 
@@ -106,10 +141,11 @@ $(document).ready(function() {
          src : test,
          id : testId
       });
+      
       console.log(testId);
       addNum();
       start8gang();
-
+      
       if (j == 4) {
          var four = '4강';
          setZero();
@@ -117,6 +153,8 @@ $(document).ready(function() {
          nGangClassUp(four);
          // alert(i + ' | ' + j);
          startFour();
+        
+         //4강 이미지 선택	//off추가하기
          $('.match img').off().click(function() {
             var test123 = $(this).attr('src');
             var test123Id = $(this).attr('id');
@@ -138,8 +176,21 @@ $(document).ready(function() {
                finalMatch();
                // 우승자 선택
                $('.match img').off().click(function() {
+            	   $('.vsClass > span').text('WINNER!');
+            	   $('.vsClass').css('width','400px');
+            	   $('.btnMatch').css('display','block');
                   var victory = $(this).attr('src');
                   var victoryId = $(this).attr('id');
+                  var thisId = $(this);
+                  
+                  var goSearchText = '\'' + victoryId + '\''+ '검색하기';
+                  $('#goSearch').text(goSearchText);//서치버튼에 우승자 이름 추가하기
+                  
+                  $('.match').find('img').not(thisId).css('display', 'none');
+                  //우승자 아닌 이미지 없애기
+                  $('.match').css('width','600px');
+                  //$('.match img').css('opacity','1');
+
                   console.log(victoryId);
                   $('#victoryId img').attr({
                      src : victory,
@@ -147,17 +198,7 @@ $(document).ready(function() {
                   });
                   $('.modalBack').css('display', 'none');
 
-                  // 우승자 이미지 추가
-                  $('.match').css('display', 'none');
-                  // $('body img').attr(not('img').css('display','none');
-
                   var winName = $('#victoryId img').eq(0).attr('id');
-                  /*
-                   * var victoryJpgIndex = victorySrc.indexOf(".jpg"); var
-                   * winName = victorySrc.substring(16, victoryJpgIndex);
-                   */
-
-                  alert(winName);
 
                   $.ajax({
                      url : "matdcupWin.eat",
@@ -168,7 +209,7 @@ $(document).ready(function() {
                      },
                      success : function(cnt) {
                         if (cnt == 1) {
-                           alert('성공');
+                           $('.match img').off('click');
                         } else {
                            alert(cnt);
                         }

@@ -25,4 +25,11 @@ public class MatdcupDAO {
 		
 		return cnt;
 	}
+	
+	public List getRanking() {
+		List list = sqlSession.selectList("mdSQL.ranking");
+		
+		System.out.println("DAO ======" + list.size());
+		return list;
+	}
 }

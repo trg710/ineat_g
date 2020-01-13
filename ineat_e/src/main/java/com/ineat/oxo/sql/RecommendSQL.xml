@@ -5,7 +5,7 @@
 
 <mapper namespace="rSQL">
 	<!-- 지난주 리뷰랭킹 가져오기 -->
-	<select id="showList" resultType="tVO">
+	<select id="storeList" resultType="tVO">
 	<![CDATA[
 		SELECT
    			ml_no, ml_title, avg

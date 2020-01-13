@@ -14,7 +14,7 @@ public class RecommendDAO {
 	//맛집 가게명
 	public List storeList() {
 			
-		return sqlSession.selectList("rSQL.showList");
+		return sqlSession.selectList("rSQL.storeList");
 	}
 	
 	
