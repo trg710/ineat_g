@@ -39,6 +39,7 @@ public class MainList {
 				list.get(i).setFavorite(""+tDAO.checkfavorite(list.get(i)));
 			}
 			List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
+			
 			list.get(i).setRvList(rlist);
 		}
 		
@@ -98,6 +99,7 @@ public class MainList {
 	@RequestMapping("info.eat")
 	public ModelAndView detailinfo(ModelAndView mv, int ml_no, RedirectView rv, HttpSession session) {
 		TasteInfoVO tVO = tDAO.tasteInfo(ml_no);
+		
 		List<ReviewVO> list = rvDAO.getReviewInfo(ml_no);
 		int cnt = rvDAO.getReviewCnt(ml_no);
 		double avg = 0;

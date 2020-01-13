@@ -116,4 +116,5 @@
 		AND m_name = #{name}
 		AND m_email = #{email}
 </select>
+
  </mapper>

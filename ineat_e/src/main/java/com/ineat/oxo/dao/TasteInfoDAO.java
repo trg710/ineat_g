@@ -31,7 +31,9 @@ public class TasteInfoDAO {
 	
 	public TasteInfoVO tasteInfo(int ml_no) {
 		sqlSession.update("tSQL.upcount", ml_no);
-		return sqlSession.selectOne("tSQL.tasteInfo", ml_no);
+		TasteInfoVO tVO = sqlSession.selectOne("tSQL.tasteInfo", ml_no);
+		tVO.setFvrcnt(sqlSession.selectOne("tSQL.getfvrcnt", ml_no));
+		return tVO;
 	}
 	
 	public List<String> reviewImgs(int ml_no){

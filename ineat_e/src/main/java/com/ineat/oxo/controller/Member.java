@@ -127,12 +127,14 @@ public class Member {
 		mv.setViewName("member/memInfo");
 		return mv;
 	}
+	
 	//회원정보수정
 	@RequestMapping("editProc.eat")
 	public ModelAndView editProc(ModelAndView mv, MemberVO mVO, RedirectView rv, HttpSession session) {
 		int result = mDAO.infoEdit(mVO);
-//		System.out.println("## membEdit : " + mVO);
+		
 		MultipartFile sfile = mVO.getsFile();
+		
 		String sid = (String)session.getAttribute("SID");
 		String sname;
 		
@@ -142,16 +144,7 @@ public class Member {
 		}else {
 			sname = "member.png";
 		}
-
 		rv.setUrl("/oxo/member/memInfo.eat");
-/*		
-		if(result == 1) {
-			rv.setUrl("/oxo/member/memInfo.eat?id="+mVO.getId());
-			System.out.println("*********** : " + mVO.getId());
-		}else {
-			rv.setUrl("/oxo/member/memInfo.eat?id="+mVO.getId());
-		}
-*/
 		mv.addObject("rdCode", -1);
 		mv.addObject("id", mVO.getId());
 		mv.addObject("PROF", sname);

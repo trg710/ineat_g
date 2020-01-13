@@ -73,6 +73,7 @@
  						m_id = #{mid})
  	
  	</update>
+ 	
  	<!-- 회원정보 사진 가져오깅 ~~ -->
  	<select id="getProf" parameterType="fVO" resultType="string">
  		SELECT
@@ -83,4 +84,5 @@
  			m_id = #{mid}
  			AND m_no = p_mno(+)
  	</select>
+ 	
  </mapper>

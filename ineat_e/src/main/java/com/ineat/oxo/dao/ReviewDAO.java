@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ineat.oxo.vo.FileVO;
 import com.ineat.oxo.vo.ReviewVO;
 
 //rvDAO
@@ -30,9 +31,12 @@ public class ReviewDAO {
 	public List<ReviewVO> getReviewInfo(int ml_no){
 //		리뷰정보가져오는 함수.
 		List<ReviewVO> list = sqlSession.selectList("rvSQL.reviewinfolist", ml_no);
-		
 //		리뷰 갯수만큼 반복
 		for(int i = 0 ; i<list.size(); i++) {
+			FileVO fVO = new FileVO();
+			fVO.setMid(list.get(i).getM_id());
+			list.get(i).setProfile(sqlSession.selectOne("fSQL.getProf",fVO));
+			
 //			i번째 리뷰의 사진갯수를 가져옴.
 			int cnt = list.get(i).getCnt();
 //			사진갯수가 0보다 크면

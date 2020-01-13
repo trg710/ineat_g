@@ -299,9 +299,9 @@
 			  	});
 			   });
 			</script>
-              <li class="nav-item"><img src="/oxo/img/member.png" width="30x"
-               style="margin-left: 15px;">
-               <ul class="navbar-nav">
+             <li class="nav-item"><img src="/oxo/img/member.png" width="30x"
+              style="margin-left: 15px;">
+              	<ul class="navbar-nav">
                   <c:if test="${empty SID}">
                   <li class="nav-item" id="loginbtn"><a class="nav-link" href="#">로그인</a></li>
                   <li class="nav-item" id="joinbtn"><a class="nav-link" href="#">회원가입</a></li>
@@ -310,7 +310,8 @@
                      <li class="nav-item"><a class="nav-link" href="#" id="logout">로그아웃</a></li>
                      <li class="nav-item"><a class="nav-link" href="#" id="memInfo">회원정보보기</a></li>
                   </c:if>
-               </ul></li>
+              	</ul>
+              </li>
          </ul>
       </div>
    </nav>
@@ -346,7 +347,7 @@
                 <!-- 탑 -->
                 <div class="listtop d-flex">
                     <div>ㅇ조회수 : <span>${TVO.ml_count }</span> </div>
-                    <div class="ml-3">ㅇ추천수 : <span>000</span> </div>
+                    <div class="ml-3">ㅇ추천수 : <span>${TVO.fvrcnt}</span> </div>
                     <div class="ml-3">ㅇ리뷰수 : <span>${CNT} </span> </div>
                     <div class="listcommon">
                         <div>2019-12-27</div>

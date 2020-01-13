@@ -125,7 +125,12 @@ ul {
 	cursor:pointer;
 	height:35px;
 }
-
+.lr{
+	cursor: pointer;
+}
+.type{
+	font-size: 14px;
+}
 </style>
 
 
@@ -178,7 +183,20 @@ ul {
 
 		var isEnd = false;
 		var rno = 1;
-		var type = 'nomal';
+		
+		var type = 'cnt';
+		$('.type').click(function(){
+			type = $(this).attr('id');
+			
+		});
+		$('.badge').click(function(){
+			$(this).removeClass('badge-light');
+			$(this).removeClass('badge-primary');
+			$(this).addClass('badge-primary');
+			$(this).siblings().removeClass('badge-primary');
+			$(this).siblings().removeClass('badge-light');
+			$(this).siblings().addClass('badge-light');
+		});
 		var tag = '';
 		var total = 5;
 		
@@ -241,7 +259,9 @@ ul {
 			} else if (tclass.match('more')) {
 				rno += 5;
 			}
-			/* 더보기 ajax asdasdasd */
+			
+			
+			/* 더보기 ajax */
 			$.ajax({
 				url : "/oxo/ineatlist/morelist.eat",
 				type : "post",
@@ -301,11 +321,11 @@ ul {
 							resultlist += '<li class="d-flex mb-2">';
 							resultlist += '<div>';
 							resultlist += '<div class="pimgbox mr-2">';
-							resultlist += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQujpgIXc66CXx_lyy0TjzC2S26aKxpel6Yl_-qBrg3e06yfhKDyQ&s" alt="avt" class="pic">';
+							resultlist += '<img src="/oxo/upload/'+t1[j].profile+'" alt="avt" class="pic">';
 							resultlist += '</div>';
 							resultlist += '</div>';
 							resultlist += '<div>';
-							resultlist += ' <b>'+ t1[j].m_id+'</b>'+ t1[j].rv_body+' ';
+							resultlist += ' <b>'+ t1[j].m_id+'</b>'+ t1[j].rv_body+'';
 							resultlist += '</div>';
 							resultlist += '</li>';
 							}
@@ -417,15 +437,17 @@ ul {
 					<div>
 						<em id="total">${TOTAL }</em>개<span id="common">(${type }순)</span>
 					</div>
+					
+					
 					<div class="list_row d-flex">
-						<div class="lr">
-							<a href="#" class="list_ajax type" id="count">조회순</a>
+						<div class="lr badge badge-pill badge-primary">
+							<span class="list_ajax type" id="cnt">조회순</span>
 						</div>
-						<div class="lr">
-							<a href="#" class="list_ajax type" id="review">리뷰순</a>
+						<div class="lr badge badge-pill badge-light">
+							<span class="list_ajax type " id="rv_cnt">리뷰순</span>
 						</div>
-						<div class="lr">
-							<a href="#" class="list_ajax type" id="like">좋아요순</a>
+						<div class="lr badge badge-pill badge-light">
+							<span class="list_ajax type " id="fvr">좋아요순</span>
 						</div>
 					</div>
 				</div>
@@ -478,7 +500,7 @@ ul {
 									<li class="d-flex mb-2">
 										<div>
 											<div class="pimgbox mr-2">
-												<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQujpgIXc66CXx_lyy0TjzC2S26aKxpel6Yl_-qBrg3e06yfhKDyQ&s" alt="avt" class="pic">
+												<img src="/oxo/upload/${data2.profile}" alt="avt" class="pic">
 											</div>
 										</div>
 										<div>

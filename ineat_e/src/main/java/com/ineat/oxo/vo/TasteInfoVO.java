@@ -15,15 +15,21 @@ public class TasteInfoVO {
 	private String ml_tag;
 	private String ml_count;
 	private String ml_isshow;
-	private String ml_type;
+	private String ml_type ="cnt";
 	private int rno;
 	private String mf_filename;
 	private List<ReviewVO> rvList;
 	private String favorite;
 	private String m_id;
 	private double avg; //리뷰평균
+	private int fvrcnt;
 	
-	
+	public int getFvrcnt() {
+		return fvrcnt;
+	}
+	public void setFvrcnt(int fvrcnt) {
+		this.fvrcnt = fvrcnt;
+	}
 	public String getM_id() {
 		return m_id;
 	}

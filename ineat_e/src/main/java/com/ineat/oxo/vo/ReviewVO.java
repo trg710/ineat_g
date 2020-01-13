@@ -25,10 +25,14 @@ public class ReviewVO {
 	private int cnt;
 	
 	private String p_savename;
+	private String profile;
 	
-	
-	
-	
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 	public String getP_savename() {
 		return p_savename;
 	}
