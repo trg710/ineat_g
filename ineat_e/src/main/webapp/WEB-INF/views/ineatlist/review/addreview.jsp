@@ -112,7 +112,11 @@
   	   			$(location).attr('href','/oxo/member/memInfo.eat?id='+id);
   	   		});
 ///////////////////////
-			
+			$('#cancle').click(function(){
+  				var no = $(this).attr('data-id');
+   	   			$(location).attr('href','/oxo/ineatlist/info.eat?ml_no='+no);
+   	   		});
+   	   		
             $('.pointStarRating>div:odd').css('width', '19px');
 
             $('.reviewarea').each(function () {
@@ -312,7 +316,7 @@
                         	</div>
                         	
                             <div class="text-right">
-                                <button type="button" class="btn btn-secondary btn-lg"> 취소 </button>
+                                <button type="button" class="btn btn-secondary btn-lg" id="cancle" data-id="${MLNO}"> 취소 </button>
                                 <button type="button" class="btn btn-warning btn-lg ml-3" onclick="reviewsubmit()"> 글 작성 완료</button>
                             </div>
                         </form>

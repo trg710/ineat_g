@@ -230,6 +230,7 @@
     			$(this).children('.text-center').children('.btns').css('display', 'none');
     		});
     		
+    		
     		$('.del').click(function(){
     			var review = $(this);
     			var rvno = review.attr('data-id');

@@ -10,72 +10,11 @@
 	<link rel="stylesheet" href="/oxo/css/w3.css">
     <link rel="stylesheet" href="/oxo/css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="/oxo/css/nav.css">
+    <link rel="stylesheet" href="/oxo/css/fixreview.css">
     <script src="/oxo/js/popper.min.js"></script>
     <script src="/oxo/js/jquery.min.js"></script>
     <script src="/oxo/js/bootstrap.min.js"></script>
-    <style>
-		.bg {
-		    background-color: rgba(255, 255, 255, 1);
-		    border-color: rgba(214, 214, 214, 1);
-		}
-		
-		.reviewarea {
-		    width: 100%;
-		    height: 150px;
-		    resize: none;
-		    font-size: 16px;
-		    border-color: rgba(214, 214, 214, 1);
-		    border-radius: 3px;
-		    overflow-y: hidden;
-		}
-		
-		.pointStarRating {
-		    width: 156px;
-		    height: 24px;
-		    overflow: hidden;
-		    display: inline-block;
-		    vertical-align: top;
-		    margin: 1px 0 0 0;
-		    padding-left: 1px;
-		    background: url(/oxo/img/sp_ico3.png) no-repeat;
-		    background-position: 0 -1060px;
-		}
-		
-		.pointStarlist {
-		    height: 24px;
-		    width: 12px;
-		    overflow: hidden;
-		    border: 0;
-		    cursor: pointer;
-		    background: url(/oxo/img/sp_ico3.png) no-repeat;
-		    background-position: 0 -9999px;
-		}
-		.pic_1 {
-            display: inline-block;
-            position: relative;
-            width: 100px;
-            height: 100px;
-            overflow: hidden;
-            margin: 1px;
-        }
-        .pic {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            cursor: pointer;
-        }
-        .del_pic{
-       	    position: absolute;
-		    top: 0;
-		    right: 10px;
-		    color: white;
-		    cursor: pointer;
-		    display:none;
-        }
-        .blurEffect {
-            filter: brightness(30%);
-        }
-    </style>
+    
     <script type="text/javascript">
         $(function () {
         	//로그인처리
@@ -118,12 +57,16 @@
     	         $(location).attr('href', '/oxo/member/join.eat');
     	      });
     	   	//회원정보보기로 이동
-    	   		var id = '${SID}'
-    	   		$('#memInfo').click(function(){
-    	   			$(location).attr('href','/oxo/member/memInfo.eat?id='+id);
-    	   		});
+   	   		var id = '${SID}'
+   	   		$('#memInfo').click(function(){
+   	   			$(location).attr('href','/oxo/member/memInfo.eat?id='+id);
+   	   		});
   ///////////////////////
 			
+  			$('#cancle').click(function(){
+  				var no = $(this).attr('data-id');
+   	   			$(location).attr('href','/oxo/ineatlist/info.eat?ml_no='+no);
+   	   		});
             $('.pointStarRating>div:odd').css('width', '19px');
 
             $('.reviewarea').each(function () {
@@ -181,9 +124,7 @@
                 	$('#sc').text(c_score);
                 }
             });
-            
-            
-            
+///////////////////////////////////////////////////////////////////////////////////////////////
             $('#ck').click(function(){
             	var f_value = $('#f1').val();
             	if(f_value ==""){
@@ -191,43 +132,34 @@
             	}
             });
             
-            var f_no;
-            var f_id;
-            var f_this;
-            var count = 0;
-            $(document).on('click', '.pic_1', function(e) {
+            
+    			var cnt = 0;
+            $(document).on('click', '.up_pic_1', function(e) {
     			e.stopImmediatePropagation();
+    			var val = $('#file_box>input:last').val();
+    			alert(val);
     			
-    			f_this = $(this).find('img');
-    			
-            	f_no = ($(this).index()+1)-'${RVO.cnt}';
-            	
-            	f_id = "#f"+f_no;
-            	
-            	$(f_id).click();
+    			if(val == '' || val == undefined){
+    				$('#file_box>input:last').remove();
+    			}else{
+    				cnt += 1;
+    			}
+   				var inputfile = '<input type="file" class="form-control-file files" name="sfile" id="f'+cnt+'">';
+            	$('#file_box').append(inputfile);
+    			var f_id = "#f"+cnt;
+    			$(f_id).click();
             });
             
             $(document).on('change', '.files' , function(e) {
             	e.stopImmediatePropagation();
-            	console.log($(this).val());
-            	
             	var tmp = URL.createObjectURL(e.target.files[0]);
-            	f_this.attr('src', tmp);
-            	f_this.addClass('inimg');
-            	var f_value = $(this).val();
-            	if( count < f_no && count <= 10){
-            		count += 1;
-	            	var resultlist ='';
-	            	resultlist +='<div class="pic_1 ml-2">';
-	            	resultlist +='<img src="/oxo/img/moreimg.png" class="pic">';
-	            	resultlist +='</div>';
-	            	$('#gall').append(resultlist);
-	            	
-	            	f_id = 'f'+(f_no+1);
-	            	var inputfile = '<input type="file" class="form-control-file files" name="sfile" id="'+f_id+'">';
-	            	$('#file_box').append(inputfile);
-            	}
-            	            	
+            	console.log(tmp);
+            	var resultlist ='';
+            	resultlist +='<div class="inimg pic_1 ml-2" data-id="#f'+cnt+'">';
+            	resultlist +='<img src="'+tmp+'" class="pic up_pic">';
+            	resultlist +='<span class="up_del_pic">X</span>';
+            	resultlist +='</div>';
+            	$('.up_pic_1').before(resultlist);
             });
             
             $(document).on('mouseenter', '.inimg', function(e) {
@@ -236,19 +168,28 @@
             	$(this).find('img').css('cursor','auto');
             	$(this).find('span').css('display','block');
             });
+            
             $(document).on('mouseleave', '.inimg', function(e) {
             	e.stopImmediatePropagation();
             	$(this).find('img').removeClass('blurEffect');
             	$(this).find('img').css('cursor','pointer');
             	$(this).find('span').css('display','none');
-            	
             });
+            
             $(document).on('click', '.del_pic', function(e) {
             	e.stopImmediatePropagation();
             	$(this).parents('.pic_1').remove();
             	var savename = $(this).attr('data-id');
             	var del_file = '<input type="text" name="rf_savename" value="'+savename+'">';
             	$('#del_file_box').append(del_file);
+            });
+            
+            $(document).on('click', '.up_del_pic', function(e) {
+            	e.stopImmediatePropagation();
+            	var inputid = $(this).parents('.pic_1').attr('data-id');
+            	alert(inputid);
+            	$(this).parents('.pic_1').remove();
+            	$(inputid).remove();
             });
             
         });
@@ -260,10 +201,7 @@
 </head>
 
 <body>
-<button id="my-btn" onclick="alert('클릭이벤트 발생')">버튼</button>
-
     <!-- 메인 -->
-
    <!--네비게이션바-->
    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
       <a class="navbar-brand" href="#"><img src="/oxo/img/logo.png"
@@ -346,11 +284,12 @@
                             <input type="hidden" id="mlno" name="rv_mlno" value="${RVO.rv_mlno}">
                             <input type="hidden" id="mlno" name="rv_no" value="${RVO.rv_no}">
                             <div id="file_box" style="display: none;">
-	                           	<input type="file" class="form-control-file files" name="sfile" id="f1">
                             </div>
                             <div id="del_file_box" style="display: none;">
                             	
                             </div>
+                            	
+                           	<!-- 텍스트 박스 -->
                             <textarea name="rv_body" class="p-3 mt-3 mb-3 reviewarea" placeholder="리뷰 내용을 작성해 주세요" maxlength="1000">${RVO.rv_body }</textarea>
                             <div class="gallery" id="gall">
                             
@@ -361,13 +300,13 @@
                                 </div>
                        			</c:forEach>
                        			
-                        		<div class="pic_1 ml-2">
+                        		<div class="up_pic_1 ml-2">
                             		<img src="/oxo/img/moreimg.png" class="pic">
                                 </div>
                         	</div>
                         	
                             <div class="text-right">
-                                <button type="button" class="btn btn-secondary btn-lg"> 취소 </button>
+                                <button type="button" id="cancle"class="btn btn-secondary btn-lg" data-id="${RVO.rv_mlno}"> 취소 </button>
                                 <button type="button" class="btn btn-warning btn-lg ml-3" onclick="reviewsubmit()"> 글 작성 완료</button>
                             </div>
                         </form>
