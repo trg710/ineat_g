@@ -5,6 +5,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ineat.oxo.vo.MatdcupVO;
+
 //mcDAO
 public class MatdcupDAO {
 	@Autowired
@@ -26,8 +28,8 @@ public class MatdcupDAO {
 		return cnt;
 	}
 	
-	public List getRanking() {
-		List list = sqlSession.selectList("mdSQL.ranking");
+	public List<MatdcupVO> getRanking() {
+		List<MatdcupVO> list = sqlSession.selectList("mdSQL.ranking");
 		
 		System.out.println("DAO ======" + list.size());
 		return list;

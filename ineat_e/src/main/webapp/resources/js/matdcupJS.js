@@ -1,4 +1,10 @@
 $(document).ready(function() {
+	$('.match img').hover(function(){
+		$(this).css('opacity','0.3');
+	},function(){
+		$(this).css('opacity','1');
+	});
+	
    var match8 = $('#8gang img');
    var match4 = $('#4gang img');
    var match2 = $('#2gang img');
@@ -47,7 +53,18 @@ $(document).ready(function() {
          src : Fplayer2,
          id : Fplayer2Id
       });
+      
+    $(document).ready(function(){
+      $('.match img').hover(function(){
+  		$(this).css('opacity','0.3');
+  	},function(){
+  		$(this).css('opacity','1');
+  	});
+    });
+   
+      
    }
+   
 
    // 결승
    function finalMatch() {
@@ -84,20 +101,12 @@ $(document).ready(function() {
       });
 
    }
-   
-   $('#match1player').mouseenter(function(){
-	   $(this).css('opacity','0.6');
-   });
-   $('#match1player').mouseleave(function(){
-	   $(this).css('opacity','1');
-   });
-  
    //맛드컵우승자에서 메인으로 가기
-/*   $('#goMain').click(function(){
+   $('#goMain').click(function(){
 	  $(location).attr('href','/oxo/main.eat');
-   });*/
+   });
    
-/*   $('#goRanking').click(function(){
+   $('#goRanking').click(function(){
 	  $('.ranking').css({
 		  "display" : "block",
 		  "z-index" : "1200"
@@ -108,13 +117,16 @@ $(document).ready(function() {
           type : "post",
           dataType : "json",
           success : function(list){
-        	  alert(list.length);
+        	  for(var i = 0 ; i < list.length ; i++ ){
+        		  $('#mList').append("<li>" + (i + 1) + '위 : ' + list[i].md_name + '( ' + list[i].md_vic + '회 )' +  "</li>");
+        	  }
+        	  $('#goRanking').off('click');
           },
           error: function(){
         	alert('통신오류');  
           }
 	  });
-   });*/
+   });
    
    //맛드컵 시작하기 클릭
    $('#start').click(function() {
@@ -191,11 +203,11 @@ $(document).ready(function() {
                   $('.match').css('width','600px');
                   //$('.match img').css('opacity','1');
 
-                  console.log(victoryId);
                   $('#victoryId img').attr({
                      src : victory,
                      id : victoryId
                   });
+                  
                   $('.modalBack').css('display', 'none');
 
                   var winName = $('#victoryId img').eq(0).attr('id');

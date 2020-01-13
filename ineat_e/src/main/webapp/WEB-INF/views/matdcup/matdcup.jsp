@@ -168,6 +168,9 @@ img {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	width: 300px;
+	background : white;
+	font-size: 20px;
 }
 
 .opacityOne{
@@ -277,10 +280,7 @@ img {
 
 	<!-- 맛드컵랭킹리스트 -->
 	<div class="ranking">
-		<ul class="w3-ul w3-border">
-			<li>Jill</li>
-			<li>Eve</li>
-			<li>Adam</li>
+		<ul class="w3-ul w3-border" id="mList">
 		</ul>
 
 	</div>
