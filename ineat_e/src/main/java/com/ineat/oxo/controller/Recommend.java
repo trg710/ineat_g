@@ -47,7 +47,6 @@ public class Recommend {
 	public TasteInfoVO result(@RequestParam String dayCondition) {
 		TasteInfoVO weatherlist = rDAO.weatherChoo(dayCondition);
 		//api에서 데이터 제대로 들어오나 테스트
-		//System.out.println(dayCondition);
 		return weatherlist;
 	}
 }

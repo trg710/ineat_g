@@ -108,7 +108,6 @@ public class MainList {
 		}
 		List<String> rvimgs = tDAO.reviewImgs(ml_no);
 		String sid = (String)session.getAttribute("SID");
-		System.out.println(sid);
 		if(sid != null) {
 			tVO.setM_id(sid);
 			tVO.setFavorite(""+tDAO.checkfavorite(tVO));

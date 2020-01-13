@@ -116,14 +116,12 @@ public class Member {
 		memVO.setRdCode(mVO.getRdCode());
 		fVO.setMid(mVO.getId());
 		String sname = fDAO.getProf(fVO);
-		System.out.println("**** cont sname : " + sname);
 		mv.addObject("SNAME",sname);
 		mv.addObject("DATA", memVO);
 		/*
 		rv.setUrl("/oxo/member/memInfo.eat");
 		mv.setView(rv);
 		*/
-		System.out.println("### isRD : " + mVO.getRdCode());
 		mv.setViewName("member/memInfo");
 		return mv;
 	}
@@ -177,8 +175,6 @@ public class Member {
 	
 	@RequestMapping("passFindProc.eat")
 	public ModelAndView passFindProc (MemberVO mVO, ModelAndView mv, RedirectView rv) {
-//		System.out.println("들어오냐?");
-//		System.out.println(mVO.getId());
 		
 		String id= mVO.getId();
 		String name= mVO.getName();
@@ -191,7 +187,6 @@ public class Member {
 		} catch(Exception e) {
 			pw = null;
 		}
-//		System.out.println("###"+ id + name + email + pw);
 		
 		
 			if(pw != null){

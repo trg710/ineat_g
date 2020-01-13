@@ -22,7 +22,6 @@ public class MainController {
 	public ModelAndView Main(ModelAndView mv) {
 		mv.setViewName("main/main");
 		List<ReviewVO> list = rvDAO.mainReview();
-		System.out.println(list.size());
 		
 		mv.addObject("REVIEW",list);
 		return mv;

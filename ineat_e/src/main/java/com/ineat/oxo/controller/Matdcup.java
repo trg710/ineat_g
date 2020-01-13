@@ -29,7 +29,6 @@ public class Matdcup {
 	@RequestMapping("matdcupWin.eat")
 	@ResponseBody
 	public int matdcupInsertCount(@RequestParam String winName) {
-		System.out.println(winName);
 		int cnt = mdDAO.insertCount(winName);
 	return cnt;
 	}

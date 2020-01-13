@@ -59,7 +59,6 @@ public class StoryBoard {
 		
 		String sid = (String) session.getAttribute("SID");
 		session.setAttribute("SID", sid);
-		System.out.println("*storyBoard.eat sid: " + sid);
 		return mv;
 	}
 
@@ -89,7 +88,6 @@ public class StoryBoard {
 		
 		String sid = (String) session.getAttribute("SID");
 		session.setAttribute("SID", sid);
-		System.out.println("*storyBoardWrite.eat sid: " + sid);
 		
 		return mv;
 	}
@@ -105,7 +103,6 @@ public class StoryBoard {
 			session.setAttribute("mid", sbVO.getMid());
 			fileSrvc.setDAO(fDAO);
 			fileSrvc.sbFileAddProc(session, sbVO);
-			System.out.println("##sbVO.toString()\n " + sbVO.toString());
 			rv.setUrl("/oxo/storyboard/storyBoard.eat");
 		}else if(cnt == 1) {
 			rv.setUrl("/oxo/storyboard/storyBoard.eat");
@@ -125,7 +122,6 @@ public class StoryBoard {
 		int cnt = sbDAO.sbLike(sbVO);
 		
 		if(cnt == 1) {
-			System.out.println("좋아요를 취소합니다.");
 			sbDAO.sbLikeU(sbVO);
 		}else {
 			int cnt2 = sbDAO.sbLikeHC(sbVO);
@@ -133,18 +129,15 @@ public class StoryBoard {
 			if(cnt2 == 1) {
 				
 				sbDAO.sbLikeU2(sbVO);
-				System.out.println("싫어요를 취소하고 좋아요를 누릅니다.");
 			}else {
 				
 				int cnt3 = sbDAO.sbLikeZC(sbVO);
 				
 				if(cnt3 == 1) {
 					
-					System.out.println("좋아요를 누릅니다.");
 					sbDAO.sbLikeU2(sbVO);
 				}else {
 					
-					System.out.println("좋아요를 누릅니다.");
 					sbDAO.sbLike2(sbVO);	
 				}
 			}
@@ -163,24 +156,20 @@ public class StoryBoard {
 		int cnt = sbDAO.sbHate(sbVO);
 		
 		if(cnt == 1) {
-			System.out.println("싫어요를 취소합니다.");
 			sbDAO.sbHateU(sbVO);
 		}else {
 			int cnt2 = sbDAO.sbHateLC(sbVO);
 			
 			if(cnt2 == 1) {
 				sbDAO.sbHateU2(sbVO);
-				System.out.println("좋아요를 취소하고 싫어요를 누릅니다..");
 					
 			}else {
 				int cnt3 = sbDAO.sbHateZC(sbVO);
 				
 				if(cnt3 == 1) {
-					System.out.println("싫어요를 누릅니다.");
 					sbDAO.sbHateU2(sbVO);
 					
 				}else {
-					System.out.println("싫어요를 누릅니다.");
 					sbDAO.sbHate2(sbVO);	
 				}
 			}

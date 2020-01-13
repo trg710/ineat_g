@@ -127,6 +127,7 @@ ul {
 }
 .lr{
 	cursor: pointer;
+	padding: 5px 8px 6px 8px;
 }
 .type{
 	font-size: 14px;
@@ -191,9 +192,9 @@ ul {
 		});
 		$('.badge').click(function(){
 			$(this).removeClass('badge-light');
-			$(this).removeClass('badge-primary');
-			$(this).addClass('badge-primary');
-			$(this).siblings().removeClass('badge-primary');
+			$(this).removeClass('badge-success');
+			$(this).addClass('badge-success');
+			$(this).siblings().removeClass('badge-success');
 			$(this).siblings().removeClass('badge-light');
 			$(this).siblings().addClass('badge-light');
 		});
@@ -440,7 +441,7 @@ ul {
 					
 					
 					<div class="list_row d-flex">
-						<div class="lr badge badge-pill badge-primary">
+						<div class="lr badge badge-pill badge-success">
 							<span class="list_ajax type" id="cnt">조회순</span>
 						</div>
 						<div class="lr badge badge-pill badge-light">

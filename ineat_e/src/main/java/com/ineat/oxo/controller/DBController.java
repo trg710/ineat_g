@@ -31,7 +31,6 @@ public class DBController {
 	            for(int i = 0; i<fullList.length; i++) {
 	               String real = fullList[i].toString();
 	               if(real.indexOf("1")!=-1) {
-	               System.out.println(real.substring(real.lastIndexOf("\\")+1));
 	               dbDAO.dbSet(real.substring(real.lastIndexOf("\\")+1));
 	               }
 	            }
