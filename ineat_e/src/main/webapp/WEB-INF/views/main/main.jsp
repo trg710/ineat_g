@@ -83,6 +83,7 @@
 				gal.children('b').addClass('overindex');
 			}
 		});
+		
 
 		//3섹션 
 		$('#hansik').click(
@@ -184,7 +185,9 @@
 	overflow: hidden;
 	margin: 1px;
 }
-
+.img{
+	cursor: pointer;
+}
 .overindex {
 	margin: 0;
 	text-align: center;
@@ -247,8 +250,7 @@
 	<!-- 메인 -->
 	<!--네비게이션바-->
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
-		<a class="navbar-brand" href=""><img src="img/logo.png"
-			style="margin-left: 30px; width: 100px;"></a>
+		<a class="navbar-brand" href=""><img src="img/logo.png" style="margin-left: 30px; width: 100px;"></a>
 		<script type="text/javascript">
 			$(function() {
 				//네비바 로고 클릭 시 메인화면으로 이동
@@ -259,10 +261,8 @@
 		</script>
 
 		<div class="collapse navbar-collapse" id="navbar">
-			<form class="form-inline col-10" action="/oxo/searchProc.eat"
-				method="POST">
-				<input class=" form-control col-11 mr-sm-2" type="text"
-					placeholder="Search" name="contents">
+			<form class="form-inline col-10" action="/oxo/searchProc.eat" method="POST">
+				<input class=" form-control col-11 mr-sm-2" type="text" placeholder="Search" name="contents">
 				<button class="btn btn-warning" type="submit">Search</button>
 			</form>
 			<ul class="navbar-nav float-left"
@@ -273,37 +273,28 @@
 				<script type="text/javascript">
 					$(function() {
 						//스토리 이동
-						$('#story').click(
-								function() {
-									$(location).attr('href',
-											'/oxo/storyboard/storyBoard.eat');
-								});
+						$('#story').click(function() {
+							$(location).attr('href','/oxo/storyboard/storyBoard.eat');
+							});
 						//맛드컵 이동
 						$('#cup').click(function() {
 							$(location).attr('href', '/oxo/mat/matdcup.eat');
-						});
+							});
 						//리스트 이동
-						$('#list').click(
-								function() {
-									$(location).attr('href',
-											'/oxo/ineatlist/list.eat');
-								});
+						$('#list').click(function() {
+									$(location).attr('href','/oxo/ineatlist/list.eat');
+							});
 					});
 				</script>
-				<li class="nav-item"><img src="img/member.png" width="30x"
-					style="margin-left: 15px;">
+				<li class="nav-item"><img src="img/member.png" width="30x" style="margin-left: 15px;">
 					<ul class="navbar-nav">
 						<c:if test="${empty SID}">
-							<li class="nav-item" id="loginbtn"><a class="nav-link"
-								href="#">로그인</a></li>
-							<li class="nav-item" id="joinbtn"><a class="nav-link"
-								href="#">회원가입</a></li>
+							<li class="nav-item" id="loginbtn"><a class="nav-link" href="#">로그인</a></li>
+							<li class="nav-item" id="joinbtn"><a class="nav-link" href="#">회원가입</a></li>
 						</c:if>
 						<c:if test="${not empty SID}">
-							<li class="nav-item"><a class="nav-link" href="#"
-								id="logout">로그아웃</a></li>
-							<li class="nav-item"><a class="nav-link"
-								id="memInfo">회원정보보기</a></li>
+							<li class="nav-item"><a class="nav-link" href="#" id="logout">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link" id="memInfo">회원정보보기</a></li>
 						</c:if>
 					</ul></li>
 			</ul>
@@ -317,16 +308,13 @@
 		<div class="section"
 			style="background: url('img/main.jpg') no-repeat; background-size: cover;">
 			<div id="page1" style="margin-top: 5%;">
-				<a href="#"><img src="img/click2.jpg" width="28%" id="mainimg"
-					class="goRecommend" style="margin-left: 15px;"></a> <img
-					src="img/ineat.png" width="30%"
-					style="margin-right: 5%; margin-left: 5%;"> <a href="#"><img
-					src="img/matdcup1.jpg" width="28%" id="mainimg" class="cup"></a>
+				<a href="#"><img src="img/click2.jpg" width="28%" id="mainimg" class="goRecommend" style="margin-left: 15px;"></a>
+				<img src="img/ineat.png" width="30%" style="margin-right: 5%; margin-left: 5%;">
+				<a href="#"> <img src="img/matdcup1.jpg" width="28%" id="mainimg" class="cup"></a>
 			</div>
 		</div>
 		<!--임시섹션2-->
-		<div class="section mt-n1"
-			style="background: url('img/main2.jpg') no-repeat; background-size: cover;">
+		<div class="section mt-n1" style="background: url('img/main2.jpg') no-repeat; background-size: cover;">
 			<div class="content2">
 				<div class="reviewTitle col-8">
 					<h1 style="font-size: 38px; color: rgb(255, 255, 255);">
@@ -336,21 +324,17 @@
 
 				<c:forEach var="data" items="${REVIEW}" begin="0" end="3">
 					<div class="reviewBox col-8">
-						<div class="membInfo col-2 center-block mt-2"
-							style="float: left; display: grid;">
+						<div class="membInfo col-2 center-block mt-2" style="float: left; display: grid;">
 							<c:if test="${data.p_savename != null}">
-								<img src="/oxo/upload/${data.p_savename }" width="70px"
-									height="70px" style="margin: 0 auto;">
+								<img src="/oxo/upload/${data.p_savename }" width="70px" height="70px" style="margin: 0 auto; border-radius: 50%;">
 							</c:if>
 							<c:if test="${data.p_savename == null}">
-								<img src="/oxo/img/member.png" width="70px" height="70px"
-									style="margin: 0 auto;">
+								<img src="/oxo/img/member.png" width="70px" height="70px" style="margin: 0 auto; border-radius: 50%;">
 							</c:if>
 							<h6></h6>
 							<h4 class="badge badge-warning" style="font-size: 13px;">${data.m_id }</h4>
 						</div>
-						<div class="review col-10 clearfix d-flex"
-							style="margin-top: 3px;">
+						<div class="review col-10 clearfix d-flex" style="margin-top: 3px;">
 							<div class="col-6 rvimg">
 								<c:forEach var="data2" items="${data.rf_savename}">
 									<div class="pic_1">
@@ -361,8 +345,7 @@
 							<div class="col-4 rvtext">
 								<p class="short_txt02">${data.rv_body }</p>
 							</div>
-							<div class="jumsu co-2" style="float: right;" width="50px"
-								height="50px;">
+							<div class="jumsu co-2" style="float: right;" width="50px" height="50px;">
 								<h1 style="font-size: 80px; color: rgb(0, 148, 0);">
 									<b><em>${data.rv_score }</em></b>
 								</h1>
@@ -376,33 +359,17 @@
 		</div>
 
 		<!--섹션3-->
-		<div class="section"
-			style="background: url('img/main.jpg') no-repeat; background-size: cover;"
-			align="center">
+		<div class="section" style="background: url('img/main.jpg') no-repeat; background-size: cover;" align="center">
 			<div id="page3" style="margin-top: 5%;">
 				<div align="left">
-					<a href="#"><img src="img/한식1.jpg"
-						onmouseover="this.src='img/한식2.jpg'"
-						onmouseout="this.src='img/한식1.jpg'" width="250px" id="hansik"
-						class="img"></a> <a href="#"><img src="img/중식1.jpg"
-						onmouseover="this.src='img/중식2.jpg'"
-						onmouseout="this.src='img/중식1.jpg'" width="250px" id="joongsik"
-						class="img"></a> <a href="#"><img src="img/양식1.jpg"
-						onmouseover="this.src='img/양식2.jpg'"
-						onmouseout="this.src='img/양식1.jpg'" width="250px" id="yangsik"
-						class="img"></a>
+					<img src="img/한식1.jpg" onmouseover="this.src='img/한식2.jpg'" onmouseout="this.src='img/한식1.jpg'" width="250px" id="hansik" class="img">
+					<img src="img/중식1.jpg" onmouseover="this.src='img/중식2.jpg'" onmouseout="this.src='img/중식1.jpg'" width="250px" id="joongsik" class="img">
+					<img src="img/양식1.jpg" onmouseover="this.src='img/양식2.jpg'" onmouseout="this.src='img/양식1.jpg'" width="250px" id="yangsik" class="img">
 				</div>
 				<div style="margin-left: 30%;" align="right">
-					<a href="#"><img src="img/일식1.jpg"
-						onmouseover="this.src='img/일식2.jpg'"
-						onmouseout="this.src='img/일식1.jpg'" width="250px" id="ilsik"
-						class="img"></a> <a href="#"><img src="img/회식1.jpg"
-						onmouseover="this.src='img/회식2.jpg'"
-						onmouseout="this.src='img/회식1.jpg'" width="250px" id="hsik"
-						class="img"> </a> <a href="#"><img src="img/카페1.jpg"
-						onmouseover="this.src='img/카페2.jpg'"
-						onmouseout="this.src='img/카페1.jpg'" width="250px" id="cafe"
-						class="img"></a>
+					<img src="img/일식1.jpg" onmouseover="this.src='img/일식2.jpg'" onmouseout="this.src='img/일식1.jpg'" width="250px" id="ilsik" class="img">
+					<img src="img/회식1.jpg" onmouseover="this.src='img/회식2.jpg'" onmouseout="this.src='img/회식1.jpg'" width="250px" id="hsik" class="img">
+					<img src="img/카페1.jpg" onmouseover="this.src='img/카페2.jpg'" onmouseout="this.src='img/카페1.jpg'" width="250px" id="cafe" class="img">
 				</div>
 			</div>
 		</div>
@@ -412,34 +379,26 @@
 	<div id="login" class="w3-modal">
 		<div class="w3-modal-content" style="width: 35%">
 			<div class="w3-container w3-padding">
-				<span id="x" style="margin: 10px 18px 0px 0px;"
-					class="w3-button w3-display-topright">&times;</span>
+				<span id="x" style="margin: 10px 18px 0px 0px;" class="w3-button w3-display-topright">&times;</span>
 				<!-- 로그인 모달 실제코드 -->
 
 				<div style="border: solid orange 2px;">
 					<div>
 						<div style="text-align: center;">
-							<img src="/oxo/img/logo.png" width="50%"
-								style="align-content: center; padding-top: 20px;">
+							<img src="/oxo/img/logo.png" width="50%" style="align-content: center; padding-top: 20px;">
 						</div>
-						<div
-							style="padding: 20px 20px 0px 20px; margin: 20px 20px 20px 20px;">
+						<div style="padding: 20px 20px 0px 20px; margin: 20px 20px 20px 20px;">
 							<div>
-								<input type="text" class="form-control inputheight " id="id"
-									name="id" placeholder="I D"">
+								<input type="text" class="form-control inputheight " id="id" name="id" placeholder="I D"">
 							</div>
 							<div>
-								<input type="password" class="form-control inputheight "
-									style="margin-top: 10px;" id="password" name="pw"
-									placeholder="Password">
+								<input type="password" class="form-control inputheight" style="margin-top: 10px;" id="password" name="pw" placeholder="Password">
 							</div>
 							<div>
 								<br>
-								<button type="button" class="btn btn-warning btn-w"
-									id="loginsub">Login</button>
+								<button type="button" class="btn btn-warning btn-w" id="loginsub">Login</button>
 							</div>
-							<div style="display: inline-block; margin: 0px;"
-								class="row col-md-12">
+							<div style="display: inline-block; margin: 0px;" class="row col-md-12">
 								<div class="size col-md-6" style="float: left;">
 									<p class="text-warning size idFind">
 										<b>아이디찾기</b>
@@ -447,14 +406,9 @@
 								</div>
 								<script type="text/javascript">
 									$(function() {
-										$('.idFind')
-												.click(
-														function() {
-															$(location)
-																	.attr(
-																			'href',
-																			'/oxo/member/idFind.eat');
-														});
+										$('.idFind') .click( function() {
+											 $(location) .attr('href','/oxo/member/idFind.eat');
+										});
 									});
 								</script>
 								<div class="size col-md-6" style="float: right;">
@@ -465,20 +419,14 @@
 								<script>
 									$(function() {
 										//비밀번호 찾기 버튼 클릭시 비밀번호 찾는 창으로 이동
-										$('.passFind')
-												.click(
-														function() {
-															$(location)
-																	.attr(
-																			'href',
-																			'/oxo/member/passFind.eat');
-														});
+										$('.passFind').click(function() {
+											 $(location).attr('href','/oxo/member/passFind.eat');
+										});
 									});
 								</script>
 							</div>
 							<p></p>
-							<p class="text-muted text-center pt-1">Copyright © INEAT
-								Corp. All Rights Reserved.</p>
+							<p class="text-muted text-center pt-1">Copyright © INEAT Corp. All Rights Reserved.</p>
 						</div>
 					</div>
 				</div>
