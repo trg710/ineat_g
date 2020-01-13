@@ -174,7 +174,9 @@ $(function(){
 			});
 			
 			//맛드컵 이동
-			
+			$('#cup').click(function(){
+		           $(location).attr('href','/oxo/mat/matdcup.eat');
+		    });
 			//리스트 이동
 			$('#list').click(function(){
 				$(location).attr('href','/oxo/ineatlist/list.eat');
