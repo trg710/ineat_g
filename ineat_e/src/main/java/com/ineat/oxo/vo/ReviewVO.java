@@ -24,8 +24,17 @@ public class ReviewVO {
 	
 	private int cnt;
 	
+	private String p_savename;
 	
 	
+	
+	
+	public String getP_savename() {
+		return p_savename;
+	}
+	public void setP_savename(String p_savename) {
+		this.p_savename = p_savename;
+	}
 	public List<String> getRf_savename() {
 		return rf_savename;
 	}
