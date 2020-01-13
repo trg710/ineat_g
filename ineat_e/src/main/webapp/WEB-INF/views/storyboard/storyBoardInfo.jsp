@@ -285,7 +285,7 @@ $(function(){
 	        <div class="col-md-3 border-bottom font-weight-bold" style="font-size:17px">제목:&nbsp;${DATA.title }</div>
 	        <div class="col-md-2 border-bottom text-right">작성자:&nbsp;${DATA.mid }</div>
 	        <div class="col-md-1 border-bottom text-right">조회수:&nbsp;${DATA.views }</div>
-	        <div class="col-md-2 border-bottom text-right">작성일:&nbsp;${DATA.sbDate }</div>
+	        <div class="col-md-2 border-bottom text-center">작성일:&nbsp;${DATA.sbDate }</div>
 	    </div>
 	    <div class="row mt-2">
 	    	<div class="col-md-2"></div>

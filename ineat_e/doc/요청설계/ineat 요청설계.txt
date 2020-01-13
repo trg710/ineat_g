@@ -1,0 +1,114 @@
+
+
+
+
+=================================================================================================================================
+
+# storyboard 구간 요청처리
+
+1. storyboard 페이지 보기
+	요청내용 : /oxo/storyboard/storyBoard.eat
+	파라미터 : 
+	컨트롤러 : com.ineat.oxo.controller.StoryBoard
+	처리함수 : storyBoard()
+	응답문서 : /WEB-INF/views/storyboard/storyBoard.jsp
+	
+2. storyboard 각 게시물 보기
+	요청내용 : /oxo/storyboard/storyBoardInfo.eat
+	파라미터 : 게시물번호, 회원번호(bno, mid)
+	컨트롤러 : com.ineat.oxo.controller.StoryBoard
+	처리함수 : storyBoardInfo()
+	응답문서 : /WEB-INF/views/storyboard/storyBoardInfo.jsp
+
+3. storyboard 글쓰기 페이지 보기
+	요청내용 : /oxo/storyboard/storyBoardWrite.eat
+	파라미터 : 
+	컨트롤러 : com.ineat.oxo.controller.StoryBoardWrite
+	처리함수 : storyBoardInfoWrite()
+	응답문서 : /WEB-INF/views/storyboard/storyBoardWrite.jsp
+
+4. storyboard 글쓰기
+	요청내용 : /oxo/storyboard/storyBoardWriteProc.eat
+	파라미터 : 회원아이디(mid)
+	컨트롤러 : com.ineat.oxo.controller.StoryBoardWriteProc
+	처리함수 : storyBoardInfoWriteProc()
+	응답문서 : /WEB-INF/views/storyboard/storyBoard.jsp
+
+5. storyboard 좋아요 처리
+	요청내용 : /oxo/storyboard/sbLike.eat
+	파라미터 : 게시물번호, 회원아이디(bno, mid)
+	컨트롤러 : com.ineat.oxo.controller.sbLike
+	처리함수 : sbLike()
+	응답문서 : /WEB-INF/views/storyboard/storyBoardInfo.jsp
+
+6. storyboard 싫어요 처리
+	요청내용 : /oxo/storyboard/sbHate.eat
+	파라미터 : 게시물번호, 회원아이디(bno, mid)
+	컨트롤러 : com.ineat.oxo.controller.
+	처리함수 : sbHate()
+	응답문서 : /WEB-INF/views/storyboard/storyBoardInfo.jsp
+
+7. storyboard 게시물 삭제 처리
+	요청내용 : /oxo/storyboard/sbDelete.eat
+	파라미터 : 게시물번호(bno)
+	컨트롤러 : com.ineat.oxo.controller.sbDelete
+	처리함수 : sbDelete()
+	응답문서 : /WEB-INF/views/storyboard/storyBoard.jsp
+
+8. storyboard 수정시 상세보기
+	요청내용 : /oxo/storyboard/sbViewDetail.eat
+	파라미터 : 게시물번호(bno)
+	컨트롤러 : com.ineat.oxo.controller.sbViewDetail
+	처리함수 : sbViewDetail()
+	응답문서 : 
+
+9. storyboard 수정 처리
+	요청내용 : /oxo/storyboard/sbInfoEdit.eat
+	파라미터 : 게시물번호, 제목, 내용(bno, title, content)
+	컨트롤러 : com.ineat.oxo.controller.sbInfoEdit
+	처리함수 : sbInfoEdit()
+	응답문서 : 
+
+10. storyboard 수정시 게시물 사진 삭제처리
+	요청내용 : /oxo/storyboard/sbInfoImgDelete.eat
+	파라미터 : 게시물번호(bno)
+	컨트롤러 : com.ineat.oxo.controller.sbInfoImgDelete
+	처리함수 : sbInfoImgDelete
+	응답문서 : /WEB-INF/views/storyboard/storyBoardInfo.jsp
+
+11. storyboard 수정시 사진 올리기
+	요청내용 : /oxo/storyboard/sbInfoImgUp.eat
+	파라미터 : 게시물번호, 회원아이디(bno, mid)
+	컨트롤러 : com.ineat.oxo.controller.sbInfoImgUp
+	처리함수 : sbInfoImgUp()
+	응답문서 : /WEB-INF/views/storyboard/storyBoardInfo.jsp
+
+12. storyboard 댓글 등록 처리
+	요청내용 : /oxo/storyboard/sbComment.eat
+	파라미터 : 게시물번호, 회원아이디, 내용(bno, mid, content)
+	컨트롤러 : com.ineat.oxo.controller.sbComment
+	처리함수 : sbComment()
+	응답문서 : /WEB-INF/views/storyboard/storyBoardInfo.jsp
+
+13. storyboard 댓글 수정시 상세보기
+	요청내용 : /oxo/storyboard/sbCmtView.eat
+	파라미터 : 댓글번호(cno)
+	컨트롤러 : com.ineat.oxo.controller.sbCmtView
+	처리함수 : sbCmtView()
+	응답문서 : 
+
+14. storyboard 댓글 수정 처리
+	요청내용 : /oxo/storyboard/sbCmtEdit.eat
+	파라미터 : 댓글번호(cno)
+	컨트롤러 : com.ineat.oxo.controller.sbCmtEdit
+	처리함수 : sbCmtEdit()
+	응답문서 : /WEB-INF/views/storyboard/storyBoardInfo.jsp
+
+15. storyboard 댓글 삭제 처리
+	요청내용 : /oxo/storyboard/sbCmtOneDelete.eat
+	파라미터 : 댓글번호(cno)
+	컨트롤러 : com.ineat.oxo.controller.sbCmtOneDelete
+	처리함수 : sbCmtOneDelete()
+	응답문서 : /WEB-INF/views/storyboard/storyBoardInfo.jsp
+	
+=======================================================================================================================

@@ -204,7 +204,7 @@ public class StoryBoard {
 		return mv;
 	}
 	
-	// 게시물 상세 보기
+	// 수정시 상세보기
 	@RequestMapping("sbViewDetail.eat")
 	public @ResponseBody StoryBoardVO sbViewDetail(StoryBoardVO sbVO) {
 		sbVO = sbDAO.sbViewDetail(sbVO);
@@ -234,7 +234,7 @@ public class StoryBoard {
 	@RequestMapping("sbInfoImgUp.eat")
 	public ModelAndView sbInfoImgUp(ModelAndView mv, StoryBoardVO sbVO, HttpSession session){
 		fileSrvc.setDAO(fDAO);
-		fileSrvc.sbInfoImgUp(session, sbVO);
+		fileSrvc.sbInfoImgUp(session, sbVO);  
 		
 		mv.addObject("DATA", sbVO);
 		mv.setViewName("storyboard/sbInfoR");
@@ -251,7 +251,7 @@ public class StoryBoard {
 		return mv;
 	}
 	
-	// 댓글 상세 보기
+	// 댓글 수정시 상세 보기
 	@RequestMapping("sbCmtView.eat")
 	public @ResponseBody StoryBoardVO sbCmtView(StoryBoardVO sbVO) {
 		sbVO = sbDAO.sbCmtView(sbVO);
