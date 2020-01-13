@@ -1,7 +1,113 @@
+#회원관련 요청처리
+1.메인화면 페이지 보기
+	요청내용 : /oxo/main.eat
+	파라미터 : 
+	컨트롤러 : com.ineat.oxo.controller.MainController
+	처리함수 : Main()
+	응답문서 :	/WEB-INF/views/main/main.jsp
+	
+2. 로그인 처리요청
+	요청내용 : /oxo/member/loginProc.eat
+	파라미터 : id, pw
+	컨트롤러 : con.ineat.oxo.controller.Member
+	처리함수 : loginProc()
+	응답문서 :	/WEB-INF/views/main/main.jsp
+	
+3. 로그아웃 처리요청
+	요청내용 : /oxo/member/logout.eat
+	파라미터 : 
+	컨트롤러 : com.ineat.oxo.controller.Member
+	처리함수 : logoutForm()
+	응답문서 :	/WEB-INF/views/main/main.jsp
+	
+4. 회원가입 폼 보기
+	요청내용 : /oxo/member/join.eat
+	파라미터 :
+	컨트롤러 : com.ineat.oxo.controller.Member
+	처리함수 : join()
+	응답문서 :	/WEB-INF/views/member/join.jsp
+	
+5. 회원가입 처리요청
+	요청내용 : /oxo/member/joinProc.eat
+	파라미터 : id, pw, name, nickname, tel, email, birthday
+	컨트롤러 : com.ineat.oxo.controller.Member
+	처리함수 : joinProc()
+	응답문서 :	성공 - /WEB-INF/views/main/main.jsp
+			실패 - /WEB-INF/views/member/join.jsp
+			
+6. 회원아이디 체크요청
+	요청내용 : /oxo/member/idCheck.eat
+	파라미터 : id
+	전송방식 : json
+	컨트롤러 :	com.ineat.oxo.controller.Member
+	처리함수 : idCheck()
+	
+7. 회원 닉네임 체크요청
+	요청내용 : /oxo/member/nnCheck.eat
+	파라미터 : nname
+	전송방식 : json
+	컨트롤러 :	com.ineat.oxo.controller.Member
+	처리함수 : nnCheck()
+	
+8. 회원 전화번호 체크요청
+	요청내용 : /oxo/member/telCheck.eat
+	파라미터 : tel
+	전송방식 : json
+	컨트롤러 :	com.ineat.oxo.controller.Member
+	처리함수 : telCheck()
+	
+9. 회원 이메일  체크요청
+	요청내용 : /oxo/member/eCheck.eat
+	파라미터 : email
+	전송방식 : json
+	컨트롤러 :	com.ineat.oxo.controller.Member
+	처리함수 : eCheck()
+	
+10. 회원 정보보기 요청
+	요청내용 : /oxo/member/memInfo.eat
+	파라미터 : id
+	컨트롤러 :	com.ineat.oxo.controller.Member
+	처리함수 : memInfo()
+	응답문서 : /WEB-INF/views/member/memInfo.jsp
+	
+11. 회원정보 수정 요청
+	요청내용 : /oxo/member/editProc.eat
+	파라미터 : file, pw, nname, tel, email
+	컨트롤러 :	com.ineat.oxo.controller.Member
+	처리함수 : editProc()
+	응답문서 : /WEB-INF/views/member/memInfo.jsp
 
-
-
-
+12. 아이디 찾기 폼 요청
+	요청내용 : /oxo/member/idFind.eat
+	파라미터 : 
+	컨트롤러 :	com.ineat.oxo.controller.Member
+	처리함수 : idFind()
+	응답문서 : /WEB-INF/views/member/idFind.jsp
+	
+13. 아이디 찾기 요청
+	요청내용 : /oxo/member/idFindProc.eat
+	파라미터 : name, email
+	컨트롤러 :	com.ineat.oxo.controller.Member
+	처리함수 : idFindProc()
+	응답문서 : /WEB-INF/views/member/idFind.jsp
+	
+14. 비밀번호 찾기 폼 요청
+	요청내용 : /oxo/member/passFind.eat
+	파라미터 : 
+	컨트롤러 :	com.ineat.oxo.controller.Member
+	처리함수 : passFind()
+	응답문서 : /WEB-INF/views/member/passFind.jsp
+	
+14. 비밀번호 찾기 폼 요청
+	요청내용 : /oxo/member/passFindProc.eat
+	파라미터 : id, name, email
+	컨트롤러 :	com.ineat.oxo.controller.Member
+	처리함수 : passFindProc()
+	응답문서 : 성공 - /WEB-INF/views/main.jsp
+			실패 - /WEB-INF/views/member/passFind.jsp
+	
+	
+	
 =================================================================================================================================
 
 # storyboard 구간 요청처리
