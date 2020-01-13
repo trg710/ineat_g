@@ -145,6 +145,11 @@
 	background-color:orange;
 	border-color:orange;
 }
+
+.btn-default{
+	background-color:green;
+	border-color:green;
+}
 </style>
 
 
@@ -385,10 +390,10 @@ $(function(){
 
                 <!-- 태그 버튼들 정렬내용. -->
                 <div class="btn-group-toggle d-flex justify-content-between col-12" data-toggle="buttons">
-                    <label class="btn btn-primary btn-lg btn-block">
+                    <label class="btn btn-warning btn-lg btn-block">
                         <input type="radio" name="options" id="option1" autocomplete="off"> 맛집리스트
                     </label>
-                    <label  class="btn btn-default btn-lg btn-block">
+                    <label  class="btn btn-warning btn-lg  btn-block">
                         <input type="radio" name="options" id="option2" autocomplete="off"> 스토리보드
                     </label>
                    
