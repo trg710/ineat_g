@@ -73,7 +73,7 @@
  	<!-- 맛집 평균점수 확인 -->
  	<select id="reviewavg" parameterType="int" resultType="double">
  	SELECT
-	    TRUNC(AVG(rv_score), 1)
+	    NVL(TRUNC(AVG(rv_score), 1),0)
 	FROM
 	    ie_review
 	WHERE

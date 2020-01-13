@@ -39,8 +39,8 @@ public class MainList {
 				list.get(i).setFavorite(""+tDAO.checkfavorite(list.get(i)));
 			}
 			List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
-			
 			list.get(i).setRvList(rlist);
+			list.get(i).setAvg(rvDAO.getReviewAvg(ml_no));
 		}
 		
 		int total = list.size();
@@ -69,26 +69,37 @@ public class MainList {
 		String type = tVO.getMl_type();
 		String tag = tVO.getMl_tag();
 		String sid = (String)session.getAttribute("SID");
+		
 		if(tag.length() == 0) {
 			list = (ArrayList<TasteInfoVO>)tDAO.moreList(tVO);
+			
 			for (int i = 0; i < list.size(); i++) {
 				int ml_no = list.get(i).getMl_no();
+				
 				if(sid != null) {
+					
 					list.get(i).setM_id(sid);
 					list.get(i).setFavorite(""+tDAO.checkfavorite(list.get(i)));
 				}
 				List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
 				list.get(i).setRvList(rlist);
+				list.get(i).setAvg(rvDAO.getReviewAvg(ml_no));
 			}
 		}else {
+			
 			list = (ArrayList<TasteInfoVO>)tDAO.tagList(tVO);
+			
 			for (int i = 0; i < list.size(); i++) {
 				int ml_no = list.get(i).getMl_no();
+				
 				if(sid != null) {
+					
 					list.get(i).setM_id(sid);
 					list.get(i).setFavorite(""+tDAO.checkfavorite(list.get(i)));
 				}
+				
 				List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
+				list.get(i).setAvg(rvDAO.getReviewAvg(ml_no));
 				list.get(i).setRvList(rlist);
 			}
 		}
@@ -120,26 +131,5 @@ public class MainList {
 		mv.setViewName("ineatlist/detail/detailinfo");
 		return mv;
 	}
-	
-	@RequestMapping("map.eat")
-	public ModelAndView MapTest(ModelAndView mv) {
-		mv.setViewName("ineatlist/detail/modal");
-		return mv;
-	}
-	
-	@RequestMapping("mainList.eat")
-	public ModelAndView mainList(ModelAndView mv, TasteInfoVO tVO) {
-		ArrayList<TasteInfoVO> list = new ArrayList<TasteInfoVO>();
-		String type = tVO.getMl_type();
-		String tag = tVO.getMl_tag();
-		if(tag.length() == 0) {
-			list = (ArrayList<TasteInfoVO>)tDAO.moreList(tVO);
-		}else {
-			list = (ArrayList<TasteInfoVO>)tDAO.tagList(tVO);
-		}
-		mv.addObject("LIST",list);
-		mv.setViewName("ineatlist/list");
-		return mv;
-	}
-	
+
 }

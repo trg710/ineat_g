@@ -218,3 +218,68 @@
 	응답문서 : /WEB-INF/views/storyboard/storyBoardInfo.jsp
 	
 =======================================================================================================================
+
+1. 맛집리스트 페이지 이동 
+	요청내용 : /oxo/ineatlist/list.eat
+	파라미터 : 회원아이디(mid)
+	컨트롤러 : com.ineat.oxo.controller.MainList.java
+	처리함수 : List()
+	응답문서 : /WEB-INF/views/ineatlist/list.jsp
+	
+2. 리스트 더보기, 태그선택 
+	요청내용 : /oxo/ineatlist/morelist.eat
+	파라미터 : 회원아이디(mid)
+	컨트롤러 : com.ineat.oxo.controller.MainList.java
+	처리함수 : morelist()
+	응답문서 : /WEB-INF/views/ineatlist/list.jsp
+	
+3. 맛집정보 자세히 보기
+	요청내용 : /oxo/ineatlist/info.eat
+	파라미터 : 글번호(ml_no)
+	컨트롤러 : com.ineat.oxo.controller.MainList.java
+	처리함수 : detailinfo()
+	응답문서 : /WEB-INF/views/ineatlist/detail/detailinfo.jsp
+	
+4. 맛집 좋아요 처리.
+	요청내용 : /oxo/ineatlist/favoriteup.eat
+	파라미터 : 글번호(ml_no), 회원아이디(mid)
+	컨트롤러 : com.ineat.oxo.controller.MainList.java
+	처리함수 : FavoriteUp()
+	응답문서 : /WEB-INF/views/ineatlist/list.jsp
+	
+	
+	
+5. 리뷰 작성 페이지 이동
+	요청내용 : /oxo//ineatlist/review/reviewform.eat
+	파라미터 : 글번호(ml_no)
+	컨트롤러 : com.ineat.oxo.controller.Review.java
+	처리함수 : reviewform()
+	응답문서 : /WEB-INF/views/ineatlist/review/addreview.jsp
+	
+6. 리뷰 작성 처리.
+	요청내용 : /oxo//ineatlist/review/addreview.eat
+	파라미터 : 글번호(ml_no), 회원아이디(mid)
+	컨트롤러 : com.ineat.oxo.controller.Review.java
+	처리함수 : addreview()
+	응답문서 : /WEB-INF/views/ineatlist/detail/detailinfo.jsp
+	
+7. 리뷰 삭제
+	요청내용 : /oxo//ineatlist/review/delreview.eat
+	파라미터 : 
+	컨트롤러 : com.ineat.oxo.controller.Review.java
+	처리함수 : 
+	응답문서 : /WEB-INF/views/ineatlist/review/
+	
+8. 리뷰 수정 페이지 이동
+	요청내용 : /oxo//ineatlist/review
+	파라미터 : 
+	컨트롤러 : com.ineat.oxo.controller.Review.java
+	처리함수 : 
+	응답문서 : /WEB-INF/views/ineatlist/review/
+	
+9. 리뷰 수정 처리.
+	요청내용 : /oxo//ineatlist/review
+	파라미터 : 
+	컨트롤러 : com.ineat.oxo.controller.Review.java
+	처리함수 : 
+	응답문서 : /WEB-INF/views/ineatlist/review/

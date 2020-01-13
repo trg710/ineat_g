@@ -305,7 +305,7 @@ ul {
 						resultlist += '<ul>';
 						resultlist += '<li>';
 						resultlist += '<h1 class="d-inline-block m-0 detail" data-id="'+data[i].ml_no +'">'+data[i].ml_title +'</h1>';
-						resultlist += '<h1 class="d-inline-block m-0 ml-2 text-success">4.5</h1>';
+						resultlist += '<h1 class="d-inline-block m-0 ml-2 text-success">'+data[i].avg+'</h1>';
 						resultlist += '</li>';
 						resultlist += '<li>';
 						resultlist += '<h4>';
@@ -490,7 +490,7 @@ ul {
 								<ul>
 									<li>
 										<h1 class="d-inline-block m-0 detail" data-id="${data.ml_no }">${data.ml_title }</h1>
-										<h1 class="d-inline-block m-0 ml-2 text-success">4.5</h1>
+										<h1 class="d-inline-block m-0 ml-2 text-success">${data.avg }</h1>
 									</li>
 									<li>
 										<h4>

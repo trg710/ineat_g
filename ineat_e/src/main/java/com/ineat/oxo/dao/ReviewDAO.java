@@ -29,8 +29,10 @@ public class ReviewDAO {
 	 
 // 리뷰 정보 리스트를 가져오는 함수	
 	public List<ReviewVO> getReviewInfo(int ml_no){
+		
 //		리뷰정보가져오는 함수.
 		List<ReviewVO> list = sqlSession.selectList("rvSQL.reviewinfolist", ml_no);
+		
 //		리뷰 갯수만큼 반복
 		for(int i = 0 ; i<list.size(); i++) {
 			FileVO fVO = new FileVO();
@@ -39,10 +41,12 @@ public class ReviewDAO {
 			
 //			i번째 리뷰의 사진갯수를 가져옴.
 			int cnt = list.get(i).getCnt();
+			
 //			사진갯수가 0보다 크면
 			if(cnt > 0) {
 //				i번째 리뷰번호를 받아서
 				int rvno =list.get(i).getRv_no();
+				
 //				사진정보(savename)을 i번째 리뷰에 넣는다.
 				list.get(i).setRf_savename(sqlSession.selectList("rvSQL.rvfileinfo", rvno));
 			}
@@ -70,10 +74,13 @@ public class ReviewDAO {
 		for(int i = 0 ; i<list.size(); i++) {
 //			i번째 리뷰의 사진갯수를 가져옴.
 			int cnt = list.get(i).getCnt();
+			
 //			사진갯수가 0보다 크면
 			if(cnt > 0) {
+				
 //				i번째 리뷰번호를 받아서
 				int rvno =list.get(i).getRv_no();
+				
 //				사진정보(savename)을 i번째 리뷰에 넣는다.
 				list.get(i).setRf_savename(sqlSession.selectList("rvSQL.rvfileinfo", rvno));
 			}
