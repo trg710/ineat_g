@@ -116,6 +116,7 @@ public class Member {
 		memVO.setRdCode(mVO.getRdCode());
 		fVO.setMid(mVO.getId());
 		String sname = fDAO.getProf(fVO);
+		System.out.println("**** cont sname : " + sname);
 		mv.addObject("SNAME",sname);
 		mv.addObject("DATA", memVO);
 		/*
@@ -138,8 +139,8 @@ public class Member {
 		if(sfile!=null) {
 			sname = fileSrvc.singleUpProc(session, sfile);
 			fDAO.memInfoPic(sfile, sname, sid);
-			System.out.println(sname);
-			mv.addObject("PROF", sname);
+		}else {
+			sname = "member.png";
 		}
 
 		rv.setUrl("/oxo/member/memInfo.eat");
@@ -153,6 +154,7 @@ public class Member {
 */
 		mv.addObject("rdCode", -1);
 		mv.addObject("id", mVO.getId());
+		mv.addObject("PROF", sname);
 		mv.setView(rv);
 		return mv;
 	}

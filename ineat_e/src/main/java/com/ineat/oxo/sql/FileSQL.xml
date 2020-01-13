@@ -74,17 +74,13 @@
  	
  	</update>
  	<!-- 회원정보 사진 가져오깅 ~~ -->
- 	<select id="getProf" parameterType="fVO" resultType="String">
+ 	<select id="getProf" parameterType="fVO" resultType="string">
  		SELECT
- 			p_savename
+ 			NVL(p_savename, 'member.png')
  		FROM
- 			ie_profile
+ 			ie_profile, ie_member
  		WHERE
- 			p_mno = (SELECT
- 						m_no
- 					FROM
- 						ie_member
- 					WHERE
- 						m_id = #{mid})
+ 			m_id = #{mid}
+ 			AND m_no = p_mno(+)
  	</select>
  </mapper>

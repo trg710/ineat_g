@@ -72,7 +72,7 @@ public class FileDAO {
 	//회원 사진보기 함수
 	public String getProf(FileVO fVO) {
 		System.out.println("###"+fVO.getMid());
-		String result = sqlSession.selectOne("fSQL.getProf",fVO);
+		String result = sqlSession.selectOne("fSQL.getProf", fVO);
 		System.out.println("*** dao result : " + result);
 		return result;
 	}
