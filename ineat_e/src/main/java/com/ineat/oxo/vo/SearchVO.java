@@ -4,14 +4,35 @@ public class SearchVO {
 	private int num; 
 	private String contents; // 검색 키워드
 	private int price[];  // 가격대 필터 저장 배열 
-	private int ml_count;
-	private int favorite;
+
 	private int ml_no;
 	private String tag;
-	private String order;
+	private String order="ml_no";
+	
+	private String ml_count;
+	private String favorite;
+	private String rv_cnt;
 	
 	
 	
+	public String getMl_count() {
+		return ml_count;
+	}
+	public void setMl_count(String ml_count) {
+		this.ml_count = ml_count;
+	}
+	public String getFavorite() {
+		return favorite;
+	}
+	public void setFavorite(String favorite) {
+		this.favorite = favorite;
+	}
+	public String getRv_cnt() {
+		return rv_cnt;
+	}
+	public void setRv_cnt(String rv_cnt) {
+		this.rv_cnt = rv_cnt;
+	}
 	public String getOrder() {
 		return order;
 	}
@@ -24,18 +45,7 @@ public class SearchVO {
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
-	public int getMl_count() {
-		return ml_count;
-	}
-	public void setMl_count(int ml_count) {
-		this.ml_count = ml_count;
-	}
-	public int getFavorite() {
-		return favorite;
-	}
-	public void setFavorite(int favorite) {
-		this.favorite = favorite;
-	}
+	
 	public int getMl_no() {
 		return ml_no;
 	}

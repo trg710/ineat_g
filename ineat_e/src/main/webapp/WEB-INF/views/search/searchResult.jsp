@@ -55,10 +55,10 @@
 } 
  
 .click-btn { 
-    color: #17BAEF; 
+    color: white; 
  
     background-color: orange; 
- 
+ 	
     text-decoration: none; 
 }
 
@@ -180,18 +180,73 @@ ul {
 	cursor:pointer;
 	height:35px;
 }
-
+#sf{
+	color:#fd8f00;
+}
 </style>
 
 
 <script type="text/javascript">
 $(function(){
+	//로그인처리
+	$('#login').css('display', 'none');
+	$('#loginbtn').click(function() {
+		$('#login').css('display', 'block');
+	});
+	$('#x').click(function() {
+		$('#login').css('display', 'none');
+	});
+
+	$('#loginsub').click(function() {
+		$.ajax({
+			url : "/oxo/member/loginProc.eat",
+			type : "post",
+			dataType : "json",
+			data : {
+				"id" : $('#id').val(),
+				"pw" : $('#password').val()
+			},
+			success : function(cnt) {
+				if (cnt == 1) {
+					location.reload();
+				} else {
+					alert('로그인에 실패하였습니다.');
+				}
+			},
+			error : function() {
+				alert('###에러');
+			}
+		});
+	});
+
+	//로그아웃
+	$('#logout').click(function() {
+		$(location).attr('href', '/oxo/member/logout.eat');
+	});
+
+	//회원가입처리
+	$('#joinbtn').click(function() {
+		$(location).attr('href', '/oxo/member/join.eat');
+	});
+	//회원정보보기로 이동
+	$('#memInfo').click(function() {
+		$(location).attr('href', '/oxo/member/memInfo.eat?id=' + '${SID}');
+	});
+	
+	var tag;
+	var order;
+	
+	var tag2;
 		var listno=5;
 		var body = '${SCH.contents}';
 		var cost = new Array();
 		// 필터원형 버튼에 관한
-		$('.round-btn').click(function(){
+		$('.badge-success').click(function(){
 			$(this).toggleClass('click-btn');
+		});
+		
+		$('.list_ajax').click(function(){
+			order = $(this).attr('id');
 		});
 		// 적용 or 취소 버튼 클릭시 
 		$('#commit').click(function(){
@@ -214,10 +269,10 @@ $(function(){
 			
 			} // end for
 			
-			
+		
 			// 태그 검색 
 			var val = document.getElementsByName('options');
-			var tag;
+			
 			for(var i = 0; i<val.length; i++){
 				if(val[i].checked){
 					tag = val[i].value;
@@ -225,14 +280,7 @@ $(function(){
 			}
 			
 			// 리뷰, 조회, 좋아요 순서 변수 세팅 
-			var val2 = document.getElementsByName('options1');
-			var tag2;
-			for(var i = 0; i<val2.length; i++){
-				if(val2[i].checked){
-					tag2 = val2[i].value;
-				}
-			}
-			alert(cost+tag);
+			
 			
 			$.ajax({
 				url:"/oxo/filterSearch.eat",
@@ -243,7 +291,7 @@ $(function(){
 					"contents":body,
 					"price":cost,
 					"tag":tag,
-					"order":tag2
+					"order":order
 				},
 				success:function(data){
 					listno=5;
@@ -339,9 +387,10 @@ $(function(){
 					 traditional : true,
 					dataType:"json",
 					data:{
-						num : listno,
-						contents:body,
-						price:cost
+						"num" : listno,
+						"contents":body,
+						"price":cost,
+						"order":order
 					},
 					success: function(data){
 						
@@ -483,65 +532,56 @@ $(function(){
 </head>
 
 <body>
-   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
-      <a class="navbar-brand" href="#"><img src="img/logo.png"
-         style="margin-left: 30px; width: 100px;"></a>
-         <script type="text/javascript">
-         $(function() {
-            //네비바 로고 클릭 시 메인화면으로 이동
-            $('.navbar-brand').click(function() {
-               $(location).attr('href', '/oxo/main.eat');
-            });
-         });
-         </script>
-      <!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
-            aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>-->
+  <!--네비게이션바-->
+	<nav class="navbar navbar-expand-lg navbar-light fixed-top bg">
+		<a class="navbar-brand" id="main" href="/oxo/main.eat"><img src="img/logo.png" style="margin-left: 30px; width: 100px;"></a>
+		
 
-      <div class="collapse navbar-collapse" id="navbar">
-         <form class="form-inline col-9" action="/oxo/searchProc.eat" method="POST">
-                <input class=" form-control col-10 mr-sm-2" type="text" placeholder="Search" name="contents">
-                <button class="btn btn-warning" type="submit">Search</button>
-           </form>
-         <ul class="navbar-nav float-left"
-            style="width: 200px; margin-right: 20px;">
-            <li class="nav-item" id="story"><a class="nav-link" href="#">Story</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Matdcup</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">List</a></li>
-            <li class="nav-item"><img src="img/member.png" width="30x"
-               style="margin-left: 15px;">
-               <script type="text/javascript">
-			  $(function(){
-			  	//스토리 이동
-			  	$('#story').click(function(){
-			  		$(location).attr('href','/oxo/storyboard/storyBoard.eat');
-			  	});
-			  	//맛드컵 이동
-			  	//리스트 이동
-			  	$('#list').click(function(){
-			  		$(location).attr('href','/oxo/ineatlist/list.eat');
-			  	});
-			   });
-			</script>
-               <ul class="navbar-nav">
-                  <c:if test="${empty SID}">
-                  <li class="nav-item" id="loginbtn"><a class="nav-link" href="#">로그인</a></li>
-                  <li class="nav-item" id="joinbtn"><a class="nav-link" href="#">회원가입</a></li>
-                  </c:if>
-                  <c:if test="${not empty SID}">
-                     <li class="nav-item"><a class="nav-link" href="#" id="logout">로그아웃</a></li>
-                     <li class="nav-item"><a class="nav-link" href="#" id="memInfo">회원정보보기</a></li>
-                  </c:if>
-               </ul></li>
-         </ul>
-      </div>
-   </nav>
-   <!--네비게이션바-->
+		<div class="collapse navbar-collapse" id="navbar">
+			<form class="form-inline col-10" action="/oxo/searchProc.eat" method="POST">
+				<input class=" form-control col-11 mr-sm-2" type="text" placeholder="Search" name="contents">
+				<button class="btn btn-warning" type="submit">Search</button>
+			</form>
+			<ul class="navbar-nav float-left"
+				style="width: 200px; margin-right: 20px;">
+				<li class="nav-item" id="story"><a class="nav-link" href="#">Story</a></li>
+				<li class="nav-item" id="cup"><a class="nav-link" href="#">Matdcup</a></li>
+				<li class="nav-item" id="list"><a class="nav-link" href="#">List</a></li>
+				<script type="text/javascript">
+					$(function() {
+						//스토리 이동
+						$('#story').click(function() {
+							$(location).attr('href','/oxo/storyboard/storyBoard.eat');
+							});
+						//맛드컵 이동
+						$('#cup').click(function() {
+							$(location).attr('href', '/oxo/mat/matdcup.eat');
+							});
+						//리스트 이동
+						$('#list').click(function() {
+									$(location).attr('href','/oxo/ineatlist/list.eat');
+							});
+					});
+				</script>
+				<li class="nav-item"><img src="img/member.png" width="30x" style="margin-left: 15px;">
+					<ul class="navbar-nav">
+						<c:if test="${empty SID}">
+							<li class="nav-item" id="loginbtn"><a class="nav-link" href="#">로그인</a></li>
+							<li class="nav-item" id="joinbtn"><a class="nav-link" href="#">회원가입</a></li>
+						</c:if>
+						<c:if test="${not empty SID}">
+							<li class="nav-item"><a class="nav-link" href="#" id="logout">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link" id="memInfo">회원정보보기</a></li>
+						</c:if>
+					</ul></li>
+			</ul>
+		</div>
+	</nav>
+	<!--네비게이션바-->
 
     <div class="container" style="margin-top: 100px;">
     	
-    	<img src="/oxo/img/filter.png" class="btn" style="width:100px;" id="filter"
+    	<img src="/oxo/img/filter.png" class="btn" style="width:80px;" id="filter"
     	onclick="document.getElementById('filterModal').style.display='block'"/>
     	
         <div class="row">
@@ -641,30 +681,33 @@ $(function(){
             <span id="x" style="margin: 10px 18px 0px 0px;"
                class="w3-button w3-display-topright" onclick="document.getElementById('filterModal').style.display='none'">&times;</span>
           <center>
-          <h6 class="display-3">검색 필터</h6>
+          <h3 class="display-3" id="sf"><em>Search filter</em></h3>
+          
           <hr>
-          <a class="round-btn" href="#">10,000</a><a class="round-btn" href="#">20,000</a>
-          <a class="round-btn" href="#">30,000</a><a class="round-btn" href="#">40,000</a>
-          <a class="round-btn" href="#">50,000</a>
+          <a class="badge badge-success" style="width:80px; height:40px;font-size:20px; line-height:30px;" href="#">10,000</a>
+          <a class="badge badge-success" style="width:80px; height:40px;font-size:20px; line-height:30px;" href="#">20,000</a>
+          <a class="badge badge-success" style="width:80px; height:40px;font-size:20px; line-height:30px;" href="#">30,000</a>
+          <a class="badge badge-success" style="width:80px; height:40px;font-size:20px; line-height:30px;" href="#">40,000</a>
+          <a class="badge badge-success" style="width:80px; height:40px;font-size:20px; line-height:30px;" href="#">50,000</a>
           <hr>
           <div class="btn-group-toggle d-flex justify-content-between col-12"
 					data-toggle="buttons">
-					<label class="btn btn-warning btn-lg list_ajax tag" id="한식">
+					<label class="btn btn-warning btn-lg  tag" id="한식">
 						<input type="radio" name="options" value="#한식" id="option1" autocomplete="off">
 						#한식
-					</label> <label class="btn btn-warning btn-lg list_ajax tag" id="중식">
+					</label> <label class="btn btn-warning btn-lg  tag" id="중식">
 						<input type="radio" name="options" value="#중식" id="option2" autocomplete="off">
 						#중식
-					</label> <label class="btn btn-warning btn-lg list_ajax tag" id="양식">
+					</label> <label class="btn btn-warning btn-lg  tag" id="양식">
 						<input type="radio" name="options" value="#양식" id="option3" autocomplete="off">
 						#양식
-					</label> <label class="btn btn-warning btn-lg list_ajax tag" id="일식">
+					</label> <label class="btn btn-warning btn-lg  tag" id="일식">
 						<input type="radio" name="options" value="#일식" id="option4" autocomplete="off">
 						#일식
-					</label> <label class="btn btn-warning btn-lg list_ajax tag" id="회식">
+					</label> <label class="btn btn-warning btn-lg  tag" id="회식">
 						<input type="radio" name="options" value="#회식" id="option5" autocomplete="off">
 						#회식
-					</label> <label class="btn btn-warning btn-lg list_ajax tag" id="카페">
+					</label> <label class="btn btn-warning btn-lg  tag" id="카페">
 						<input type="radio" name="options" value="#카페" id="option6" autocomplete="off">
 						#카페
 					</label>
@@ -672,15 +715,15 @@ $(function(){
 				<hr>
 				 <div class="btn-group-toggle d-flex justify-content-between col-12"
 					data-toggle="buttons">
-					</label> <label class="btn btn-warning btn-lg " id="review">
-						<input type="radio" name="options1" id="option4" value="" autocomplete="off">
-						리뷰순
-					</label> <label class="btn btn-warning btn-lg " id="like">
-						<input type="radio" name="options1" id="option5" value="favorite" autocomplete="off">
-						좋아요순
-					</label> <label class="btn btn-warning btn-lg " id="views">
-						<input type="radio" name="options1" id="option6" value="ml_count" autocomplete="off">
+					</label> <label class="btn btn-warning btn-lg  tag" >
+						<input type="radio" name="options1" class="list_ajax" value="#일식" id="ml_count" autocomplete="off">
 						조회순
+					</label> <label class="btn btn-warning btn-lg  tag" >
+						<input type="radio" name="options1" class="list_ajax" value="#회식" id="rv_cnt" autocomplete="off">
+						리뷰순
+					</label> <label class="btn btn-warning btn-lg  tag">
+						<input type="radio" name="options1" class="list_ajax" value="#카페" id="favorite" autocomplete="off">
+						좋아요순
 					</label>
 				</div>	
 						
@@ -691,5 +734,65 @@ $(function(){
       </div>
    </div>
    </div>
+   
+   <!-- 로그인 모달창 -->
+	<div id="login" class="w3-modal">
+		<div class="w3-modal-content" style="width: 35%">
+			<div class="w3-container w3-padding">
+				<span id="x" style="margin: 10px 18px 0px 0px;" class="w3-button w3-display-topright">&times;</span>
+				<!-- 로그인 모달 실제코드 -->
+
+				<div style="border: solid orange 2px;">
+					<div>
+						<div style="text-align: center;">
+							<img src="/oxo/img/logo.png" width="50%" style="align-content: center; padding-top: 20px;">
+						</div>
+						<div style="padding: 20px 20px 0px 20px; margin: 20px 20px 20px 20px;">
+							<div>
+								<input type="text" class="form-control inputheight " id="id" name="id" placeholder="I D"">
+							</div>
+							<div>
+								<input type="password" class="form-control inputheight" style="margin-top: 10px;" id="password" name="pw" placeholder="Password">
+							</div>
+							<div>
+								<br>
+								<button type="button" class="btn btn-warning btn-w" id="loginsub">Login</button>
+							</div>
+							<div style="display: inline-block; margin: 0px;" class="row col-md-12">
+								<div class="size col-md-6" style="float: left;">
+									<p class="text-warning size idFind">
+										<b>아이디찾기</b>
+									</p>
+								</div>
+								<script type="text/javascript">
+									$(function() {
+										$('.idFind') .click( function() {
+											 $(location) .attr('href','/oxo/member/idFind.eat');
+										});
+									});
+								</script>
+								<div class="size col-md-6" style="float: right;">
+									<p class="text-warning size passFind">
+										<b>비밀번호찾기</b>
+									</p>
+								</div>
+								<script>
+									$(function() {
+										//비밀번호 찾기 버튼 클릭시 비밀번호 찾는 창으로 이동
+										$('.passFind').click(function() {
+											 $(location).attr('href','/oxo/member/passFind.eat');
+										});
+									});
+								</script>
+							</div>
+							<p></p>
+							<p class="text-muted text-center pt-1">Copyright © INEAT Corp. All Rights Reserved.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 로그인 모달 실제코드 여기까지 -->
+		</div>
+	</div>
 </body>
 </html>

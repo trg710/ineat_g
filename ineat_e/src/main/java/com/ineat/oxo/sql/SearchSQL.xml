@@ -9,7 +9,7 @@ SELECT b.rnum rno, b.ml_no ml_no, b.ml_time ml_time, b.ml_title ml_title, b.ml_t
  b.ml_newaddr ml_newaddr, b.ml_oldaddr ml_oldaddr, b.ml_menu ml_menu, b.ml_tag ml_tag, b.ml_count ml_count, sprice, eprice, b.favorite favorite
 FROM
 (SELECT ROWNUM rnum,  a.ml_no, a.ml_time, a.ml_title, a.ml_tel, a.ml_price, a.ml_newaddr, a.ml_oldaddr,
-    a.ml_menu, a.ml_tag, a.ml_count, a.favorite,
+    a.ml_menu, a.ml_tag, a.ml_count, a.favorite, 
     <![CDATA[
     case
     when a.s >5 then 5
@@ -27,10 +27,12 @@ FROM
 (SELECT 
       ml_no, ml_time, ml_title, ml_tel, ml_price, ml_newaddr, ml_oldaddr,
     ml_menu, ml_tag, ml_count, NVL(TRUNC((TO_NUMBER(SUBSTR(ml_price,1,INSTR(ml_price,'~',1)-1)))/10000),0)s,  NVL(TRUNC((TO_NUMBER(SUBSTR(ml_price,INSTR(ml_price,'~',1)+1)))/10000),0)e,
-    (SELECT count(*) FROM ie_ml_favorites WHERE mlf_mlno = ml_no ) favorite
+    (SELECT count(*) FROM ie_ml_favorites WHERE mlf_mlno = ml_no ) favorite, (SELECT count(*) FROM ie_review WHERE rv_mlno = ml_no) rv_cnt
 FROM
     ie_mainlist
-ORDER BY ml_no desc ) a
+ORDER BY 
+${order}
+ desc ) a
  WHERE
  
  (ml_title like '%'||#{contents}||'%' or ml_tag like '%'||#{contents}||'%' or '%'|| ml_newaddr like '%'||#{contents}||'%' or ml_oldaddr like '%'||#{contents}||'%' or ml_menu like '%'||#{contents}||'%') 
@@ -50,7 +52,7 @@ ORDER BY ml_no desc ) a
   AND ml_tag like '%'|| #{tag}||'%'
   </if>
   <![CDATA[
- AND rownum <= 5) b
+ AND rownum < 5) b
  WHERE b.rnum >= 1
   ]]> 
 </select> 
@@ -61,7 +63,7 @@ SELECT b.rnum rno, b.ml_no ml_no, b.ml_time ml_time, b.ml_title ml_title, b.ml_t
  b.ml_newaddr ml_newaddr, b.ml_oldaddr ml_oldaddr, b.ml_menu ml_menu, b.ml_tag ml_tag, b.ml_count ml_count, sprice, eprice, b.favorite
 FROM
 (SELECT ROWNUM rnum,  a.ml_no, a.ml_time, a.ml_title, a.ml_tel, a.ml_price, a.ml_newaddr, a.ml_oldaddr,
-    a.ml_menu, a.ml_tag, a.ml_count,  a.favorite,
+    a.ml_menu, a.ml_tag, a.ml_count,  a.favorite, 
     <![CDATA[
     case
     when a.s >5 then 5
@@ -79,10 +81,13 @@ FROM
 (SELECT 
       ml_no, ml_time, ml_title, ml_tel, ml_price, ml_newaddr, ml_oldaddr,
     ml_menu, ml_tag, ml_count, NVL(TRUNC((TO_NUMBER(SUBSTR(ml_price,1,INSTR(ml_price,'~',1)-1)))/10000),0)s,  NVL(TRUNC((TO_NUMBER(SUBSTR(ml_price,INSTR(ml_price,'~',1)+1)))/10000),0)e
-	, (SELECT count(*) FROM ie_ml_favorites WHERE mlf_mlno = ml_no ) favorite
+	, (SELECT count(*) FROM ie_ml_favorites WHERE mlf_mlno = ml_no ) favorite, (SELECT count(*) FROM ie_review WHERE rv_mlno = ml_no) rv_cnt
 FROM
     ie_mainlist
-ORDER BY ml_no desc ) a
+ 
+ORDER BY 
+${order}
+ desc ) a
  WHERE
  
  (ml_title like '%'||#{contents}||'%' or ml_tag like '%'||#{contents}||'%' or '%'|| ml_newaddr like '%'||#{contents}||'%' or ml_oldaddr like '%'||#{contents}||'%') 
@@ -103,7 +108,7 @@ ORDER BY ml_no desc ) a
   </if>
   <![CDATA[
  AND rownum <= #{num}+5) b
- WHERE b.rnum > #{num}
+ WHERE b.rnum >= #{num}
   ]]> 
 </select> 
 

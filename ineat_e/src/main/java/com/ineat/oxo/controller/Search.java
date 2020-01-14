@@ -66,11 +66,13 @@ public class Search {
 				list.get(i).setM_id(sid);
 				list.get(i).setFavorite(""+tDAO.checkfavorite(list.get(i)));
 			}
+			System.out.println("controller "+list.get(i).getMl_title());
 			List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
 			
 			list.get(i).setRvList(rlist);
 		}
 		System.out.println(schVO.getTag());
+		System.out.println(schVO.getOrder());
 		//System.out.println(schVO.getPrice().toString());
 		return list;
 	}
@@ -89,11 +91,17 @@ public class Search {
 			if(sid != null) {
 				list.get(i).setM_id(sid);
 				list.get(i).setFavorite(""+tDAO.checkfavorite(list.get(i)));
+				
 			}
 			List<ReviewVO> rlist = rvDAO.getReviewInfo(ml_no);
-			
+			System.out.println("controller "+list.get(i).getMl_title());
 			list.get(i).setRvList(rlist);
 		}
+		
+		System.out.println(schVO.getTag());
+		System.out.println(schVO.getOrder());
+		
+		
 		return list;
 		
 		
