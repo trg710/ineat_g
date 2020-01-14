@@ -20,6 +20,9 @@
 <script type="text/javascript" src="/oxo/js/popper.min.js"></script>
 
 <style>
+.rv-text-box{
+	font-size: 1.000rem;
+}
 .btn-group-toggle{
 	font-family: "Jua", sans-serif;
 }
@@ -77,8 +80,8 @@ ul {
 }
 
 .mainlist {
-	padding-top: 60px;
-	padding-bottom: 30px;
+	padding-top: 40px;
+	padding-bottom: 40px;
 	width: 900px;
 	margin: 0 auto;
 	border-bottom: 1px solid #dbdbdb;
@@ -132,7 +135,12 @@ ul {
 .type{
 	font-size: 14px;
 }
+b{
+ margin-right: 5px;
+}
+
 </style>
+
 
 
 <script type="text/javascript">
@@ -460,7 +468,6 @@ ul {
 						<div class="d-flex mainlist pr-4">
 						
 							<!-- 넘버 -->
-							<h1 style="display: inline-block; margin-right: 10px;">${sts.count}.</h1>
 							
 							<!-- 이미지박스 -->
 							<div class="imgbox detail" data-id="${data.ml_no }">
@@ -487,18 +494,18 @@ ul {
 									</c:otherwise>
 								</c:choose>
 								
-								<ul>
+								<ul style="margin-top: -11px;">
 									<li>
-										<h1 class="d-inline-block m-0 detail" data-id="${data.ml_no }">${data.ml_title }</h1>
+										<h1 class="d-inline-block m-0 detail" data-id="${data.ml_no }">${sts.count}. ${data.ml_title }</h1>
 										<h1 class="d-inline-block m-0 ml-2 text-success">${data.avg }</h1>
 									</li>
-									<li>
+									<li style="margin-bottom: 15px;">
 										<h4>
 											<small class="text-muted ">${data.ml_newaddr }</small>
 										</h4>
 									</li>
 									<c:forEach var="data2" items="${data.rvList}" varStatus="sts" begin="0" end="1">
-									<li class="d-flex mb-2">
+									<li class="d-flex mb-2 rv-text-box">
 										<div>
 											<div class="pimgbox mr-2">
 												<img src="/oxo/upload/${data2.profile}" alt="avt" class="pic">

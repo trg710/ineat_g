@@ -413,7 +413,7 @@
             <div class="col-10 d-flex mb-3">
                 <div class="text-center mt-3">
                     <div class="imgbox">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQujpgIXc66CXx_lyy0TjzC2S26aKxpel6Yl_-qBrg3e06yfhKDyQ&s"
+                        <img src="/oxo/upload/${data.profile }"
                             alt="avt" class="pic">
                     </div>
                     <span>${data.m_id }</span>
