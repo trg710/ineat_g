@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -17,13 +16,11 @@
 	background-color: rgba(255, 255, 255, 1);
 	border-color: rgba(214, 214, 214, 1);
 }
-
 .form-control:focus {
 	border: solid orange 2px;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px
 		rgba(255, 165, 0, 0.4)
 }
-
 /* .content {
 	position: absolute;
 	top: 50%;
@@ -34,11 +31,9 @@ body {
 	background: url('/oxo/img/main.jpg') no-repeat;
 	background-size: cover;
 }
-
 .card border-danger {
 	width: 450px;
 }
-
 #thumNail {
 	width: 430px;
 	height: 330px;
@@ -47,59 +42,110 @@ body {
 	padding: 8px;
 	border: 1px solid rgba(255, 119, 0, 0.5);
 }
-
 #recommendID {
 	position: absolute;
 	right: 10px;
 }
-
 .conImg img {
 	height: 300px;
 	opacity: 0.7;
 }
-
 .w3-content {
 	background: white;
 }
-
 .white {
 	background: rgba(255, 255, 255, 0.8);
 	padding: 15px;
 }
-
 .imgClass {
 	height: 350px;
 }
-
 .apiFont {
 	font-size: 20px;
 	color: #ff7702;
 	font-weight: 600;
 }
-
 ul {
 	cursor: pointer;
 	
 }
-
 ul li:hover {
 	color: #ff7702;
 }
-
 h2 {
 	color: #ff7702;
 }
-
 #more {
 	margin-left:5px;
 }
-
 </style>
-<script type="text/javascript" src="/oxo/js/nav.js"></script>
+<script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="/oxo/js/popper.min.js"></script>
+	<script type="text/javascript" src="/oxo/js/fullpage.min.js"></script>
+	<script type="text/javascript" src="/oxo/js/pscript.js"></script>
+	<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/oxo/js/nav.js"></script>
+	<script type="text/javascript" src="/oxo/js/recommend.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		//로그인처리
+		$('#login').css('display', 'none');
+		$('#loginbtn').click(function() {
+			$('#login').css('display', 'block');
+		});
+		$('#x').click(function() {
+			$('#login').css('display', 'none');
+		});
+
+		$('#loginsub').click(function() {
+			$.ajax({
+				url : "/oxo/member/loginProc.eat",
+				type : "post",
+				dataType : "json",
+				data : {
+					"id" : $('#id').val(),
+					"pw" : $('#password').val()
+				},
+				success : function(cnt) {
+					if (cnt == 1) {
+						location.reload();
+					} else {
+						alert('로그인에 실패하였습니다.');
+					}
+				},
+				error : function() {
+					alert('###에러');
+				}
+			});
+		});
+
+		//로그아웃
+		$('#logout').click(function() {
+			$(location).attr('href', '/oxo/member/logout.eat');
+		});
+
+		//회원가입처리
+		$('#joinbtn').click(function() {
+			$(location).attr('href', '/oxo/member/join.eat');
+		});
+		//회원정보보기로 이동
+		$('#memInfo').click(function() {
+			 $(location).attr('href', '/oxo/member/memInfo.eat?id=' + '${SID}');
+			/* $('#id').val('${SID}');
+			$('#membFrm').submit(); */
+		});
+		//맛드컵 이동
+		$('#cup').click(function() {
+			$(location).attr('href', '/oxo/mat/matdcup.eat');
+		});
+	});	
+	</script>
 </head>
 
 <body>
-
+<!-- <form id="membFrm" method="post" action="memInfo.eat">
+	<input type="hidden" id="id" name="id"> 
+</form> -->
 	<!--네비게이션바-->
 	<nav class="navbar navbar-expand-lg navbar-light bg">
 		<a class="navbar-brand" href="#"><img src="/oxo/img/logo.png"
@@ -231,124 +277,66 @@ h2 {
 			</div>
 		</div>
 	</div>
+	
+	
+	<div id="login" class="w3-modal">
+		<div class="w3-modal-content" style="width: 35%">
+			<div class="w3-container w3-padding">
+				<span id="x" style="margin: 10px 18px 0px 0px;" class="w3-button w3-display-topright">&times;</span>
+				<!-- 로그인 모달 실제코드 -->
 
-
-	<script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="/oxo/js/popper.min.js"></script>
-	<script type="text/javascript" src="/oxo/js/fullpage.min.js"></script>
-	<script type="text/javascript" src="/oxo/js/pscript.js"></script>
-	<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/oxo/js/nav.js"></script>
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$
-									.getJSON(
-											'http://api.openweathermap.org/data/2.5/weather?id=1835848&APPID=44b647d32d3a2207ba2169b2aa1a7f92&units=metric',
-											function(data) {
-												var nowTemp = data.main.temp;
-												var humidity = data.main.humidity;
-												var dayCondition;
-												if (nowTemp > 20) {
-													dayCondition = '더운날';
-												} else if (nowTemp > 5) {
-													dayCondition = '선선한날';
-												} else {
-													dayCondition = '추운날';
-												}
-												$('#dayCondition').append(
-														dayCondition);
-												$('#ctemp').append(nowTemp);
-
-												$
-														.ajax({
-															url : "weather.eat",
-															type : "post",
-															dataType : "json",
-															data : {
-																"dayCondition" : dayCondition
-															},
-															success : function(
-																	adata) {
-																var thum = "/oxo/mainlist/"
-																		+ adata.mf_filename
-																//alert(adata.mf_filename);
-																$(
-																		'.recommendTitle')
-																		.append(
-																				adata.ml_title);
-																$(
-																		'.recommendMenu')
-																		.append(
-																				adata.ml_menu);
-																$('#thumNail')
-																		.attr(
-																				"src",
-																				thum);
-																$(
-																		'#recommendID > span')
-																		.attr(
-																				"id",
-																				adata.ml_no);
-
-															},
-															error : function() {
-																alert('통신에러');
-															}
-														});
-											});
-							//추천메뉴 검색하기
-							$('.listMenu').click(function() {
-								var searchTitle = $(this).text();
-								//alert(searchTitle);						
-								$('#contents').val(searchTitle);
-								$('#frm').submit();
-							});
-
-							//추천맛집 검색하기
-							$('.listTitle').click(
-									function() {
-										var no = $(this).attr('id');
-										$(location).attr(
-												'href',
-												'/oxo/ineatlist/info.eat?ml_no='
-														+ no);
+				<div style="border: solid orange 2px;">
+					<div>
+						<div style="text-align: center;">
+							<img src="/oxo/img/logo.png" width="50%" style="align-content: center; padding-top: 20px;">
+						</div>
+						<div style="padding: 20px 20px 0px 20px; margin: 20px 20px 20px 20px;">
+							<div>
+								<input type="text" class="form-control inputheight " id="id" name="id" placeholder="I D"">
+							</div>
+							<div>
+								<input type="password" class="form-control inputheight" style="margin-top: 10px;" id="password" name="pw" placeholder="Password">
+							</div>
+							<div>
+								<br>
+								<button type="button" class="btn btn-warning btn-w" id="loginsub">Login</button>
+							</div>
+							<div style="display: inline-block; margin: 0px;" class="row col-md-12">
+								<div class="size col-md-6" style="float: left;">
+									<p class="text-warning size idFind">
+										<b>아이디찾기</b>
+									</p>
+								</div>
+								<script type="text/javascript">
+									$(function() {
+										$('.idFind') .click( function() {
+											 $(location) .attr('href','/oxo/member/idFind.eat');
+										});
 									});
-
-							//날씨추천메뉴 검색하기
-							$('#recommendID').click(
-									function() {
-										var no = $('#recommendID > span').attr(
-												'id');
-										$(location).attr(
-												'href',
-												'/oxo/ineatlist/info.eat?ml_no='
-														+ no);
+								</script>
+								<div class="size col-md-6" style="float: right;">
+									<p class="text-warning size passFind">
+										<b>비밀번호찾기</b>
+									</p>
+								</div>
+								<script>
+									$(function() {
+										//비밀번호 찾기 버튼 클릭시 비밀번호 찾는 창으로 이동
+										$('.passFind').click(function() {
+											 $(location).attr('href','/oxo/member/passFind.eat');
+										});
 									});
-
-							//마우스 아이콘, text스타일  변경
-							$('.list-group-item > h3').hover(function() {
-								$(this).css({
-									"cursor" : "pointer",
-									"text-decoration" : "underline"
-								});
-							}, function() {
-								$(this).css('text-decoration', 'none');
-							});
-
-							//더보기 스타일변경
-							$('.more').hover(function() {
-								$(this).css({
-									"cursor" : "pointer",
-									"text-decoration" : "underline"
-								});
-							}, function() {
-								$(this).css('text-decoration', 'none');
-							});
-
-						});
-	</script>
+								</script>
+							</div>
+							<p></p>
+							<p class="text-muted text-center pt-1">Copyright © INEAT Corp. All Rights Reserved.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	${SID}
 </body>
 
 </html>

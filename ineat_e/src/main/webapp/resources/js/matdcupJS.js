@@ -1,9 +1,18 @@
 $(document).ready(function() {
+	var onOpacity = 0.3;	//opacity설정
+	var offOpacity = 1;
+	
+	//마우스 hover 함수
+	function fhover (opac){
 	$('.match img').hover(function(){
-		$(this).css('opacity','0.3');
+		var test = opac; 
+		$(this).css('opacity',test);
 	},function(){
 		$(this).css('opacity','1');
 	});
+	
+	}
+	fhover(onOpacity);
 	
    var match8 = $('#8gang img');
    var match4 = $('#4gang img');
@@ -31,10 +40,13 @@ $(document).ready(function() {
          src : player1,
          id : player1Id
       });
+      $('#imageName1').text(player1Id);
+      
       $('.match img').eq(1).attr({
          src : player2,
          id : player2Id
       });
+      $('#imageName2').text(player2Id);
 
    }
    
@@ -49,10 +61,13 @@ $(document).ready(function() {
          src : Fplayer1,
          id : Fplayer1Id
       });
+      $('#imageName1').text(Fplayer1Id);
+      
       $('.match img').eq(1).attr({
          src : Fplayer2,
          id : Fplayer2Id
       });
+      $('#imageName2').text(Fplayer2Id);
       
     $(document).ready(function(){
       $('.match img').hover(function(){
@@ -76,10 +91,13 @@ $(document).ready(function() {
          src : finalPlayer1,
          id : finalPlayer1Id
       });
+      $('#imageName1').text(finalPlayer1Id);
+      
       $('.match img').eq(1).attr({
          src : finalPlayer2,
          id : finalPlayer2Id
       });
+      $('#imageName2').text(finalPlayer2Id);
 
    }
 
@@ -106,6 +124,14 @@ $(document).ready(function() {
 	  $(location).attr('href','/oxo/main.eat');
    });
    
+   //우승메뉴 검색하기
+   $('#goSearch').click(function(){
+	  var vName = $('#victoryId img').attr('id');
+	  $('#contents').val(vName);
+	  $('#searchForm').submit();
+   });
+   
+   //랭킹보기
    $('#goRanking').click(function(){
 	  $('.ranking').css({
 		  "display" : "block",
@@ -128,8 +154,11 @@ $(document).ready(function() {
 	  });
    });
    
+   
+   
    //맛드컵 시작하기 클릭
    $('#start').click(function() {
+	   $('.vsClass').css('display', 'block');
       $('.nGangClass').css('display', 'block');
       var eight = '8강';
       nGangClassUp(eight);
@@ -186,11 +215,14 @@ $(document).ready(function() {
                nGangClassUp(finalMatchText);
             
                finalMatch();
+               
                // 우승자 선택
                $('.match img').off().click(function() {
+            	   fhover(offOpacity);
             	   $('.vsClass > span').text('WINNER!');
             	   $('.vsClass').css('width','400px');
             	   $('.btnMatch').css('display','block');
+            	   
                   var victory = $(this).attr('src');
                   var victoryId = $(this).attr('id');
                   var thisId = $(this);
@@ -199,6 +231,7 @@ $(document).ready(function() {
                   $('#goSearch').text(goSearchText);//서치버튼에 우승자 이름 추가하기
                   
                   $('.match').find('img').not(thisId).css('display', 'none');
+                  $('.match').find('h2').not(thisId).css('display', 'none');
                   //우승자 아닌 이미지 없애기
                   $('.match').css('width','600px');
                   //$('.match img').css('opacity','1');
@@ -230,6 +263,8 @@ $(document).ready(function() {
                         alert('통신에러');
                      }
                   });
+                  
+                  fhover().off();
 
                   // 나눔 줄
                });

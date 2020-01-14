@@ -9,184 +9,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="/oxo/css/bootstrap.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-<style>
-/*전체이미지크기*/
-/* body{
-       background: url(/oxo/matdcupImg/soccer.jpg) no-repeat;
-       background-size : cover;
-   } */
-   
- body{
- background-color: black;
- }
-img {
-	width: 150px;
-	height: 100px;
-	
-}
-
-/*8강*/
-.class8gang {
-	position: absolute;
-	bottom: 5%;
-	width: 100%;
-}
-
-/*4강*/
-.class4gang {
-	position: absolute;
-	bottom: 20%;
-	width: 100%;
-	display: inline-block;
-}
-
-/*결승*/
-.class2gang {
-	position: absolute;
-	bottom: 35%;
-	width: 100%;
-}
-
-/*우승자*/
-.classVictory {
-	position: absolute;
-	bottom: 50%;
-	width: 100%;
-}
-
-.classVictory img {
-	width: 100%;
-	height: 250px;
-}
-
-.victoryBox {
-	width: 250px;
-	height: 250px;
-}
-
-.victoryBox>img {
-	width: 250px;
-	height: 250px;
-}
-
-.modalBack {
-	position: absolute;
-	background-color: rgba(0, 0, 0, 0.6);
-	width: 100%;
-	height: 1080px;
-	z-index: 500;
-	display: none;
-}
-
-.startBtn {
-	position: absolute;
-	width: 400px;
-	height: 100px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 1000;
-	font-size: 50px;
-}
-
-.matdcup {
-	display: none;
-}
-
-.matdcupBack {
-	display: none;
-}
-
-/*매치메뉴*/
-.match {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 1200px;
-	height: 600px;
-	display: none;
-	z-index: 1000;
-}
-
-.match img {
-	float: left;
-	width: 600px;
-	height: 600px;
-	border: 10px solid white;
-}
-
-/*n강 박스*/
-.nGangClass {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 1200px;
-	height: 600px;
-	display: none;
-	z-index: 1500;
-	background: rgba(0, 0, 0, 0.9);
-}
-
-.nGang {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-style: italic;
-	color: white;
-	font-size: 150px;
-	font-weight: 900;
-}
-
-/* vs 폰트 */
-.vsClass {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background: rgba(255, 255, 255, 1);
-	width: 150px;
-	text-align: center;
-	border-radius: 50px;
-	z-index: 900;
-}
-
-.vsClass span {
-	font-size: 100px;
-	color: #fe7201;
-	font-weight: 900;
-}
-
-.btnMatch {
-	display: none;
-}
-
-.btnMatch>button {
-	font-size: 14px;
-}
-
-.ranking {
-	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 300px;
-	background : white;
-	font-size: 20px;
-}
-
-.opacityOne{
-	opacity : 0.6;
-}
-.opacityTwo{
-	opacity : 1;
-}
-</style>
-<style>
-</style>
+<link rel="stylesheet" href="/oxo/css/matdcup.css">
 
 <body>
 
@@ -254,32 +77,40 @@ img {
 
 	<!-- 모달 백 -->
 	<div class="modalBack"></div>
-
-	<!-- 매치창 -->
-
-	<div class="match">
-		<div class="nGangClass">
+	<div class="nGangClass">
 			<span class="nGang"></span>
-		</div>
-		<div class="vsClass">
+	</div>
+	
+	<div class="vsClass">
 			<span><em>V S</em></span>
+	</div>
+	<!-- 매치창 -->
+	<div class="match">
+		<div class="matchImgg">
+			<img>
+			<h2 id="imageName1">이미지1</h2>
 		</div>
-		<img id="match1player"> 
-		<img id="match2player">
-
-		<div class="btnMatch w3-right w3-margin-top">
+		<div class="matchImgg">
+			<img>
+			<h2 id="imageName2">이미지2</h2>
+		</div>
+		<div class="btnMatch w3-right">
 			<button type="button" class="btn btn-warning" id="goMain">메인으로
 				가기</button>
 			<button type="button" class="btn btn-warning" id="goSearch"></button>
 			<button type="button" class="btn btn-warning" id="goRanking">맛드컵랭킹보기</button>
 		</div>
 	</div>
-
+	
+	
+	<form id="searchForm" method="POST" action="/oxo/searchProc.eat">
+		<input type="hidden" id="contents" name="contents">
+	</form>
+	
 	<!-- 맛드컵랭킹리스트 -->
 	<div class="ranking">
 		<ul class="w3-ul w3-border" id="mList">
 		</ul>
-
 	</div>
 
 	<script type="text/javascript" src="/oxo/js/jquery-3.4.1.min.js"></script>
@@ -288,8 +119,5 @@ img {
 	<script type="text/javascript" src="/oxo/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/oxo/js/nav.js"></script>
 	<script type="text/javascript" src="/oxo/js/matdcupJS.js"></script>
-	<script>
-		
-	</script>
 </body>
 </html>
