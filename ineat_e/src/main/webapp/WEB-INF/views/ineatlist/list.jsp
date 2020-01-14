@@ -321,7 +321,7 @@ b{
 						resultlist += '</h4>';
 						resultlist += '</li>';
 						var idx = 1;
-						if(data[i].rvList >= 2){
+						if(data[i].rvList.length >= 2){
 							idx = 2;
 						}
 						for (var j = 0; j < idx; j++) {
@@ -468,7 +468,7 @@ b{
 						<div class="d-flex mainlist pr-4">
 						
 							<!-- 넘버 -->
-							
+							<h1 style="display: inline-block; margin-right: 10px;">${sts.count}.</h1>
 							<!-- 이미지박스 -->
 							<div class="imgbox detail" data-id="${data.ml_no }">
 								<img src="/oxo/mainlist/${data.ml_title}1.jpg">
@@ -496,7 +496,7 @@ b{
 								
 								<ul style="margin-top: -11px;">
 									<li>
-										<h1 class="d-inline-block m-0 detail" data-id="${data.ml_no }">${sts.count}. ${data.ml_title }</h1>
+										<h1 class="d-inline-block m-0 detail" data-id="${data.ml_no }"> ${data.ml_title }</h1>
 										<h1 class="d-inline-block m-0 ml-2 text-success">${data.avg }</h1>
 									</li>
 									<li style="margin-bottom: 15px;">
