@@ -265,21 +265,21 @@
 	
 7. 리뷰 삭제
 	요청내용 : /oxo//ineatlist/review/delreview.eat
-	파라미터 : 
+	파라미터 : 리뷰번호(rv_no)
 	컨트롤러 : com.ineat.oxo.controller.Review.java
-	처리함수 : 
-	응답문서 : /WEB-INF/views/ineatlist/review/
+	처리함수 : delreview()
+	응답문서 : /WEB-INF/views/ineatlist/review/detailinfo.jsp
 	
 8. 리뷰 수정 페이지 이동
-	요청내용 : /oxo//ineatlist/review
-	파라미터 : 
+	요청내용 : /oxo//ineatlist/review/fixreview.eat
+	파라미터 : 리뷰번호(rv_no)
 	컨트롤러 : com.ineat.oxo.controller.Review.java
-	처리함수 : 
-	응답문서 : /WEB-INF/views/ineatlist/review/
+	처리함수 : fixreviewform()
+	응답문서 : /WEB-INF/views/ineatlist/review/fixreview.jsp
 	
 9. 리뷰 수정 처리.
-	요청내용 : /oxo//ineatlist/review
-	파라미터 : 
+	요청내용 : /oxo//ineatlist/review/fixreviewproc.eat
+	파라미터 : 리뷰내용(rv_body), 리뷰 점수(rv_score), 리뷰 번호(rv_no)
 	컨트롤러 : com.ineat.oxo.controller.Review.java
-	처리함수 : 
-	응답문서 : /WEB-INF/views/ineatlist/review/
+	처리함수 : fixreviewporc()
+	응답문서 : /WEB-INF/views/ineatlist/review/detailinfo.jsp
