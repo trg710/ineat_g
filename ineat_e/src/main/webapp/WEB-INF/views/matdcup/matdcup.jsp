@@ -8,17 +8,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="/oxo/css/bootstrap.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 <style>
 /*전체이미지크기*/
 /* body{
        background: url(/oxo/matdcupImg/soccer.jpg) no-repeat;
        background-size : cover;
    } */
+   
+ body{
+ background-color: black;
+ }
 img {
 	width: 150px;
 	height: 100px;
+	
 }
 
 /*8강*/
@@ -109,6 +113,7 @@ img {
 	float: left;
 	width: 600px;
 	height: 600px;
+	border: 10px solid white;
 }
 
 /*n강 박스*/
@@ -121,7 +126,7 @@ img {
 	height: 600px;
 	display: none;
 	z-index: 1500;
-	background: black;
+	background: rgba(0, 0, 0, 0.9);
 }
 
 .nGang {
@@ -141,7 +146,7 @@ img {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background: rgba(255, 255, 255, 0.8);
+	background: rgba(255, 255, 255, 1);
 	width: 150px;
 	text-align: center;
 	border-radius: 50px;
@@ -150,7 +155,7 @@ img {
 
 .vsClass span {
 	font-size: 100px;
-	color: red;
+	color: #fe7201;
 	font-weight: 900;
 }
 
@@ -185,8 +190,7 @@ img {
 
 <body>
 
-	<button type="button" class="startBtn btn btn-warning" id="start">맛드컵
-		시작하기</button>
+	<button type="button" class="startBtn btn btn-warning" id="start"><em>S T A R T</em></button>
 	<div class="matdcupBack">
 		<!-- 우승자 -->
 		<div class="w3-row classVictory" id="victoryId">
@@ -205,8 +209,7 @@ img {
 		<div class="w3-row w3-margin-bottom class2gang winner2" id="2gang">
 			<div class="w3-col w3-container" style="width: 37.77777%"></div>
 			<div class="w3-col w3-container" style="width: 25%">
-				<img class="w3-padding w3-round w3-half"> <img
-					class="w3-padding w3-round w3-half">
+				<img class="w3-padding w3-round w3-half"> <img class="w3-padding w3-round w3-half">
 			</div>
 			<div class="w3-col w3-container" style="width: 37.77777%"></div>
 		</div>
@@ -214,13 +217,11 @@ img {
 		<div class="w3-row w3-margin-bottom class4gang winner" id="4gang">
 			<div class="w3-col w3-container" style="width: 16.66666%"></div>
 			<div class="w3-col w3-container" style="width: 25%">
-				<img class="w3-padding w3-round w3-half"> <img
-					class="w3-padding w3-round w3-half">
+				<img class="w3-padding w3-round w3-half"> <img class="w3-padding w3-round w3-half">
 			</div>
 			<div class="w3-col w3-container" style="width: 16.66666%"></div>
 			<div class="w3-col w3-container" style="width: 25%">
-				<img class="w3-padding w3-round w3-half"> <img
-					class="w3-padding w3-round w3-half">
+				<img class="w3-padding w3-round w3-half"> <img class="w3-padding w3-round w3-half">
 			</div>
 			<div class="w3-col w3-container" style="width: 16.66666%"></div>
 		</div>
@@ -228,28 +229,24 @@ img {
 
 		<!-- 8강 -->
 		<div class="w3-row w3-bottom w3-margin-bottom" id="8gang">
-			<div class="w3-col w3-container" style="width: 25%">
+			<div class="w3-col w3-container" style="width: 25%;">
 				<c:forEach begin="0" end="1" var="list" items="${MLIST}">
-					<img src="/oxo/matdcupImg/${list.md_name}.jpg" id="${list.md_name}"
-						class="w3-padding w3-round w3-half">
+					<img src="/oxo/matdcupImg/${list.md_name}.jpg" id="${list.md_name}" class="w3-padding w3-round w3-half">
 				</c:forEach>
 			</div>
 			<div class="w3-col w3-container" style="width: 25%">
 				<c:forEach begin="2" end="3" var="list" items="${MLIST}">
-					<img src="/oxo/matdcupImg/${list.md_name}.jpg" id="${list.md_name}"
-						class="w3-padding w3-round w3-half">
+					<img src="/oxo/matdcupImg/${list.md_name}.jpg" id="${list.md_name}" class="w3-padding w3-round w3-half">
 				</c:forEach>
 			</div>
 			<div class="w3-col w3-container" style="width: 25%">
 				<c:forEach begin="4" end="5" var="list" items="${MLIST}">
-					<img src="/oxo/matdcupImg/${list.md_name}.jpg" id="${list.md_name}"
-						class="w3-padding w3-round w3-half">
+					<img src="/oxo/matdcupImg/${list.md_name}.jpg" id="${list.md_name}" class="w3-padding w3-round w3-half">
 				</c:forEach>
 			</div>
 			<div class="w3-col w3-container" style="width: 25%">
 				<c:forEach begin="6" end="7" var="list" items="${MLIST}">
-					<img src="/oxo/matdcupImg/${list.md_name}.jpg" id="${list.md_name}"
-						class="w3-padding w3-round w3-half">
+					<img src="/oxo/matdcupImg/${list.md_name}.jpg" id="${list.md_name}" class="w3-padding w3-round w3-half">
 				</c:forEach>
 			</div>
 		</div>
@@ -265,7 +262,7 @@ img {
 			<span class="nGang"></span>
 		</div>
 		<div class="vsClass">
-			<span>VS</span>
+			<span><em>V S</em></span>
 		</div>
 		<img id="match1player"> 
 		<img id="match2player">
