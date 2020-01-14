@@ -79,6 +79,7 @@ body {
 
 ul {
 	cursor: pointer;
+	
 }
 
 ul li:hover {
@@ -89,10 +90,10 @@ h2 {
 	color: #ff7702;
 }
 
-.more {
-	font-size: 16px;
-	text-decoration:
+#more {
+	margin-left:5px;
 }
+
 </style>
 <script type="text/javascript" src="/oxo/js/nav.js"></script>
 </head>
@@ -178,7 +179,7 @@ h2 {
 				<h2>
 					<em>MENU LIST</em>
 					<button type="button" class="btn btn-warning" data-toggle="modal"
-						data-target="#exampleModalScrollable">more</button>
+						data-target="#exampleModalScrollable" id="more">more</button>
 				</h2>
 				<ul class="list-group">
 					<c:forEach begin="0" end="9" var="listMenu" items="${LISTMENU}">
@@ -195,7 +196,7 @@ h2 {
 				<ul class="list-group">
 					<c:forEach var="list" items="${LIST}">
 						<li class="list-group-item listTitle" id="${list.ml_no}"><h5>${list.ml_title}
-								<span class="badge badge-primary badge-pill">★
+								<span class="badge badge-success badge-pill">★
 									${list.avg}</span>
 							</h5></li>
 					</c:forEach>
