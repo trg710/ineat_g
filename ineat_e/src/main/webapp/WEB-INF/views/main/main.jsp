@@ -89,32 +89,32 @@
 		$('#hansik').click(
 				function() {
 					$(location).attr('href',
-							'/oxo/ineatlist/mainList.eat?rno=1&ml_tag=한식');
+							'/oxo/ineatlist/list.eat?rno=1&ml_tag=한식');
 				});
 		$('#joongsik').click(
 				function() {
 					$(location).attr('href',
-							'/oxo/ineatlist/mainList.eat?rno=1&ml_tag=중식');
+							'/oxo/ineatlist/list.eat?rno=1&ml_tag=중식');
 				});
 		$('#yangsik').click(
 				function() {
 					$(location).attr('href',
-							'/oxo/ineatlist/mainList.eat?rno=1&ml_tag=양식');
+							'/oxo/ineatlist/list.eat?rno=1&ml_tag=양식');
 				});
 		$('#ilsik').click(
 				function() {
 					$(location).attr('href',
-							'/oxo/ineatlist/mainList.eat?rno=1&ml_tag=일식');
+							'/oxo/ineatlist/list.eat?rno=1&ml_tag=일식');
 				});
 		$('#hsik').click(
 				function() {
 					$(location).attr('href',
-							'/oxo/ineatlist/mainList.eat?rno=1&ml_tag=회식');
+							'/oxo/ineatlist/list.eat?rno=1&ml_tag=회식');
 				});
 		$('#cafe').click(
 				function() {
 					$(location).attr('href',
-							'/oxo/ineatlist/mainList.eat?rno=1&ml_tag=카페');
+							'/oxo/ineatlist/list.eat?rno=1&ml_tag=카페');
 				});
 
 	});

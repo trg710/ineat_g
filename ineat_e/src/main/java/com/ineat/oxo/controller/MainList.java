@@ -28,8 +28,15 @@ public class MainList {
 	ReviewDAO rvDAO;
 	
 	@RequestMapping("list.eat")
-	public ModelAndView List(ModelAndView mv, HttpSession session) {
-		List<TasteInfoVO> list = tDAO.selectList();
+	public ModelAndView List(ModelAndView mv, HttpSession session,TasteInfoVO tVO) {
+		
+		List<TasteInfoVO> list=null;  
+		if(tVO.getMl_tag()!=null) {
+			list = tDAO.tagList(tVO);
+			
+		}else if(tVO.getMl_tag()==null) {
+			list = tDAO.selectList();
+		}
 		String sid = (String)session.getAttribute("SID");
 		
 		for (int i = 0; i < list.size(); i++) {
