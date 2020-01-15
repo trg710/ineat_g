@@ -216,7 +216,6 @@ $(function(){
 	// 댓글 삭제
 	$('.cmtDelete').click(function(){
 		var cno = $(this).attr('id');
-		alert(cno);
 		$('#ccno').val(cno);
 				
 		$('#deleteForm2').submit();
