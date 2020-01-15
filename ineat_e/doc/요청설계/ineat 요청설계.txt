@@ -283,3 +283,27 @@
 	컨트롤러 : com.ineat.oxo.controller.Review.java
 	처리함수 : fixreviewporc()
 	응답문서 : /WEB-INF/views/ineatlist/review/detailinfo.jsp
+
+=======================================================================================================================
+
+ 1. 맛집 검색 처리 
+	요청내용	: /oxo/searchProc.eat
+	파라미터	: 검색키워드(contents)
+	컨트롤러	: com.ineat.oxo.controller.Search.java
+	처리함수	: searchProc()
+	응답문서	:  /WEB-INF/views/search/searchResult.jsp
+	
+ 2. 맛집 검색 필터 처리 
+	요청내용	: /oxo/filterSearch.eat
+	파라미터	: 검색키워드(contents), 가격대(price), 음식종류(tag), 정렬순서(order)
+	컨트롤러	: com.ineat.oxo.controller.Search.java
+	처리함수	: filterResult()
+	응답문서	:  /WEB-INF/views/search/searchResult.jsp
+	
+ 3. 검색 결과 무한 스크롤
+ 	요청내용	: /oxo/moreResult.eat
+ 	파라미터 	: 검색키워드(contents), 가격대(price), 음식종류(tag), 정렬순서(order), 뽑아올 개수 (num)
+ 	컨트롤러	: com.ineat.oxo.controller.Search.java
+ 	처리함수	: moreResult()
+ 	응답문서	:  /WEB-INF/views/search/searchResult.jsp
+ 	
