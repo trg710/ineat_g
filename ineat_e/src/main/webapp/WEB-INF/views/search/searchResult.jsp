@@ -477,7 +477,7 @@ $(function(){
 			e.stopImmediatePropagation();
 		var id = $(this).data('id');
 		$(location).attr('href','/oxo/ineatlist/info.eat?ml_no='+id);
-			alert(id);
+			
 		});
 		
 		$(document).on('click', '.loginpls', function(e) {
